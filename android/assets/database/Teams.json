@@ -1,0 +1,62 @@
+[
+  {
+    "id": "TEAM_0001",
+    "name": "Evil Geniuses",
+    "abbreviatedName": "EG",
+    "budget": 2000000,
+    "playersId": [
+      "PLAYER_000001",
+      "PLAYER_000002",
+      "PLAYER_000003",
+      "PLAYER_000004",
+      "PLAYER_000005",
+      "PLAYER_000006"
+    ],
+    "tier": 1
+  },
+  {
+    "id": "TEAM_0002",
+    "name": "Team Secret",
+    "abbreviatedName": "Secret",
+    "budget": 1000000,
+    "playersId": [
+      "PLAYER_000007",
+      "PLAYER_000008",
+      "PLAYER_000009",
+      "PLAYER_000010",
+      "PLAYER_000011",
+      null
+    ],
+    "tier": 1
+  },
+  {
+    "id": "TEAM_0003",
+    "name": "Digital Chaos",
+    "abbreviatedName": "DC",
+    "budget": 800000,
+    "playersId": [
+      "PLAYER_000012",
+      "PLAYER_000013",
+      "PLAYER_000014",
+      "PLAYER_000015",
+      "PLAYER_000016",
+      null
+    ],
+    "tier": 1
+  },
+  {
+    "id": "TEAM_0004",
+    "name": "Wings Gaming",
+    "abbreviatedName": "Wings",
+    "budget": 1000000,
+    "playersId": [
+      "PLAYER_000017",
+      "PLAYER_000018",
+      "PLAYER_000019",
+      "PLAYER_000020",
+      "PLAYER_000021",
+      null
+    ],
+    "tier": 1
+  }
+]
