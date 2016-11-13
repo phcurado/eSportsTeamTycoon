@@ -3,7 +3,6 @@ package com.paulocurado.esportsmanager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -16,7 +15,6 @@ import com.paulocurado.esportsmanager.model.Team;
 import com.paulocurado.esportsmanager.screens.LoadingScreen;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class EsportsManager extends Game {
 

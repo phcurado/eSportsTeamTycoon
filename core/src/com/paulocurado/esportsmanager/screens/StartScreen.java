@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -38,7 +39,7 @@ public class StartScreen implements Screen {
     private TextButton buttonExit;
     private NewGameDialog dialog;
 
-    public static float BUTTON_SPACING = 65f;
+    public static float BUTTON_SPACING = 10f;
     public static float BUTTON_SIZE = 100f;
 
 
@@ -72,6 +73,8 @@ public class StartScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        mainApp.batch.setProjectionMatrix(stage.getCamera().combined);
 
 
         stage.draw();
@@ -118,17 +121,14 @@ public class StartScreen implements Screen {
     }
 
     public void initButtons() {
-        buttonPlay = new TextButton("Start", skin, "default");
-        buttonAbout = new TextButton("About", skin, "default");
-        buttonExit = new TextButton("Exit", skin, "default");
+        buttonPlay = new TextButton("START", skin, "default");
+        buttonAbout = new TextButton("ABOUT", skin, "default");
+        buttonExit = new TextButton("EXIT", skin, "default");
 
         buttonPlay.setSize(BUTTON_SIZE, BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth() );
         buttonAbout.setSize(BUTTON_SIZE , BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth() );
         buttonExit.setSize(BUTTON_SIZE , BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth() );
 
-        buttonPlay.setPosition(gamePort.getWorldWidth() / 2 - buttonPlay.getWidth() / 2, gamePort.getWorldHeight() / 2 - buttonPlay.getWidth() / 2);
-        buttonAbout.setPosition(gamePort.getWorldWidth() / 2 - buttonAbout.getWidth() / 2, buttonPlay.getY() -  BUTTON_SPACING );
-        buttonExit.setPosition(gamePort.getWorldWidth() / 2 - buttonExit.getWidth() / 2, buttonAbout.getY() - BUTTON_SPACING);
 
         buttonExit.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
@@ -137,9 +137,18 @@ public class StartScreen implements Screen {
         });
 
 
-        stage.addActor(buttonPlay);
-        stage.addActor(buttonAbout);
-        stage.addActor(buttonExit);
+        Table table = new Table();
+
+        table.add(buttonPlay).width(BUTTON_SIZE).height(BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth()).padBottom(BUTTON_SPACING);
+        table.row();
+        table.add(buttonAbout).width(BUTTON_SIZE).height(BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth()).padBottom(BUTTON_SPACING);
+        table.row();
+        table.add(buttonExit).width(BUTTON_SIZE).height(BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth()).padBottom(BUTTON_SPACING);
+
+        table.setPosition(gamePort.getWorldWidth() / 2 - table.getWidth() / 2, gamePort.getWorldHeight() / 2 - table.getHeight() / 2 - 80 );
+
+
+        stage.addActor(table);
 
     }
 }
