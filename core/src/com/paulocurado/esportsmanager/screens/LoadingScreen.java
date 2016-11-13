@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -49,7 +50,7 @@ public class LoadingScreen implements Screen {
         progress = MathUtils.lerp(progress, mainApp.assets.getProgress(), .1f);
         if(mainApp.assets.update() && progress >= mainApp.assets.getProgress() - .1f) {
             mainApp.bundle =  mainApp.assets.get("languages/languages", I18NBundle.class);
-            mainApp.setScreen(new SimulationScreen(mainApp));
+            mainApp.setScreen(new StartScreen(mainApp));
         }
     }
 
@@ -95,9 +96,13 @@ public class LoadingScreen implements Screen {
     }
 
     private void queueAssets() {
-        mainApp.assets.load("simulationMap.png", Texture.class);
-        mainApp.assets.load("facetextures.png", Texture.class);
+        mainApp.assets.load("img/simulationMap.png", Texture.class);
+        mainApp.assets.load("img/facetextures.png", Texture.class);
         mainApp.assets.load("languages/languages", I18NBundle.class);
+        mainApp.assets.load("ui/ui.atlas", TextureAtlas.class);
+        mainApp.assets.load("img/logo.png", Texture.class);
+        mainApp.assets.load("img/startmenubackground.png", Texture.class);
+
 
         Reader reader = Gdx.files.internal("database/Players.json").reader();
         Gson gson = new GsonBuilder().create();
@@ -120,7 +125,6 @@ public class LoadingScreen implements Screen {
                 for(int j = 0; j < jsonObject.get("playersId").getAsJsonArray().size(); j++) {
                     if(!jsonObject.get("playersId").getAsJsonArray().get(j).isJsonNull()) {
                         mainApp.teamList.get(i).getPlayers().add(mainApp.findPlayerbyId(jsonObject.get("playersId").getAsJsonArray().get(j).getAsString()));
-                        //System.out.println(mainApp.teamList.get(i).getPlayers().get(j).getNickName());
                     }
                 }
             }

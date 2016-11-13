@@ -4,10 +4,12 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.paulocurado.esportsmanager.model.Player;
 import com.paulocurado.esportsmanager.model.Team;
@@ -20,8 +22,8 @@ public class EsportsManager extends Game {
 
     public static final String TITLE = "eSports Manager";
     public static final float VERSION = 0.1f;
-    public static final int V_WIDTH = 480;
-    public static final int V_HEIGHT = 720;
+    public static final int V_WIDTH = 320;
+    public static final int V_HEIGHT = 480;
 
     public ArrayList<Player> playerList;
     public ArrayList<Team> teamList;
@@ -41,11 +43,8 @@ public class EsportsManager extends Game {
     @Override
     public void create() {
         assets = new AssetManager();
-        FileHandle baseFileHandle = Gdx.files.internal("languages/languages");
-        Locale locale = new Locale("pt", "br");
-        I18NBundle myBundle = I18NBundle.createBundle(baseFileHandle, locale);
 
-        font = new BitmapFont();
+        initFonts();
         playerList = new ArrayList<Player>();
         teamList = new ArrayList<Team>();
 
@@ -66,6 +65,14 @@ public class EsportsManager extends Game {
         batch.dispose();
         assets.dispose();
         this.getScreen().dispose();
+    }
+
+    private void initFonts() {
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/font.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 20;
+        parameter.color = Color.WHITE;
+        font = generator.generateFont(parameter);
     }
 
     public Player findPlayerbyId(String playerId) {

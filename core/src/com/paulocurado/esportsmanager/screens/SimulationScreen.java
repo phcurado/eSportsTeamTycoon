@@ -6,8 +6,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
@@ -29,12 +32,29 @@ public class SimulationScreen implements Screen {
     Texture background;
     Texture faces;
 
+    TextButton button;
+    TextButton.TextButtonStyle textButtonStyle;
+
     public SimulationScreen(EsportsManager mainApp) {
         this.mainApp = mainApp;
         gameCam = new OrthographicCamera();
-        gamePort = new FitViewport(500,500, gameCam);
+        gamePort = new FitViewport(mainApp.V_WIDTH, mainApp.V_HEIGHT, gameCam);
 
         stage = new Stage(gamePort, mainApp.batch);
+        Gdx.input.setInputProcessor(stage);
+
+        TextureAtlas atlas = mainApp.assets.get("ui/ui.atlas", TextureAtlas.class);
+        Skin skin = new Skin();
+        skin.addRegions(atlas);
+        textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.up = skin.getDrawable("button_03");
+        textButtonStyle.down = skin.getDrawable("button_01");
+        textButtonStyle.font = mainApp.font;
+        button = new TextButton("Start", textButtonStyle);
+
+//        Texture text = skin.get("button_01", Texture.class);
+        stage.addActor(button);
+
     }
     @Override
     public void show() {
@@ -77,9 +97,11 @@ public class SimulationScreen implements Screen {
                 mainApp.playerList.get(i).render(mainApp.facesOptions, mainApp.batch);
             }
         }
-
-        mainApp.font.draw(mainApp.batch, "fps:"+Gdx.graphics.getFramesPerSecond(), 50, 50);
+        mainApp.font.draw(mainApp.batch, "fps:"+Gdx.graphics.getFramesPerSecond(), gamePort.getWorldWidth() - 80, gamePort.getWorldHeight() - 20);
         mainApp.batch.end();
+
+        stage.draw();
+
     }
 
     @Override
