@@ -1,19 +1,18 @@
-
 ui.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 button_down_menu
   rotate: false
-  xy: 1, 1
-  size: 56, 26
-  orig: 56, 26
+  xy: 0, 0
+  size: 256, 87
+  orig: 256, 87
   offset: 0, 0
   index: -1
 button_up_menu
   rotate: false
-  xy: 59, 1
-  size: 56, 26
-  orig: 56, 26
+  xy: 258, 0
+  size: 256, 87
+  orig: 256, 87
   offset: 0, 0
   index: -1

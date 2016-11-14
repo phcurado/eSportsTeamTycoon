@@ -68,7 +68,7 @@ public class EsportsManager extends Game {
     private void initFonts() {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/font.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 20;
+        parameter.size = 16;
         parameter.color = Color.WHITE;
         font = generator.generateFont(parameter);
     }

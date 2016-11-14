@@ -40,7 +40,7 @@ public class StartScreen implements Screen {
     private NewGameDialog dialog;
 
     public static float BUTTON_SPACING = 10f;
-    public static float BUTTON_SIZE = 100f;
+    public static float BUTTON_SIZE = 115f;
 
 
     public StartScreen(EsportsManager mainApp) {
@@ -121,13 +121,13 @@ public class StartScreen implements Screen {
     }
 
     public void initButtons() {
-        buttonPlay = new TextButton("START", skin, "default");
+        buttonPlay = new TextButton("NEW GAME", skin, "default");
         buttonAbout = new TextButton("ABOUT", skin, "default");
         buttonExit = new TextButton("EXIT", skin, "default");
 
-        buttonPlay.setSize(BUTTON_SIZE, BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth() );
-        buttonAbout.setSize(BUTTON_SIZE , BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth() );
-        buttonExit.setSize(BUTTON_SIZE , BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth() );
+   //     buttonPlay.setSize(BUTTON_SIZE, BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth() );
+     //   buttonAbout.setSize(BUTTON_SIZE , BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth() );
+     //   buttonExit.setSize(BUTTON_SIZE , BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth() );
 
 
         buttonExit.addListener(new ClickListener() {
