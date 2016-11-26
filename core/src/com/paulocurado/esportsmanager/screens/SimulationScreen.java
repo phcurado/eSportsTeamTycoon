@@ -81,9 +81,6 @@ public class SimulationScreen implements Screen {
         mainApp.batch.setColor(Color.WHITE);
         stage.getBatch().draw(background, 0, 0, gamePort.getWorldWidth(), gamePort.getWorldHeight());
 
-        //for(int i = 0; i < 5; i++) {
-       //     mainApp.teamList.get(0).getPlayers().get(i).render(mainApp.facesOptions, mainApp.batch);
-       // }
 
         for(int i = 0; i < mainApp.playerList.size(); i++) {
             if(i < 15) {

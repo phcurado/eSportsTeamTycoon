@@ -1,18 +1,44 @@
+
 ui.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+window
+  rotate: false
+  xy: 1, 1
+  size: 352, 284
+  split: 7, 7, 59, 7
+  orig: 352, 284
+  offset: 0, 0
+  index: -1
 button_down_menu
   rotate: false
-  xy: 0, 0
+  xy: 355, 198
   size: 256, 87
+  split: 3, 3, 3, 3
   orig: 256, 87
   offset: 0, 0
   index: -1
 button_up_menu
   rotate: false
-  xy: 258, 0
+  xy: 355, 109
   size: 256, 87
+  split: 3, 3, 3, 3
   orig: 256, 87
+  offset: 0, 0
+  index: -1
+text_field
+  rotate: false
+  xy: 355, 38
+  size: 70, 69
+  split: 13, 13, 13, 13
+  orig: 70, 69
+  offset: 0, 0
+  index: -1
+cursor
+  rotate: false
+  xy: 427, 46
+  size: 1, 61
+  orig: 1, 61
   offset: 0, 0
   index: -1

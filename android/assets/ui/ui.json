@@ -3,6 +3,7 @@
   white: { r: 1, g: 1, b: 1, a: 1 },
   red: { r: 1, g: 0, b: 0, a: 1 },
   yellow: { r: 0.5, g: 0.5, b: 0, a: 1 },
+  black: { r: 0, g: 0, b: 0, a: 1 },
   grayFont: {hex: bfccd9}
 },
 
@@ -37,5 +38,21 @@
     font: default-font,
     fontColor: white
   }
+},
+  com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
+  default: {
+    cursor: cursor
+    background: text_field,
+    font: default-font,
+    fontColor: black,
+  }
+},
+  com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
+  default: {
+    titleFont: default-font,
+    background: window,
+    titleFontColor: black
+  }
 }
+
 }

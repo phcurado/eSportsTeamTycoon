@@ -20,8 +20,8 @@ public class EsportsManager extends Game {
 
     public static final String TITLE = "eSports Manager";
     public static final float VERSION = 0.1f;
-    public static final int V_WIDTH = 320;
-    public static final int V_HEIGHT = 480;
+    public static final int V_WIDTH = 640;
+    public static final int V_HEIGHT = 960;
 
     public ArrayList<Player> playerList;
     public ArrayList<Team> teamList;
@@ -66,9 +66,9 @@ public class EsportsManager extends Game {
     }
 
     private void initFonts() {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/font.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Renogare.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 16;
+        parameter.size = 28;
         parameter.color = Color.WHITE;
         font = generator.generateFont(parameter);
     }

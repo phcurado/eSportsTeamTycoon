@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -24,7 +25,7 @@ import com.paulocurado.esportsmanager.uielements.NewGameDialog;
  * Created by Paulo on 09/11/2016.
  */
 
-public class StartScreen implements Screen {
+public class MainMenuScreen implements Screen {
     private EsportsManager mainApp;
 
     private Viewport gamePort;
@@ -37,13 +38,13 @@ public class StartScreen implements Screen {
     private TextButton buttonPlay;
     private TextButton buttonAbout;
     private TextButton buttonExit;
-    private NewGameDialog dialog;
+    private NewGameDialog newGameDialog;
 
-    public static float BUTTON_SPACING = 10f;
-    public static float BUTTON_SIZE = 115f;
+    public static float BUTTON_SPACING = 20f;
+    public static float BUTTON_SIZE = 230f;
 
 
-    public StartScreen(EsportsManager mainApp) {
+    public MainMenuScreen(EsportsManager mainApp) {
         this.mainApp = mainApp;
 
 
@@ -58,10 +59,15 @@ public class StartScreen implements Screen {
         this.skin.load(Gdx.files.internal("ui/ui.json"));
 
 
+
         initBackground();
-
-
         initButtons();
+
+
+
+        newGameDialog = new NewGameDialog(mainApp, skin);
+
+
     }
 
     @Override
@@ -78,6 +84,7 @@ public class StartScreen implements Screen {
 
 
         stage.draw();
+        newGameDialog.render(delta);
     }
 
     @Override
@@ -121,14 +128,16 @@ public class StartScreen implements Screen {
     }
 
     public void initButtons() {
-        buttonPlay = new TextButton("NEW GAME", skin, "default");
-        buttonAbout = new TextButton("ABOUT", skin, "default");
-        buttonExit = new TextButton("EXIT", skin, "default");
+        buttonPlay = new TextButton(mainApp.bundle.get("startButton"), skin, "default");
+        buttonAbout = new TextButton(mainApp.bundle.get("aboutButton"), skin, "default");
+        buttonExit = new TextButton(mainApp.bundle.get("exitButton"), skin, "default");
 
-   //     buttonPlay.setSize(BUTTON_SIZE, BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth() );
-     //   buttonAbout.setSize(BUTTON_SIZE , BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth() );
-     //   buttonExit.setSize(BUTTON_SIZE , BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth() );
+        buttonPlay.addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                newGameDialog.visible = true;
 
+            }
+        });
 
         buttonExit.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
@@ -140,12 +149,12 @@ public class StartScreen implements Screen {
         Table table = new Table();
 
         table.add(buttonPlay).width(BUTTON_SIZE).height(BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth()).padBottom(BUTTON_SPACING);
-        table.row();
+        table.row().fillX();
         table.add(buttonAbout).width(BUTTON_SIZE).height(BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth()).padBottom(BUTTON_SPACING);
-        table.row();
+        table.row().fillX();
         table.add(buttonExit).width(BUTTON_SIZE).height(BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth()).padBottom(BUTTON_SPACING);
 
-        table.setPosition(gamePort.getWorldWidth() / 2 - table.getWidth() / 2, gamePort.getWorldHeight() / 2 - table.getHeight() / 2 - 80 );
+        table.setPosition(gamePort.getWorldWidth() / 2 - table.getWidth() / 2, logo.getY() - table.getHeight() / 2 - 250 );
 
 
         stage.addActor(table);

@@ -50,7 +50,7 @@ public class LoadingScreen implements Screen {
         progress = MathUtils.lerp(progress, mainApp.assets.getProgress(), .1f);
         if(mainApp.assets.update() && progress >= mainApp.assets.getProgress() - .1f) {
             mainApp.bundle =  mainApp.assets.get("languages/languages", I18NBundle.class);
-            mainApp.setScreen(new StartScreen(mainApp));
+            mainApp.setScreen(new MainMenuScreen(mainApp));
         }
     }
 
@@ -96,14 +96,6 @@ public class LoadingScreen implements Screen {
     }
 
     private void queueAssets() {
-        mainApp.assets.load("img/simulationMap.png", Texture.class);
-        mainApp.assets.load("img/facetextures.png", Texture.class);
-        mainApp.assets.load("languages/languages", I18NBundle.class);
-        mainApp.assets.load("ui/ui.atlas", TextureAtlas.class);
-        mainApp.assets.load("img/logo.png", Texture.class);
-        mainApp.assets.load("img/startmenubackground.png", Texture.class);
-
-
         Reader reader = Gdx.files.internal("database/Players.json").reader();
         Gson gson = new GsonBuilder().create();
         mainApp.playerList.addAll((ArrayList<Player>) gson.fromJson(reader,
@@ -129,5 +121,14 @@ public class LoadingScreen implements Screen {
                 }
             }
         }
+
+
+        mainApp.assets.load("img/simulationMap.png", Texture.class);
+        mainApp.assets.load("img/facetextures.png", Texture.class);
+        mainApp.assets.load("languages/languages", I18NBundle.class);
+        mainApp.assets.load("ui/ui.atlas", TextureAtlas.class);
+        mainApp.assets.load("img/logo.png", Texture.class);
+        mainApp.assets.load("img/startmenubackground.png", Texture.class);
+        mainApp.assets.load("img/images.atlas", TextureAtlas.class);
     }
 }
