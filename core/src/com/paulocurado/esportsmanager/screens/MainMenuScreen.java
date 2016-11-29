@@ -9,8 +9,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -19,7 +21,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
+import com.paulocurado.esportsmanager.uielements.ErrorDialog;
+import com.paulocurado.esportsmanager.uielements.GameScreenBox;
 import com.paulocurado.esportsmanager.uielements.NewGameDialog;
+import com.paulocurado.esportsmanager.uielements.ReaderElements;
 
 /**
  * Created by Paulo on 09/11/2016.
@@ -33,46 +38,55 @@ public class MainMenuScreen implements Screen {
     private Stage stage;
     private Skin skin;
 
-    private Image logo;
-    private Image background;
-    private TextButton buttonPlay;
-    private TextButton buttonAbout;
-    private TextButton buttonExit;
     private NewGameDialog newGameDialog;
+    private GameScreenBox errorDialog;
+    private GameScreenBox confirmDataDialog;
 
-    public static float BUTTON_SPACING = 20f;
-    public static float BUTTON_SIZE = 230f;
+    ReaderElements mainMenuLayout;
+
 
 
     public MainMenuScreen(EsportsManager mainApp) {
         this.mainApp = mainApp;
-
-
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT , mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
-        Gdx.input.setInputProcessor(stage);
-
-
-        this.skin = new Skin();
-        this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
-        this.skin.add("default-font", mainApp.font);
-        this.skin.load(Gdx.files.internal("ui/ui.json"));
-
-
-
-        initBackground();
-        initButtons();
-
-
-
-        newGameDialog = new NewGameDialog(mainApp, skin);
-
-
     }
 
     @Override
     public void show() {
         System.out.println("Start Screen");
+        Gdx.input.setInputProcessor(stage);
+        stage.clear();
+
+        this.skin = new Skin();
+        this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
+        this.skin.add("button-font", mainApp.buttonFont);
+        this.skin.add("label-font", mainApp.labelFont);
+        this.skin.add("label-small-font", mainApp.labelFontSmall);
+        this.skin.load(Gdx.files.internal("ui/ui.json"));
+
+        mainMenuLayout = new ReaderElements(mainApp, stage, skin, "ui/MainMenuScreen.json");
+        newGameDialog = new NewGameDialog(mainApp, skin, "ui/NewGameBox.json");
+        errorDialog = new GameScreenBox(mainApp, skin, "ui/ErrorBox.json");
+        confirmDataDialog = new GameScreenBox(mainApp, skin, "ui/ConfirmData.json");
+
+
+
+        mainMenuScreenButtonsClick();
+        newGameDialogButtonsClick();
+        errorDialogButtonsClick();
+        confirmDataDialogButtonsClick();
+
+
+
+        Actions actions = new Actions();
+
+        stage.getRoot().findActor("cloud1").addAction(actions.forever(actions.sequence(actions.moveBy(30, 0, 10f), actions.moveBy(-30, 0, 10f))) );
+        stage.getRoot().findActor("cloud2").addAction(actions.forever(actions.sequence(actions.moveBy(40, 0, 13f), actions.moveBy(-40, 0, 13f))) );
+
+
+
+
     }
 
     @Override
@@ -80,11 +94,21 @@ public class MainMenuScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        update(delta);
+
         mainApp.batch.setProjectionMatrix(stage.getCamera().combined);
 
-
         stage.draw();
-        newGameDialog.render(delta);
+        newGameDialog.draw();
+        errorDialog.draw();
+        confirmDataDialog.draw();
+
+    }
+
+    public void update(float delta) {
+
+        stage.act(delta);
+        errorDialog.getStage().act(delta);
     }
 
     @Override
@@ -114,50 +138,83 @@ public class MainMenuScreen implements Screen {
 
     }
 
-    public void initBackground() {
-        background = new Image(mainApp.assets.get("img/startmenubackground.png", Texture.class));
-        background.setSize(gamePort.getWorldWidth(), gamePort.getWorldHeight());
-        stage.addActor(background);
 
-
-        logo = new Image(mainApp.assets.get("img/logo.png", Texture.class));
-        logo.setSize(gamePort.getWorldWidth() - 25, gamePort.getWorldWidth()*logo.getHeight()/logo.getWidth());
-        logo.setPosition(gamePort.getWorldWidth() / 2 - logo.getWidth() / 2, gamePort.getWorldHeight() - logo.getHeight() - 25);
-        stage.addActor(logo);
-
-    }
-
-    public void initButtons() {
-        buttonPlay = new TextButton(mainApp.bundle.get("startButton"), skin, "default");
-        buttonAbout = new TextButton(mainApp.bundle.get("aboutButton"), skin, "default");
-        buttonExit = new TextButton(mainApp.bundle.get("exitButton"), skin, "default");
-
-        buttonPlay.addListener(new ClickListener() {
+    private void mainMenuScreenButtonsClick() {
+        stage.getRoot().findActor("startButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                newGameDialog.visible = true;
+                newGameDialog.setVisibility(true);
+                Gdx.input.setInputProcessor(newGameDialog.getStage());
+            }
+        });
+
+        stage.getRoot().findActor("aboutButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
 
             }
         });
 
-        buttonExit.addListener(new ClickListener() {
+        stage.getRoot().findActor("exitButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 Gdx.app.exit();
             }
         });
 
+    }
 
-        Table table = new Table();
+    private void newGameDialogButtonsClick() {
+        newGameDialog.getActor("confirmButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
 
-        table.add(buttonPlay).width(BUTTON_SIZE).height(BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth()).padBottom(BUTTON_SPACING);
-        table.row().fillX();
-        table.add(buttonAbout).width(BUTTON_SIZE).height(BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth()).padBottom(BUTTON_SPACING);
-        table.row().fillX();
-        table.add(buttonExit).width(BUTTON_SIZE).height(BUTTON_SIZE * buttonPlay.getHeight() / buttonPlay.getWidth()).padBottom(BUTTON_SPACING);
+                if(!newGameDialog.getError().equals("")) {
+                    ((Label) errorDialog.getActor("errorLabel")).setText(newGameDialog.getError());
+                    errorDialog.setVisibility(true);
+                    Gdx.input.setInputProcessor(errorDialog.getStage());
+                }
+                else {
+                    Gdx.input.setInputProcessor(confirmDataDialog.getStage());
+                    ((Label)confirmDataDialog.getActor("informationLabel")).setText( mainApp.bundle.get("SelectTeamName") + ": " + ((TextField)newGameDialog.getActor("teamName")).getText() +
+                            "\n" + mainApp.bundle.get("SelectShortName") + ": " + ((TextField)newGameDialog.getActor("teamShortName")).getText());
+                    newGameDialog.setVisibility(false);
+                    confirmDataDialog.setVisibility(true);
+                }
+            }
+        });
 
-        table.setPosition(gamePort.getWorldWidth() / 2 - table.getWidth() / 2, logo.getY() - table.getHeight() / 2 - 250 );
+        newGameDialog.getActor("cancelButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                Gdx.input.setInputProcessor(stage);
+                newGameDialog.setVisibility(false);
+            }
+        });
+    }
 
+    private void errorDialogButtonsClick() {
+        errorDialog.getActor("OkButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                Gdx.input.setInputProcessor(newGameDialog.getStage());
+                errorDialog.setVisibility(false);
+            }
+        });
+    }
 
-        stage.addActor(table);
+    private void confirmDataDialogButtonsClick() {
+        confirmDataDialog.getActor("confirmButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+               // Gdx.input.setInputProcessor(newGameDialog.getStage());
+                //confirmDataDialog.setVisibility(false);
+            }
+        });
 
+        confirmDataDialog.getActor("cancelButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                Gdx.input.setInputProcessor(newGameDialog.getStage());
+                confirmDataDialog.setVisibility(false);
+                newGameDialog.setVisibility(true);
+            }
+        });
+    }
+
+    public Stage getStage(){
+        return stage;
     }
 }
