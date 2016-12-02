@@ -84,9 +84,6 @@ public class MainMenuScreen implements Screen {
         stage.getRoot().findActor("cloud1").addAction(actions.forever(actions.sequence(actions.moveBy(30, 0, 10f), actions.moveBy(-30, 0, 10f))) );
         stage.getRoot().findActor("cloud2").addAction(actions.forever(actions.sequence(actions.moveBy(40, 0, 13f), actions.moveBy(-40, 0, 13f))) );
 
-
-
-
     }
 
     @Override
@@ -108,7 +105,7 @@ public class MainMenuScreen implements Screen {
     public void update(float delta) {
 
         stage.act(delta);
-        errorDialog.getStage().act(delta);
+        //errorDialog.getStage().act(delta);
     }
 
     @Override
@@ -167,13 +164,18 @@ public class MainMenuScreen implements Screen {
 
                 if(!newGameDialog.getError().equals("")) {
                     ((Label) errorDialog.getActor("errorLabel")).setText(newGameDialog.getError());
+                    ((Label)errorDialog.getActor("errorLabel")).setText(errorDialog.cutText(((Label)errorDialog.getActor("errorLabel")), errorDialog.getActor("panel").getHeight()) );
+
                     errorDialog.setVisibility(true);
                     Gdx.input.setInputProcessor(errorDialog.getStage());
                 }
+
                 else {
                     Gdx.input.setInputProcessor(confirmDataDialog.getStage());
-                    ((Label)confirmDataDialog.getActor("informationLabel")).setText( mainApp.bundle.get("SelectTeamName") + ": " + ((TextField)newGameDialog.getActor("teamName")).getText() +
+                    ((Label)confirmDataDialog.getActor("informationLabel")).setText( mainApp.bundle.get("SelectPlayerName") + ": " + ((TextField)newGameDialog.getActor("PlayerName")).getText() +
+                            "\n" + mainApp.bundle.get("SelectTeamName") + ": " + ((TextField)newGameDialog.getActor("teamName")).getText() +
                             "\n" + mainApp.bundle.get("SelectShortName") + ": " + ((TextField)newGameDialog.getActor("teamShortName")).getText());
+
                     newGameDialog.setVisibility(false);
                     confirmDataDialog.setVisibility(true);
                 }
@@ -193,6 +195,13 @@ public class MainMenuScreen implements Screen {
             public void clicked(InputEvent e, float x, float y) {
                 Gdx.input.setInputProcessor(newGameDialog.getStage());
                 errorDialog.setVisibility(false);
+
+            }
+        });
+        errorDialog.getActor("errorLabel").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                    ((Label) errorDialog.getActor("errorLabel")).setText(errorDialog.getText()[1]);
+
             }
         });
     }
@@ -200,8 +209,6 @@ public class MainMenuScreen implements Screen {
     private void confirmDataDialogButtonsClick() {
         confirmDataDialog.getActor("confirmButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-               // Gdx.input.setInputProcessor(newGameDialog.getStage());
-                //confirmDataDialog.setVisibility(false);
             }
         });
 

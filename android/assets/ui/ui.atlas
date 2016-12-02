@@ -5,40 +5,48 @@ filter: Nearest,Nearest
 repeat: none
 window
   rotate: false
-  xy: 1, 1
+  xy: 0, 0
+  size: 360, 292
+  split: 41, 41, 74, 74
+  orig: 360, 292
+  offset: 0, 0
+  index: -1
+panel
+  rotate: false
+  xy: 360, 8
   size: 352, 284
-  split: 7, 7, 59, 7
+  split: 6, 6, 6, 6
   orig: 352, 284
   offset: 0, 0
   index: -1
 button_down_menu
   rotate: false
-  xy: 355, 198
-  size: 256, 87
-  split: 3, 3, 3, 3
-  orig: 256, 87
+  xy: 712, 198
+  size: 255, 94
+  split: 19, 19, 18, 18
+  orig: 255, 94
   offset: 0, 0
   index: -1
 button_up_menu
   rotate: false
-  xy: 355, 109
-  size: 256, 87
-  split: 3, 3, 3, 3
-  orig: 256, 87
-  offset: 0, 0
-  index: -1
-text_field
-  rotate: false
-  xy: 355, 38
-  size: 70, 69
-  split: 13, 13, 13, 13
-  orig: 70, 69
+  xy: 712, 104
+  size: 255, 94
+  split: 19, 19, 18, 18
+  orig: 255, 94
   offset: 0, 0
   index: -1
 cursor
   rotate: false
-  xy: 427, 46
+  xy: 967, 231
   size: 1, 61
   orig: 1, 61
+  offset: 0, 0
+  index: -1
+text_field
+  rotate: false
+  xy: 712, 73
+  size: 30, 31
+  split: 3, 3, 3, 3
+  orig: 30, 31
   offset: 0, 0
   index: -1

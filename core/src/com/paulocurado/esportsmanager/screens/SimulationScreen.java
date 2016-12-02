@@ -49,7 +49,7 @@ public class SimulationScreen implements Screen {
         textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.up = skin.getDrawable("button_03");
         textButtonStyle.down = skin.getDrawable("button_01");
-        textButtonStyle.font = mainApp.font;
+        textButtonStyle.font = mainApp.labelFont;
         button = new TextButton("Start", textButtonStyle);
 
 //        Texture text = skin.get("button_01", Texture.class);
@@ -84,17 +84,17 @@ public class SimulationScreen implements Screen {
 
         for(int i = 0; i < mainApp.playerList.size(); i++) {
             if(i < 15) {
-                mainApp.font.draw(mainApp.batch, mainApp.playerList.get(i).getNickName(), 80, 45 + 30 * i);
+                mainApp.labelFont.draw(mainApp.batch, mainApp.playerList.get(i).getNickName(), 80, 45 + 30 * i);
                 mainApp.playerList.get(i).setPosition(50, 20 + 30 * i);
                 mainApp.playerList.get(i).render(mainApp.facesOptions, mainApp.batch);
             }
             else {
-                mainApp.font.draw(mainApp.batch, mainApp.playerList.get(i).getNickName(), 230, 45 + 30 * i - 300);
+                mainApp.labelFont.draw(mainApp.batch, mainApp.playerList.get(i).getNickName(), 230, 45 + 30 * i - 300);
                 mainApp.playerList.get(i).setPosition(200, 20 + 30 * i  - 300);
                 mainApp.playerList.get(i).render(mainApp.facesOptions, mainApp.batch);
             }
         }
-        mainApp.font.draw(mainApp.batch, "fps:"+Gdx.graphics.getFramesPerSecond(), gamePort.getWorldWidth() - 80, gamePort.getWorldHeight() - 20);
+        mainApp.labelFont.draw(mainApp.batch, "fps:"+Gdx.graphics.getFramesPerSecond(), gamePort.getWorldWidth() - 80, gamePort.getWorldHeight() - 20);
         mainApp.batch.end();
 
         stage.draw();

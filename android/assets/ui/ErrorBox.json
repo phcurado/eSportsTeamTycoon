@@ -1,0 +1,78 @@
+{
+  "ui": [
+    {
+      "type": "window",
+      "title": "Error",
+      "id": "title",
+      "background": "window",
+      "size": {
+        "x": 550,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "center"
+    },
+    {
+      "type": "label",
+      "text": "Error",
+      "id": "title",
+      "size": {
+        "x": 175,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 200
+      },
+      "orientation": "center"
+    },
+    {
+      "uniqueName": "panel",
+      "type": "panel",
+      "background": "panel",
+      "id": "default",
+      "size": {
+        "x": 500,
+        "y": 260
+      },
+      "position": {
+        "x": 0,
+        "y": 20
+      },
+      "orientation": "center"
+    },
+    {
+      "uniqueName": "errorLabel",
+      "type": "label",
+      "text": "SelectTeamName",
+      "id": "small",
+      "size": {
+        "x": 470,
+        "y": 250
+      },
+      "position": {
+        "x": 0,
+        "y": 10
+      },
+      "orientation": "center"
+    },
+    {
+      "uniqueName": "OkButton",
+      "type": "textbutton",
+      "text": "Ok",
+      "id": "default",
+      "size": {
+        "x": 180,
+        "y": 65
+      },
+      "position": {
+        "x": 0,
+        "y": -160
+      },
+      "orientation": "center"
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "ui": [
+    {
+      "type": "window",
+      "title": "newGame",
+      "id": "title",
+      "background": "window",
+      "size": {
+        "x": 550,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "center"
+    },
+    {
+      "type": "label",
+      "text": "newGame",
+      "id": "title",
+      "size": {
+        "x": 175,
+        "y": 0
+
+      },
+      "position": {
+        "x": 0,
+        "y": 200
+      },
+      "orientation": "center"
+    },
+    {
+      "type": "label",
+      "text": "SelectPlayerName",
+      "id": "small",
+      "size": {
+        "x": 175,
+        "y": 0
+
+      },
+      "position": {
+        "x": 90,
+        "y": 580
+      },
+      "orientation": "none"
+    },
+    {
+      "type": "label",
+      "text": "SelectTeamName",
+      "id": "small",
+      "size": {
+        "x": 175,
+        "y": 0
+
+      },
+      "position": {
+        "x": 90,
+        "y": 490
+      },
+      "orientation": "none"
+    },
+    {
+      "type": "label",
+      "text": "SelectShortName",
+      "id": "small",
+      "size": {
+        "x": 175,
+        "y": 0
+
+      },
+      "position": {
+        "x": 90,
+        "y": 400
+      },
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PlayerName",
+      "type": "textfield",
+      "id": "default",
+      "size": {
+        "x": 255,
+        "y": 40
+
+      },
+      "position": {
+        "x": 280,
+        "y": 580
+      },
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "teamName",
+      "type": "textfield",
+      "id": "default",
+      "size": {
+        "x": 255,
+        "y": 40
+
+      },
+      "position": {
+        "x": 280,
+        "y": 490
+      },
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "teamShortName",
+      "type": "textfield",
+      "id": "default",
+      "size": {
+        "x": 255,
+        "y": 40
+
+      },
+      "position": {
+        "x": 280,
+        "y": 400
+      },
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "confirmButton",
+      "type": "textbutton",
+      "text": "Confirm",
+      "id": "default",
+      "size": {
+        "x": 180,
+        "y": 65
+
+      },
+      "position": {
+        "x": 80,
+        "y": 290
+      },
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "cancelButton",
+      "type": "textbutton",
+      "text": "Cancel",
+      "id": "default",
+      "size": {
+        "x": 180,
+        "y": 65
+
+      },
+      "position": {
+        "x": 380,
+        "y": 290
+      },
+      "orientation": "none"
+    }
+  ]
+}

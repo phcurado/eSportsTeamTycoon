@@ -40,7 +40,7 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void show() {
-        System.out.println("Entrou na Loading Screen");
+        System.out.println("Loading Screen");
         this.progress = 0f;
         queueAssets();
 
@@ -127,8 +127,6 @@ public class LoadingScreen implements Screen {
         mainApp.assets.load("img/facetextures.png", Texture.class);
         mainApp.assets.load("languages/languages", I18NBundle.class);
         mainApp.assets.load("ui/ui.atlas", TextureAtlas.class);
-        mainApp.assets.load("img/logo.png", Texture.class);
-        mainApp.assets.load("img/startmenubackground.png", Texture.class);
         mainApp.assets.load("img/images.atlas", TextureAtlas.class);
     }
 }

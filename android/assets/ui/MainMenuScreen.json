@@ -1,0 +1,111 @@
+{
+  "ui": [
+    {
+      "type": "image",
+      "path": "img/images.atlas",
+      "image": "startmenubackground",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "cloud1",
+      "type": "image",
+      "path": "img/images.atlas",
+      "image": "cloud1",
+      "size": {
+        "x": 300,
+        "y": 0
+      },
+      "position": {
+        "x": 400,
+        "y": 550
+      },
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "cloud2",
+      "type": "image",
+      "path": "img/images.atlas",
+      "image": "cloud2",
+      "size": {
+        "x": 300,
+        "y": 0
+      },
+      "position": {
+        "x": 10,
+        "y": 600
+      },
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "logo",
+      "type": "image",
+      "path": "img/images.atlas",
+      "image": "logo",
+      "size": {
+        "x": 600,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 300
+      },
+      "orientation": "center"
+    },
+    {
+      "uniqueName": "startButton",
+      "type": "textbutton",
+      "text": "startButton",
+      "id": "default",
+      "size": {
+        "x": 220,
+        "y": 75
+
+      },
+      "position": {
+        "x": 0,
+        "y": -50
+      },
+      "orientation": "center"
+    },
+    {
+      "uniqueName": "aboutButton",
+      "type": "textbutton",
+      "text": "aboutButton",
+      "id": "default",
+      "size": {
+        "x": 220,
+        "y": 75
+
+      },
+      "position": {
+        "x": 0,
+        "y": -150
+      },
+      "orientation": "center"
+    },
+    {
+      "uniqueName": "exitButton",
+      "type": "textbutton",
+      "text": "exitButton",
+      "id": "default",
+      "size": {
+        "x": 220,
+        "y": 75
+
+      },
+      "position": {
+        "x": 0,
+        "y": -250
+      },
+      "orientation": "center"
+    }
+  ]
+}
