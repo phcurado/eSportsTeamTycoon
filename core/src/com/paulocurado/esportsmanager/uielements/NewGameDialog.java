@@ -1,6 +1,7 @@
 package com.paulocurado.esportsmanager.uielements;
 
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -18,8 +19,8 @@ public class NewGameDialog extends GameScreenBox {
 
     private String error;
 
-    public NewGameDialog(EsportsManager mainApp, Skin skin, String path) {
-        super(mainApp, skin, path);
+    public NewGameDialog(EsportsManager mainApp, Skin skin, String path, Screen parent) {
+        super(mainApp, skin, path, parent);
 
         error = "";
     }

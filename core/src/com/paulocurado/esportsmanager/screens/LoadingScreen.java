@@ -16,6 +16,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.paulocurado.esportsmanager.EsportsManager;
+import com.paulocurado.esportsmanager.model.Contract;
 import com.paulocurado.esportsmanager.model.Player;
 import com.paulocurado.esportsmanager.model.Team;
 
@@ -28,11 +29,11 @@ import java.util.ArrayList;
 
 public class LoadingScreen implements Screen {
 
-    private EsportsManager mainApp;
+    private final EsportsManager mainApp;
     private ShapeRenderer shapeRenderer;
     private float progress;
 
-    public LoadingScreen(EsportsManager mainApp) {
+    public LoadingScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
         this.shapeRenderer = new ShapeRenderer();
 
@@ -106,6 +107,12 @@ public class LoadingScreen implements Screen {
         mainApp.teamList.addAll((ArrayList<Team>) gson.fromJson(readerTeam,
                 new TypeToken<ArrayList<Team>>() {
                 }.getType()));
+
+        Reader readerContract = Gdx.files.internal("database/Contracts.json").reader();
+        mainApp.contractList.addAll((ArrayList<Contract>) gson.fromJson(readerContract,
+                new TypeToken<ArrayList<Contract>>() {
+                }.getType()));
+
 
         JsonParser json = new JsonParser();
         Object arrayTeams = json.parse(Gdx.files.internal("database/Teams.json").reader());

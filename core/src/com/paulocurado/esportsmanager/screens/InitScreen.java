@@ -18,7 +18,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
  */
 
 public class InitScreen implements Screen {
-    private EsportsManager mainApp;
+    private final EsportsManager mainApp;
     private Viewport gamePort;
 
     private Image logoCompany;
@@ -26,7 +26,7 @@ public class InitScreen implements Screen {
 
     private static float LOGO_SIZE = 150f;
 
-    public InitScreen(EsportsManager mainApp) {
+    public InitScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT , mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);

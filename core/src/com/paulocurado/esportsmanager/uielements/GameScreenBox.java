@@ -1,6 +1,7 @@
 package com.paulocurado.esportsmanager.uielements;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -15,7 +16,7 @@ import com.paulocurado.esportsmanager.EsportsManager;
 
 public class GameScreenBox {
     protected Stage stage;
-    private Viewport gamePort;
+    protected Viewport gamePort;
     protected Skin skin;
 
     protected boolean visibility;
@@ -25,15 +26,19 @@ public class GameScreenBox {
     String[] text = new String[2];
 
     protected EsportsManager mainApp;
+    protected final Screen root;
 
-    public GameScreenBox(EsportsManager mainApp, Skin skin, String path) {
+
+    public GameScreenBox(final EsportsManager mainApp, Skin skin, String path, final Screen root) {
         this.mainApp = mainApp;
-        gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT , mainApp.camera);
+        this.root = root;
+        gamePort = new FitViewport(mainApp.V_WIDTH, mainApp.V_HEIGHT , mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
         this.skin = skin;
         visibility = false;
-        reader = new ReaderElements(mainApp, stage, skin, path);
 
+
+        reader = new ReaderElements(mainApp, stage, skin, path);
     }
 
     public void draw() {
@@ -62,6 +67,8 @@ public class GameScreenBox {
 
     public void setVisibility(boolean visibility) {
         this.visibility = visibility;
+        if(visibility == true)
+            Gdx.input.setInputProcessor(stage);
     }
 
     public String cutText(Label label, float yMax) {
@@ -89,5 +96,9 @@ public class GameScreenBox {
 
     public void setText(String[] text) {
         this.text = text;
+    }
+
+    public void dispose() {
+        stage.dispose();
     }
 }

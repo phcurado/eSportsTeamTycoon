@@ -23,7 +23,7 @@ import com.paulocurado.esportsmanager.model.BattleSimulation;
 
 public class SimulationScreen implements Screen {
 
-    private EsportsManager mainApp;
+    private final EsportsManager mainApp;
     private OrthographicCamera gameCam;
     private Viewport gamePort;
 
@@ -35,7 +35,7 @@ public class SimulationScreen implements Screen {
     TextButton button;
     TextButton.TextButtonStyle textButtonStyle;
 
-    public SimulationScreen(EsportsManager mainApp) {
+    public SimulationScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(mainApp.V_WIDTH, mainApp.V_HEIGHT, gameCam);

@@ -9,7 +9,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.paulocurado.esportsmanager.model.Contract;
 import com.paulocurado.esportsmanager.model.Player;
 import com.paulocurado.esportsmanager.model.Team;
 import com.paulocurado.esportsmanager.model.User;
@@ -27,6 +29,7 @@ public class EsportsManager extends Game {
 
     public ArrayList<Player> playerList;
     public ArrayList<Team> teamList;
+    public ArrayList<Contract> contractList;
 
     public User user;
 
@@ -41,6 +44,12 @@ public class EsportsManager extends Game {
     public BitmapFont buttonFont;
     public BitmapFont labelFont;
     public BitmapFont labelFontSmall;
+    public BitmapFont positionFont;
+    public BitmapFont positionSmallFont;
+    public BitmapFont labelFontMedium;
+
+    public Skin skin;
+
 
     @Override
     public void create() {
@@ -49,6 +58,7 @@ public class EsportsManager extends Game {
         initFonts();
         playerList = new ArrayList<Player>();
         teamList = new ArrayList<Team>();
+        contractList = new ArrayList<Contract>();
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, V_WIDTH, V_HEIGHT);
@@ -79,17 +89,35 @@ public class EsportsManager extends Game {
 
         FreeTypeFontGenerator generatorLabel = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Neuton-Extrabold.ttf"));
         parameter.size = 30;
-        parameter.borderWidth = 1;
+        parameter.borderWidth = 2;
         parameter.color = Color.WHITE;
         labelFont = generatorLabel.generateFont(parameter);
 
-        FreeTypeFontGenerator generatorLabelSmall = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Neuton-Regular.ttf"));
-        parameter.size = 26;
+        FreeTypeFontGenerator generatorLabelMedium = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Neuton-Extrabold.ttf"));
+        parameter.size = 25;
+        parameter.borderWidth = 2;
+        parameter.color = Color.WHITE;
+        labelFontMedium = generatorLabel.generateFont(parameter);
+
+        FreeTypeFontGenerator generatorLabelSmall = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Neuton-Extrabold.ttf"));
+        parameter.size = 22;
         parameter.borderWidth = 0;
         parameter.spaceX = 2;
         parameter.spaceY = 2;
         parameter.color = Color.WHITE;
         labelFontSmall = generatorLabelSmall.generateFont(parameter);
+
+        FreeTypeFontGenerator generatorPosition = new FreeTypeFontGenerator(Gdx.files.internal("fonts/arial.ttf"));
+        parameter.size = 24;
+        parameter.borderWidth = 2;
+        parameter.color = Color.WHITE;
+        positionFont = generatorPosition.generateFont(parameter);
+
+        FreeTypeFontGenerator generatorSmallPosition = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Neuton-Extrabold.ttf"));
+        parameter.size = 15;
+        parameter.borderWidth = 1;
+        parameter.color = Color.WHITE;
+        positionSmallFont = generatorSmallPosition.generateFont(parameter);
 
     }
 
@@ -97,6 +125,15 @@ public class EsportsManager extends Game {
 
         for(int i = 0; i < playerList.size(); i++) {
             if(playerId.equals(playerList.get(i).getId()))
+                return playerList.get(i);
+        }
+        return null;
+    }
+
+    public Player findPlayerbyNickName(String NickName) {
+
+        for(int i = 0; i < playerList.size(); i++) {
+            if(NickName.equals(playerList.get(i).getNickName()))
                 return playerList.get(i);
         }
         return null;

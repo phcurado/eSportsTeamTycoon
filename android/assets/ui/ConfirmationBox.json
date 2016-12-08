@@ -1,0 +1,97 @@
+{
+  "ui": [
+    {
+      "uniqueName": "ConfirmationBox",
+      "type": "window",
+      "background": "window",
+      "size": {
+        "x": 550,
+        "y": 300
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "center"
+    },
+    {
+      "type": "label",
+      "text": "Confirmation",
+      "id": "title",
+      "size": {
+        "x": 0,
+        "y": 0
+
+      },
+      "position": {
+        "x": 0,
+        "y": 200
+      },
+      "centerX": "ConfirmationBox",
+      "inside_Top": "ConfirmationBox",
+      "marginTop": 10,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "TextLabel",
+      "type": "label",
+      "text": "Hire_Confirmation",
+      "id": "default",
+      "size": {
+        "x": 490,
+        "y": 0
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Left": "ConfirmationBox",
+      "inside_Top": "ConfirmationBox",
+      "marginTop": 70,
+      "marginLeft": 30,
+      "orientation": "none"
+    },
+
+
+    {
+      "uniqueName": "YesButton",
+      "type": "textbutton",
+      "text": "Yes",
+      "id": "default",
+      "size": {
+        "x": 180,
+        "y": 65
+
+      },
+      "position": {
+        "x": 80,
+        "y": 290
+      },
+      "inside_Left": "ConfirmationBox",
+      "inside_Bottom": "ConfirmationBox",
+      "marginLeft": 30,
+      "marginBottom": 30,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "NoButton",
+      "type": "textbutton",
+      "text": "No",
+      "id": "default",
+      "size": {
+        "x": 180,
+        "y": 65
+
+      },
+      "position": {
+        "x": 380,
+        "y": 290
+      },
+      "alignY": "YesButton",
+      "inside_Right": "ConfirmationBox",
+      "marginRight": 30,
+      "orientation": "none"
+    }
+  ]
+}

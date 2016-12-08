@@ -1,8 +1,9 @@
 {
   "ui": [
     {
+      "uniqueName": "tipWindow",
       "type": "window",
-      "title": "Error",
+      "title": "Tip",
       "id": "title",
       "background": "window",
       "size": {
@@ -17,7 +18,7 @@
     },
     {
       "type": "label",
-      "text": "Error",
+      "text": "Tip",
       "id": "title",
       "size": {
         "x": 0,
@@ -27,7 +28,10 @@
         "x": 0,
         "y": 200
       },
-      "orientation": "center"
+      "centerX": "tipWindow",
+      "inside_Top": "tipWindow",
+      "marginTop": 10,
+      "orientation": "none"
     },
     {
       "uniqueName": "panel",
@@ -45,9 +49,9 @@
       "orientation": "center"
     },
     {
-      "uniqueName": "errorLabel",
+      "uniqueName": "tipLabel",
       "type": "label",
-      "text": "SelectTeamName",
+      "text": "Tip",
       "id": "small",
       "size": {
         "x": 470,
@@ -72,7 +76,10 @@
         "x": 0,
         "y": -160
       },
-      "orientation": "center"
+      "inside_Bottom": "tipWindow",
+      "centerX": "tipWindow",
+      "marginBottom": 30,
+      "orientation": "none"
     }
   ]
 }

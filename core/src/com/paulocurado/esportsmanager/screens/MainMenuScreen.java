@@ -1,27 +1,20 @@
 package com.paulocurado.esportsmanager.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
-import com.paulocurado.esportsmanager.uielements.ErrorDialog;
+import com.paulocurado.esportsmanager.model.User;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
 import com.paulocurado.esportsmanager.uielements.NewGameDialog;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
@@ -31,7 +24,7 @@ import com.paulocurado.esportsmanager.uielements.ReaderElements;
  */
 
 public class MainMenuScreen implements Screen {
-    private EsportsManager mainApp;
+    private final EsportsManager mainApp;
 
     private Viewport gamePort;
 
@@ -41,16 +34,28 @@ public class MainMenuScreen implements Screen {
     private NewGameDialog newGameDialog;
     private GameScreenBox errorDialog;
     private GameScreenBox confirmDataDialog;
+    private GameScreenBox aboutDialog;
 
     ReaderElements mainMenuLayout;
 
 
 
-    public MainMenuScreen(EsportsManager mainApp) {
+    public MainMenuScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT , mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
+
+        this.skin = new Skin();
+        this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
+        this.skin.add("button-font", mainApp.buttonFont);
+        this.skin.add("label-font", mainApp.labelFont);
+        this.skin.add("label-small-font", mainApp.labelFontSmall);
+        this.skin.add("position-font", mainApp.positionFont);
+        this.skin.add("position-small-font", mainApp.positionSmallFont);
+        this.skin.add("label-medium-font", mainApp.labelFontMedium);
+        this.skin.load(Gdx.files.internal("ui/ui.json"));
     }
+
 
     @Override
     public void show() {
@@ -58,17 +63,12 @@ public class MainMenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         stage.clear();
 
-        this.skin = new Skin();
-        this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
-        this.skin.add("button-font", mainApp.buttonFont);
-        this.skin.add("label-font", mainApp.labelFont);
-        this.skin.add("label-small-font", mainApp.labelFontSmall);
-        this.skin.load(Gdx.files.internal("ui/ui.json"));
 
         mainMenuLayout = new ReaderElements(mainApp, stage, skin, "ui/MainMenuScreen.json");
-        newGameDialog = new NewGameDialog(mainApp, skin, "ui/NewGameBox.json");
-        errorDialog = new GameScreenBox(mainApp, skin, "ui/ErrorBox.json");
-        confirmDataDialog = new GameScreenBox(mainApp, skin, "ui/ConfirmData.json");
+        newGameDialog = new NewGameDialog(mainApp, skin, "ui/NewGameBox.json", this);
+        errorDialog = new GameScreenBox(mainApp, skin, "ui/ErrorBox.json", this);
+        confirmDataDialog = new GameScreenBox(mainApp, skin, "ui/ConfirmData.json", this);
+        aboutDialog = new GameScreenBox(mainApp, skin, "ui/HirePlayerBox.json", this);
 
 
 
@@ -84,6 +84,8 @@ public class MainMenuScreen implements Screen {
         stage.getRoot().findActor("cloud1").addAction(actions.forever(actions.sequence(actions.moveBy(30, 0, 10f), actions.moveBy(-30, 0, 10f))) );
         stage.getRoot().findActor("cloud2").addAction(actions.forever(actions.sequence(actions.moveBy(40, 0, 13f), actions.moveBy(-40, 0, 13f))) );
 
+
+
     }
 
     @Override
@@ -94,18 +96,19 @@ public class MainMenuScreen implements Screen {
         update(delta);
 
         mainApp.batch.setProjectionMatrix(stage.getCamera().combined);
+        stage.getCamera().update();
+        stage.getViewport().apply();
 
         stage.draw();
         newGameDialog.draw();
         errorDialog.draw();
         confirmDataDialog.draw();
+        aboutDialog.draw();
 
     }
 
     public void update(float delta) {
-
         stage.act(delta);
-        //errorDialog.getStage().act(delta);
     }
 
     @Override
@@ -132,7 +135,10 @@ public class MainMenuScreen implements Screen {
     public void dispose() {
         stage.dispose();
         skin.dispose();
-
+        newGameDialog.dispose();
+        errorDialog.dispose();
+        confirmDataDialog.dispose();
+        aboutDialog.dispose();
     }
 
 
@@ -146,6 +152,7 @@ public class MainMenuScreen implements Screen {
 
         stage.getRoot().findActor("aboutButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
+                aboutDialog.setVisibility(true);
 
             }
         });
@@ -209,6 +216,12 @@ public class MainMenuScreen implements Screen {
     private void confirmDataDialogButtonsClick() {
         confirmDataDialog.getActor("confirmButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
+                mainApp.user = new User(
+                        ((TextField)newGameDialog.getActor("PlayerName")).getText(),
+                        ((TextField)newGameDialog.getActor("teamName")).getText(),
+                        ((TextField)newGameDialog.getActor("teamShortName")).getText());
+
+                mainApp.setScreen(new GameScreen(mainApp));
             }
         });
 
@@ -220,6 +233,7 @@ public class MainMenuScreen implements Screen {
             }
         });
     }
+
 
     public Stage getStage(){
         return stage;

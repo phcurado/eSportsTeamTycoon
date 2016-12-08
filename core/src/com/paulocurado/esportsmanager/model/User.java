@@ -5,11 +5,13 @@ package com.paulocurado.esportsmanager.model;
  */
 
 public class User {
-    private String name;
+    private String userName;
     private Team team;
 
-    public User(String name, String teamName, String shortTeamName) {
-        this.name = name;
+    private boolean hireScreenFirstTime = true;
+
+    public User(String userName, String teamName, String shortTeamName) {
+        this.userName = userName;
         team = new Team();
         team.setName(teamName);
         team.setAbbreviatedName(shortTeamName);
@@ -20,11 +22,20 @@ public class User {
     }
 
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+
+    public boolean isHireScreenFirstTime() {
+        return hireScreenFirstTime;
+    }
+
+    public void setHireScreenFirstTime(boolean hireScreenFirstTime) {
+        this.hireScreenFirstTime = hireScreenFirstTime;
     }
 }

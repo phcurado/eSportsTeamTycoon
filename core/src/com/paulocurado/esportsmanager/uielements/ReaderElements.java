@@ -52,45 +52,6 @@ public class ReaderElements {
 
     }
 
-    private void windowStyle(int position) {
-        Image background = new Image(skin.getPatch(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("background").getAsString() ));
-
-
-        Vector2 windowSize = new Vector2(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().getAsJsonObject("size").get("x").getAsFloat(),
-                jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().getAsJsonObject("size").get("y").getAsFloat());
-
-        Vector2 windowPosition = new Vector2(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().getAsJsonObject("position").get("x").getAsFloat(),
-                jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().getAsJsonObject("position").get("y").getAsFloat());
-
-        if(windowSize.y == 0) {
-            background.setSize(windowSize.x, windowSize.x * background.getHeight() / background.getWidth());
-
-        } else {
-            background.setSize(windowSize.x, windowSize.y);
-        }
-
-        if (jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("orientation").getAsString().equals("center")) {
-            background.setPosition(stage.getViewport().getWorldWidth() / 2 - background.getWidth() / 2 + windowPosition.x,
-                    stage.getViewport().getWorldHeight() / 2 - background.getHeight() / 2 + windowPosition.y);
-
-        } else {
-            background.setPosition(windowPosition.x, windowPosition.y);
-        }
-
-
-        Label titleLabel = new Label(mainApp.bundle.get(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("title").getAsString()), skin,
-                jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("id").getAsString() );
-
-        titleLabel.setPosition(background.getX() + background.getWidth() / 2 - titleLabel.getWidth() / 2, background.getY() + background.getHeight() - titleLabel.getHeight() - 10);
-
-
-        stage.addActor(background);
-        stage.addActor(titleLabel);
-    }
-
-
-
-
     private void actorStyle(int position) {
         Actor actor;
         if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("window")) {
@@ -102,6 +63,7 @@ public class ReaderElements {
         else if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("label")) {
             actor = new Label(mainApp.bundle.get(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("text").getAsString()), skin,
                     jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("id").getAsString());
+
         }
         else if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("textbutton")) {
             actor = new TextButton(mainApp.bundle.get(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("text").getAsString()),
@@ -114,6 +76,9 @@ public class ReaderElements {
             actor = new Image(new TextureRegion(new TextureRegion(mainApp.assets.get(
                     jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("path").getAsString(), TextureAtlas.class)
                     .findRegion(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("image").getAsString())) ) );
+        }
+        else if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("imageBlank")) {
+            actor = new Image();
         }
         else {
             actor = new Actor();
@@ -131,26 +96,132 @@ public class ReaderElements {
                 jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().getAsJsonObject("position").get("y").getAsFloat());
 
         if(actorSize.x == 0 && actorSize.y == 0) {
-            if(!jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("label"))
+            if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("label")) {
+                ((Label) actor).setWrap(true);
+                ((Label) actor).setAlignment(Align.topLeft);
+                actor.setSize(((Label) actor).getWidth(), ((Label) actor).getHeight() );
+            }
+            else
                 actor.setSize(stage.getViewport().getWorldWidth(), stage.getViewport().getWorldHeight());
-
         }
 
         else if (actorSize.y == 0) {
-            if(!jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("label"))
+            if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("label")) {
+                if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().getAsJsonObject("size").has("orientation")) {
+                    if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().getAsJsonObject("size").get("orientation").getAsString().equals("center")) {
+                        ((Label) actor).setWrap(true);
+                        ((Label) actor).setAlignment(Align.center);
+                        actor.setSize(actorSize.x, ((Label) actor).getHeight());
+                    }
+                    else {
+                        ((Label) actor).setWrap(true);
+                        ((Label) actor).setAlignment(Align.topLeft);
+                        actor.setSize(actorSize.x, ((Label) actor).getHeight());
+                    }
+                }
+                else {
+                    ((Label) actor).setWrap(true);
+                    ((Label) actor).setAlignment(Align.topLeft);
+                    actor.setSize(actorSize.x, ((Label) actor).getHeight());
+                }
+
+            }
+            else
                 actor.setSize(actorSize.x, actorSize.x * actor.getHeight() / actor.getWidth());
         }
 
         else {
             if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("label")) {
-                ((Label) actor).setWrap(true);
-                ((Label) actor).setAlignment(Align.topLeft);
-
+                if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().getAsJsonObject("size").has("orientation")) {
+                    if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().getAsJsonObject("size").get("orientation").getAsString().equals("center")) {
+                        ((Label) actor).setWrap(true);
+                        ((Label) actor).setAlignment(Align.center);
+                        actor.setSize(actorSize.x, actorSize.y);
+                    }
+                    else {
+                        ((Label) actor).setWrap(true);
+                        ((Label) actor).setAlignment(Align.topLeft);
+                        actor.setSize(actorSize.x, actorSize.y);
+                    }
+                }
+                else {
+                    ((Label) actor).setWrap(true);
+                    ((Label) actor).setAlignment(Align.topLeft);
+                    actor.setSize(actorSize.x, actorSize.y);
+                }
             }
                 actor.setSize(actorSize.x, actorSize.y);
-
-
         }
+
+        if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("below")) {
+            actorPosition.x = stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("below").getAsString()).getX();
+            actorPosition.y = stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("below").getAsString()).getY() -
+                    actor.getHeight();
+        }
+        if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("alignLeft")) {
+            actorPosition.x = stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("alignLeft").getAsString()).getX() +
+                    stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("alignLeft").getAsString()).getWidth();
+            actorPosition.y = stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("alignLeft").getAsString()).getY() - actor.getHeight() +
+                    stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("alignLeft").getAsString()).getHeight();
+        }
+
+
+
+        if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("alignX")) {
+            actorPosition.x = stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("alignX").getAsString()).getX();
+        }
+
+        if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("alignY")) {
+            actorPosition.y = stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("alignY").getAsString()).getY();
+        }
+
+
+
+        if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("inside_Top")) {
+            actorPosition.y = stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("inside_Top").getAsString()).getTop() -
+            actor.getHeight();
+        }
+
+        if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("inside_Bottom")) {
+            actorPosition.y = stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("inside_Bottom").getAsString()).getY();
+        }
+
+        if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("inside_Left")) {
+            actorPosition.x = stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("inside_Left").getAsString()).getX();
+        }
+
+        if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("inside_Right")) {
+            actorPosition.x = stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("inside_Right").getAsString()).getRight() -
+            actor.getWidth();
+        }
+
+
+        if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("centerX")) {
+            actorPosition.x = stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("centerX").getAsString()).getWidth() / 2 +
+                    stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("centerX").getAsString()).getX() -
+                    actor.getWidth() / 2;
+        }
+
+        if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("centerY")) {
+            actorPosition.y = stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("centerY").getAsString()).getY() +
+                    stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("centerY").getAsString()).getHeight() / 2 -
+                    actor.getHeight() / 2;
+        }
+
+
+        if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("marginTop")) {
+            actorPosition.y = actorPosition.y - jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("marginTop").getAsFloat();
+        }
+        if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("marginBottom")) {
+            actorPosition.y = actorPosition.y + jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("marginBottom").getAsFloat();
+        }
+        if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("marginLeft")) {
+            actorPosition.x = actorPosition.x + jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("marginLeft").getAsFloat();
+        }
+        if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("marginRight")) {
+            actorPosition.x = actorPosition.x - jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("marginRight").getAsFloat();
+        }
+
 
         if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("orientation").getAsString().equals("center")) {
             actor.setPosition(stage.getViewport().getWorldWidth() / 2 - actor.getWidth() / 2 + actorPosition.x,

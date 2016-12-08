@@ -2,10 +2,20 @@ package com.paulocurado.esportsmanager.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -56,6 +66,7 @@ public class Player {
     private boolean moving = true;
 
 
+
     public Player() {
         this.firstName = "";
         this.lastName = "";
@@ -102,7 +113,6 @@ public class Player {
             position.x += directionX * speed * Gdx.graphics.getDeltaTime();
             position.y += directionY * speed * Gdx.graphics.getDeltaTime();
             if(Math.sqrt(Math.pow(position.x - start.x, 2)+Math.pow(position.y - start.y, 2)) >= distance) {
-                System.out.println("dasdas");
                 position.x = end.x;
                 position.y = end.y;
                 moving = true;
@@ -163,7 +173,93 @@ public class Player {
         }
 
 
+
     }
+
+    public Image createPlayerFace(TextureRegion[][] texture, Viewport viewport) {
+
+        Batch batch = new SpriteBatch();
+
+        FrameBuffer faceDraw = new FrameBuffer(Pixmap.Format.RGBA8888, (int)viewport.getWorldWidth(), (int)viewport.getWorldHeight(), false);
+
+        Matrix4 m = new Matrix4();
+        m.setToOrtho2D(0, 0, 32, 32);
+        batch.setProjectionMatrix(m);
+
+        faceDraw.begin();
+
+        batch.enableBlending();
+        Gdx.gl.glBlendFuncSeparate(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.begin();
+
+        switch (faceColor) {
+            case 0:
+                batch.setColor(232f/255, 193f/255, 158f/255, 1);
+                break;
+            case 1:
+                batch.setColor(196f/255, 146f/255, 112f/255, 1);
+                break;
+            case 2:
+                batch.setColor(223f/255, 190f/255, 143f/255, 1);
+                break;
+            case 3:
+                batch.setColor(141f/255, 105f/255, 177f/255, 1);
+                break;
+        }
+        batch.draw(texture[1][faceType], position.x, position.y);
+        batch.setColor(Color.WHITE);
+        switch (hairColor) {
+            case 0:
+                batch.setColor(255f/255, 24f/255, 225f/255, 1);
+                break;
+            case 1:
+                batch.setColor(83f/255, 61f/255, 53f/255, 1);
+                break;
+            case 2:
+                batch.setColor(9f/255, 8f/255, 6f/255, 1);
+                break;
+            case 3:
+                batch.setColor(207f/255, 204f/255, 112f/255, 1);
+                break;
+            case 4:
+                batch.setColor(137f/255, 56f/255, 66f/255, 1);
+                break;
+            case 5:
+                batch.setColor(95f/255, 159f/255, 100f/255, 1);
+                break;
+        }
+        if(hairType != 0)
+            batch.draw(texture[0][hairType], position.x, position.y);
+        batch.setColor(Color.WHITE);
+        batch.draw(texture[1][expressionType+4], position.x, position.y);
+        switch (accessory) {
+            case 1:
+                batch.draw(texture[1][accessory+9], position.x, position.y);
+                break;
+            case 2:
+                batch.draw(texture[1][accessory+9], position.x, position.y);
+                break;
+        }
+
+
+        batch.end();
+        faceDraw.end();
+
+        viewport.apply();
+
+
+        TextureRegion combinedTexture = new TextureRegion(faceDraw.getColorBufferTexture());
+        combinedTexture.flip(false, true);
+
+        Image playerFace = new Image(combinedTexture);
+        playerFace.debug();
+
+        return playerFace;
+    }
+
 
     public String getId() {
         return id;
@@ -403,6 +499,149 @@ public class Player {
 
     public void setAccessory(int accessory) {
         this.accessory = accessory;
+    }
+
+    public String hability(int role) {
+
+        double positionHability;
+
+        if(role == 1) {
+            positionHability = 0.65 * farm + 0.05 * independency + 0 * support + 0.05 * rotation + 0.25 * fighting;
+        }
+        else if(role == 2) {
+            positionHability = 0.15 * farm + 0.10 * independency + 0 * support + 0.10 * rotation + 0.65 * fighting;
+        }
+        else if(role == 3) {
+            positionHability = 0.1 * farm + 0.60 * independency + 0 * support + 0.15 * rotation + 0.15 * fighting;
+        }
+        else if(role == 4) {
+            positionHability = 0 * farm + 0.05 * independency + 0.4 * support + 0.50 * rotation + 0.05 * fighting;
+        }
+       else {
+            positionHability = 0 * farm + 0.05 * independency + 0.75 * support + 0.1 * rotation + 0.10 * fighting;
+        }
+
+        return abilityResult((int)positionHability);
+    }
+
+
+    protected String abilityResult(int positionHability) {
+        String hability = "F";
+        int range = 7;
+        int maxAbility = 88;
+
+        if(positionHability >= maxAbility)
+            hability = "S";
+        if(positionHability >= maxAbility - range && positionHability < maxAbility)
+            hability = "A";
+        if(positionHability >= maxAbility - 2*range && positionHability < maxAbility - range)
+            hability = "B";
+        if(positionHability >= maxAbility - 3*range && positionHability < maxAbility - 2*range)
+            hability = "C";
+        if(positionHability >= maxAbility - 4*range && positionHability < maxAbility - 3*range)
+            hability = "D";
+        if(positionHability >= maxAbility - 5*range && positionHability < maxAbility - 4*range)
+            hability = "F";
+
+        return hability;
+    }
+
+    public int habilityInteger(int role) {
+
+        double positionHability;
+
+        if(role == 1) {
+            positionHability = 0.65 * farm + 0.05 * independency + 0 * support + 0.05 * rotation + 0.25 * fighting;
+        }
+        else if(role == 2) {
+            positionHability = 0.15 * farm + 0.10 * independency + 0 * support + 0.10 * rotation + 0.65 * fighting;
+        }
+        else if(role == 3) {
+            positionHability = 0.1 * farm + 0.60 * independency + 0 * support + 0.15 * rotation + 0.15 * fighting;
+        }
+        else if(role == 4) {
+            positionHability = 0 * farm + 0.05 * independency + 0.4 * support + 0.50 * rotation + 0.05 * fighting;
+        }
+        else {
+            positionHability = 0 * farm + 0.05 * independency + 0.75 * support + 0.1 * rotation + 0.10 * fighting;
+        }
+
+        return (int)positionHability;
+    }
+
+    public boolean playerHasTeam(ArrayList<Team> teams) {
+        for(int i = 0; i < teams.size(); i++) {
+            if(teams.get(i).getPlayers().size() != 0) {
+                for (int j = 0; j < teams.get(i).getPlayers().size(); j++) {
+                    if(id.equals(teams.get(i).getPlayers().get(j).getId())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public int getSalary(ArrayList<Contract> contracts) {
+        for(int i = 0; i < contracts.size(); i++) {
+            if(id.equals(contracts.get(i).getPlayerId())) {
+                return contracts.get(i).getSalary();
+            }
+        }
+
+        int positions[] = {habilityInteger(1),habilityInteger(2),habilityInteger(3),habilityInteger(4),habilityInteger(5)};
+
+        for(int i = 4; i >= 1; i--) {
+            for( int j = 0; j < i; j++) {
+                if(positions[j] > positions[j+1]) {
+                    int buffer = positions[j];
+                    positions[j] = positions[j+1];
+                    positions[j+1] = buffer;
+                }
+            }
+
+        }
+
+        return (int) (Math.pow(Math.pow(1.09, positions[4]) + Math.pow(1.075, popularity), 1.22)*3/(Math.pow(1.035,200-1.1*positions[4]-0.9*popularity)) );
+    }
+
+    public int getCost(ArrayList<Contract> contracts) {
+        for (int i = 0; i < contracts.size(); i++) {
+            if (id.equals(contracts.get(i).getPlayerId())) {
+                return contracts.get(i).getTransferFee();
+            }
+        }
+
+
+        return 0;
+    }
+
+    public String bestPosition() {
+
+        for(int i = 1; i < 5; i++) {
+            int loops = 0;
+            for(int j = 1; j < 5; j++) {
+                if (habilityInteger(i) >= habilityInteger(j + 1)) {
+                    loops++;
+                    if(loops == 4) {
+                        if(i == 1)
+                            return "Carry";
+                        if(i == 2)
+                            return "Mid";
+                        if(i == 3)
+                            return "Offlane";
+                        if(i == 4)
+                            return "Supp4";
+                        if(i == 5)
+                            return "Supp5";
+
+                    }
+
+                }
+            }
+        }
+
+        return "Supp5";
     }
 
 }

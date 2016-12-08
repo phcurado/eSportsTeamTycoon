@@ -5,7 +5,7 @@ filter: Nearest,Nearest
 repeat: none
 window
   rotate: false
-  xy: 0, 0
+  xy: 1, 84
   size: 360, 292
   split: 41, 41, 74, 74
   orig: 360, 292
@@ -13,7 +13,7 @@ window
   index: -1
 panel
   rotate: false
-  xy: 360, 8
+  xy: 363, 92
   size: 352, 284
   split: 6, 6, 6, 6
   orig: 352, 284
@@ -21,7 +21,7 @@ panel
   index: -1
 button_down_menu
   rotate: false
-  xy: 712, 198
+  xy: 717, 282
   size: 255, 94
   split: 19, 19, 18, 18
   orig: 255, 94
@@ -29,24 +29,110 @@ button_down_menu
   index: -1
 button_up_menu
   rotate: false
-  xy: 712, 104
+  xy: 717, 186
   size: 255, 94
   split: 19, 19, 18, 18
   orig: 255, 94
   offset: 0, 0
   index: -1
+table_row_down
+  rotate: false
+  xy: 717, 98
+  size: 247, 86
+  split: 12, 12, 12, 12
+  orig: 247, 86
+  offset: 0, 0
+  index: -1
+table_row_title
+  rotate: false
+  xy: 363, 4
+  size: 247, 86
+  split: 12, 12, 12, 12
+  orig: 247, 86
+  offset: 0, 0
+  index: -1
+table_row_up
+  rotate: false
+  xy: 717, 10
+  size: 247, 86
+  split: 12, 12, 12, 12
+  orig: 247, 86
+  offset: 0, 0
+  index: -1
+backgroundblue
+  rotate: false
+  xy: 1, 17
+  size: 75, 65
+  split: 12, 12, 12, 12
+  orig: 75, 65
+  offset: 0, 0
+  index: -1
 cursor
   rotate: false
-  xy: 967, 231
+  xy: 974, 315
   size: 1, 61
   orig: 1, 61
   offset: 0, 0
   index: -1
+selection
+  rotate: false
+  xy: 966, 123
+  size: 1, 61
+  orig: 1, 61
+  offset: 0, 0
+  index: -1
+selection2
+  rotate: false
+  xy: 1, 1
+  size: 61, 1
+  orig: 61, 1
+  offset: 0, 0
+  index: -1
 text_field
   rotate: false
-  xy: 712, 73
+  xy: 612, 59
   size: 30, 31
   split: 3, 3, 3, 3
   orig: 30, 31
+  offset: 0, 0
+  index: -1
+bluedarkborderbox
+  rotate: false
+  xy: 78, 62
+  size: 39, 20
+  split: 1, 1, 1, 1
+  orig: 39, 20
+  offset: 0, 0
+  index: -1
+graylightborderbox
+  rotate: false
+  xy: 644, 70
+  size: 39, 20
+  split: 1, 1, 1, 1
+  orig: 39, 20
+  offset: 0, 0
+  index: -1
+blueskyroundedbox
+  rotate: false
+  xy: 78, 42
+  size: 39, 18
+  split: 4, 4, 4, 4
+  orig: 39, 18
+  offset: 0, 0
+  index: -1
+bluebox
+  rotate: false
+  xy: 612, 39
+  size: 25, 18
+  split: 4, 4, 4, 4
+  orig: 25, 18
+  offset: 0, 0
+  index: -1
+redbox
+  rotate: false
+  xy: 119, 64
+  size: 25, 18
+  split: 1, 1, 1, 1
+  orig: 25, 18
   offset: 0, 0
   index: -1

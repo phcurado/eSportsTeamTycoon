@@ -1,0 +1,36 @@
+{
+  "ui": [
+    {
+      "uniqueName": "floor",
+      "type": "image",
+      "path": "img/images.atlas",
+      "image": "inGameFloor",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "center"
+    },
+    {
+      "type": "image",
+      "path": "img/images.atlas",
+      "image": "inGameComputers",
+      "size": {
+        "x": 600,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "centerX": "floor",
+      "inside_Top": "floor",
+      "marginTop": 80,
+      "orientation": "none"
+    }
+  ]
+}

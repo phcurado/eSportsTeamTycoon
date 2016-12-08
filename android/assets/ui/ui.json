@@ -1,71 +1,146 @@
 {
-  com.badlogic.gdx.graphics.Color: {
-  white: { r: 1, g: 1, b: 1, a: 1 },
-  red: { r: 1, g: 0, b: 0, a: 1 },
-  yellow: { r: 0.5, g: 0.5, b: 0, a: 1 },
-  black: { r: 0, g: 0, b: 0, a: 1 },
-  blue: { r: 0, g: 0, b: 1, a: 1 },
-  buttonUP: {hex: 525d65},
-  grayFont: {hex: bfccd9}
-},
-
-  com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-  default: {
-    font: label-font,
-    fontColor: white
+  "com.badlogic.gdx.graphics.Color": {
+    "white": { "r": 1, "g": 1, "b": 1, "a": 1 },
+    "red": { "r": 1, "g": 0, "b": 0, "a": 1 },
+    "yellow": { "r": 0.5, "g": 0.5, "b": 0, "a": 1 },
+    "black": { "r": 0, "g": 0, "b": 0, "a": 1 },
+    "blue": { "r": 0, "g": 0, "b": 1, "a": 1 },
+    "buttonUP": {"hex": "525d65"},
+    "grayFont": {"hex": "bfccd9"}
   },
-  title: {
-    font: button-font,
-    fontColor: white
-  },
-  small: {
-    font: label-small-font,
-    fontColor: black
-  }
-},
 
-  com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
-    default: {
-      down: button_down_menu,
-      up: button_up_menu,
+  "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+    "default": {
+      "font": "label-font",
+      "fontColor": "white"
     },
-    toggle: {
-      down: button_down_menu,
-      up: button_up_menu,
+    "title": {
+      "font": "button-font",
+      "fontColor": "white"
+    },
+    "small": {
+      "font": "label-small-font",
+      "fontColor": "black"
+    },
+    "tableLabel_Title": {
+      "font": "label-font",
+      "fontColor": "white",
+      "background": "table_row_title"
+    },
+    "tableLabel_Light": {
+      "font": "label-small-font",
+      "fontColor": "black",
+      "background": "table_row_up"
+    },
+    "tableLabel_Dark": {
+      "font": "label-small-font",
+      "fontColor": "black",
+      "background": "table_row_down"
+    },
+    "labelBlueBoxSmallText": {
+      "font": "position-font",
+      "fontColor": "grayFont",
+      "background": "bluebox"
+    },
+    "labelBlueBox": {
+      "font": "label-medium-font",
+      "fontColor": "white",
+      "background": "bluebox"
+    },
+    "labelText": {
+      "font": "position-font",
+      "fontColor": "grayFont"
+    },
+    "labelVerySmallText": {
+      "font": "position-small-font",
+      "fontColor": "grayFont"
+    },
+    "labelRedBox": {
+      "font": "position-small-font",
+      "fontColor": "grayFont",
+      "background": "redbox"
+    },
+    "tableLabelTitle2": {
+      "font": "label-medium-font",
+      "fontColor": "grayFont",
+      "background": "table_row_title"
+    },
+    "labelGrayLightBorderBox": {
+      "font": "position-font",
+      "fontColor": "grayFont",
+      "background": "graylightborderbox"
+    },
+    "labelBlueDarkBorderBox": {
+      "font": "position-font",
+      "fontColor": "grayFont",
+      "background": "bluedarkborderbox"
+    },
+    "labelBlueSkyRoundedBox": {
+      "font": "position-font",
+      "fontColor": "grayFont",
+      "background": "blueskyroundedbox"
+
     }
   },
 
-  com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-  default: {
-    down: button_down_menu,
-    up: button_up_menu,
-    font: button-font,
-    fontColor: white,
-    downFontColor: grayFont
-  }
-  toggle: {
-    down: button_down_menu,
-    up: button_up_menu,
-    font: button-font,
-    fontColor: white
+  "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
+  "default": {
+    "down": "button_down_menu",
+    "up": "button_up_menu"
+  },
+  "toggle": {
+    "down": "button_down_menu",
+    "up": "button_up_menu"
   }
 },
-  com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
-  default: {
-    cursor: cursor
-    background: text_field,
-    font: label-font,
-    fontColor: grayFont,
-  }
-},
-  com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
-  default: {
-    titleFont: button-font,
-    background: window,
-    titleFontColor: black
-  }
-}
 
+  "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+  "default": {
+    "down": "button_down_menu",
+    "up": "button_up_menu",
+    "font": "button-font",
+    "fontColor": "white",
+    "downFontColor": "grayFont"
+  },
+  "toggle": {
+    "down": "button_down_menu",
+    "up": "button_up_menu",
+    "font": "button-font",
+    "fontColor": "white"
+  }
+},
+  "com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
+    "default": {
+      "selection": "selection",
+      "cursor": "cursor",
+      "background": "text_field",
+      "font": "label-font",
+      "fontColor": "grayFont"
+    }
+  },
+
+  "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
+    "default": {
+      "selection": "selection",
+      "fontColorSelected": "white",
+      "font": "button-font"
+    }
+  },
+
+  "com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
+    "default": {
+      "hScrollKnob": "selection2",
+      "vScrollKnob": "selection"
+    }
+  },
+
+  "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
+    "default": {
+      "titleFont": "button-font",
+      "background": "window",
+      "titleFontColor": "black"
+    }
+  }
 
 }
 
