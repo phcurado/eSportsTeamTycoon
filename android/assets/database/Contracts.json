@@ -98,13 +98,6 @@
     "salary": 15000
   },
   {
-    "id": "CONTRACT_000006",
-    "playerId": "PLAYER_000006",
-    "teamId": "TEAM_0001",
-    "transferFee": 350000,
-    "salary": 5000
-  },
-  {
     "id": "CONTRACT_000016",
     "playerId": "PLAYER_000016",
     "teamId": "TEAM_0003",

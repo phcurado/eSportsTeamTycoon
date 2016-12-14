@@ -135,7 +135,6 @@ public class HireScreen implements Screen{
                     if(i%2 == 0) {
                         if (mainApp.teamList.get(j).getPlayers().get(k).getNickName().equals(playerNickName_Light.getText().toString())) {
                             team = mainApp.teamList.get(j).getName();
-
                         }
                     }
                     else {
@@ -173,16 +172,12 @@ public class HireScreen implements Screen{
                 public void clicked(InputEvent e, float x, float y) {
                     hireDialog.setUpDialog(mainApp.findPlayerbyNickName(playerNickName_Light.getText().toString()) );
                     hireDialog.setVisibility(true);
-                    Gdx.input.setInputProcessor(hireDialog.getStage());
-
                 }
             });
             playerNickName_Dark.addListener(new ClickListener() {
                 public void clicked(InputEvent e, float x, float y) {
                     hireDialog.setUpDialog(mainApp.findPlayerbyNickName(playerNickName_Dark.getText().toString()) );
                     hireDialog.setVisibility(true);
-                    Gdx.input.setInputProcessor(hireDialog.getStage());
-
                 }
             });
 

@@ -55,7 +55,7 @@ public class PlayerHireDialog extends  GameScreenBox {
 
 
         ((Label) getActor("CostNumberLabel")).setAlignment(Align.right);
-        ((Label) getActor("SalaryNumberLabel"   )).setAlignment(Align.right);
+        ((Label) getActor("SalaryNumberLabel")).setAlignment(Align.right);
 
     }
 
@@ -65,16 +65,13 @@ public class PlayerHireDialog extends  GameScreenBox {
 
                 if(!((HireScreen) root).getErrorDialog().getError().equals("")) {
                     ((HireScreen) root).getErrorDialog().setVisibility(true);
-
                 }
 
                 else {
                     ((HireScreen) root).getConfirmContractDialog().setVisibility(true);
-
                 }
             }
         });
-
 
         this.getActor("backButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {

@@ -16,6 +16,7 @@
       "orientation": "center"
     },
     {
+      "uniqueName": "Computers",
       "type": "image",
       "path": "img/images.atlas",
       "image": "inGameComputers",
@@ -28,9 +29,161 @@
         "y": 0
       },
       "centerX": "floor",
-      "inside_Top": "floor",
-      "marginTop": 80,
+      "inside_Bottom": "floor",
+      "marginBottom": 90,
       "orientation": "none"
+    },
+    {
+      "uniqueName": "playerImage_1",
+      "type": "imageBlank",
+      "size": {
+        "x": 100,
+        "y": 100
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Left": "Computers",
+      "inside_Top": "Computers",
+      "marginBottom": 45,
+      "marginLeft": 30,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "playerLabel_1",
+      "type": "label",
+      "text": "Error",
+      "id": "labelVerySmallText",
+      "size": {
+        "x": 115,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "center"
+    },
+    {
+      "uniqueName": "playerImage_2",
+      "type": "imageBlank",
+      "size": {
+        "x": 100,
+        "y": 100
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "playerImage_1",
+      "marginLeft": 10,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "playerLabel_2",
+      "type": "label",
+      "text": "Error",
+      "id": "labelVerySmallText",
+      "size": {
+        "x": 115,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "center"
+    },
+    {
+      "uniqueName": "playerImage_3",
+      "type": "imageBlank",
+      "size": {
+        "x": 100,
+        "y": 100
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "playerImage_2",
+      "marginLeft": 10,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "playerLabel_3",
+      "type": "label",
+      "text": "Error",
+      "id": "labelVerySmallText",
+      "size": {
+        "x": 115,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "center"
+    },
+    {
+      "uniqueName": "playerImage_4",
+      "type": "imageBlank",
+      "size": {
+        "x": 100,
+        "y": 100
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "playerImage_3",
+      "marginLeft": 10,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "playerLabel_4",
+      "type": "label",
+      "text": "Error",
+      "id": "labelVerySmallText",
+      "size": {
+        "x": 115,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "center"
+    },
+    {
+      "uniqueName": "playerImage_5",
+      "type": "imageBlank",
+      "size": {
+        "x": 100,
+        "y": 100
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "playerImage_4",
+      "marginLeft": 10,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "playerLabel_5",
+      "type": "label",
+      "text": "Error",
+      "id": "labelVerySmallText",
+      "size": {
+        "x": 115,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "center"
     }
   ]
 }

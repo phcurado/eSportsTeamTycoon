@@ -8,8 +8,11 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
@@ -49,12 +52,12 @@ public class GameScreen implements Screen {
         this.skin.add("position-small-font", mainApp.positionSmallFont);
         this.skin.add("label-medium-font", mainApp.labelFontMedium);
 
-
         this.skin.load(Gdx.files.internal("ui/ui.json"));
 
         facesOptions = TextureRegion.split(mainApp.assets.get("img/facetextures.png", Texture.class), 32, 32);
 
-        mainApp.user.getTeam().setBudget(20000);
+        mainApp.teamList.add(mainApp.user.getTeam());
+        mainApp.user.getTeam().setBudget(2000000);
 
 
     }
@@ -72,6 +75,22 @@ public class GameScreen implements Screen {
 
         tipsLogic(this);
 
+        if(mainApp.user.getTeam().getPlayers().size() >= 5) {
+            for(int i = 1; i <= 5; i++) {
+                ((Image)stage.getRoot().findActor("playerImage_" + Integer.toString(i))).setDrawable(mainApp.user.getTeam().getPlayers().get(i - 1).createPlayerFace(facesOptions, gamePort).getDrawable());
+                ((Label)stage.getRoot().findActor("playerLabel_" + Integer.toString(i))).setText(mainApp.user.getTeam().getPlayers().get(i - 1).getNickName());
+                ((Label)stage.getRoot().findActor("playerLabel_" + Integer.toString(i))).setAlignment(Align.center);
+                stage.getRoot().findActor("playerLabel_" + Integer.toString(i)).setPosition(stage.getRoot().findActor("playerImage_" + Integer.toString(i)).getX() + stage.getRoot().findActor("playerImage_" + Integer.toString(i)).getWidth() / 2 -
+                                stage.getRoot().findActor("playerLabel_" + Integer.toString(i)).getWidth() / 2,
+                        stage.getRoot().findActor("playerImage_" + Integer.toString(i)).getTop() );
+
+            }
+
+
+
+
+        }
+
 
     }
 
@@ -86,17 +105,13 @@ public class GameScreen implements Screen {
         stage.getViewport().apply();
 
         stage.draw();
-
         tipsDialog.draw();
-
-        mainApp.batch.begin();
-        //mainApp.playerList.get(0).render(mainApp.facesOptions, mainApp.batch);
-        mainApp.batch.end();
 
     }
 
     private void update(float delta) {
         stage.act(delta);
+
     }
 
     @Override

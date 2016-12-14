@@ -100,27 +100,6 @@ public class Player {
 
     }
 
-    public void randomMovement() {
-
-        if(moving == false) {
-            Random random = new Random();
-            boolean stopped = false;
-            Vector2 start = new Vector2(position.x, position.y);
-            Vector2 end = new Vector2(start.x + 5, start.y + 5);
-            float distance = (float)Math.sqrt(Math.pow(end.x - start.x,2)+Math.pow(end.y - start.y,2));
-            float directionX = (end.x - start.x) / distance;
-            float directionY = (end.y - start.y) / distance;
-            position.x += directionX * speed * Gdx.graphics.getDeltaTime();
-            position.y += directionY * speed * Gdx.graphics.getDeltaTime();
-            if(Math.sqrt(Math.pow(position.x - start.x, 2)+Math.pow(position.y - start.y, 2)) >= distance) {
-                position.x = end.x;
-                position.y = end.y;
-                moving = true;
-            }
-        }
-        //translate(position.x + random.nextInt() % 10, position.y + random.nextInt() % 10);
-    }
-
 
     public void render(TextureRegion[][] texture, SpriteBatch batch) {
         switch (faceColor) {
@@ -503,50 +482,50 @@ public class Player {
 
     public String hability(int role) {
 
-        double positionHability;
+        double positionAbility;
 
         if(role == 1) {
-            positionHability = 0.65 * farm + 0.05 * independency + 0 * support + 0.05 * rotation + 0.25 * fighting;
+            positionAbility = 0.65 * farm + 0.05 * independency + 0 * support + 0.05 * rotation + 0.25 * fighting;
         }
         else if(role == 2) {
-            positionHability = 0.15 * farm + 0.10 * independency + 0 * support + 0.10 * rotation + 0.65 * fighting;
+            positionAbility = 0.15 * farm + 0.10 * independency + 0 * support + 0.10 * rotation + 0.65 * fighting;
         }
         else if(role == 3) {
-            positionHability = 0.1 * farm + 0.60 * independency + 0 * support + 0.15 * rotation + 0.15 * fighting;
+            positionAbility = 0.1 * farm + 0.60 * independency + 0 * support + 0.15 * rotation + 0.15 * fighting;
         }
         else if(role == 4) {
-            positionHability = 0 * farm + 0.05 * independency + 0.4 * support + 0.50 * rotation + 0.05 * fighting;
+            positionAbility = 0 * farm + 0.05 * independency + 0.4 * support + 0.50 * rotation + 0.05 * fighting;
         }
        else {
-            positionHability = 0 * farm + 0.05 * independency + 0.75 * support + 0.1 * rotation + 0.10 * fighting;
+            positionAbility = 0 * farm + 0.05 * independency + 0.75 * support + 0.1 * rotation + 0.10 * fighting;
         }
 
-        return abilityResult((int)positionHability);
+        return abilityResult((int)positionAbility);
     }
 
 
-    protected String abilityResult(int positionHability) {
-        String hability = "F";
+    protected String abilityResult(int positionAbility) {
+        String ability = "F";
         int range = 7;
         int maxAbility = 88;
 
-        if(positionHability >= maxAbility)
-            hability = "S";
-        if(positionHability >= maxAbility - range && positionHability < maxAbility)
-            hability = "A";
-        if(positionHability >= maxAbility - 2*range && positionHability < maxAbility - range)
-            hability = "B";
-        if(positionHability >= maxAbility - 3*range && positionHability < maxAbility - 2*range)
-            hability = "C";
-        if(positionHability >= maxAbility - 4*range && positionHability < maxAbility - 3*range)
-            hability = "D";
-        if(positionHability >= maxAbility - 5*range && positionHability < maxAbility - 4*range)
-            hability = "F";
+        if(positionAbility >= maxAbility)
+            ability = "S";
+        if(positionAbility >= maxAbility - range && positionAbility < maxAbility)
+            ability = "A";
+        if(positionAbility >= maxAbility - 2*range && positionAbility < maxAbility - range)
+            ability = "B";
+        if(positionAbility >= maxAbility - 3*range && positionAbility < maxAbility - 2*range)
+            ability = "C";
+        if(positionAbility >= maxAbility - 4*range && positionAbility < maxAbility - 3*range)
+            ability = "D";
+        if(positionAbility >= maxAbility - 5*range && positionAbility < maxAbility - 4*range)
+            ability = "F";
 
-        return hability;
+        return ability;
     }
 
-    public int habilityInteger(int role) {
+    public int abilityInteger(int role) {
 
         double positionHability;
 
@@ -569,7 +548,10 @@ public class Player {
         return (int)positionHability;
     }
 
-    public boolean playerHasTeam(ArrayList<Team> teams) {
+    public boolean hasTeam(ArrayList<Team> teams) {
+        if(id.equals("TEAM_USER"))
+            return true;
+
         for(int i = 0; i < teams.size(); i++) {
             if(teams.get(i).getPlayers().size() != 0) {
                 for (int j = 0; j < teams.get(i).getPlayers().size(); j++) {
@@ -589,7 +571,7 @@ public class Player {
             }
         }
 
-        int positions[] = {habilityInteger(1),habilityInteger(2),habilityInteger(3),habilityInteger(4),habilityInteger(5)};
+        int positions[] = {abilityInteger(1),abilityInteger(2),abilityInteger(3),abilityInteger(4),abilityInteger(5)};
 
         for(int i = 4; i >= 1; i--) {
             for( int j = 0; j < i; j++) {
@@ -605,6 +587,23 @@ public class Player {
         return (int) (Math.pow(Math.pow(1.09, positions[4]) + Math.pow(1.075, popularity), 1.22)*3/(Math.pow(1.035,200-1.1*positions[4]-0.9*popularity)) );
     }
 
+    public int getRecomendedSalary(){
+        int positions[] = {abilityInteger(1),abilityInteger(2),abilityInteger(3),abilityInteger(4),abilityInteger(5)};
+
+        for(int i = 4; i >= 1; i--) {
+            for( int j = 0; j < i; j++) {
+                if(positions[j] > positions[j+1]) {
+                    int buffer = positions[j];
+                    positions[j] = positions[j+1];
+                    positions[j+1] = buffer;
+                }
+            }
+
+        }
+        return (int) (Math.pow(Math.pow(1.09, positions[4]) + Math.pow(1.075, popularity), 1.22)*3/(Math.pow(1.035,200-1.1*positions[4]-0.9*popularity)) );
+
+    }
+
     public int getCost(ArrayList<Contract> contracts) {
         for (int i = 0; i < contracts.size(); i++) {
             if (id.equals(contracts.get(i).getPlayerId())) {
@@ -616,12 +615,28 @@ public class Player {
         return 0;
     }
 
+    public int getRecomendedCost() {
+        int positions[] = {abilityInteger(1),abilityInteger(2),abilityInteger(3),abilityInteger(4),abilityInteger(5)};
+
+        for(int i = 4; i >= 1; i--) {
+            for( int j = 0; j < i; j++) {
+                if(positions[j] > positions[j+1]) {
+                    int buffer = positions[j];
+                    positions[j] = positions[j+1];
+                    positions[j+1] = buffer;
+                }
+            }
+
+        }
+        return (int) (Math.pow(Math.pow(1.12, positions[4]) + Math.pow(1.09, popularity), 1.25)*14/(Math.pow(1.035,200-positions[4]-popularity)) );
+    }
+
     public String bestPosition() {
 
         for(int i = 1; i < 5; i++) {
             int loops = 0;
             for(int j = 1; j < 5; j++) {
-                if (habilityInteger(i) >= habilityInteger(j + 1)) {
+                if (abilityInteger(i) >= abilityInteger(j + 1)) {
                     loops++;
                     if(loops == 4) {
                         if(i == 1)
@@ -632,8 +647,7 @@ public class Player {
                             return "Offlane";
                         if(i == 4)
                             return "Supp4";
-                        if(i == 5)
-                            return "Supp5";
+
 
                     }
 
@@ -642,6 +656,73 @@ public class Player {
         }
 
         return "Supp5";
+    }
+    public int bestPositionInteger() {
+
+        for(int i = 1; i < 5; i++) {
+            int loops = 0;
+            for(int j = 1; j < 5; j++) {
+                if (abilityInteger(i) >= abilityInteger(j + 1)) {
+                    loops++;
+                    if(loops == 4) {
+                        if(i == 1)
+                            return Position.CARRY;
+                        if(i == 2)
+                            return Position.MID;
+                        if(i == 3)
+                            return Position.OFFLANE;
+                        if(i == 4)
+                            return Position.SUPP4;
+
+                    }
+
+                }
+            }
+        }
+
+        return Position.SUPP5;
+    }
+
+    public Team playerTeam(ArrayList<Team> teams) {
+        for(int i = 0; i < teams.size(); i++ ) {
+            for(int j = 0; j < teams.get(i).getPlayers().size(); j++) {
+                if(teams.get(i).getPlayers().get(j).getId().equals(id) ) {
+                    return teams.get(i);
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean isEqual(Player player) {
+        if(player.getId().equals(id))
+            return true;
+        else
+            return false;
+    }
+
+    public int getOverall() {
+        for(int i = 1; i < 5; i++) {
+            int loops = 0;
+            for(int j = 1; j < 5; j++) {
+                if (abilityInteger(i) >= abilityInteger(j + 1)) {
+                    loops++;
+                    if(loops == 4) {
+                        if(i == 1)
+                            return abilityInteger(1);
+                        if(i == 2)
+                            return abilityInteger(2);
+                        if(i == 3)
+                            return abilityInteger(3);
+                        if(i == 4)
+                            return abilityInteger(4);
+                    }
+
+                }
+            }
+        }
+
+        return abilityInteger(5);
     }
 
 }

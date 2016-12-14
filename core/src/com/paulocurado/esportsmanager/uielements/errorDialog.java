@@ -26,19 +26,23 @@ public class ErrorDialog extends GameScreenBox {
     public String getError() {
         error = "";
 
-
-        if(((GameScreen)((HireScreen)root).getParent()).getMainApp().user.getTeam().getPlayers().size() >= 5) {
-            error += mainApp.bundle.get("Error_User_Team_Full") + "\n";
+        if(((HireScreen)root).getHireDialog().player.getTeamId().equals(mainApp.user.getTeam().getId())) {
+            error += mainApp.bundle.get("Error_User_Player_Already_in_Team") + "\n";
         }
-        if(mainApp.user.getTeam().getBudget() < mainApp.findPlayerbyId( ((HireScreen)root).getHireDialog().player.getId() ).getCost(mainApp.contractList) ) {
-            System.out.println(mainApp.findPlayerbyId( ((HireScreen)root).getHireDialog().player.getId() ).getCost(mainApp.contractList) );
+        else {
+            if (mainApp.user.getTeam().getPlayers().size() >= 5) {
+                error += mainApp.bundle.get("Error_User_Team_Full") + "\n";
+            }
+            if (mainApp.user.getTeam().getBudget() < mainApp.findPlayerbyId(((HireScreen) root).getHireDialog().player.getId()).getCost(mainApp.contractList)) {
+                System.out.println(mainApp.findPlayerbyId(((HireScreen) root).getHireDialog().player.getId()).getCost(mainApp.contractList));
 
-            error += mainApp.bundle.get("Error_User_Team_No_Cost_Money") + "\n";
-        }
+                error += mainApp.bundle.get("Error_User_Team_No_Cost_Money") + "\n";
+            }
 
-        if(mainApp.user.getTeam().getBudget() < MINUMUM_MONTHS*mainApp.findPlayerbyId( ((HireScreen)root).getHireDialog().player.getId() ).getSalary(mainApp.contractList)  ) {
+            if (mainApp.user.getTeam().getBudget() < MINUMUM_MONTHS * mainApp.findPlayerbyId(((HireScreen) root).getHireDialog().player.getId()).getSalary(mainApp.contractList)) {
 
-            error += mainApp.bundle.get("Error_User_Team_No_Salary_Money") + "\n";
+                error += mainApp.bundle.get("Error_User_Team_No_Salary_Money") + "\n";
+            }
         }
 
         ((Label) getActor("errorLabel")).setText(error);

@@ -220,6 +220,10 @@ public class MainMenuScreen implements Screen {
                         ((TextField)newGameDialog.getActor("PlayerName")).getText(),
                         ((TextField)newGameDialog.getActor("teamName")).getText(),
                         ((TextField)newGameDialog.getActor("teamShortName")).getText());
+                //informações básicas preenchidas para dar newGame
+                mainApp.user.getTeam().setId("TEAM_USER");
+                mainApp.user.getTeam().setBudget(5000);
+                mainApp.user.getTeam().setTier(4);
 
                 mainApp.setScreen(new GameScreen(mainApp));
             }
