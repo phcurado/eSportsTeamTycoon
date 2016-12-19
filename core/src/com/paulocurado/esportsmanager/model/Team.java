@@ -12,13 +12,13 @@ public class Team {
     private String name;
     private String abbreviatedName;
     private long budget;
-    private ArrayList<Player> players;
+    private transient ArrayList<Player> players;
     private String[] playersId;
     private int tier;
 
     public Team() {
 
-        playersId = new String[6];
+        playersId = new String[5];
         players = new ArrayList<Player>();
     }
 
@@ -147,6 +147,12 @@ public class Team {
         }
 
 
+    }
+
+    public void organizeIdPlayers() {
+        for(int i = 0; i < players.size(); i++) {
+            playersId[i] = players.get(i).getId();
+        }
     }
 
 }

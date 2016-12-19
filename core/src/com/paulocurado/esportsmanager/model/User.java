@@ -38,4 +38,8 @@ public class User {
     public void setHireScreenFirstTime(boolean hireScreenFirstTime) {
         this.hireScreenFirstTime = hireScreenFirstTime;
     }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 }

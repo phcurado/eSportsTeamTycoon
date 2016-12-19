@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -68,6 +69,22 @@ public class ReaderElements {
         else if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("textbutton")) {
             actor = new TextButton(mainApp.bundle.get(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("text").getAsString()),
                     skin, jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("id").getAsString());
+        }
+        else if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("imagetextbutton")) {
+            actor = new TextButton(mainApp.bundle.get(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("text").getAsString()),
+                    skin, jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("id").getAsString());
+
+            if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("labelOrientation")) {
+                if (jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("labelOrientation").getAsString().equals("center")) {
+                    ((TextButton) actor).getLabel().setAlignment(Align.center);
+                }
+            }
+
+            else
+                ((TextButton)actor).getLabel().setAlignment(Align.center);
+
+
+
         }
         else if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("panel")) {
             actor = new Image(skin.getPatch(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("background").getAsString() ));

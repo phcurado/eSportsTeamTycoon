@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
+import com.paulocurado.esportsmanager.model.HandleSaveGame;
 import com.paulocurado.esportsmanager.uielements.TipsDialog;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
 
@@ -56,7 +57,7 @@ public class GameScreen implements Screen {
 
         facesOptions = TextureRegion.split(mainApp.assets.get("img/facetextures.png", Texture.class), 32, 32);
 
-        mainApp.teamList.add(mainApp.user.getTeam());
+
         mainApp.user.getTeam().setBudget(2000000);
 
 
@@ -72,8 +73,10 @@ public class GameScreen implements Screen {
         tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
 
 
-
+        HandleSaveGame handler = new HandleSaveGame();
+        handler.saveGame(mainApp);
         tipsLogic(this);
+        buttonsLogic(this);
 
         if(mainApp.user.getTeam().getPlayers().size() >= 5) {
             for(int i = 1; i <= 5; i++) {
@@ -85,9 +88,6 @@ public class GameScreen implements Screen {
                         stage.getRoot().findActor("playerImage_" + Integer.toString(i)).getTop() );
 
             }
-
-
-
 
         }
 
@@ -158,6 +158,15 @@ public class GameScreen implements Screen {
         else {
             tipsDialog.setVisibility(false);
         }
+
+    }
+
+    private void buttonsLogic(final Screen parent) {
+        stage.getRoot().findActor("LeaderBoardsButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                mainApp.setScreen(new HireScreen(mainApp, parent));
+            }
+        });
 
     }
 

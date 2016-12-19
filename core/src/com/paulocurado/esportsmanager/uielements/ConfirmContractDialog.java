@@ -51,18 +51,22 @@ public class ConfirmContractDialog extends GameScreenBox {
             team.getPlayers().add(recomendedPlayer ); //adiciona ele
             recomendedPlayer.setTeamId(team.getId()); // muda seu id para o time correspondente
             usefulFunctions.createNewContract(team, recomendedPlayer, recomendedPlayer.getRecomendedCost(), recomendedPlayer.getRecomendedSalary());
+            team.organizeIdPlayers();
 
             ((HireScreen) root).getHireDialog().player.setTeamId(mainApp.user.getTeam().getId());
             mainApp.user.getTeam().getPlayers().add(((HireScreen) root).getHireDialog().player);
             mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() - ((HireScreen) root).getHireDialog().player.getCost(mainApp.contractList));
-
+            mainApp.user.getTeam().organizeIdPlayers();
             usefulFunctions.changePlayerContract(mainApp.user.getTeam(), ((HireScreen) root).getHireDialog().player);
         }
         else if(!((HireScreen)root).getHireDialog().player.hasTeam(mainApp.teamList) ) {
-                //Id do time antigo do player alterado pro novo
-                ((HireScreen) root).getHireDialog().player.setTeamId(mainApp.user.getTeam().getId());
-                //player contratado
-                mainApp.user.getTeam().getPlayers().add(((HireScreen) root).getHireDialog().player);
+
+            //Id do time antigo do player alterado pro novo
+            ((HireScreen) root).getHireDialog().player.setTeamId(mainApp.user.getTeam().getId());
+            //player contratado
+            mainApp.user.getTeam().getPlayers().add(((HireScreen) root).getHireDialog().player);
+            mainApp.user.getTeam().organizeIdPlayers();
+
             usefulFunctions.createNewContract(mainApp.user.getTeam(), ((HireScreen) root).getHireDialog().player, ((HireScreen) root).getHireDialog().player.getRecomendedCost(),
             ((HireScreen) root).getHireDialog().player.getRecomendedSalary());
         }

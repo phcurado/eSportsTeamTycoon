@@ -6,5 +6,5 @@ eclipse.project {
     name = appName + "-core"
 }
 dependencies {
-    compile files('build/libs/gson-2.7.jar')
+    compile 'com.google.code.gson:gson:2.2.4'
 }

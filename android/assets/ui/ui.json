@@ -84,31 +84,38 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
-  "default": {
-    "down": "button_down_menu",
-    "up": "button_up_menu"
+    "default": {
+      "down": "button_down_menu",
+      "up": "button_up_menu"
+    },
+    "toggle": {
+      "down": "button_down_menu",
+      "up": "button_up_menu"
+    }
   },
-  "toggle": {
-    "down": "button_down_menu",
-    "up": "button_up_menu"
-  }
-},
 
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
-  "default": {
-    "down": "button_down_menu",
-    "up": "button_up_menu",
-    "font": "button-font",
-    "fontColor": "white",
-    "downFontColor": "grayFont"
+    "default": {
+      "down": "button_down_menu",
+      "up": "button_up_menu",
+      "font": "button-font",
+      "fontColor": "white",
+      "downFontColor": "grayFont"
+    },
+    "toggle": {
+      "down": "button_down_menu",
+      "up": "button_up_menu",
+      "font": "button-font",
+      "fontColor": "white"
+    },
+    "blackStyle": {
+      "down": "button_down_gamescreen",
+      "up": "button_up_gamescreen",
+      "font": "label-small-font",
+      "fontColor": "white",
+      "downFontColor": "grayFont"
+    }
   },
-  "toggle": {
-    "down": "button_down_menu",
-    "up": "button_up_menu",
-    "font": "button-font",
-    "fontColor": "white"
-  }
-},
   "com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
     "default": {
       "selection": "selection",

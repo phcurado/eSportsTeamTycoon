@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
+import com.paulocurado.esportsmanager.model.HandleSaveGame;
 import com.paulocurado.esportsmanager.model.User;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
 import com.paulocurado.esportsmanager.uielements.NewGameDialog;
@@ -150,9 +151,11 @@ public class MainMenuScreen implements Screen {
             }
         });
 
-        stage.getRoot().findActor("aboutButton").addListener(new ClickListener() {
+        stage.getRoot().findActor("loadButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                aboutDialog.setVisibility(true);
+                HandleSaveGame handler = new HandleSaveGame();
+                handler.loadGame(mainApp);
+                mainApp.setScreen(new GameScreen(mainApp));
 
             }
         });
@@ -224,6 +227,7 @@ public class MainMenuScreen implements Screen {
                 mainApp.user.getTeam().setId("TEAM_USER");
                 mainApp.user.getTeam().setBudget(5000);
                 mainApp.user.getTeam().setTier(4);
+                mainApp.teamList.add(mainApp.user.getTeam());
 
                 mainApp.setScreen(new GameScreen(mainApp));
             }

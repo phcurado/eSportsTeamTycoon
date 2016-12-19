@@ -76,9 +76,9 @@
       "orientation": "center"
     },
     {
-      "uniqueName": "aboutButton",
+      "uniqueName": "loadButton",
       "type": "textbutton",
-      "text": "aboutButton",
+      "text": "Load",
       "id": "default",
       "size": {
         "x": 220,

@@ -184,6 +184,98 @@
         "y": 0
       },
       "orientation": "center"
+    },
+    {
+      "uniqueName": "AdvanceButton",
+      "type": "imagetextbutton",
+      "text": "Advance",
+      "id": "blackStyle",
+      "labelOrientation": "center",
+      "size": {
+        "x": 290,
+        "y": 80
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Left": "floor",
+      "marginBottom": 790,
+      "marginLeft": 20,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "ChampionshipButton",
+      "type": "imagetextbutton",
+      "text": "Championship",
+      "id": "blackStyle",
+      "size": {
+        "x": 290,
+        "y": 80
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "AdvanceButton",
+      "marginTop": 20,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "LeaderBoardsButton",
+      "type": "imagetextbutton",
+      "text": "LeaderBoards",
+      "id": "blackStyle",
+      "size": {
+        "x": 290,
+        "y": 80
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "ChampionshipButton",
+      "marginLeft": 20,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PraticeButton",
+      "type": "imagetextbutton",
+      "text": "Practice_your_team",
+      "id": "blackStyle",
+      "size": {
+        "x": 290,
+        "y": 80
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "ChampionshipButton",
+      "marginTop": 20,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "EditTeamButton",
+      "type": "imagetextbutton",
+      "text": "Edit_Team",
+      "id": "blackStyle",
+      "size": {
+        "x": 290,
+        "y": 80
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "LeaderBoardsButton",
+      "marginTop": 20,
+      "orientation": "none"
     }
   ]
 }

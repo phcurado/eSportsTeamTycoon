@@ -61,9 +61,9 @@ public class Player {
     private int accessory;
 
     /*  in game informations*/
-    private Vector2 position;
-    private float speed = 20f;
-    private boolean moving = true;
+    private transient Vector2 position;
+    private transient float speed = 20f;
+    private transient boolean moving = true;
 
 
 
