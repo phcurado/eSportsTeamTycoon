@@ -1,16 +1,16 @@
 {
-  "userName": "secret",
+  "userName": "Paulo",
   "team": {
     "id": "TEAM_USER",
-    "name": "secret",
-    "abbreviatedName": "sec",
+    "name": "Natus Vincere",
+    "abbreviatedName": "Navi",
     "budget": 2000000,
     "playersId": [
-      "PLAYER_000001",
       "PLAYER_000023",
       "PLAYER_000025",
-      "PLAYER_000022",
-      "PLAYER_000024"
+      "PLAYER_000024",
+      "PLAYER_000006",
+      "PLAYER_000022"
     ],
     "tier": 4
   },

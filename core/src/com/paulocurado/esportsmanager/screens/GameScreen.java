@@ -16,7 +16,9 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
+import com.paulocurado.esportsmanager.model.Championship;
 import com.paulocurado.esportsmanager.model.HandleSaveGame;
+import com.paulocurado.esportsmanager.uielements.ResultMatchDialog;
 import com.paulocurado.esportsmanager.uielements.TipsDialog;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
 
@@ -35,6 +37,7 @@ public class GameScreen implements Screen {
     private ReaderElements gameMenuLayout;
 
     private TipsDialog tipsDialog;
+    private ResultMatchDialog resultMatchDialog;
 
     public TextureRegion[][] facesOptions;
 
@@ -60,6 +63,8 @@ public class GameScreen implements Screen {
 
         mainApp.user.getTeam().setBudget(2000000);
 
+        mainApp.championship = new Championship(mainApp.teamList, mainApp.schedule);
+
 
     }
 
@@ -71,6 +76,7 @@ public class GameScreen implements Screen {
 
         gameMenuLayout = new ReaderElements(mainApp, stage, skin, "ui/GameScreen.json");
         tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
+        resultMatchDialog = new ResultMatchDialog(mainApp, skin, "ui/ResultMatch.json", this);
 
 
         HandleSaveGame handler = new HandleSaveGame();
@@ -86,12 +92,11 @@ public class GameScreen implements Screen {
                 stage.getRoot().findActor("playerLabel_" + Integer.toString(i)).setPosition(stage.getRoot().findActor("playerImage_" + Integer.toString(i)).getX() + stage.getRoot().findActor("playerImage_" + Integer.toString(i)).getWidth() / 2 -
                                 stage.getRoot().findActor("playerLabel_" + Integer.toString(i)).getWidth() / 2,
                         stage.getRoot().findActor("playerImage_" + Integer.toString(i)).getTop() );
-
             }
-
         }
 
 
+        continueTime();
     }
 
     @Override
@@ -106,7 +111,37 @@ public class GameScreen implements Screen {
 
         stage.draw();
         tipsDialog.draw();
+        resultMatchDialog.draw();
+        update();
 
+        mainApp.schedule.passTime();
+        ((Label)stage.getRoot().findActor("timeLabel")).setText(Integer.toString(mainApp.schedule.getDay()) + "D" + " " +
+                Integer.toString(mainApp.schedule.getWeek()) + "W" + " " +
+                Integer.toString(mainApp.schedule.getMonth()) + "M" + " " +
+                Integer.toString(mainApp.schedule.getYear()) + "Y");
+
+    }
+    private void update() {
+        mainApp.championship.startChampionship();
+        mainApp.championship.updateTeamsMatches(mainApp.user);
+        mainApp.championship.matches();
+        if(mainApp.championship.isMatchReady()) {
+            pauseTime();
+            resultMatchDialog.setUpDialog(mainApp.championship.getBattles().get(mainApp.championship.getGamesPlayed() - 1));
+            mainApp.championship.setMatchReady(false);
+            resultMatchDialog.setVisibility(true);
+        }
+
+
+
+    }
+
+    public void continueTime() {
+        mainApp.schedule.setTimePass(true);
+    }
+
+    public void pauseTime() {
+        mainApp.schedule.setTimePass(false);
     }
 
     private void update(float delta) {
@@ -144,12 +179,15 @@ public class GameScreen implements Screen {
     private void tipsLogic(final Screen parent) {
         if(!tipsDialog.isTeamPlayerRequirement()) {
             tipsDialog.setVisibility(true);
+            pauseTime();
             Gdx.input.setInputProcessor(tipsDialog.getStage());
 
             tipsDialog.getActor("OkButton").addListener(new ClickListener() {
                 public void clicked(InputEvent e, float x, float y) {
                     mainApp.setScreen(new HireScreen(mainApp, parent));
                     tipsDialog.setVisibility(false);
+                    continueTime();
+
                 }
             });
 
@@ -164,6 +202,7 @@ public class GameScreen implements Screen {
     private void buttonsLogic(final Screen parent) {
         stage.getRoot().findActor("LeaderBoardsButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
+                pauseTime();
                 mainApp.setScreen(new HireScreen(mainApp, parent));
             }
         });
@@ -172,5 +211,9 @@ public class GameScreen implements Screen {
 
     public EsportsManager getMainApp() {
         return mainApp;
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 }

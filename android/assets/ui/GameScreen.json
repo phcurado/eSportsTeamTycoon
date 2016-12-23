@@ -16,6 +16,23 @@
       "orientation": "center"
     },
     {
+      "uniqueName": "timeLabel",
+      "type": "label",
+      "text": "Error",
+      "id": "default",
+      "size": {
+        "x": 500,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Left": "floor",
+      "inside_Top": "floor",
+      "orientation": "none"
+    },
+    {
       "uniqueName": "Computers",
       "type": "image",
       "path": "img/images.atlas",

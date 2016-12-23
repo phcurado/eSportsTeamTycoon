@@ -1,13 +1,11 @@
 {
   "ui": [
     {
-      "uniqueName": "ConfirmDataBox",
+      "uniqueName": "ResultMatchBox",
       "type": "window",
-      "title": "ConfirmData",
-      "id": "title",
       "background": "window",
       "size": {
-        "x": 550,
+        "x": 600,
         "y": 0
       },
       "position": {
@@ -18,66 +16,58 @@
     },
     {
       "type": "label",
-      "text": "ConfirmData",
+      "text": "Result",
       "id": "title",
       "size": {
         "x": 0,
         "y": 0
+
       },
       "position": {
         "x": 0,
         "y": 200
       },
-      "centerX": "ConfirmDataBox",
-      "inside_Top": "ConfirmDataBox",
+      "centerX": "ResultMatchBox",
+      "inside_Top": "ResultMatchBox",
       "marginTop": 10,
       "orientation": "none"
     },
     {
-      "uniqueName": "informationLabel",
+      "uniqueName": "ResultLabel",
       "type": "label",
-      "text": "SelectTeamName",
-      "id": "default",
+      "text": "Error",
+      "id": "title",
       "size": {
-        "x": 470,
-        "y": 250
+        "x": 600,
+        "y": 0
+
       },
       "position": {
         "x": 0,
-        "y": 10
+        "y": 0
       },
-      "orientation": "center"
-    },
-    {
-      "uniqueName": "confirmButton",
-      "type": "textbutton",
-      "text": "Confirm",
-      "id": "default",
-      "size": {
-        "x": 180,
-        "y": 65
+      "centerX": "ResultMatchBox",
+      "centerY": "ResultMatchBox",
+      "marginTop": 5,
 
-      },
-      "position": {
-        "x": 80,
-        "y": 290
-      },
       "orientation": "none"
     },
     {
-      "uniqueName": "cancelButton",
+      "uniqueName": "OkButton",
       "type": "textbutton",
-      "text": "Cancel",
+      "text": "Ok",
       "id": "default",
       "size": {
         "x": 180,
         "y": 65
-
       },
       "position": {
-        "x": 380,
-        "y": 290
+        "x": 0,
+        "y": -160
       },
+      "inside_Bottom": "ResultMatchBox",
+      "centerX": "ResultMatchBox",
+      "marginBottom": 30,
       "orientation": "none"
     }
   ]

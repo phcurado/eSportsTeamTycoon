@@ -68,7 +68,7 @@ public class SimulationScreen implements Screen {
 
     }
     private void update(float delta) {
-        battleSimulation.setPositions();
+
     }
 
     @Override

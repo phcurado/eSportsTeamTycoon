@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
+import com.paulocurado.esportsmanager.model.Championship;
+import com.paulocurado.esportsmanager.model.GameSchedule;
 import com.paulocurado.esportsmanager.model.HandleSaveGame;
 import com.paulocurado.esportsmanager.model.User;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
@@ -185,6 +187,7 @@ public class MainMenuScreen implements Screen {
                     ((Label)confirmDataDialog.getActor("informationLabel")).setText( mainApp.bundle.get("SelectPlayerName") + ": " + ((TextField)newGameDialog.getActor("PlayerName")).getText() +
                             "\n" + mainApp.bundle.get("SelectTeamName") + ": " + ((TextField)newGameDialog.getActor("teamName")).getText() +
                             "\n" + mainApp.bundle.get("SelectShortName") + ": " + ((TextField)newGameDialog.getActor("teamShortName")).getText());
+                    mainApp.schedule = new GameSchedule();
 
                     newGameDialog.setVisibility(false);
                     confirmDataDialog.setVisibility(true);

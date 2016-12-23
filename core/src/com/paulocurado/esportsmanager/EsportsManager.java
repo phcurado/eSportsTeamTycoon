@@ -11,7 +11,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.paulocurado.esportsmanager.model.Championship;
 import com.paulocurado.esportsmanager.model.Contract;
+import com.paulocurado.esportsmanager.model.GameSchedule;
 import com.paulocurado.esportsmanager.model.Player;
 import com.paulocurado.esportsmanager.model.Team;
 import com.paulocurado.esportsmanager.model.User;
@@ -32,6 +34,8 @@ public class EsportsManager extends Game {
     public ArrayList<Contract> contractList;
 
     public User user;
+    public GameSchedule schedule;
+    public Championship championship;
 
 
     public OrthographicCamera camera;

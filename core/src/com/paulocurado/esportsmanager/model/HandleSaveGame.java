@@ -61,6 +61,15 @@ public class HandleSaveGame {
             e.printStackTrace();
         }
 
+        Writer writerSchedule = Gdx.files.local("Schedule.json").writer(false);
+        String schedule = gson.toJson(mainApp.schedule);
+        try {
+            writerSchedule.write(schedule);
+            writerSchedule.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void loadGame(EsportsManager mainApp){
@@ -105,6 +114,9 @@ public class HandleSaveGame {
         }
 
         mainApp.user.setTeam(mainApp.teamList.get(mainApp.teamList.size() - 1) );
+
+        Reader readerSchedule = Gdx.files.local("Schedule.json").reader();
+        mainApp.schedule = gson.fromJson(readerSchedule, GameSchedule.class);
 
     }
 }

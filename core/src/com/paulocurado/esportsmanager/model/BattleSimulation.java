@@ -4,42 +4,71 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.paulocurado.esportsmanager.EsportsManager;
 
+import java.util.Random;
+
 /**
  * Created by Paulo on 06/11/2016.
  */
 
 public class BattleSimulation {
 
-    public enum Roles {
-        CARRY, MIDLANE, OFFLANE, SUPP4, SUPP5;
-    }
-    float matchTime;
+    private transient Team radiantTeam;
+    private transient Team direTeam;
+    private int radiantVictories;
+    private int direVictories;
 
-    private EsportsManager mainApp;
-
-    private Team radiantTeam;
-    private Team direTeam;
-
-    public static final int MAP_WIDTH = 480;
-    public static final int MAP_HEIGHT = 420;
 
     public BattleSimulation(Team radiantTeam, Team direTeam) {
         this.radiantTeam = radiantTeam;
         this.direTeam = direTeam;
     }
 
-    public void setPositions() {
-        matchTime += Gdx.graphics.getDeltaTime();
-        if(matchTime > 3.0f) {
-            radiantTeam.getPlayers().get(Roles.CARRY.ordinal()).translate(MAP_WIDTH / 2, 0);
-            radiantTeam.getPlayers().get(Roles.MIDLANE.ordinal()).translate(MAP_WIDTH / 2, MAP_HEIGHT  / 2);
-            radiantTeam.getPlayers().get(Roles.OFFLANE.ordinal()).translate(0, MAP_HEIGHT  / 2);
-            radiantTeam.getPlayers().get(Roles.SUPP4.ordinal()).translate(MAP_WIDTH / 2, 25);
-            radiantTeam.getPlayers().get(Roles.SUPP5.ordinal()).translate(MAP_WIDTH / 2 + 25, 25);
+    public void bestofBattle(int number) {
+        for(int i = 0; i < number; i++) {
+            if (radiantVictories < number / 2 + 1 && direVictories < number / 2 + 1) {
+                Random randomStr = new Random();
+                if (radiantTeam.getStrength() - randomStr.nextInt(10) >= direTeam.getStrength() - randomStr.nextInt(10)) {
+                    radiantVictories++;
+                    System.out.println(radiantVictories + " X " + direVictories);
+                } else {
+                    direVictories++;
+                    System.out.println(radiantVictories + " X " + direVictories);
+
+                }
+            }
         }
     }
 
-    public void renderPlayers(SpriteBatch batch) {
+    public Team winner() {
+        if(radiantVictories >= direVictories) {
+            return radiantTeam;
+        }
+        else {
+            return direTeam;
+        }
+    }
 
+    public int getRadiantVictories() {
+        return radiantVictories;
+    }
+
+    public void setRadiantVictories(int radiantVictories) {
+        this.radiantVictories = radiantVictories;
+    }
+
+    public int getDireVictories() {
+        return direVictories;
+    }
+
+    public void setDireVictories(int direVictories) {
+        this.direVictories = direVictories;
+    }
+
+    public Team getRadiantTeam() {
+        return radiantTeam;
+    }
+
+    public Team getDireTeam() {
+        return direTeam;
     }
 }
