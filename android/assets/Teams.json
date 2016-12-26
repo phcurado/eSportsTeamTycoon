@@ -5,11 +5,11 @@
     "abbreviatedName": "EG",
     "budget": 2000000,
     "playersId": [
-      "PLAYER_000001",
       "PLAYER_000002",
       "PLAYER_000003",
       "PLAYER_000004",
-      "PLAYER_000005"
+      "PLAYER_000005",
+      "PLAYER_000006"
     ],
     "tier": 1
   },
@@ -56,15 +56,29 @@
     "tier": 1
   },
   {
+    "id": "TEAM_0005",
+    "name": "OG",
+    "abbreviatedName": "OG",
+    "budget": 1000000,
+    "playersId": [
+      "PLAYER_000030",
+      "PLAYER_000028",
+      "PLAYER_000029",
+      "PLAYER_000027",
+      "PLAYER_000026"
+    ],
+    "tier": 1
+  },
+  {
     "id": "TEAM_USER",
-    "name": "Natus Vincere",
-    "abbreviatedName": "Navi",
+    "name": "a",
+    "abbreviatedName": "a",
     "budget": 2000000,
     "playersId": [
       "PLAYER_000023",
       "PLAYER_000025",
       "PLAYER_000024",
-      "PLAYER_000006",
+      "PLAYER_000001",
       "PLAYER_000022"
     ],
     "tier": 4

@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.paulocurado.esportsmanager.EsportsManager;
+import com.paulocurado.esportsmanager.screens.GameScreen;
 
 
 /**

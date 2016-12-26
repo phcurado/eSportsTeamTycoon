@@ -33,26 +33,6 @@
       "orientation": "none"
     },
     {
-      "uniqueName": "ResultLabel",
-      "type": "label",
-      "text": "Error",
-      "id": "title",
-      "size": {
-        "x": 600,
-        "y": 0
-
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "centerX": "ResultMatchBox",
-      "centerY": "ResultMatchBox",
-      "marginTop": 5,
-
-      "orientation": "none"
-    },
-    {
       "uniqueName": "OkButton",
       "type": "textbutton",
       "text": "Ok",

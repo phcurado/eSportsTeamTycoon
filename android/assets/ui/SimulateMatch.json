@@ -1,0 +1,92 @@
+{
+  "ui": [
+    {
+      "uniqueName": "SimulateMatchBox",
+      "type": "window",
+      "background": "window",
+      "size": {
+        "x": 600,
+        "y": 880
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "center"
+    },
+    {
+      "type": "label",
+      "text": "Match",
+      "id": "title",
+      "size": {
+        "x": 0,
+        "y": 0
+
+      },
+      "position": {
+        "x": 0,
+        "y": 200
+      },
+      "centerX": "SimulateMatchBox",
+      "inside_Top": "SimulateMatchBox",
+      "marginTop": 10,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "vsLabel",
+      "type": "label",
+      "text": "VS",
+      "id": "default",
+      "size": {
+        "x": 0,
+        "y": 0
+
+      },
+      "position": {
+        "x": 0,
+        "y": 200
+      },
+      "centerX": "SimulateMatchBox",
+      "inside_Top": "SimulateMatchBox",
+      "marginTop": 60,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "-Label",
+      "type": "label",
+      "text": "-",
+      "id": "default",
+      "size": {
+        "x": 0,
+        "y": 0
+
+      },
+      "position": {
+        "x": 0,
+        "y": 200
+      },
+      "centerX": "SimulateMatchBox",
+      "inside_Top": "SimulateMatchBox",
+      "marginTop": 100,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "OkButton",
+      "type": "textbutton",
+      "text": "Ok",
+      "id": "default",
+      "size": {
+        "x": 180,
+        "y": 65
+      },
+      "position": {
+        "x": 0,
+        "y": -160
+      },
+      "inside_Bottom": "SimulateMatchBox",
+      "centerX": "SimulateMatchBox",
+      "marginBottom": 30,
+      "orientation": "none"
+    }
+  ]
+}

@@ -1,8 +1,5 @@
 package com.paulocurado.esportsmanager.model;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.paulocurado.esportsmanager.EsportsManager;
 
 import java.util.Random;
 
@@ -29,11 +26,8 @@ public class BattleSimulation {
                 Random randomStr = new Random();
                 if (radiantTeam.getStrength() - randomStr.nextInt(10) >= direTeam.getStrength() - randomStr.nextInt(10)) {
                     radiantVictories++;
-                    System.out.println(radiantVictories + " X " + direVictories);
                 } else {
                     direVictories++;
-                    System.out.println(radiantVictories + " X " + direVictories);
-
                 }
             }
         }

@@ -16,11 +16,15 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
+import com.paulocurado.esportsmanager.model.BattleSimulation;
 import com.paulocurado.esportsmanager.model.Championship;
 import com.paulocurado.esportsmanager.model.HandleSaveGame;
 import com.paulocurado.esportsmanager.uielements.ResultMatchDialog;
+import com.paulocurado.esportsmanager.uielements.SimulateMatchDialog;
 import com.paulocurado.esportsmanager.uielements.TipsDialog;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
+
+import java.util.ArrayList;
 
 /**
  * Created by Paulo on 03/12/2016.
@@ -38,6 +42,7 @@ public class GameScreen implements Screen {
 
     private TipsDialog tipsDialog;
     private ResultMatchDialog resultMatchDialog;
+    private SimulateMatchDialog simulateMatchDialog;
 
     public TextureRegion[][] facesOptions;
 
@@ -77,6 +82,7 @@ public class GameScreen implements Screen {
         gameMenuLayout = new ReaderElements(mainApp, stage, skin, "ui/GameScreen.json");
         tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
         resultMatchDialog = new ResultMatchDialog(mainApp, skin, "ui/ResultMatch.json", this);
+        simulateMatchDialog = new SimulateMatchDialog(mainApp, skin, "ui/SimulateMatch.json", this);
 
 
         HandleSaveGame handler = new HandleSaveGame();
@@ -111,8 +117,11 @@ public class GameScreen implements Screen {
 
         stage.draw();
         tipsDialog.draw();
+        tipsLogic(this);
         resultMatchDialog.draw();
-        update();
+        simulateMatchDialog.draw();
+
+        setChampionship();
 
         mainApp.schedule.passTime();
         ((Label)stage.getRoot().findActor("timeLabel")).setText(Integer.toString(mainApp.schedule.getDay()) + "D" + " " +
@@ -121,15 +130,21 @@ public class GameScreen implements Screen {
                 Integer.toString(mainApp.schedule.getYear()) + "Y");
 
     }
-    private void update() {
+    private void setChampionship() {
         mainApp.championship.startChampionship();
         mainApp.championship.updateTeamsMatches(mainApp.user);
         mainApp.championship.matches();
         if(mainApp.championship.isMatchReady()) {
             pauseTime();
-            resultMatchDialog.setUpDialog(mainApp.championship.getBattles().get(mainApp.championship.getGamesPlayed() - 1));
+            simulateMatchDialog.setUpDialog(mainApp.championship.findBattleByTeam(mainApp.user.getTeam(),
+                    mainApp.championship.getRoundsPlayed()));
+
+            simulateMatchDialog.setVisibility(true);
+
+
+            resultMatchDialog.showRoundMatches(mainApp.championship.getMatchesPerRound(mainApp.championship.getRoundsPlayed()));
             mainApp.championship.setMatchReady(false);
-            resultMatchDialog.setVisibility(true);
+
         }
 
 
@@ -174,22 +189,25 @@ public class GameScreen implements Screen {
         stage.dispose();
         skin.dispose();
         tipsDialog.dispose();
+        resultMatchDialog.dispose();
     }
 
     private void tipsLogic(final Screen parent) {
         if(!tipsDialog.isTeamPlayerRequirement()) {
-            tipsDialog.setVisibility(true);
             pauseTime();
-            Gdx.input.setInputProcessor(tipsDialog.getStage());
+            if(!tipsDialog.isVisible()) {
+                tipsDialog.setVisibility(true);
+                Gdx.input.setInputProcessor(tipsDialog.getStage());
 
-            tipsDialog.getActor("OkButton").addListener(new ClickListener() {
-                public void clicked(InputEvent e, float x, float y) {
-                    mainApp.setScreen(new HireScreen(mainApp, parent));
-                    tipsDialog.setVisibility(false);
-                    continueTime();
+                tipsDialog.getActor("OkButton").addListener(new ClickListener() {
+                    public void clicked(InputEvent e, float x, float y) {
+                        mainApp.setScreen(new HireScreen(mainApp, parent));
+                        tipsDialog.setVisibility(false);
+                        continueTime();
 
-                }
-            });
+                    }
+                });
+            }
 
         }
 
@@ -215,5 +233,17 @@ public class GameScreen implements Screen {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public TipsDialog getTipsDialog() {
+        return tipsDialog;
+    }
+
+    public ResultMatchDialog getResultMatchDialog() {
+        return resultMatchDialog;
+    }
+
+    public SimulateMatchDialog getSimulateMatchDialog() {
+        return simulateMatchDialog;
     }
 }

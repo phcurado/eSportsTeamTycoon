@@ -54,5 +54,19 @@
       "PLAYER_000021"
     ],
     "tier": 1
+  },
+  {
+    "id": "TEAM_0005",
+    "name": "OG",
+    "abbreviatedName": "OG",
+    "budget": 1000000,
+    "playersId": [
+      "PLAYER_000030",
+      "PLAYER_000028",
+      "PLAYER_000029",
+      "PLAYER_000027",
+      "PLAYER_000026"
+    ],
+    "tier": 1
   }
 ]
