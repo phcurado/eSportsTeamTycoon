@@ -15,6 +15,7 @@ public class Team {
     private transient ArrayList<Player> players;
     private String[] playersId;
     private int tier;
+    private int victoriesChampionship;
 
     public Team() {
 
@@ -155,4 +156,11 @@ public class Team {
         }
     }
 
+    public int getVictoriesChampionship() {
+        return victoriesChampionship;
+    }
+
+    public void setVictoriesChampionship(int victoriesChampionship) {
+        this.victoriesChampionship = victoriesChampionship;
+    }
 }

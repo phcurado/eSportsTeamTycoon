@@ -57,8 +57,8 @@
   },
   {
     "id": "TEAM_0005",
-    "name": "OG",
-    "abbreviatedName": "OG",
+    "name": "(monkey) Business",
+    "abbreviatedName": "MB",
     "budget": 1000000,
     "playersId": [
       "PLAYER_000030",
@@ -68,5 +68,33 @@
       "PLAYER_000026"
     ],
     "tier": 1
+  },
+  {
+    "id": "TEAM_0006",
+    "name": "Ad Feed",
+    "abbreviatedName": "AF",
+    "budget": 100000,
+    "playersId": [
+      "PLAYER_000031",
+      "PLAYER_000032",
+      "PLAYER_000033",
+      "PLAYER_000034",
+      "PLAYER_000035"
+    ],
+    "tier": 4
+  },
+  {
+    "id": "TEAM_0007",
+    "name": "Team Cloud",
+    "abbreviatedName": "TC",
+    "budget": 180000,
+    "playersId": [
+      "PLAYER_000037",
+      "PLAYER_000036",
+      "PLAYER_000038",
+      "PLAYER_000039",
+      "PLAYER_000040"
+    ],
+    "tier": 3
   }
 ]

@@ -17,6 +17,7 @@ import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.model.Championship;
 import com.paulocurado.esportsmanager.model.GameSchedule;
 import com.paulocurado.esportsmanager.model.HandleSaveGame;
+import com.paulocurado.esportsmanager.model.UsefulFunctions;
 import com.paulocurado.esportsmanager.model.User;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
 import com.paulocurado.esportsmanager.uielements.NewGameDialog;
@@ -56,6 +57,7 @@ public class MainMenuScreen implements Screen {
         this.skin.add("position-font", mainApp.positionFont);
         this.skin.add("position-small-font", mainApp.positionSmallFont);
         this.skin.add("label-medium-font", mainApp.labelFontMedium);
+        this.skin.add("label-clean-font", mainApp.cleanFont);
         this.skin.load(Gdx.files.internal("ui/ui.json"));
     }
 
@@ -187,7 +189,7 @@ public class MainMenuScreen implements Screen {
                     ((Label)confirmDataDialog.getActor("informationLabel")).setText( mainApp.bundle.get("SelectPlayerName") + ": " + ((TextField)newGameDialog.getActor("PlayerName")).getText() +
                             "\n" + mainApp.bundle.get("SelectTeamName") + ": " + ((TextField)newGameDialog.getActor("teamName")).getText() +
                             "\n" + mainApp.bundle.get("SelectShortName") + ": " + ((TextField)newGameDialog.getActor("teamShortName")).getText());
-                    mainApp.schedule = new GameSchedule();
+
 
                     newGameDialog.setVisibility(false);
                     confirmDataDialog.setVisibility(true);
@@ -227,10 +229,14 @@ public class MainMenuScreen implements Screen {
                         ((TextField)newGameDialog.getActor("teamName")).getText(),
                         ((TextField)newGameDialog.getActor("teamShortName")).getText());
                 //informações básicas preenchidas para dar newGame
+                UsefulFunctions usefulFunctions = new UsefulFunctions(mainApp);
                 mainApp.user.getTeam().setId("TEAM_USER");
-                mainApp.user.getTeam().setBudget(5000);
+                mainApp.user.getTeam().setBudget(250000);
                 mainApp.user.getTeam().setTier(4);
                 mainApp.teamList.add(mainApp.user.getTeam());
+                mainApp.schedule = new GameSchedule();
+                mainApp.championship = new Championship(usefulFunctions.getTeamsByTier(mainApp.user.getTeam().getTier()),
+                        mainApp);
 
                 mainApp.setScreen(new GameScreen(mainApp));
             }

@@ -18,16 +18,13 @@ import java.util.ArrayList;
  */
 
 public class ResultMatchDialog extends GameScreenBox {
+    private int actorsAdded = 0;
     public ResultMatchDialog(EsportsManager mainApp, Skin skin, String path, Screen root) {
         super(mainApp, skin, path, root);
 
         buttonsClick();
     }
 
-    public void setUpDialog(BattleSimulation battleSimulation) {
-        ((Label)getActor("ResultLabel")).setText(battleSimulation.getRadiantTeam().getName() + " " + battleSimulation.getRadiantVictories() + " X " +
-                battleSimulation.getDireVictories() + " " + battleSimulation.getDireTeam().getName() );
-    }
     public void showRoundMatches(ArrayList<BattleSimulation> battles) {
         String battlesResult = "";
         for(int i = 0; i < battles.size(); i++) {
@@ -47,19 +44,23 @@ public class ResultMatchDialog extends GameScreenBox {
             stage.addActor(result);
             stage.addActor(teamRadiant);
             stage.addActor(teamDire);
-            //stage.addActor(teamRadiant);
+            actorsAdded = actorsAdded + 3;
         }
     }
 
     public void buttonsClick() {
         this.getActor("OkButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                for(int i = 0; i < 9; i++) {
+                for(int i = 0; i < actorsAdded; i++) {
                     stage.getActors().get(stage.getActors().size - 1).remove();
                 }
                 Gdx.input.setInputProcessor(((GameScreen)root).getStage());
+                if(mainApp.championship.isFinalsUp()) {
+                   mainApp.championship.setGroupStage(false);
+                }
                 setVisibility(false);
                 ((GameScreen)root).continueTime();
+
             }
         });
     }

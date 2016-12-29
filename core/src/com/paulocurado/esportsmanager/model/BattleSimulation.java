@@ -11,6 +11,8 @@ public class BattleSimulation {
 
     private transient Team radiantTeam;
     private transient Team direTeam;
+    private String radiantTeamId;
+    private String direTeamId;
     private int radiantVictories;
     private int direVictories;
 
@@ -18,6 +20,8 @@ public class BattleSimulation {
     public BattleSimulation(Team radiantTeam, Team direTeam) {
         this.radiantTeam = radiantTeam;
         this.direTeam = direTeam;
+        radiantTeamId = radiantTeam.getId();
+        direTeamId = direTeam.getId();
     }
 
     public void bestofBattle(int number) {
@@ -64,5 +68,29 @@ public class BattleSimulation {
 
     public Team getDireTeam() {
         return direTeam;
+    }
+
+    public void setRadiantTeam(Team radiantTeam) {
+        this.radiantTeam = radiantTeam;
+    }
+
+    public void setDireTeam(Team direTeam) {
+        this.direTeam = direTeam;
+    }
+
+    public String getRadiantTeamId() {
+        return radiantTeamId;
+    }
+
+    public void setRadiantTeamId(String radiantTeamId) {
+        this.radiantTeamId = radiantTeamId;
+    }
+
+    public String getDireTeamId() {
+        return direTeamId;
+    }
+
+    public void setDireTeamId(String direTeamId) {
+        this.direTeamId = direTeamId;
     }
 }

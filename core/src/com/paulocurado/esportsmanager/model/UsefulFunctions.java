@@ -2,6 +2,8 @@ package com.paulocurado.esportsmanager.model;
 
 import com.paulocurado.esportsmanager.EsportsManager;
 
+import java.util.ArrayList;
+
 /**
  * Created by Paulo on 13/12/2016.
  */
@@ -55,5 +57,23 @@ public class UsefulFunctions {
         }
 
         return "CONTRACT_" + zeros + calculateID;
+    }
+
+    public Team findTeamById(String teamId) {
+        for(int i = 0; i < mainApp.teamList.size(); i++) {
+            if(teamId.equals(mainApp.teamList.get(i).getId()))
+                return mainApp.teamList.get(i);
+        }
+        return null;
+    }
+
+    public ArrayList<Team> getTeamsByTier(int tier) {
+        ArrayList<Team> team = new ArrayList<Team>();
+        for(int i = 0; i < mainApp.teamList.size(); i++) {
+            if(mainApp.teamList.get(i).getTier() == tier) {
+                team.add(mainApp.teamList.get(i));
+            }
+        }
+        return team;
     }
 }

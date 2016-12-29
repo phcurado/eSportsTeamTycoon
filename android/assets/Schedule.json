@@ -1,8 +1,9 @@
 {
-  "day": 6,
-  "week": 4,
-  "month": 5,
+  "day": 5,
+  "week": 3,
+  "month": 6,
   "year": 2015,
-  "realTime": 0.19982807,
+  "realTime": 0.10000749,
+  "monthPassing": false,
   "timePass": false
 }

@@ -70,9 +70,19 @@ public class HandleSaveGame {
             e.printStackTrace();
         }
 
+        Writer writerChampionship = Gdx.files.local("Championship.json").writer(false);
+        String championship = gson.toJson(mainApp.championship);
+        try {
+            writerChampionship.write(championship);
+            writerChampionship.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void loadGame(EsportsManager mainApp){
+        UsefulFunctions usefulFunctions = new UsefulFunctions(mainApp);
         Gson gson = new GsonBuilder().create();
 
         Reader readerPlayer = Gdx.files.local("Players.json").reader();
@@ -109,14 +119,24 @@ public class HandleSaveGame {
                     }
                 }
             }
-
-
         }
 
         mainApp.user.setTeam(mainApp.teamList.get(mainApp.teamList.size() - 1) );
-
         Reader readerSchedule = Gdx.files.local("Schedule.json").reader();
         mainApp.schedule = gson.fromJson(readerSchedule, GameSchedule.class);
 
+
+        Reader readerChampionship = Gdx.files.local("Championship.json").reader();
+        mainApp.championship = gson.fromJson(readerChampionship, Championship.class);
+        if(mainApp.championship.getBattles().size() > 0 ) {
+            for (int i = 0; i < mainApp.championship.getBattles().size(); i++) {
+                mainApp.championship.getBattles().get(i).setRadiantTeam(usefulFunctions.findTeamById(mainApp.championship.getBattles().get(i).getRadiantTeamId()));
+                mainApp.championship.getBattles().get(i).setDireTeam(usefulFunctions.findTeamById(mainApp.championship.getBattles().get(i).getDireTeamId()));
+            }
+        }
+
+        mainApp.championship.setTeams(usefulFunctions.getTeamsByTier(mainApp.user.getTeam().getTier()) );
+        //TODO arrumar esse de pegar o time por tier, tem que pegar o ultimo campeonato rolando
+        mainApp.championship.setBasicVariables(mainApp);
     }
 }

@@ -77,7 +77,14 @@ public class SimulateMatchDialog extends GameScreenBox {
                 }
                 Gdx.input.setInputProcessor(((GameScreen)root).getStage());
                 setVisibility(false);
-                ((GameScreen)root).getResultMatchDialog().setVisibility(true);
+
+                if(mainApp.championship.isGroupStage()) {
+                    ((GameScreen) root).getResultMatchDialog().setVisibility(true);
+
+                }
+                else {
+                    ((GameScreen)root).continueTime();
+                }
             }
         });
     }

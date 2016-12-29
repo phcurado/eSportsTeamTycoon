@@ -63,6 +63,7 @@ public class HireScreen implements Screen{
         this.skin.add("position-font", mainApp.positionFont);
         this.skin.add("position-small-font", mainApp.positionSmallFont);
         this.skin.add("label-medium-font", mainApp.labelFontMedium);
+        this.skin.add("label-clean-font", mainApp.cleanFont);
         this.skin.load(Gdx.files.internal("ui/ui.json"));
 
     }
@@ -267,8 +268,6 @@ public class HireScreen implements Screen{
                 mainApp.setScreen(parent);
             }
         });
-
-
 
     }
 

@@ -5,13 +5,14 @@
     "abbreviatedName": "EG",
     "budget": 2000000,
     "playersId": [
+      "PLAYER_000001",
       "PLAYER_000002",
       "PLAYER_000003",
       "PLAYER_000004",
-      "PLAYER_000005",
-      "PLAYER_000006"
+      "PLAYER_000005"
     ],
-    "tier": 1
+    "tier": 1,
+    "victoriesChampionship": 0
   },
   {
     "id": "TEAM_0002",
@@ -25,7 +26,8 @@
       "PLAYER_000010",
       "PLAYER_000011"
     ],
-    "tier": 1
+    "tier": 1,
+    "victoriesChampionship": 0
   },
   {
     "id": "TEAM_0003",
@@ -39,7 +41,8 @@
       "PLAYER_000015",
       "PLAYER_000016"
     ],
-    "tier": 1
+    "tier": 1,
+    "victoriesChampionship": 0
   },
   {
     "id": "TEAM_0004",
@@ -53,12 +56,13 @@
       "PLAYER_000020",
       "PLAYER_000021"
     ],
-    "tier": 1
+    "tier": 1,
+    "victoriesChampionship": 0
   },
   {
     "id": "TEAM_0005",
-    "name": "OG",
-    "abbreviatedName": "OG",
+    "name": "(monkey) Business",
+    "abbreviatedName": "MB",
     "budget": 1000000,
     "playersId": [
       "PLAYER_000030",
@@ -67,20 +71,52 @@
       "PLAYER_000027",
       "PLAYER_000026"
     ],
-    "tier": 1
+    "tier": 1,
+    "victoriesChampionship": 0
+  },
+  {
+    "id": "TEAM_0006",
+    "name": "Ad Feed",
+    "abbreviatedName": "AF",
+    "budget": 100000,
+    "playersId": [
+      "PLAYER_000031",
+      "PLAYER_000032",
+      "PLAYER_000033",
+      "PLAYER_000034",
+      "PLAYER_000035"
+    ],
+    "tier": 4,
+    "victoriesChampionship": 0
+  },
+  {
+    "id": "TEAM_0007",
+    "name": "Team Cloud",
+    "abbreviatedName": "TC",
+    "budget": 180000,
+    "playersId": [
+      "PLAYER_000037",
+      "PLAYER_000036",
+      "PLAYER_000038",
+      "PLAYER_000039",
+      "PLAYER_000040"
+    ],
+    "tier": 3,
+    "victoriesChampionship": 0
   },
   {
     "id": "TEAM_USER",
-    "name": "a",
-    "abbreviatedName": "a",
-    "budget": 2000000,
+    "name": "aaa",
+    "abbreviatedName": "aa",
+    "budget": 593858,
     "playersId": [
       "PLAYER_000023",
       "PLAYER_000025",
       "PLAYER_000024",
-      "PLAYER_000001",
+      "PLAYER_000006",
       "PLAYER_000022"
     ],
-    "tier": 4
+    "tier": 2,
+    "victoriesChampionship": 1
   }
 ]

@@ -37,6 +37,21 @@
       "fontColor": "black",
       "background": "table_row_down"
     },
+    "Label_Gray_Title": {
+      "font": "label-font",
+      "fontColor": "black",
+      "background": "table_row_title_gray"
+    },
+    "Label_Gray_Light": {
+      "font": "label-clean-font",
+      "fontColor": "black",
+      "background": "table_row_up_gray"
+    },
+    "Label_Gray_Dark": {
+      "font": "label-clean-font",
+      "fontColor": "black",
+      "background": "table_row_down_gray"
+    },
     "labelBlueBoxSmallText": {
       "font": "position-font",
       "fontColor": "grayFont",
@@ -80,6 +95,14 @@
       "fontColor": "grayFont",
       "background": "blueskyroundedbox"
 
+    },
+    "labelButtonGameScreen": {
+      "font": "label-medium-font",
+      "fontColor": "white"
+    },
+    "labelRedGameScreen": {
+      "font": "label-medium-font",
+      "fontColor": "red"
     }
   },
 
@@ -109,9 +132,9 @@
       "fontColor": "white"
     },
     "blackStyle": {
-      "down": "button_down_gamescreen",
-      "up": "button_up_gamescreen",
-      "font": "label-small-font",
+      "down": "button_down_menu",
+      "up": "button_up_menu",
+      "font": "label-medium-font",
       "fontColor": "white",
       "downFontColor": "grayFont"
     }
@@ -145,6 +168,11 @@
     "default": {
       "titleFont": "button-font",
       "background": "window",
+      "titleFontColor": "black"
+    },
+    "square": {
+      "titleFont": "button-font",
+      "background": "window_square",
       "titleFontColor": "black"
     }
   }

@@ -1,18 +1,19 @@
 {
-  "userName": "a",
+  "userName": "aaa",
   "team": {
     "id": "TEAM_USER",
-    "name": "a",
-    "abbreviatedName": "a",
-    "budget": 2000000,
+    "name": "aaa",
+    "abbreviatedName": "aa",
+    "budget": 593858,
     "playersId": [
       "PLAYER_000023",
       "PLAYER_000025",
       "PLAYER_000024",
-      "PLAYER_000001",
+      "PLAYER_000006",
       "PLAYER_000022"
     ],
-    "tier": 4
+    "tier": 2,
+    "victoriesChampionship": 1
   },
   "hireScreenFirstTime": false
 }

@@ -1,25 +1,28 @@
 {
   "ui": [
     {
-      "uniqueName": "floor",
-      "type": "image",
-      "path": "img/images.atlas",
-      "image": "inGameFloor",
+      "uniqueName": "ConfirmDataBox",
+      "type": "window",
+      "title": "ConfirmData",
+      "id": "title",
+      "background": "window_square",
       "size": {
-        "x": 0,
+        "x": 550,
         "y": 0
       },
       "position": {
         "x": 0,
         "y": 0
       },
-      "orientation": "center"
+      "sizeOf_X": "Screen",
+      "inside_Top": "Screen",
+      "orientation": "none"
     },
     {
       "uniqueName": "timeLabel",
       "type": "label",
       "text": "Error",
-      "id": "default",
+      "id": "labelButtonGameScreen",
       "size": {
         "x": 500,
         "y": 0
@@ -28,8 +31,25 @@
         "x": 0,
         "y": 0
       },
-      "inside_Left": "floor",
-      "inside_Top": "floor",
+      "inside_Left": "Screen",
+      "inside_Top": "Screen",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "budgetLabel",
+      "type": "label",
+      "text": "Error",
+      "id": "labelButtonGameScreen",
+      "size": {
+        "x": 160,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Right": "Screen",
+      "inside_Top": "Screen",
       "orientation": "none"
     },
     {
@@ -45,8 +65,8 @@
         "x": 0,
         "y": 0
       },
-      "centerX": "floor",
-      "inside_Bottom": "floor",
+      "centerX": "Screen",
+      "inside_Bottom": "Screen",
       "marginBottom": 90,
       "orientation": "none"
     },
@@ -63,8 +83,8 @@
       },
       "inside_Left": "Computers",
       "inside_Top": "Computers",
-      "marginBottom": 45,
-      "marginLeft": 30,
+      "marginBottom": 15,
+      "marginLeft": 12,
       "orientation": "none"
     },
     {
@@ -94,7 +114,7 @@
         "y": 0
       },
       "alignLeft": "playerImage_1",
-      "marginLeft": 10,
+      "marginLeft": 15,
       "orientation": "none"
     },
     {
@@ -124,7 +144,7 @@
         "y": 0
       },
       "alignLeft": "playerImage_2",
-      "marginLeft": 10,
+      "marginLeft": 24,
       "orientation": "none"
     },
     {
@@ -154,7 +174,7 @@
         "y": 0
       },
       "alignLeft": "playerImage_3",
-      "marginLeft": 10,
+      "marginLeft": 24,
       "orientation": "none"
     },
     {
@@ -184,7 +204,7 @@
         "y": 0
       },
       "alignLeft": "playerImage_4",
-      "marginLeft": 10,
+      "marginLeft": 16,
       "orientation": "none"
     },
     {
@@ -217,7 +237,7 @@
         "x": 0,
         "y": 0
       },
-      "inside_Left": "floor",
+      "inside_Left": "Screen",
       "marginBottom": 790,
       "marginLeft": 20,
       "orientation": "none"

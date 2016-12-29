@@ -51,6 +51,7 @@ public class EsportsManager extends Game {
     public BitmapFont positionFont;
     public BitmapFont positionSmallFont;
     public BitmapFont labelFontMedium;
+    public BitmapFont cleanFont;
 
     public Skin skin;
 
@@ -122,6 +123,12 @@ public class EsportsManager extends Game {
         parameter.borderWidth = 1;
         parameter.color = Color.WHITE;
         positionSmallFont = generatorSmallPosition.generateFont(parameter);
+
+        FreeTypeFontGenerator generatorCleanFont = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Neuton-Extrabold.ttf"));
+        parameter.size = 28;
+        parameter.borderWidth = 0;
+        parameter.color = Color.WHITE;
+        cleanFont = generatorCleanFont.generateFont(parameter);
 
     }
 
