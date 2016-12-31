@@ -254,7 +254,7 @@ public class ReaderElements {
 
         if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("centerY")) {
             if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("centerY").getAsString().equals("Screen")) {
-                actorPosition.x = stage.getHeight() / 2 - actor.getHeight() / 2;
+                actorPosition.y = stage.getHeight() / 2 - actor.getHeight() / 2;
             }
             else {
                 actorPosition.y = stage.getRoot().findActor(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("centerY").getAsString()).getY() +

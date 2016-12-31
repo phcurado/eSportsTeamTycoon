@@ -1,0 +1,71 @@
+{
+  "ui": [
+    {
+      "uniqueName": "LineupScreenBackground",
+      "type": "image",
+      "path": "img/images.atlas",
+      "image": "startmenubackground",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PositionsButton",
+      "type": "textbutton",
+      "text": "Positions",
+      "id": "default",
+      "size": {
+        "x": 300,
+        "y": 75
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "centerX": "Screen",
+      "centerY": "Screen",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "SellButton",
+      "type": "textbutton",
+      "text": "SellPlayers",
+      "id": "default",
+      "size": {
+        "x": 300,
+        "y": 75
+
+      },
+      "position": {
+        "x": 0,
+        "y": -150
+      },
+      "below": "PositionsButton",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "BackButton",
+      "type": "textbutton",
+      "text": "Back",
+      "id": "default",
+      "size": {
+        "x": 300,
+        "y": 75
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "SellButton",
+      "orientation": "none"
+    }
+  ]
+}

@@ -82,7 +82,7 @@ public class Team {
     public int getStrength() {
         int strength = 0;
         for(int i = 0; i < players.size(); i++) {
-            strength += players.get(i).getOverall();
+            strength += players.get(i).abilityInteger(i + 1);
         }
 
         return strength / players.size();

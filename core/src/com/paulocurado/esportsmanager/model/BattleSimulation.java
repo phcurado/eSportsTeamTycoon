@@ -29,7 +29,7 @@ public class BattleSimulation {
             if (radiantVictories < number / 2 + 1 && direVictories < number / 2 + 1) {
                 Random randomStr = new Random();
                 if (radiantTeam.getStrength() - randomStr.nextInt(10) >= direTeam.getStrength() - randomStr.nextInt(10)) {
-                    radiantVictories++;
+                    radiantVictories++;//TODO o calculo do overall nao ta considerando a posicao do player
                 } else {
                     direVictories++;
                 }

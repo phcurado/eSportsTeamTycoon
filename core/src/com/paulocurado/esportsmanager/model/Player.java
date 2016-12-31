@@ -234,7 +234,7 @@ public class Player {
         combinedTexture.flip(false, true);
 
         Image playerFace = new Image(combinedTexture);
-        playerFace.debug();
+        playerFace.setSize(128, 128);
 
         return playerFace;
     }

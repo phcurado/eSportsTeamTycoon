@@ -77,13 +77,5 @@ public class ConfirmContractDialog extends GameScreenBox {
             System.out.println(mainApp.teamList.get(0).getPlayers().get(i).getNickName());
         }
 
-
-
-
-        //TODO fazer a transferencia e pensar em fazer uma classe que tenha funções de find
-        //por enquanto isso aqui faz a transferência pro time, removendo o jogador do time antigo porém tem que fazer depois
-        // algo que atualize as variáveis que relacionam jogador e time como o ID do time na classe jogador
-
-
     }
 }

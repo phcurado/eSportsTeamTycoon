@@ -95,15 +95,15 @@ public class GameScreen implements Screen {
         resultMatchDialog = new ResultMatchDialog(mainApp, skin, "ui/ResultMatch.json", this);
         simulateMatchDialog = new SimulateMatchDialog(mainApp, skin, "ui/SimulateMatch.json", this);
 
-
-        HandleSaveGame handler = new HandleSaveGame();
-        handler.saveGame(mainApp);
         tipsLogic(this);
 
 
         //buttons in screen logic
+        saveButtonLogic();
+        exitButtonLogic();
         championshipButtonLogic(this);
         leaderBoardsButtonLogic(this);
+        lineupButtonLogic(this);
 
 
         if(mainApp.user.getTeam().getPlayers().size() >= 5) {
@@ -123,6 +123,8 @@ public class GameScreen implements Screen {
         stage.addActor(debitsLabel);
 
         continueTime();
+
+        //System.out.println(mainApp.user.getTeam().getStrength() );
     }
 
     @Override
@@ -170,7 +172,7 @@ public class GameScreen implements Screen {
                 debits += mainApp.user.getTeam().getPlayers().get(i).getSalary(mainApp.contractList);
             }
             mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() - debits);
-            debitsLabel.setText("$ " + Integer.toString(debits));
+            debitsLabel.setText("$ -" + Integer.toString(debits));
             debitsLabel.addAction(sequence(alpha(0f), fadeIn(0.8f), delay(1f), fadeOut(1f)));
         }
     }
@@ -278,15 +280,39 @@ public class GameScreen implements Screen {
                         mainApp.setScreen(new HireScreen(mainApp, parent));
                         tipsDialog.setVisibility(false);
                         continueTime();
-
                     }
                 });
             }
         }
 
-        else {
-            tipsDialog.setVisibility(false);
-        }
+    }
+
+    private void saveButtonLogic() {
+        stage.getRoot().findActor("SaveButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                pauseTime();
+                HandleSaveGame handler = new HandleSaveGame();
+                handler.saveGame(mainApp);
+                tipsDialog.setTip(mainApp.bundle.get("Game_Saved"));
+                tipsDialog.setVisibility(true);
+
+
+                tipsDialog.getActor("OkButton").addListener(new ClickListener() {
+                    public void clicked(InputEvent e, float x, float y) {
+                        tipsDialog.setVisibility(false);
+                        Gdx.input.setInputProcessor(stage);
+                        continueTime();
+                    }
+                });
+            }
+        });
+    }
+    private void exitButtonLogic() {
+        stage.getRoot().findActor("ExitButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                Gdx.app.exit();
+            }
+        });
 
     }
 
@@ -307,6 +333,16 @@ public class GameScreen implements Screen {
                 mainApp.setScreen(new HireScreen(mainApp, parent));
             }
         });
+    }
+
+    private void lineupButtonLogic(final Screen parent) {
+        stage.getRoot().findActor("LineupButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                pauseTime();
+                mainApp.setScreen(new LineupScreen(mainApp, parent));
+            }
+        });
+
     }
 
 

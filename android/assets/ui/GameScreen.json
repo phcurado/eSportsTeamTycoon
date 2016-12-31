@@ -223,14 +223,49 @@
       "orientation": "center"
     },
     {
-      "uniqueName": "AdvanceButton",
-      "type": "imagetextbutton",
-      "text": "Advance",
+      "uniqueName": "SaveButton",
+      "type": "textbutton",
+      "text": "Save",
       "id": "blackStyle",
       "labelOrientation": "center",
       "size": {
+        "x": 160,
+        "y": 60
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "ExitButton",
+      "type": "textbutton",
+      "text": "exitButton",
+      "id": "blackStyle",
+      "labelOrientation": "center",
+      "size": {
+        "x": 160,
+        "y": 60
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Bottom": "Screen",
+      "inside_Right": "Screen",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "ChampionshipButton",
+      "type": "textbutton",
+      "text": "Championship",
+      "id": "blackStyle",
+      "size": {
         "x": 290,
-        "y": 80
+        "y": 70
 
       },
       "position": {
@@ -243,31 +278,13 @@
       "orientation": "none"
     },
     {
-      "uniqueName": "ChampionshipButton",
-      "type": "imagetextbutton",
-      "text": "Championship",
-      "id": "blackStyle",
-      "size": {
-        "x": 290,
-        "y": 80
-
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "below": "AdvanceButton",
-      "marginTop": 20,
-      "orientation": "none"
-    },
-    {
       "uniqueName": "LeaderBoardsButton",
-      "type": "imagetextbutton",
+      "type": "textbutton",
       "text": "LeaderBoards",
       "id": "blackStyle",
       "size": {
         "x": 290,
-        "y": 80
+        "y": 70
 
       },
       "position": {
@@ -280,12 +297,12 @@
     },
     {
       "uniqueName": "PraticeButton",
-      "type": "imagetextbutton",
-      "text": "Practice_your_team",
+      "type": "textbutton",
+      "text": "Practice",
       "id": "blackStyle",
       "size": {
         "x": 290,
-        "y": 80
+        "y": 70
 
       },
       "position": {
@@ -297,13 +314,13 @@
       "orientation": "none"
     },
     {
-      "uniqueName": "EditTeamButton",
-      "type": "imagetextbutton",
-      "text": "Edit_Team",
+      "uniqueName": "LineupButton",
+      "type": "textbutton",
+      "text": "Lineup",
       "id": "blackStyle",
       "size": {
         "x": 290,
-        "y": 80
+        "y": 70
 
       },
       "position": {

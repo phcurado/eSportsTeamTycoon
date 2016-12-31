@@ -1,0 +1,27 @@
+{
+  "teamsId": [
+    "TEAM_0006",
+    "TEAM_0008",
+    "TEAM_USER"
+  ],
+  "championshipIsUp": false,
+  "battles": [],
+  "championshipSchedule": {
+    "day": 1,
+    "week": 1,
+    "month": 1,
+    "year": 2015,
+    "realTime": 0.0,
+    "monthPassing": false,
+    "timePass": false
+  },
+  "matchReady": false,
+  "week": 2,
+  "gamesPlayed": 0,
+  "roundsPlayed": 0,
+  "organizeTeams": false,
+  "finalsUp": false,
+  "groupStage": false,
+  "organizeTeamsFinal": false,
+  "championshipEnded": false
+}

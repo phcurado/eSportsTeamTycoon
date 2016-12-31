@@ -35,11 +35,14 @@ public class TipsDialog extends GameScreenBox {
             teamPlayerRequirement = false;
         }
         else {
-            setTip("");
             teamPlayerRequirement = true;
         }
 
         return teamPlayerRequirement;
+    }
+
+    public void resizeDialogBasedOnText() {
+        this.getActor("tipWindow").setSize(this.getActor("tipWindow").getWidth(), this.getActor("tipLabel").getHeight());
     }
 
     public void setTeamPlayerRequirement(boolean teamPlayerRequirement) {
@@ -54,6 +57,7 @@ public class TipsDialog extends GameScreenBox {
 
     public void setTip(String tip) {
         ((Label) this.getActor("tipLabel")).setText(tip);
+
         this.tip = tip;
     }
 

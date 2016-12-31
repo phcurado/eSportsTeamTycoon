@@ -45,6 +45,7 @@ public class ResultMatchDialog extends GameScreenBox {
             stage.addActor(teamRadiant);
             stage.addActor(teamDire);
             actorsAdded = actorsAdded + 3;
+
         }
     }
 
@@ -54,6 +55,7 @@ public class ResultMatchDialog extends GameScreenBox {
                 for(int i = 0; i < actorsAdded; i++) {
                     stage.getActors().get(stage.getActors().size - 1).remove();
                 }
+                actorsAdded = 0;
                 Gdx.input.setInputProcessor(((GameScreen)root).getStage());
                 if(mainApp.championship.isFinalsUp()) {
                    mainApp.championship.setGroupStage(false);

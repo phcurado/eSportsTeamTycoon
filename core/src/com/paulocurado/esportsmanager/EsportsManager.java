@@ -119,7 +119,7 @@ public class EsportsManager extends Game {
         positionFont = generatorPosition.generateFont(parameter);
 
         FreeTypeFontGenerator generatorSmallPosition = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Neuton-Extrabold.ttf"));
-        parameter.size = 15;
+        parameter.size = 11;
         parameter.borderWidth = 1;
         parameter.color = Color.WHITE;
         positionSmallFont = generatorSmallPosition.generateFont(parameter);

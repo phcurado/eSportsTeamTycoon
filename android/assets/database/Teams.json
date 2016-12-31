@@ -21,11 +21,11 @@
     "playersId": [
       "PLAYER_000007",
       "PLAYER_000008",
-      "PLAYER_000009",
-      "PLAYER_000010",
-      "PLAYER_000011"
+      "PLAYER_000045",
+      "PLAYER_000011",
+      "PLAYER_000010"
     ],
-    "tier": 1
+    "tier": 2
   },
   {
     "id": "TEAM_0003",
@@ -96,5 +96,75 @@
       "PLAYER_000040"
     ],
     "tier": 3
+  },
+  {
+    "id": "TEAM_0008",
+    "name": "Natus Perdere",
+    "abbreviatedName": "Napi",
+    "budget": 1000000,
+    "playersId": [
+      "PLAYER_000042",
+      "PLAYER_000022",
+      "PLAYER_000041",
+      "PLAYER_000043",
+      "PLAYER_000044"
+    ],
+    "tier": 4
+  },
+  {
+    "id": "TEAM_0009",
+    "name": "MVP",
+    "abbreviatedName": "MVP",
+    "budget": 0,
+    "playersId": [
+      "PLAYER_000009",
+      "PLAYER_000047",
+      "PLAYER_000048",
+      "PLAYER_000049",
+      "PLAYER_000046"
+    ],
+    "tier": 2
+  },
+  {
+    "id": "TEAM_0010",
+    "name": "Virtus Polar",
+    "abbreviatedName": "VP",
+    "budget": 1000000,
+    "playersId": [
+      "PLAYER_000051",
+      "PLAYER_000052",
+      "PLAYER_000053",
+      "PLAYER_000054",
+      "PLAYER_000055"
+    ],
+    "tier": 1
+  },
+  {
+    "id": "TEAM_0011",
+    "name": "Newbie",
+    "abbreviatedName": "Newbie",
+    "budget": 600000,
+    "playersId": [
+      "PLAYER_000056",
+      "PLAYER_000057",
+      "PLAYER_000058",
+      "PLAYER_000059",
+      "PLAYER_000060"
+    ],
+    "tier": 2
+  },
+  {
+    "id": "TEAM_0012",
+    "name": "Team Face",
+    "abbreviatedName": "Face",
+    "budget": 500000,
+    "playersId": [
+      "PLAYER_000061",
+      "PLAYER_000062",
+      "PLAYER_000063",
+      "PLAYER_000064",
+      "PLAYER_000065"
+    ],
+    "tier": 2
   }
 ]

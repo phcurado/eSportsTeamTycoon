@@ -1,0 +1,204 @@
+{
+  "ui": [
+    {
+      "uniqueName": "PositionsScreenBackground",
+      "type": "image",
+      "path": "img/images.atlas",
+      "image": "startmenubackground",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PlayerBox_1",
+      "type": "window",
+      "background": "window",
+      "size": {
+        "x": 128,
+        "y": 300
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Left": "Screen",
+      "inside_Top": "Screen",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PlayerBox_2",
+      "type": "window",
+      "background": "window",
+      "size": {
+        "x": 128,
+        "y": 300
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "PlayerBox_1",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PlayerBox_3",
+      "type": "window",
+      "background": "window",
+      "size": {
+        "x": 128,
+        "y": 300
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "PlayerBox_2",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PlayerBox_4",
+      "type": "window",
+      "background": "window",
+      "size": {
+        "x": 128,
+        "y": 300
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "PlayerBox_3",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PlayerBox_5",
+      "type": "window",
+      "background": "window",
+      "size": {
+        "x": 128,
+        "y": 300
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "PlayerBox_4",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PositionLabel_1",
+      "type": "label",
+      "text": "Carry",
+      "id": "small",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Top": "PlayerBox_1",
+      "centerX": "PlayerBox_1",
+      "marginTop": 15,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PositionLabel_2",
+      "type": "label",
+      "text": "Mid",
+      "id": "small",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Top": "PlayerBox_2",
+      "centerX": "PlayerBox_2",
+      "marginTop": 15,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PositionLabel_3",
+      "type": "label",
+      "text": "Offlane",
+      "id": "small",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Top": "PlayerBox_3",
+      "centerX": "PlayerBox_3",
+      "marginTop": 15,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PositionLabel_4",
+      "type": "label",
+      "text": "Supp4",
+      "id": "small",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Top": "PlayerBox_4",
+      "centerX": "PlayerBox_4",
+      "marginTop": 15,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PositionLabel_5",
+      "type": "label",
+      "text": "Supp5",
+      "id": "small",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Top": "PlayerBox_5",
+      "centerX": "PlayerBox_5",
+      "marginTop": 15,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "BackButton",
+      "type": "textbutton",
+      "text": "Back",
+      "id": "default",
+      "size": {
+        "x": 600,
+        "y": 75
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "centerX": "Screen",
+      "centerY": "Screen",
+      "marginTop": 300,
+      "orientation": "none"
+    }
+  ]
+}
