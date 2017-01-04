@@ -7,6 +7,7 @@ package com.paulocurado.esportsmanager.model;
 public class User {
     private String userName;
     private Team team;
+    private int fansNumber = 0;
 
     private boolean hireScreenFirstTime = true;
 
@@ -41,5 +42,13 @@ public class User {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public int getFansNumber() {
+        return fansNumber;
+    }
+
+    public void setFansNumber(int fansNumber) {
+        this.fansNumber = fansNumber;
     }
 }

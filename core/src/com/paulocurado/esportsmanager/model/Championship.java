@@ -35,6 +35,7 @@ public class Championship {
     private boolean organizeTeamsFinal = false;
     private boolean championshipEnded = false;
     private transient EsportsManager mainApp;
+    private boolean isUserMatchShowed = false;
 
     public Championship(ArrayList<Team> teams, EsportsManager mainApp) {
         this.mainApp = mainApp;
@@ -111,9 +112,13 @@ public class Championship {
     public void groupMatches() {
         if (gamesPlayed < battles.size()) {
             for (int i = 0; i < teams.size() / 2; i++) {
-                battles.get(gamesPlayed).bestofBattle(3);
-                battles.get(gamesPlayed).winner().setVictoriesChampionship(battles.get(gamesPlayed).winner().getVictoriesChampionship() + 1);
-                gamesPlayed++;
+                if(battles.get(gamesPlayed).getRadiantTeam() != (mainApp.user.getTeam()) &&
+                        battles.get(gamesPlayed).getDireTeam() != (mainApp.user.getTeam())) {
+                    battles.get(gamesPlayed).bestofBattle(3);
+                    battles.get(gamesPlayed).winner().setVictoriesChampionship(battles.get(gamesPlayed).winner().getVictoriesChampionship() + 1);
+
+                }
+                 gamesPlayed++;
             }
             roundsPlayed++;
         }
@@ -124,8 +129,12 @@ public class Championship {
     }
 
     public void finalMatch() {
-        battles.get(battles.size() - 1).bestofBattle(5);
+        if(battles.get(gamesPlayed).getRadiantTeam() != (mainApp.user.getTeam()) &&
+                battles.get(gamesPlayed).getDireTeam() != (mainApp.user.getTeam())) {
+            battles.get(battles.size() - 1).bestofBattle(5);
+        }
         gamesPlayed++;
+
     }
 
     public ArrayList<Team> getTeamsInOrderOfVictory() {
@@ -155,6 +164,7 @@ public class Championship {
         finalsUp = false;
         groupStage = false;
         championshipEnded = true;
+        isUserMatchShowed = false;
     }
     public Team getWinnerOfChampionship() {
         if(championshipEnded) {
@@ -194,19 +204,35 @@ public class Championship {
         }
     }
 
-    public void payPrizeToUser() {
+    public double payPrizeToUser() {
+        double prize = 4000000 / mainApp.user.getTeam().getTier();
         for(int i = 0; i < getFinalChampionshipPositions().size(); i++) {
             if(mainApp.user.getTeam().equals(getFinalChampionshipPositions().get(i))) {
-                if (getWinnerOfChampionship() != mainApp.user.getTeam()) {
-                    int prize = 1000000 / (mainApp.user.getTeam().getTier() + i);
-                    mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + prize);
+
+                if(getWinnerOfChampionship().equals(mainApp.user.getTeam())) {
+                    prize = 0.4 * prize;
+                    mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
+                    System.out.println("Ficou em primeiro " + prize);
+                }
+                else if (i == 2) {
+                    prize = 0.2 * prize;
+                    mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
+                    System.out.println("Ficou em segundo " + prize);
+                }
+                else if (i == 3) {
+                    prize = 0.1 * prize;
+                    mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
+                    System.out.println("Ficou em terceiro " + prize);
                 }
                 else {
-                    int prize = 1000000 / (mainApp.user.getTeam().getTier());
-                    mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + prize);
+                    prize = 0.05 * prize;
+                    mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
+                    System.out.println("Ficou em quarto " + prize);
                 }
             }
         }
+
+        return prize;
     }
 
 
@@ -311,5 +337,13 @@ public class Championship {
 
     public void setMainApp(EsportsManager mainApp) {
         this.mainApp = mainApp;
+    }
+
+    public boolean isUserMatchShowed() {
+        return isUserMatchShowed;
+    }
+
+    public void setUserMatchShowed(boolean userMatchShowed) {
+        isUserMatchShowed = userMatchShowed;
     }
 }

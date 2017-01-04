@@ -1,0 +1,115 @@
+{
+  "ui": [
+    {
+      "uniqueName": "YesNoBox",
+      "type": "window",
+      "title": "ConfirmData",
+      "id": "title",
+      "background": "window",
+      "size": {
+        "x": 550,
+        "y": 450
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "centerX": "Screen",
+      "centerY": "Screen",
+      "orientation": "none"
+    },
+    {
+      "type": "label",
+      "text": "Confirm",
+      "id": "title",
+      "size": {
+        "x": 0,
+        "y": 0
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "centerX": "YesNoBox",
+      "inside_Top": "YesNoBox",
+      "marginTop": 10,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "panel",
+      "type": "panel",
+      "background": "panel",
+      "id": "default",
+      "size": {
+        "x": 500,
+        "y": 250
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "centerX": "YesNoBox",
+      "inside_Top": "YesNoBox",
+      "marginTop": 70,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "informationLabel",
+      "type": "label",
+      "text": "Error",
+      "id": "small",
+      "size": {
+        "x": 470,
+        "y": 250
+      },
+      "position": {
+        "x": 0,
+        "y": 10
+      },
+      "centerX": "YesNoBox",
+      "inside_Top": "YesNoBox",
+      "marginTop": 80,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "YesButton",
+      "type": "textbutton",
+      "text": "Yes",
+      "id": "default",
+      "size": {
+        "x": 180,
+        "y": 65
+
+      },
+      "position": {
+        "x": 80,
+        "y": 290
+      },
+      "inside_Left": "YesNoBox",
+      "inside_Bottom": "YesNoBox",
+      "marginLeft": 30,
+      "marginBottom": 30,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "NoButton",
+      "type": "textbutton",
+      "text": "No",
+      "id": "default",
+      "size": {
+        "x": 180,
+        "y": 65
+
+      },
+      "position": {
+        "x": 380,
+        "y": 290
+      },
+      "alignY": "YesButton",
+      "inside_Right": "YesNoBox",
+      "marginRight": 30,
+      "orientation": "none"
+    }
+  ]
+}

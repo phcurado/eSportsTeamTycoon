@@ -62,8 +62,15 @@ public class ReaderElements {
             actor = new TextField("", skin, jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("id").getAsString());
         }
         else if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("label")) {
-            actor = new Label(mainApp.bundle.get(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("text").getAsString()), skin,
-                    jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("id").getAsString());
+            if (jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("text")) {
+                actor = new Label(mainApp.bundle.get(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("text").getAsString()), skin,
+                        jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("id").getAsString());
+
+            }
+            else {
+                actor = new Label("", skin,
+                        jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("id").getAsString());
+            }
 
         }
         else if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("textbutton")) {
@@ -77,6 +84,11 @@ public class ReaderElements {
             if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("labelOrientation")) {
                 if (jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("labelOrientation").getAsString().equals("center")) {
                     ((TextButton) actor).getLabel().setAlignment(Align.center);
+                }
+            }
+            else if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().has("labelOrientation")) {
+                if (jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("labelOrientation").getAsString().equals("right")) {
+                    ((TextButton) actor).getLabel().setAlignment(Align.right);
                 }
             }
 
@@ -291,7 +303,9 @@ public class ReaderElements {
     }
 
     public void dispose() {
+
         stage.dispose();
+        skin.dispose();
     }
 
 }

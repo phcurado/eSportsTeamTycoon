@@ -58,6 +58,7 @@ public class ConfirmContractDialog extends GameScreenBox {
             mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() - ((HireScreen) root).getHireDialog().player.getCost(mainApp.contractList));
             mainApp.user.getTeam().organizeIdPlayers();
             usefulFunctions.changePlayerContract(mainApp.user.getTeam(), ((HireScreen) root).getHireDialog().player);
+            team.setUpPlayers();
         }
         else if(!((HireScreen)root).getHireDialog().player.hasTeam(mainApp.teamList) ) {
 
@@ -72,7 +73,7 @@ public class ConfirmContractDialog extends GameScreenBox {
         }
 
 
-        mainApp.teamList.get(0).setUpPlayers();
+        //mainApp.teamList.get(0).setUpPlayers();
         for(int i = 0; i < 5; i ++) {
             System.out.println(mainApp.teamList.get(0).getPlayers().get(i).getNickName());
         }

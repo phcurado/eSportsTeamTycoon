@@ -85,26 +85,46 @@ public class HandleSaveGame {
         UsefulFunctions usefulFunctions = new UsefulFunctions(mainApp);
         Gson gson = new GsonBuilder().create();
 
-        Reader readerPlayer = Gdx.files.local("Players.json").reader();
-        mainApp.playerList.clear();
-        mainApp.playerList.addAll((ArrayList<Player>) gson.fromJson(readerPlayer,
-                new TypeToken<ArrayList<Player>>() {
-                }.getType()));
+        try {
+            Reader readerPlayer = Gdx.files.local("Players.json").reader();
+            mainApp.playerList.clear();
+            mainApp.playerList.addAll((ArrayList<Player>) gson.fromJson(readerPlayer,
+                    new TypeToken<ArrayList<Player>>() {
+                    }.getType()));
+            readerPlayer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Reader readerTeam = Gdx.files.local("Teams.json").reader();
-        mainApp.teamList.clear();
-        mainApp.teamList.addAll((ArrayList<Team>) gson.fromJson(readerTeam,
+        try {
+            Reader readerTeam = Gdx.files.local("Teams.json").reader();
+            mainApp.teamList.clear();
+            mainApp.teamList.addAll((ArrayList<Team>) gson.fromJson(readerTeam,
                 new TypeToken<ArrayList<Team>>() {
                 }.getType()));
+            readerTeam.close();
+            } catch (IOException e) {
+            e.printStackTrace();
+            }
+        try {
+            Reader readerContract = Gdx.files.local("Contracts.json").reader();
+            mainApp.contractList.clear();
+            mainApp.contractList.addAll((ArrayList<Contract>) gson.fromJson(readerContract,
+                    new TypeToken<ArrayList<Contract>>() {
+                    }.getType()));
+            readerContract.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Reader readerContract = Gdx.files.local("Contracts.json").reader();
-        mainApp.contractList.clear();
-        mainApp.contractList.addAll((ArrayList<Contract>) gson.fromJson(readerContract,
-                new TypeToken<ArrayList<Contract>>() {
-                }.getType()));
+        try {
+            Reader readerUser = Gdx.files.local("User.json").reader();
+            mainApp.user = gson.fromJson(readerUser, User.class);
+            readerUser.close();
+        } catch (IOException e) {
+        e.printStackTrace();
+    }
 
-        Reader readerUser = Gdx.files.local("User.json").reader();
-        mainApp.user = gson.fromJson(readerUser, User.class);
 
         JsonParser json = new JsonParser();
         Object arrayTeams = json.parse(Gdx.files.local("Teams.json").reader());
@@ -122,19 +142,27 @@ public class HandleSaveGame {
         }
 
         mainApp.user.setTeam(mainApp.teamList.get(mainApp.teamList.size() - 1) );
-        Reader readerSchedule = Gdx.files.local("Schedule.json").reader();
-        mainApp.schedule = gson.fromJson(readerSchedule, GameSchedule.class);
-
-
-        Reader readerChampionship = Gdx.files.local("Championship.json").reader();
-        mainApp.championship = gson.fromJson(readerChampionship, Championship.class);
-        if(mainApp.championship.getBattles().size() > 0 ) {
-            for (int i = 0; i < mainApp.championship.getBattles().size(); i++) {
-                mainApp.championship.getBattles().get(i).setRadiantTeam(usefulFunctions.findTeamById(mainApp.championship.getBattles().get(i).getRadiantTeamId()));
-                mainApp.championship.getBattles().get(i).setDireTeam(usefulFunctions.findTeamById(mainApp.championship.getBattles().get(i).getDireTeamId()));
-            }
+        try {
+            Reader readerSchedule = Gdx.files.local("Schedule.json").reader();
+            mainApp.schedule = gson.fromJson(readerSchedule, GameSchedule.class);
+            readerSchedule.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+        try {
+            Reader readerChampionship = Gdx.files.local("Championship.json").reader();
+            mainApp.championship = gson.fromJson(readerChampionship, Championship.class);
+            if (mainApp.championship.getBattles().size() > 0) {
+                for (int i = 0; i < mainApp.championship.getBattles().size(); i++) {
+                    mainApp.championship.getBattles().get(i).setRadiantTeam(usefulFunctions.findTeamById(mainApp.championship.getBattles().get(i).getRadiantTeamId()));
+                    mainApp.championship.getBattles().get(i).setDireTeam(usefulFunctions.findTeamById(mainApp.championship.getBattles().get(i).getDireTeamId()));
+                }
+            }
+            readerChampionship.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         mainApp.championship.setTeams(usefulFunctions.getTeamsByTier(mainApp.user.getTeam().getTier()) );
         //TODO arrumar esse de pegar o time por tier, tem que pegar o ultimo campeonato rolando
         mainApp.championship.setBasicVariables(mainApp);

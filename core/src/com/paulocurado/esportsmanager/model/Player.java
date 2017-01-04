@@ -75,6 +75,31 @@ public class Player {
         position = new Vector2(0, 0);
 
     }
+    public Player(Player player) {
+        id = player.getId();
+        firstName = player.getFirstName();
+        lastName = player.lastName;
+        nickName = player.getNickName();
+        birthDay = player.getBirthDay();
+        rank = player.getRank();
+        popularity = player.popularity;
+        teamId = player.getTeamId();
+        farm = player.getFarm();
+        independency = player.getIndependency();
+        fighting = player.getFighting();
+        support = player.getSupport();
+        rotation = player.getRotation();
+        intelligence = player.getIntelligence();
+        leadership = player.getLeadership();
+        rage = player.getRage();
+        hairType = player.getHairType();
+        hairColor = player.getHairColor();
+        faceType = player.getFaceType();
+        faceColor = player.getFaceColor();
+        expressionType = player.getExpressionType();
+        accessory = player.getAccessory();
+
+    }
 
     public void setPosition(int xd, int yd) {
         position.x = xd;
@@ -505,9 +530,9 @@ public class Player {
 
 
     protected String abilityResult(int positionAbility) {
-        String ability = "F";
-        int range = 7;
-        int maxAbility = 88;
+        String ability = "G";
+        int range = 5;
+        int maxAbility = 91;
 
         if(positionAbility >= maxAbility)
             ability = "S";
@@ -521,6 +546,8 @@ public class Player {
             ability = "D";
         if(positionAbility >= maxAbility - 5*range && positionAbility < maxAbility - 4*range)
             ability = "F";
+        if(positionAbility >= maxAbility - 5*range && positionAbility < maxAbility - 4*range)
+            ability = "G";
 
         return ability;
     }
@@ -530,13 +557,13 @@ public class Player {
         double positionHability;
 
         if(role == 1) {
-            positionHability = 0.65 * farm + 0.05 * independency + 0 * support + 0.05 * rotation + 0.25 * fighting;
+            positionHability = 0.85 * farm + 0 * independency + 0 * support + 0 * rotation + 0.15 * fighting;
         }
         else if(role == 2) {
-            positionHability = 0.15 * farm + 0.10 * independency + 0 * support + 0.10 * rotation + 0.65 * fighting;
+            positionHability = 0.25 * farm + 0.05 * independency + 0 * support + 0.05 * rotation + 0.65 * fighting;
         }
         else if(role == 3) {
-            positionHability = 0.1 * farm + 0.60 * independency + 0 * support + 0.15 * rotation + 0.15 * fighting;
+            positionHability = 0.15 * farm + 0.65 * independency + 0 * support + 0.05 * rotation + 0.15 * fighting;
         }
         else if(role == 4) {
             positionHability = 0 * farm + 0.05 * independency + 0.4 * support + 0.50 * rotation + 0.05 * fighting;

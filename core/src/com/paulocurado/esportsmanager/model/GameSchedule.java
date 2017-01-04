@@ -14,8 +14,9 @@ public class GameSchedule {
     public static int MIN_DAY = 7;
     public static int MIN_WEEK = 4;
     public static int MIN_MONTH = 12;
-    public static float TIME_PASSING_SECONDS = 0.4f;
+    public static float TIME_PASSING_SECONDS = 0.08f;
     private float realTime = 0;
+    private boolean dayPassing = false;
     private boolean monthPassing = false;
 
     private boolean timePass = false;
@@ -54,6 +55,7 @@ public class GameSchedule {
         else {
             day += days;
         }
+        dayPassing = true;
 
     }
     public void addWeek(int weeks) {
@@ -125,6 +127,16 @@ public class GameSchedule {
     public boolean monthPassed() {
         if(monthPassing == true) {
             monthPassing = false;
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+    public boolean dayPassed() {
+        if(dayPassing == true) {
+            dayPassing = false;
             return true;
         }
         else {

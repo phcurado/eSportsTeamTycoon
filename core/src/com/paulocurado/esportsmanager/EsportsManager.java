@@ -53,8 +53,6 @@ public class EsportsManager extends Game {
     public BitmapFont labelFontMedium;
     public BitmapFont cleanFont;
 
-    public Skin skin;
-
 
     @Override
     public void create() {

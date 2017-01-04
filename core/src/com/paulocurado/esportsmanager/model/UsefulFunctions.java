@@ -28,6 +28,15 @@ public class UsefulFunctions {
         }
 
     }
+
+    public void removePlayerContract(Team team, Player player){
+        for(int i = 0; i < mainApp.contractList.size(); i++) {
+            if(mainApp.contractList.get(i).getPlayerId().equals(player.getId())) {
+                mainApp.contractList.remove(i);
+            }
+        }
+
+    }
     public void createNewContract(Team team, Player player, int cost, int salary) {
         Contract contract = new Contract();
         contract.setId(newContractID());

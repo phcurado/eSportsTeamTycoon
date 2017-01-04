@@ -218,7 +218,8 @@ public class PositionsScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
+        skin.dispose();
     }
 
     private void backButtonClick() {

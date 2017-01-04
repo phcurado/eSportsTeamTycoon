@@ -5,6 +5,7 @@
     "yellow": { "r": 0.5, "g": 0.5, "b": 0, "a": 1 },
     "black": { "r": 0, "g": 0, "b": 0, "a": 1 },
     "blue": { "r": 0, "g": 0, "b": 1, "a": 1 },
+    "green": { "r": 0, "g": 1, "b": 0, "a": 1 },
     "buttonUP": {"hex": "525d65"},
     "grayFont": {"hex": "bfccd9"}
   },
@@ -103,6 +104,20 @@
     "labelRedGameScreen": {
       "font": "label-medium-font",
       "fontColor": "red"
+    },
+    "labelGreenGameScreen": {
+      "font": "label-medium-font",
+      "fontColor": "green"
+    },
+    "labelTitleGraySimulation": {
+      "font": "label-small-font",
+      "fontColor": "black"
+
+    },
+    "labelDarkGraySimulation": {
+      "font": "label-small-font",
+      "fontColor": "black",
+      "background": "table_row_down_gray"
     }
   },
 
@@ -121,6 +136,7 @@
     "default": {
       "down": "button_down_menu",
       "up": "button_up_menu",
+      "over": "button_down_menu",
       "font": "button-font",
       "fontColor": "white",
       "downFontColor": "grayFont"

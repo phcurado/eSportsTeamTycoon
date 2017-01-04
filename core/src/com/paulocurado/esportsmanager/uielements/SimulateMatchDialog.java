@@ -82,6 +82,9 @@ public class SimulateMatchDialog extends GameScreenBox {
                     ((GameScreen) root).getResultMatchDialog().setVisibility(true);
 
                 }
+                else if(mainApp.championship.getWinnerOfChampionship().equals(mainApp.user.getTeam())) {
+                    ((GameScreen) root).getConfirmationDialog().setVisibility(true);
+                }
                 else {
                     ((GameScreen)root).continueTime();
                 }

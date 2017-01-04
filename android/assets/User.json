@@ -1,19 +1,20 @@
 {
-  "userName": "Paulo",
+  "userName": "a",
   "team": {
     "id": "TEAM_USER",
-    "name": "VTI",
-    "abbreviatedName": "VTI",
-    "budget": 250000,
+    "name": "a",
+    "abbreviatedName": "a",
+    "budget": 522095,
     "playersId": [
-      "PLAYER_000023",
-      "PLAYER_000050",
+      "PLAYER_000103",
       "PLAYER_000025",
-      "PLAYER_000024",
-      "PLAYER_000006"
+      "PLAYER_000099",
+      "PLAYER_000006",
+      "PLAYER_000096"
     ],
     "tier": 4,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 3
   },
+  "fansNumber": 0,
   "hireScreenFirstTime": false
 }

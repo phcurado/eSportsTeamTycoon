@@ -78,7 +78,7 @@
     "id": "TEAM_0006",
     "name": "Ad Feed",
     "abbreviatedName": "AF",
-    "budget": 100000,
+    "budget": 150000,
     "playersId": [
       "PLAYER_000031",
       "PLAYER_000032",
@@ -86,7 +86,7 @@
       "PLAYER_000034",
       "PLAYER_000035"
     ],
-    "tier": 4,
+    "tier": 3,
     "victoriesChampionship": 0
   },
   {
@@ -117,13 +117,13 @@
       "PLAYER_000044"
     ],
     "tier": 4,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 1
   },
   {
     "id": "TEAM_0009",
     "name": "MVP",
     "abbreviatedName": "MVP",
-    "budget": 0,
+    "budget": 300000,
     "playersId": [
       "PLAYER_000009",
       "PLAYER_000047",
@@ -131,7 +131,7 @@
       "PLAYER_000049",
       "PLAYER_000046"
     ],
-    "tier": 2,
+    "tier": 3,
     "victoriesChampionship": 0
   },
   {
@@ -180,18 +180,108 @@
     "victoriesChampionship": 0
   },
   {
-    "id": "TEAM_USER",
-    "name": "VTI",
-    "abbreviatedName": "VTI",
-    "budget": 250000,
+    "id": "TEAM_0013",
+    "name": "Team Liquid",
+    "abbreviatedName": "Liquid",
+    "budget": 900000,
     "playersId": [
-      "PLAYER_000023",
-      "PLAYER_000050",
-      "PLAYER_000025",
-      "PLAYER_000024",
-      "PLAYER_000006"
+      "PLAYER_000066",
+      "PLAYER_000067",
+      "PLAYER_000068",
+      "PLAYER_000069",
+      "PLAYER_000070"
+    ],
+    "tier": 2,
+    "victoriesChampionship": 0
+  },
+  {
+    "id": "TEAM_0014",
+    "name": "LGY",
+    "abbreviatedName": "LGY",
+    "budget": 400000,
+    "playersId": [
+      "PLAYER_000071",
+      "PLAYER_000072",
+      "PLAYER_000073",
+      "PLAYER_000074",
+      "PLAYER_000075"
+    ],
+    "tier": 3,
+    "victoriesChampionship": 0
+  },
+  {
+    "id": "TEAM_0015",
+    "name": "The Allies",
+    "abbreviatedName": "Allies",
+    "budget": 270000,
+    "playersId": [
+      "PLAYER_000076",
+      "PLAYER_000077",
+      "PLAYER_000078",
+      "PLAYER_000079",
+      "PLAYER_000080"
+    ],
+    "tier": 3,
+    "victoriesChampionship": 0
+  },
+  {
+    "id": "TEAM_0016",
+    "name": "compLex Game",
+    "abbreviatedName": "compLex",
+    "budget": 220000,
+    "playersId": [
+      "PLAYER_000081",
+      "PLAYER_000082",
+      "PLAYER_000083",
+      "PLAYER_000084",
+      "PLAYER_000085"
     ],
     "tier": 4,
+    "victoriesChampionship": 1
+  },
+  {
+    "id": "TEAM_0017",
+    "name": "Vega",
+    "abbreviatedName": "Vega",
+    "budget": 200000,
+    "playersId": [
+      "PLAYER_000086",
+      "PLAYER_000087",
+      "PLAYER_000088",
+      "PLAYER_000089",
+      "PLAYER_000023"
+    ],
+    "tier": 4,
+    "victoriesChampionship": 1
+  },
+  {
+    "id": "TEAM_0018",
+    "name": "Team VGG",
+    "abbreviatedName": "VGG",
+    "budget": 740000,
+    "playersId": [
+      "PLAYER_000090",
+      "PLAYER_000091",
+      "PLAYER_000092",
+      "PLAYER_000093",
+      "PLAYER_000094"
+    ],
+    "tier": 2,
     "victoriesChampionship": 0
+  },
+  {
+    "id": "TEAM_USER",
+    "name": "a",
+    "abbreviatedName": "a",
+    "budget": 522095,
+    "playersId": [
+      "PLAYER_000103",
+      "PLAYER_000025",
+      "PLAYER_000099",
+      "PLAYER_000006",
+      "PLAYER_000096"
+    ],
+    "tier": 4,
+    "victoriesChampionship": 3
   }
 ]

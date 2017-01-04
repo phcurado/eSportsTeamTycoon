@@ -1,0 +1,554 @@
+{
+  "ui": [
+    {
+      "uniqueName": "PositionsScreenBackground",
+      "type": "image",
+      "path": "img/images.atlas",
+      "image": "startmenubackground",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "SellPlayerBox",
+      "type": "window",
+      "background": "window",
+      "size": {
+        "x": 450,
+        "y": 500
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "centerY": "Screen",
+      "inside_Right": "Screen",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "NickNameLabel",
+      "type": "label",
+      "text": "Error",
+      "id": "title",
+      "size": {
+        "x": 450,
+        "y": 0,
+        "orientation": "center"
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "centerX": "SellPlayerBox",
+      "inside_Top": "SellPlayerBox",
+      "marginTop": 10,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "CarryLabel",
+      "type": "label",
+      "text": "Carry",
+      "id": "labelRedBox",
+      "size": {
+        "x": 70,
+        "y": 0,
+        "orientation": "center"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Left": "SellPlayerBox",
+      "inside_Top": "SellPlayerBox",
+      "marginLeft": 46,
+      "marginTop": 130,
+
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "MidLabel",
+      "type": "label",
+      "text": "Mid",
+      "id": "labelRedBox",
+      "size": {
+        "x": 70,
+        "y": 0,
+        "orientation": "center"
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "CarryLabel",
+      "marginLeft": 3,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "OfflaneLabel",
+      "type": "label",
+      "text": "Offlane",
+      "id": "labelRedBox",
+      "size": {
+        "x": 70,
+        "y": 0,
+        "orientation": "center"
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "MidLabel",
+      "marginLeft": 3,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "Supp4Label",
+      "type": "label",
+      "text": "Supp4",
+      "id": "labelRedBox",
+      "size": {
+        "x": 70,
+        "y": 0,
+        "orientation": "center"
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "OfflaneLabel",
+      "marginLeft": 3,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "Supp5Label",
+      "type": "label",
+      "text": "Supp5",
+      "id": "labelRedBox",
+      "size": {
+        "x": 70,
+        "y": 0,
+        "orientation": "center"
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "Supp4Label",
+      "marginLeft": 3,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "CarryAbilityLabel",
+      "type": "label",
+      "text": "D",
+      "id": "labelGrayLightBorderBox",
+      "size": {
+        "x": 70,
+        "y": 0,
+        "orientation": "center"
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "CarryLabel",
+
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "MidAbilityLabel",
+      "type": "label",
+      "text": "D",
+      "id": "labelGrayLightBorderBox",
+      "size": {
+        "x": 70,
+        "y": 0,
+        "orientation": "center"
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "MidLabel",
+
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "OfflaneAbilityLabel",
+      "type": "label",
+      "text": "D",
+      "id": "labelGrayLightBorderBox",
+      "size": {
+        "x": 70,
+        "y": 0,
+        "orientation": "center"
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "OfflaneLabel",
+
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "Supp4AbilityLabel",
+      "type": "label",
+      "text": "D",
+      "id": "labelGrayLightBorderBox",
+      "size": {
+        "x": 70,
+        "y": 0,
+        "orientation": "center"
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "Supp4Label",
+
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "Supp5AbilityLabel",
+      "type": "label",
+      "text": "D",
+      "id": "labelGrayLightBorderBox",
+      "size": {
+        "x": 70,
+        "y": 0,
+        "orientation": "center"
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "Supp5Label",
+
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "FarmLabel",
+      "type": "label",
+      "text": "Farm",
+      "id": "labelGrayLightBorderBox",
+      "size": {
+        "x": 362,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "CarryAbilityLabel",
+      "marginTop": 3,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "FightLabel",
+      "type": "label",
+      "text": "Fight",
+      "id": "labelBlueDarkBorderBox",
+      "size": {
+        "x": 362,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "FarmLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "IndependenceLabel",
+      "type": "label",
+      "text": "Independence",
+      "id": "labelGrayLightBorderBox",
+      "size": {
+        "x": 362,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "FightLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "RotationLabel",
+      "type": "label",
+      "text": "Rotation",
+      "id": "labelBlueDarkBorderBox",
+      "size": {
+        "x": 362,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "IndependenceLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "SupportLabel",
+      "type": "label",
+      "text": "Support",
+      "id": "labelGrayLightBorderBox",
+      "size": {
+        "x": 362,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "RotationLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "FarmNumberLabel",
+      "type": "label",
+      "text": "00",
+      "id": "labelText",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Right": "FarmLabel",
+      "inside_Bottom": "FarmLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "FightNumberLabel",
+      "type": "label",
+      "text": "00",
+      "id": "labelText",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Right": "FightLabel",
+      "inside_Bottom": "FightLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "IndependenceNumberLabel",
+      "type": "label",
+      "text": "00",
+      "id": "labelText",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Right": "IndependenceLabel",
+      "inside_Bottom": "IndependenceLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "RotationNumberLabel",
+      "type": "label",
+      "text": "00",
+      "id": "labelText",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Right": "RotationLabel",
+      "inside_Bottom": "RotationLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "SupportNumberLabel",
+      "type": "label",
+      "text": "00",
+      "id": "labelText",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Right": "SupportLabel",
+      "inside_Bottom": "SupportLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "CostLabel",
+      "type": "label",
+      "text": "Cost",
+      "id": "labelBlueBoxSmallText",
+      "size": {
+        "x": 180,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "SupportLabel",
+      "marginTop": 3,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "SalaryLabel",
+      "type": "label",
+      "text": "Salary",
+      "id": "labelBlueBoxSmallText",
+      "size": {
+        "x": 180,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Right": "SupportLabel",
+      "alignY": "CostLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "CostNumberLabel",
+      "type": "label",
+      "text": "0000000",
+      "id": "labelVerySmallText",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Right": "CostLabel",
+      "centerY": "CostLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "SalaryNumberLabel",
+      "type": "label",
+      "text": "0000000",
+      "id": "labelVerySmallText",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Right": "SalaryLabel",
+      "centerY": "SalaryLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "faceImage",
+      "type": "imageBlank",
+      "size": {
+        "x": 80,
+        "y": 80
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "centerX": "SellPlayerBox",
+      "inside_Top": "SellPlayerBox",
+      "marginTop": 40,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "SellButton",
+      "type": "textbutton",
+      "text": "Sell",
+      "id": "default",
+      "size": {
+        "x": 180,
+        "y": 65
+
+      },
+      "position": {
+        "x": 80,
+        "y": 290
+      },
+      "inside_Left": "SellPlayerBox",
+      "inside_Bottom": "SellPlayerBox",
+      "marginLeft": 30,
+      "marginBottom": 30,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "DismissButton",
+      "type": "textbutton",
+      "text": "Dismiss",
+      "id": "default",
+      "size": {
+        "x": 180,
+        "y": 65
+
+      },
+      "position": {
+        "x": 380,
+        "y": 290
+      },
+      "alignY": "SellButton",
+      "inside_Right": "SellPlayerBox",
+      "marginRight": 30,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "BackButton",
+      "type": "textbutton",
+      "text": "Back",
+      "id": "default",
+      "size": {
+        "x": 600,
+        "y": 75
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "centerX": "Screen",
+      "inside_Bottom": "Screen",
+      "orientation": "none"
+    }
+  ]
+}

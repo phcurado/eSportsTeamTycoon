@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.paulocurado.esportsmanager.model.Player;
 import com.paulocurado.esportsmanager.uielements.ButtonPlayer;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
+import com.paulocurado.esportsmanager.uielements.TipsDialog;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,8 @@ public class LineupScreen implements Screen {
     private Skin skin;
 
     private ReaderElements lineupScreenLayout;
+
+    private TipsDialog tipsDialog;
 
     public Screen getParent() {
         return parent;
@@ -70,8 +73,11 @@ public class LineupScreen implements Screen {
         stage.clear();
 
         lineupScreenLayout = new ReaderElements(mainApp, stage, skin, "ui/LineupScreen.json");
+        tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
 
         positionsButtonClick(this);
+        sellPlayersButtonClick(this);
+        tipsDialog.defaultButtonClick(stage);
         backButtonClick();
     }
 
@@ -86,9 +92,8 @@ public class LineupScreen implements Screen {
         stage.getCamera().update();
         stage.getViewport().apply();
 
-
-
         stage.draw();
+        tipsDialog.draw();
     }
 
     @Override
@@ -114,15 +119,38 @@ public class LineupScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        tipsDialog.dispose();
+        skin.dispose();
     }
 
     private void positionsButtonClick(final Screen lineupParent) {
         stage.getRoot().findActor("PositionsButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                mainApp.setScreen(new PositionsScreen(mainApp, lineupParent));
+                if(mainApp.user.getTeam().getPlayers().size() >= 5) {
+                    mainApp.setScreen(new PositionsScreen(mainApp, lineupParent));
+                }
+                else {
+                    tipsDialog.setTip(mainApp.bundle.get("Tip_Minimum_5_Players"));
+                    tipsDialog.setVisibility(true);
+                }
             }
         });
     }
+
+    private void sellPlayersButtonClick(final Screen lineupParent) {
+        stage.getRoot().findActor("SellButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                if(mainApp.user.getTeam().getPlayers().size() != 0) {
+                    mainApp.setScreen(new SellPlayersScreen(mainApp, lineupParent));
+                }
+                else {
+                    tipsDialog.setTip(mainApp.bundle.get("Tip_No_Players"));
+                    tipsDialog.setVisibility(true);
+                }
+            }
+        });
+    }
+
     private void backButtonClick() {
         stage.getRoot().findActor("BackButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {

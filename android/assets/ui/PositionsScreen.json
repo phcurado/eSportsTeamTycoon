@@ -196,8 +196,7 @@
         "y": 0
       },
       "centerX": "Screen",
-      "centerY": "Screen",
-      "marginTop": 300,
+      "inside_Bottom": "Screen",
       "orientation": "none"
     }
   ]

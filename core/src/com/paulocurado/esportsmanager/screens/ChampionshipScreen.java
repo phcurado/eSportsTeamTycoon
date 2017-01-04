@@ -163,6 +163,8 @@ public class ChampionshipScreen implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
+        skin.dispose();
 
     }
 
@@ -171,7 +173,7 @@ public class ChampionshipScreen implements Screen {
 
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                mainApp.setScreen(parent);
+                mainApp.setScreen(parent); //TODO analisar se é melhor dar new Screen msm ou pegar o parent screen
             }
         });
 

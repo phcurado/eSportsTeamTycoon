@@ -1,27 +1,73 @@
 {
   "teamsId": [
-    "TEAM_0006",
     "TEAM_0008",
+    "TEAM_0016",
+    "TEAM_0017",
     "TEAM_USER"
   ],
-  "championshipIsUp": false,
-  "battles": [],
+  "championshipIsUp": true,
+  "battles": [
+    {
+      "radiantTeamId": "TEAM_0016",
+      "direTeamId": "TEAM_0008",
+      "radiantVictories": 0,
+      "direVictories": 2
+    },
+    {
+      "radiantTeamId": "TEAM_0017",
+      "direTeamId": "TEAM_USER",
+      "radiantVictories": 0,
+      "direVictories": 2
+    },
+    {
+      "radiantTeamId": "TEAM_0017",
+      "direTeamId": "TEAM_0008",
+      "radiantVictories": 2,
+      "direVictories": 0
+    },
+    {
+      "radiantTeamId": "TEAM_USER",
+      "direTeamId": "TEAM_0016",
+      "radiantVictories": 2,
+      "direVictories": 0
+    },
+    {
+      "radiantTeamId": "TEAM_USER",
+      "direTeamId": "TEAM_0008",
+      "radiantVictories": 2,
+      "direVictories": 0
+    },
+    {
+      "radiantTeamId": "TEAM_0016",
+      "direTeamId": "TEAM_0017",
+      "radiantVictories": 2,
+      "direVictories": 0
+    },
+    {
+      "radiantTeamId": "TEAM_USER",
+      "direTeamId": "TEAM_0016",
+      "radiantVictories": 0,
+      "direVictories": 0
+    }
+  ],
   "championshipSchedule": {
     "day": 1,
     "week": 1,
-    "month": 1,
+    "month": 7,
     "year": 2015,
     "realTime": 0.0,
-    "monthPassing": false,
+    "dayPassing": false,
+    "monthPassing": true,
     "timePass": false
   },
   "matchReady": false,
   "week": 2,
-  "gamesPlayed": 0,
-  "roundsPlayed": 0,
-  "organizeTeams": false,
-  "finalsUp": false,
+  "gamesPlayed": 6,
+  "roundsPlayed": 3,
+  "organizeTeams": true,
+  "finalsUp": true,
   "groupStage": false,
-  "organizeTeamsFinal": false,
-  "championshipEnded": false
+  "organizeTeamsFinal": true,
+  "championshipEnded": false,
+  "isUserMatchShowed": false
 }

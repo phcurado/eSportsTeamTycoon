@@ -22,6 +22,7 @@ import com.paulocurado.esportsmanager.model.User;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
 import com.paulocurado.esportsmanager.uielements.NewGameDialog;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
+import com.paulocurado.esportsmanager.uielements.TipsDialog;
 
 /**
  * Created by Paulo on 09/11/2016.
@@ -39,6 +40,7 @@ public class MainMenuScreen implements Screen {
     private GameScreenBox errorDialog;
     private GameScreenBox confirmDataDialog;
     private GameScreenBox aboutDialog;
+    private TipsDialog tipsDialog;
 
     ReaderElements mainMenuLayout;
 
@@ -74,6 +76,7 @@ public class MainMenuScreen implements Screen {
         errorDialog = new GameScreenBox(mainApp, skin, "ui/ErrorBox.json", this);
         confirmDataDialog = new GameScreenBox(mainApp, skin, "ui/ConfirmData.json", this);
         aboutDialog = new GameScreenBox(mainApp, skin, "ui/HirePlayerBox.json", this);
+        tipsDialog =  new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
 
 
 
@@ -81,16 +84,13 @@ public class MainMenuScreen implements Screen {
         newGameDialogButtonsClick();
         errorDialogButtonsClick();
         confirmDataDialogButtonsClick();
-
+        tipsDialog.defaultButtonClick(stage);
 
 
         Actions actions = new Actions();
 
         stage.getRoot().findActor("cloud1").addAction(actions.forever(actions.sequence(actions.moveBy(30, 0, 10f), actions.moveBy(-30, 0, 10f))) );
         stage.getRoot().findActor("cloud2").addAction(actions.forever(actions.sequence(actions.moveBy(40, 0, 13f), actions.moveBy(-40, 0, 13f))) );
-
-
-
     }
 
     @Override
@@ -109,6 +109,7 @@ public class MainMenuScreen implements Screen {
         errorDialog.draw();
         confirmDataDialog.draw();
         aboutDialog.draw();
+        tipsDialog.draw();
 
     }
 
@@ -144,6 +145,7 @@ public class MainMenuScreen implements Screen {
         errorDialog.dispose();
         confirmDataDialog.dispose();
         aboutDialog.dispose();
+        tipsDialog.dispose();
     }
 
 
@@ -157,9 +159,17 @@ public class MainMenuScreen implements Screen {
 
         stage.getRoot().findActor("loadButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                HandleSaveGame handler = new HandleSaveGame();
-                handler.loadGame(mainApp);
-                mainApp.setScreen(new GameScreen(mainApp));
+                if(Gdx.files.local("Teams.json").exists() && Gdx.files.local("Players.json").exists() &&
+                        Gdx.files.local("Contracts.json").exists() && Gdx.files.local("User.json").exists() &&
+                        Gdx.files.local("Schedule.json").exists() && Gdx.files.local("Championship.json").exists()) {
+                    HandleSaveGame handler = new HandleSaveGame();
+                    handler.loadGame(mainApp);
+                    mainApp.setScreen(new GameScreen(mainApp));
+                }
+                else {
+                    tipsDialog.setTip(mainApp.bundle.get("Error_Load_Game"));
+                    tipsDialog.setVisibility(true);
+                }
 
             }
         });

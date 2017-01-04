@@ -5,7 +5,7 @@
       "type": "window",
       "title": "ConfirmData",
       "id": "title",
-      "background": "window_square",
+      "background": "window_square2",
       "size": {
         "x": 550,
         "y": 0
@@ -21,11 +21,10 @@
     {
       "uniqueName": "timeLabel",
       "type": "label",
-      "text": "Error",
       "id": "labelButtonGameScreen",
       "size": {
         "x": 500,
-        "y": 0
+        "y": 20
       },
       "position": {
         "x": 0,
@@ -38,11 +37,10 @@
     {
       "uniqueName": "budgetLabel",
       "type": "label",
-      "text": "Error",
       "id": "labelButtonGameScreen",
       "size": {
         "x": 160,
-        "y": 0
+        "y": 20
       },
       "position": {
         "x": 0,
@@ -50,6 +48,40 @@
       },
       "inside_Right": "Screen",
       "inside_Top": "Screen",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "FanLabel",
+      "type": "label",
+      "id": "labelButtonGameScreen",
+      "size": {
+        "x": 160,
+        "y": 20
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Left": "Screen",
+      "below": "timeLabel",
+      "marginTop": 30,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "TeamStrLabel",
+      "type": "label",
+      "id": "labelButtonGameScreen",
+      "labelOrientation": "right",
+      "size": {
+        "x": 260,
+        "y": 20
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "FanLabel",
+      "inside_Right": "Screen",
       "orientation": "none"
     },
     {
@@ -229,8 +261,8 @@
       "id": "blackStyle",
       "labelOrientation": "center",
       "size": {
-        "x": 160,
-        "y": 60
+        "x": 170,
+        "y": 70
 
       },
       "position": {
@@ -246,8 +278,8 @@
       "id": "blackStyle",
       "labelOrientation": "center",
       "size": {
-        "x": 160,
-        "y": 60
+        "x": 170,
+        "y": 70
 
       },
       "position": {
@@ -273,7 +305,8 @@
         "y": 0
       },
       "inside_Left": "Screen",
-      "marginBottom": 790,
+      "inside_Top": "Screen",
+      "marginTop": 130,
       "marginLeft": 20,
       "orientation": "none"
     },
@@ -296,24 +329,6 @@
       "orientation": "none"
     },
     {
-      "uniqueName": "PraticeButton",
-      "type": "textbutton",
-      "text": "Practice",
-      "id": "blackStyle",
-      "size": {
-        "x": 290,
-        "y": 70
-
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "below": "ChampionshipButton",
-      "marginTop": 20,
-      "orientation": "none"
-    },
-    {
       "uniqueName": "LineupButton",
       "type": "textbutton",
       "text": "Lineup",
@@ -327,7 +342,7 @@
         "x": 0,
         "y": 0
       },
-      "below": "LeaderBoardsButton",
+      "below": "ChampionshipButton",
       "marginTop": 20,
       "orientation": "none"
     }

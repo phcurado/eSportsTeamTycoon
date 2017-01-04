@@ -81,11 +81,14 @@ public class Team {
 
     public int getStrength() {
         int strength = 0;
-        for(int i = 0; i < players.size(); i++) {
-            strength += players.get(i).abilityInteger(i + 1);
-        }
+        if(players.size() > 0) {
+            for (int i = 0; i < players.size(); i++) {
+                strength += players.get(i).abilityInteger(i + 1);
+            }
 
-        return strength / players.size();
+            return strength / players.size();
+        }
+        else return strength;
     }
 
     public int positionNeeded() {
