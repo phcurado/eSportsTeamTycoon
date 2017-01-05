@@ -64,6 +64,7 @@ public class SimulationScreen implements Screen {
         this.skin.add("position-small-font", mainApp.positionSmallFont);
         this.skin.add("label-medium-font", mainApp.labelFontMedium);
         this.skin.add("label-clean-font", mainApp.cleanFont);
+        this.skin.add("playerName-font", mainApp.playerNameFont);
         this.skin.load(Gdx.files.internal("ui/ui.json"));
 
         this.battleSimulation = battleSimulation;
@@ -78,9 +79,11 @@ public class SimulationScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         stage.clear();
 
-        Image background = new Image(new TextureRegion(new TextureRegion(mainApp.assets.get(
-                "img/images.atlas", TextureAtlas.class)
-                .findRegion("startmenubackground"))) );
+      //  Image background = new Image(new TextureRegion(new TextureRegion(mainApp.assets.get(
+   //             "img/images.atlas", TextureAtlas.class)
+    //            .findRegion("defaultbackground"))) );
+        Image background = new Image(skin, "window_square");
+
         background.setSize(stage.getWidth(), stage.getHeight());
 
         stage.addActor(background);
@@ -93,8 +96,16 @@ public class SimulationScreen implements Screen {
         Table interfaceTable = new Table();
         Table teamTable = new Table();
 
-        Label timerLabel = new Label("0 " + mainApp.bundle.get("minutes"), skin, "default");
+
+        interfaceTable.add(new Label(mainApp.bundle.format("Tier_Championship", mainApp.user.getTeam().getTier()),
+                skin, "default")).expandX().padBottom(20).center().row();
+        Label timerLabel = new Label("0 " + mainApp.bundle.get("minutes"), skin, "labelWhiteGameScreen");
+
+        interfaceTable.add(new Label(mainApp.bundle.format("Best_Of", matchesToPlay), skin, "labelWhiteGameScreen")).padBottom(15).expandX().center().row();
+
+        interfaceTable.add(timerLabel).expandX().center().row();
         timerLabel.setName("timerLabel");
+        interfaceTable.add(timerLabel).expandX().center().row();
 
         Label towersRadiantLabel = new Label(mainApp.bundle.get("Towers") + ": " +
                 Integer.toString(simulationBattle.getAmbientInBattle().getRadiantTowersInBattle().size()), skin, "labelRedGameScreen");
@@ -104,59 +115,78 @@ public class SimulationScreen implements Screen {
                 Integer.toString(simulationBattle.getAmbientInBattle().getDireTowersInBattle().size()), skin, "labelRedGameScreen");
         towersDireLabel.setName("towersDireLabel");
 
-        interfaceTable.add(timerLabel).expandX().center().row();
 
-        teamTable.add(new Label(battleSimulation.getRadiantTeam().getName(), skin, "default") ).padLeft(3).fillX().expandX().row();
-        teamTable.add(towersRadiantLabel).padLeft(3).padBottom(20).fillX().expandX().row();
-        teamTable.add(new Label(mainApp.bundle.get("Nickname"), skin, "labelTitleGraySimulation") ).padLeft(3).fillX().expandX();
-        teamTable.add(new Label(mainApp.bundle.get("Farm"), skin, "labelTitleGraySimulation") ).padLeft(3).fillX().expandX();
-        teamTable.add(new Label(mainApp.bundle.get("KDA"), skin, "labelTitleGraySimulation") ).padLeft(3).fillX().expandX();
+
+        teamTable.add(new Label(battleSimulation.getRadiantTeam().getName(), skin, "default") ).fillX().expandX().row();
+        teamTable.add(towersRadiantLabel).padLeft(3).padBottom(10).fillX().expandX();
+        Label radiantVictoriesLabel = new Label(mainApp.bundle.get("Games_Won") + ": " +
+                battleSimulation.getRadiantVictories(), skin, "labelGreenGameScreen");
+        radiantVictoriesLabel.setName("radiantVictoriesLabel");
+        teamTable.add(radiantVictoriesLabel).padBottom(10).row();
+        teamTable.add(new Label(mainApp.bundle.get("Nickname"), skin, "labelTitleGraySimulation") ).fillX().expandX();
+        teamTable.add(new Label(mainApp.bundle.get("Farm"), skin, "labelTitleGraySimulation") ).padLeft(3).expandX();
+        teamTable.add(new Label(mainApp.bundle.get("Kills"), skin, "labelTitleGraySimulation") ).padLeft(3).expandX();
+        teamTable.add(new Label(mainApp.bundle.get("Deaths"), skin, "labelTitleGraySimulation") ).padLeft(3).expandX();
 
         for (int i = 0; i < simulationBattle.getRadiantPlayersInBattle().size(); i++ ) {
-            Label radiantPlayerNameLabel = new Label(simulationBattle.getRadiantPlayersInBattle().get(i).getNickName(), skin, "labelDarkGraySimulation");
+            Label radiantPlayerNameLabel = new Label(simulationBattle.getRadiantPlayersInBattle().get(i).getNickName(), skin, "labelBlackBox");
 
-            Label radiantPlayerLastHitLabel = new Label(Integer.toString((int)simulationBattle.getRadiantPlayersInBattle().get(i).getLastHit()), skin, "labelDarkGraySimulation");
+            Label radiantPlayerLastHitLabel = new Label(Integer.toString((int)simulationBattle.getRadiantPlayersInBattle().get(i).getLastHit()), skin, "labelBlackBox");
             radiantPlayerLastHitLabel.setName("radiantPlayerLastHitLabel_" + i);
 
-            Label radiantPlayerKDALabel = new Label(Integer.toString(simulationBattle.getRadiantPlayersInBattle().get(i).getKills()), skin, "labelDarkGraySimulation");
-            radiantPlayerKDALabel.setName("radiantPlayerKDALabel_" + i);
+            Label radiantPlayerKillsLabel = new Label(Integer.toString(simulationBattle.getRadiantPlayersInBattle().get(i).getKills()), skin, "labelBlackBox");
+            radiantPlayerKillsLabel.setName("radiantPlayerKillsLabel_" + i);
+
+            Label radiantPlayerDeathsLabel = new Label(Integer.toString(simulationBattle.getRadiantPlayersInBattle().get(i).getDeaths()), skin, "labelBlackBox");
+            radiantPlayerDeathsLabel.setName("radiantPlayerDeathsLabel_" + i);
 
             teamTable.row().fillX();
-            teamTable.add(radiantPlayerNameLabel).padLeft(3).padBottom(8).fillX().expandX();
-            teamTable.add(radiantPlayerLastHitLabel).padLeft(3).padBottom(8).fillX().expandX();
-            teamTable.add(radiantPlayerKDALabel).padLeft(3).padBottom(8).fillX().expandX();
-        }
-        teamTable.row();
+            teamTable.add(radiantPlayerNameLabel).width(300).padBottom(4).fillX().expandX();
+            teamTable.add(radiantPlayerLastHitLabel).padLeft(3).padBottom(4).expandX();
+            teamTable.add(radiantPlayerKillsLabel).padLeft(3).padBottom(4).expandX();
+            teamTable.add(radiantPlayerDeathsLabel).padLeft(3).padBottom(4).expandX();
 
-        teamTable.add(new Label(battleSimulation.getDireTeam().getName(), skin, "default") ).padLeft(3).fillX().expandX().row();
-        teamTable.add(towersDireLabel).padLeft(3).padBottom(20).fillX().expandX().row();
-        teamTable.add(new Label(mainApp.bundle.get("Nickname"), skin, "labelTitleGraySimulation") ).padLeft(3).fillX().expandX();
-        teamTable.add(new Label(mainApp.bundle.get("Farm"), skin, "labelTitleGraySimulation") ).padLeft(3).fillX().expandX();
-        teamTable.add(new Label(mainApp.bundle.get("KDA"), skin, "labelTitleGraySimulation") ).padLeft(3).fillX().expandX();
+        }
+        teamTable.row().padTop(10);
+
+        teamTable.add(new Label(battleSimulation.getDireTeam().getName(), skin, "default") ).fillX().expandX().row();
+        teamTable.add(towersDireLabel).padLeft(3).padBottom(10).fillX().expandX();
+        Label direVictoriesLabel = new Label(mainApp.bundle.get("Games_Won") + ": " +
+                battleSimulation.getDireVictories(), skin, "labelGreenGameScreen");
+        direVictoriesLabel.setName("direVictoriesLabel");
+        teamTable.add(direVictoriesLabel).padBottom(10).row();
+        teamTable.add(new Label(mainApp.bundle.get("Nickname"), skin, "labelTitleGraySimulation") ).fillX().padLeft(5).expandX();
+        teamTable.add(new Label(mainApp.bundle.get("Farm"), skin, "labelTitleGraySimulation") ).padLeft(3).expandX();
+        teamTable.add(new Label(mainApp.bundle.get("Kills"), skin, "labelTitleGraySimulation") ).padLeft(3).expandX();
+        teamTable.add(new Label(mainApp.bundle.get("Deaths"), skin, "labelTitleGraySimulation") ).padLeft(3).expandX();
 
         for (int i = 0; i < simulationBattle.getDirePlayersInBattle().size(); i++ ) {
-            Label direPlayerNameLabel = new Label(simulationBattle.getDirePlayersInBattle().get(i).getNickName(), skin, "labelDarkGraySimulation");
+            Label direPlayerNameLabel = new Label(simulationBattle.getDirePlayersInBattle().get(i).getNickName(), skin, "labelBlackBox");
 
-            Label direPlayerLastHitLabel = new Label(Integer.toString((int)simulationBattle.getDirePlayersInBattle().get(i).getLastHit()), skin, "labelDarkGraySimulation");
+            Label direPlayerLastHitLabel = new Label(Integer.toString((int)simulationBattle.getDirePlayersInBattle().get(i).getLastHit()), skin, "labelBlackBox");
             direPlayerLastHitLabel.setName("direPlayerLastHitLabel_" + i);
 
-            Label direPlayerKDALabel = new Label(Integer.toString(simulationBattle.getDirePlayersInBattle().get(i).getKills()), skin, "labelDarkGraySimulation");
-            direPlayerKDALabel.setName("direPlayerKDALabel_" + i);
+            Label direPlayerKillsLabel = new Label(Integer.toString(simulationBattle.getDirePlayersInBattle().get(i).getKills()), skin, "labelBlackBox");
+            direPlayerKillsLabel.setName("direPlayerKillsLabel_" + i);
+
+            Label direPlayerDeathsLabel = new Label(Integer.toString(simulationBattle.getDirePlayersInBattle().get(i).getDeaths()), skin, "labelBlackBox");
+            direPlayerDeathsLabel.setName("direPlayerDeathsLabel_" + i);
 
             teamTable.row().fillX();
-            teamTable.add(direPlayerNameLabel).padLeft(3).padBottom(8).fillX().expandX();
-            teamTable.add(direPlayerLastHitLabel).padLeft(3).padBottom(8).fillX().expandX();
-            teamTable.add(direPlayerKDALabel).padLeft(3).padBottom(8).fillX().expandX();
+            teamTable.add(direPlayerNameLabel).width(300).padBottom(4).fillX().expandX();
+            teamTable.add(direPlayerLastHitLabel).padLeft(3).padBottom(4).expandX();
+            teamTable.add(direPlayerKillsLabel).padLeft(3).padBottom(4).expandX();
+            teamTable.add(direPlayerDeathsLabel).padLeft(3).padBottom(4).expandX();
         }
 
         Table container = new Table();
-        container.setSize(stage.getWidth() - 20, stage.getHeight());
+        container.setSize(stage.getWidth(), stage.getHeight());
         container.top();
         container.add(interfaceTable).fillX().expandX().row();
         //container.add(radiantTable).fill().expandX().row();
-        container.add(teamTable).fillX().expandX().row();
+        container.add(teamTable).expandX().fillX().row();
 
-        container.add(battleButton).fillX();
+        container.add(battleButton).expandX();
 
         stage.addActor(container);
 
@@ -202,13 +232,14 @@ public class SimulationScreen implements Screen {
 
                     }
                 }
+                battleButton.setText(mainApp.bundle.get("Back"));
                 isBattleOver = true;
             }
         }
 
         if (!isBattleOver && isMatchReady) {
-            battleButton.getStyle().checked = battleButton.getStyle().down;
-            battleButton.setDisabled(true);
+            //battleButton.getStyle().checked = battleButton.getStyle().down;
+            battleButton.setDisabled(true);//TODO fazer o botao checked
 
             simulationBattle.getAmbientInBattle().passTime();
 
@@ -226,36 +257,42 @@ public class SimulationScreen implements Screen {
                     ((Label) stage.getRoot().findActor("radiantPlayerLastHitLabel_" + i)).setText(
                             Integer.toString((int) simulationBattle.getRadiantPlayersInBattle().get(i).getLastHit())
                     );
-                    ((Label) stage.getRoot().findActor("radiantPlayerKDALabel_" + i)).setText(
-                            Integer.toString(simulationBattle.getRadiantPlayersInBattle().get(i).getKills()) + "/" +
-                                    Integer.toString(simulationBattle.getRadiantPlayersInBattle().get(i).getDeaths())
-                    );
+                    ((Label) stage.getRoot().findActor("radiantPlayerKillsLabel_" + i)).setText(
+                            Integer.toString(simulationBattle.getRadiantPlayersInBattle().get(i).getKills()));
+                    ((Label) stage.getRoot().findActor("radiantPlayerDeathsLabel_" + i)).setText(
+                            Integer.toString(simulationBattle.getRadiantPlayersInBattle().get(i).getDeaths()));
 
                 }
                 for (int i = 0; i < simulationBattle.getDirePlayersInBattle().size(); i++) {
                     ((Label) stage.getRoot().findActor("direPlayerLastHitLabel_" + i)).setText(
                             Integer.toString((int) simulationBattle.getDirePlayersInBattle().get(i).getLastHit())
                     );
-                    ((Label) stage.getRoot().findActor("direPlayerKDALabel_" + i)).setText(
-                            Integer.toString(simulationBattle.getDirePlayersInBattle().get(i).getKills()) + "/" +
-                                    Integer.toString(simulationBattle.getDirePlayersInBattle().get(i).getDeaths())
-                    );
+                    ((Label) stage.getRoot().findActor("direPlayerKillsLabel_" + i)).setText(
+                            Integer.toString(simulationBattle.getDirePlayersInBattle().get(i).getKills()));
+                    ((Label) stage.getRoot().findActor("direPlayerDeathsLabel_" + i)).setText(
+                            Integer.toString(simulationBattle.getDirePlayersInBattle().get(i).getDeaths()));
                 }
 
 
                 if (simulationBattle.getAmbientInBattle().getDireTowersInBattle().size() == 0) {
                     battleSimulation.setRadiantVictories(battleSimulation.getRadiantVictories() + 1);
                     isMatchReady = false;
-                    battleButton.getStyle().checked = battleButton.getStyle().up;
+                    //battleButton.getStyle().checked = battleButton.getStyle().up;//TODO botao checked
                     battleButton.setDisabled(false);
                     battleButton.setText(mainApp.bundle.get("Battle") + "!");
+
+                    ((Label) stage.getRoot().findActor("radiantVictoriesLabel")).setText(mainApp.bundle.get("Games_Won") + ": " +
+                            battleSimulation.getRadiantVictories() );
 
                 } else if (simulationBattle.getAmbientInBattle().getRadiantTowersInBattle().size() == 0) {
                     battleSimulation.setDireVictories(battleSimulation.getDireVictories() + 1);
                     isMatchReady = false;
-                    battleButton.getStyle().checked = battleButton.getStyle().up;
+                    //battleButton.getStyle().checked = battleButton.getStyle().up;//TODO botao checked
                     battleButton.setDisabled(false);
                     battleButton.setText(mainApp.bundle.get("Battle") + "!");
+
+                    ((Label) stage.getRoot().findActor("direVictoriesLabel")).setText(mainApp.bundle.get("Games_Won") + ": " +
+                            battleSimulation.getDireVictories() );
 
                 }
             }

@@ -117,7 +117,7 @@
       "PLAYER_000044"
     ],
     "tier": 4,
-    "victoriesChampionship": 1
+    "victoriesChampionship": 0
   },
   {
     "id": "TEAM_0009",
@@ -252,7 +252,7 @@
       "PLAYER_000023"
     ],
     "tier": 4,
-    "victoriesChampionship": 1
+    "victoriesChampionship": 2
   },
   {
     "id": "TEAM_0018",
@@ -271,9 +271,9 @@
   },
   {
     "id": "TEAM_USER",
-    "name": "a",
+    "name": "aa",
     "abbreviatedName": "a",
-    "budget": 522095,
+    "budget": 198838,
     "playersId": [
       "PLAYER_000103",
       "PLAYER_000025",

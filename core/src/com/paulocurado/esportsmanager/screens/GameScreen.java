@@ -20,6 +20,7 @@ import com.paulocurado.esportsmanager.model.BattleSimulation;
 import com.paulocurado.esportsmanager.model.Championship;
 import com.paulocurado.esportsmanager.model.HandleSaveGame;
 import com.paulocurado.esportsmanager.model.UsefulFunctions;
+import com.paulocurado.esportsmanager.uielements.DuelDialog;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
 import com.paulocurado.esportsmanager.uielements.ResultMatchDialog;
 import com.paulocurado.esportsmanager.uielements.SimulateMatchDialog;
@@ -53,6 +54,7 @@ public class GameScreen implements Screen {
     private ResultMatchDialog resultMatchDialog;
     private SimulateMatchDialog simulateMatchDialog;
     private GameScreenBox confirmationDialog;
+    private DuelDialog duelDialog;
 
 
 
@@ -76,6 +78,7 @@ public class GameScreen implements Screen {
         this.skin.add("position-small-font", mainApp.positionSmallFont);
         this.skin.add("label-medium-font", mainApp.labelFontMedium);
         this.skin.add("label-clean-font", mainApp.cleanFont);
+        this.skin.add("playerName-font", mainApp.playerNameFont);
 
         this.skin.load(Gdx.files.internal("ui/ui.json"));
 
@@ -99,6 +102,7 @@ public class GameScreen implements Screen {
         resultMatchDialog = new ResultMatchDialog(mainApp, skin, "ui/ResultMatch.json", this);
         simulateMatchDialog = new SimulateMatchDialog(mainApp, skin, "ui/SimulateMatch.json", this);
         confirmationDialog = new GameScreenBox(mainApp, skin, "ui/YesNoBox.json", this);
+        duelDialog = new DuelDialog(mainApp, skin, "ui/genericBox.json", this);
 
         tipsLogic(this);
 
@@ -111,15 +115,17 @@ public class GameScreen implements Screen {
         lineupButtonLogic(this);
 
 
-        if(mainApp.user.getTeam().getPlayers().size() >= 5) {
-            for(int i = 1; i <= 5; i++) {
-                ((Image)stage.getRoot().findActor("playerImage_" + Integer.toString(i))).setDrawable(mainApp.user.getTeam().getPlayers().get(i - 1).createPlayerFace(facesOptions, gamePort).getDrawable());
-                ((Label)stage.getRoot().findActor("playerLabel_" + Integer.toString(i))).setText(mainApp.user.getTeam().getPlayers().get(i - 1).getNickName());
-                ((Label)stage.getRoot().findActor("playerLabel_" + Integer.toString(i))).setAlignment(Align.center);
-                stage.getRoot().findActor("playerLabel_" + Integer.toString(i)).setPosition(stage.getRoot().findActor("playerImage_" + Integer.toString(i)).getX() + stage.getRoot().findActor("playerImage_" + Integer.toString(i)).getWidth() / 2 -
-                                stage.getRoot().findActor("playerLabel_" + Integer.toString(i)).getWidth() / 2,
-                        stage.getRoot().findActor("playerImage_" + Integer.toString(i)).getTop() );
-            }
+        for (int i = 0; i < mainApp.user.getTeam().getPlayers().size(); i ++) {
+            Image playerImage = new Image(mainApp.user.getTeam().getPlayers().get(i).createPlayerFace(facesOptions, gamePort).getDrawable());
+            playerImage.setSize(100, 100);
+            playerImage.setPosition(stage.getRoot().findActor("Computers").getX() + 12 + 122*i, stage.getRoot().findActor("Computers").getTop());
+
+            Label playerNameLabel = new Label(mainApp.user.getTeam().getPlayers().get(i).getNickName(), skin, "default_PlayerName");
+            playerNameLabel.setPosition(playerImage.getX() + playerImage.getWidth() / 2 - playerNameLabel.getWidth() / 2,
+                    playerImage.getTop());
+
+            stage.addActor(playerNameLabel);
+            stage.addActor(playerImage);
         }
 
 
@@ -161,12 +167,12 @@ public class GameScreen implements Screen {
         resultMatchDialog.draw();
         confirmationDialog.draw();
         simulateMatchDialog.draw();
+        duelDialog.draw();
 
 
         setChampionship();
         paySalaries();
         passTime();
-
     }
 
     private void drawBackground() {
@@ -219,21 +225,32 @@ public class GameScreen implements Screen {
             } else if (mainApp.championship.isGroupStage()) {
 
                 if (mainApp.championship.isMatchReady() && !mainApp.championship.isFinalsUp()) {
-
-
                     pauseTime();
-                    if (!mainApp.championship.isUserMatchShowed()) {
-                        mainApp.championship.groupMatches();
-                        mainApp.setScreen(new SimulationScreen(mainApp, this, mainApp.championship.findBattleByTeam(mainApp.user.getTeam(),
-                                mainApp.championship.getRoundsPlayed() ), 3));
 
+                    if (!mainApp.championship.isUserMatchShowed()) {
+                        if (!duelDialog.isLoadInformation() && !mainApp.championship.isDuelShowed()) {
+                            mainApp.championship.groupMatches();
+                            duelDialog.setUpPlayers(mainApp.championship.findBattleByTeam(mainApp.user.getTeam(),
+                                    mainApp.championship.getRoundsPlayed()) );
+                            duelDialog.setVisibility(true);
+                            duelDialog.buttonClick();
+                            mainApp.championship.setDuelShowed(true);
+                        }
+                        else if (duelDialog.isLoadInformation() && mainApp.championship.isDuelShowed()) {
+                            duelDialog.setLoadInformation(false);
+                            mainApp.championship.setDuelShowed(false);
+                            mainApp.setScreen(new SimulationScreen(mainApp, this, mainApp.championship.findBattleByTeam(mainApp.user.getTeam(),
+                                    mainApp.championship.getRoundsPlayed()), 3));
+                        }
                     }
                     if (mainApp.championship.isUserMatchShowed()) {
-                        simulateMatchDialog.setUpDialog(mainApp.championship.findBattleByTeam(mainApp.user.getTeam(),
-                                mainApp.championship.getRoundsPlayed()));
+                        //simulateMatchDialog.setUpDialog(mainApp.championship.findBattleByTeam(mainApp.user.getTeam(),
+                        //        mainApp.championship.getRoundsPlayed()));
 
-                        simulateMatchDialog.setVisibility(true);
+
+                        //simulateMatchDialog.setVisibility(true);
                         resultMatchDialog.showRoundMatches(mainApp.championship.getMatchesPerRound(mainApp.championship.getRoundsPlayed()));
+                        resultMatchDialog.setVisibility(true);
                         mainApp.championship.setMatchReady(false);
                         mainApp.championship.setUserMatchShowed(false);
                     }
@@ -358,6 +375,7 @@ public class GameScreen implements Screen {
         resultMatchDialog.dispose();
         simulateMatchDialog.dispose();
         confirmationDialog.dispose();
+        duelDialog.dispose();
         floorBackground.getTexture().dispose();
     }
 

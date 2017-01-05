@@ -1,22 +1,24 @@
 {
   "ui": [
     {
-      "uniqueName": "SimulateMatchBox",
+      "uniqueName": "ResultMatchBox",
       "type": "window",
       "background": "window",
       "size": {
         "x": 600,
-        "y": 880
+        "y": 400
       },
       "position": {
         "x": 0,
         "y": 0
       },
-      "orientation": "center"
+      "centerX": "Screen",
+      "centerY": "Screen",
+      "orientation": "none"
     },
     {
       "type": "label",
-      "text": "Match",
+      "text": "Result",
       "id": "title",
       "size": {
         "x": 0,
@@ -27,47 +29,9 @@
         "x": 0,
         "y": 200
       },
-      "centerX": "SimulateMatchBox",
-      "inside_Top": "SimulateMatchBox",
+      "centerX": "ResultMatchBox",
+      "inside_Top": "ResultMatchBox",
       "marginTop": 10,
-      "orientation": "none"
-    },
-    {
-      "uniqueName": "vsLabel",
-      "type": "label",
-      "text": "VS",
-      "id": "default",
-      "size": {
-        "x": 0,
-        "y": 0
-
-      },
-      "position": {
-        "x": 0,
-        "y": 200
-      },
-      "centerX": "SimulateMatchBox",
-      "inside_Top": "SimulateMatchBox",
-      "marginTop": 60,
-      "orientation": "none"
-    },
-    {
-      "uniqueName": "-Label",
-      "type": "label",
-      "text": "-",
-      "id": "default",
-      "size": {
-        "x": 0,
-        "y": 0
-
-      },
-      "position": {
-        "x": 0,
-        "y": 200
-      },
-      "centerX": "SimulateMatchBox",
-      "inside_Top": "SimulateMatchBox",
-      "marginTop": 100,
       "orientation": "none"
     },
     {
@@ -81,10 +45,10 @@
       },
       "position": {
         "x": 0,
-        "y": -160
+        "y": 0
       },
-      "inside_Bottom": "SimulateMatchBox",
-      "centerX": "SimulateMatchBox",
+      "inside_Bottom": "ResultMatchBox",
+      "centerX": "ResultMatchBox",
       "marginBottom": 30,
       "orientation": "none"
     }

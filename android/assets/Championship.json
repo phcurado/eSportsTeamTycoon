@@ -10,8 +10,8 @@
     {
       "radiantTeamId": "TEAM_0016",
       "direTeamId": "TEAM_0008",
-      "radiantVictories": 0,
-      "direVictories": 2
+      "radiantVictories": 2,
+      "direVictories": 0
     },
     {
       "radiantTeamId": "TEAM_0017",
@@ -40,12 +40,12 @@
     {
       "radiantTeamId": "TEAM_0016",
       "direTeamId": "TEAM_0017",
-      "radiantVictories": 2,
-      "direVictories": 0
+      "radiantVictories": 1,
+      "direVictories": 2
     },
     {
       "radiantTeamId": "TEAM_USER",
-      "direTeamId": "TEAM_0016",
+      "direTeamId": "TEAM_0017",
       "radiantVictories": 0,
       "direVictories": 0
     }
@@ -53,7 +53,7 @@
   "championshipSchedule": {
     "day": 1,
     "week": 1,
-    "month": 7,
+    "month": 4,
     "year": 2015,
     "realTime": 0.0,
     "dayPassing": false,
@@ -69,5 +69,7 @@
   "groupStage": false,
   "organizeTeamsFinal": true,
   "championshipEnded": false,
-  "isUserMatchShowed": false
+  "isUserMatchShowed": false,
+  "isDuelShowed": false,
+  "playerAcceptedChampionship": false
 }

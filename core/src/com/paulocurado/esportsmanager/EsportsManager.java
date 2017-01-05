@@ -52,6 +52,7 @@ public class EsportsManager extends Game {
     public BitmapFont positionSmallFont;
     public BitmapFont labelFontMedium;
     public BitmapFont cleanFont;
+    public BitmapFont playerNameFont;
 
 
     @Override
@@ -127,6 +128,12 @@ public class EsportsManager extends Game {
         parameter.borderWidth = 0;
         parameter.color = Color.WHITE;
         cleanFont = generatorCleanFont.generateFont(parameter);
+
+        FreeTypeFontGenerator generatorPlayerName = new FreeTypeFontGenerator(Gdx.files.internal("fonts/arial.ttf"));
+        parameter.size = 15;
+        parameter.borderWidth = 2;
+        parameter.color = Color.WHITE;
+        playerNameFont = generatorPlayerName.generateFont(parameter);
 
     }
 

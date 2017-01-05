@@ -26,25 +26,34 @@ public class ResultMatchDialog extends GameScreenBox {
     }
 
     public void showRoundMatches(ArrayList<BattleSimulation> battles) {
-        String battlesResult = "";
-        for(int i = 0; i < battles.size(); i++) {
-            battlesResult = battlesResult + battles.get(i).getRadiantTeam().getName() + " " + battles.get(i).getRadiantVictories() + " X " +
-                    battles.get(i).getDireVictories() + " " + battles.get(i).getDireTeam().getName() + "\n";
-            Label result = new Label(battles.get(i).getRadiantVictories() + " X " + battles.get(i).getDireVictories(), skin, "default");
-            result.setPosition(getActor("ResultMatchBox").getX() + getActor("ResultMatchBox").getWidth() / 2 - result.getWidth() / 2,
-                    getActor("ResultMatchBox").getY() + getActor("ResultMatchBox").getHeight() / 2 - result.getHeight() / 2 +
-            i*2*result.getHeight() - 50);
+        for (int i = 0; i < battles.size(); i++) {
+            Label radiantTeamLabel = new Label(battles.get(i).getRadiantTeam().getName(), skin, "labelDarkGraySimulation");
+            Label radiantScoreLabel = new Label(Integer.toString(battles.get(i).getRadiantVictories()), skin, "labelDarkGraySimulation");
+            Label direTeamLabel = new Label(battles.get(i).getDireTeam().getName(), skin, "labelDarkGraySimulation");
+            Label direScoreLabel = new Label(Integer.toString(battles.get(i).getDireVictories()), skin, "labelDarkGraySimulation");
+            Label versusLabel = new Label("-", skin, "labelDarkGraySimulation");
 
-            Label teamRadiant = new Label(battles.get(i).getRadiantTeam().getName(), skin, "default");
-            teamRadiant.setPosition(result.getX() - teamRadiant.getWidth() - 10, result.getY());
 
-            Label teamDire = new Label(battles.get(i).getDireTeam().getName(), skin, "default");
-            teamDire.setPosition(result.getRight() + 10, result.getY());
+            versusLabel.setPosition(getActor("ResultMatchBox").getX() + getActor("ResultMatchBox").getWidth() / 2 - versusLabel.getWidth() / 2,
+                    getActor("ResultMatchBox").getTop() - 140 - 70 * i);
 
-            stage.addActor(result);
-            stage.addActor(teamRadiant);
-            stage.addActor(teamDire);
-            actorsAdded = actorsAdded + 3;
+            radiantScoreLabel.setPosition(versusLabel.getX() - radiantScoreLabel.getWidth(), versusLabel.getY());
+
+            radiantTeamLabel.setWidth(radiantScoreLabel.getX() - getActor("ResultMatchBox").getX() - 23);
+            radiantTeamLabel.setPosition(getActor("ResultMatchBox").getX() + 20, versusLabel.getY());
+            radiantTeamLabel.setAlignment(Align.right);
+
+            direScoreLabel.setPosition(versusLabel.getRight(), versusLabel.getY());
+            direTeamLabel.setWidth(getActor("ResultMatchBox").getRight() - direScoreLabel.getRight() - 23);
+            direTeamLabel.setPosition(direScoreLabel.getRight() + 3, versusLabel.getY());
+
+            stage.addActor(radiantTeamLabel);
+            stage.addActor(radiantScoreLabel);
+            stage.addActor(versusLabel);
+            stage.addActor(direTeamLabel);
+            stage.addActor(direScoreLabel);
+
+            actorsAdded = actorsAdded + 5;
 
         }
     }

@@ -48,6 +48,8 @@ public class ChampionshipScreen implements Screen {
         this.skin.add("position-small-font", mainApp.positionSmallFont);
         this.skin.add("label-medium-font", mainApp.labelFontMedium);
         this.skin.add("label-clean-font", mainApp.cleanFont);
+        this.skin.add("playerName-font", mainApp.playerNameFont);
+
         this.skin.load(Gdx.files.internal("ui/ui.json"));
     }
 

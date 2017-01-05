@@ -36,6 +36,8 @@ public class Championship {
     private boolean championshipEnded = false;
     private transient EsportsManager mainApp;
     private boolean isUserMatchShowed = false;
+    private boolean isDuelShowed = false;
+    private boolean playerAcceptedChampionship = false;
 
     public Championship(ArrayList<Team> teams, EsportsManager mainApp) {
         this.mainApp = mainApp;
@@ -165,6 +167,8 @@ public class Championship {
         groupStage = false;
         championshipEnded = true;
         isUserMatchShowed = false;
+        isDuelShowed = false;
+        playerAcceptedChampionship = false;
     }
     public Team getWinnerOfChampionship() {
         if(championshipEnded) {
@@ -345,5 +349,21 @@ public class Championship {
 
     public void setUserMatchShowed(boolean userMatchShowed) {
         isUserMatchShowed = userMatchShowed;
+    }
+
+    public boolean isDuelShowed() {
+        return isDuelShowed;
+    }
+
+    public void setDuelShowed(boolean duelShowed) {
+        isDuelShowed = duelShowed;
+    }
+
+    public boolean isPlayerAcceptedChampionship() {
+        return playerAcceptedChampionship;
+    }
+
+    public void setPlayerAcceptedChampionship(boolean playerAcceptedChampionship) {
+        this.playerAcceptedChampionship = playerAcceptedChampionship;
     }
 }

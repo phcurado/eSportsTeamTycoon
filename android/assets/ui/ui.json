@@ -15,6 +15,14 @@
       "font": "label-font",
       "fontColor": "white"
     },
+    "default_blue": {
+      "font": "label-font",
+      "fontColor": "blue"
+    },
+    "default_PlayerName": {
+      "font": "playerName-font",
+      "fontColor": "grayFont"
+    },
     "title": {
       "font": "button-font",
       "fontColor": "white"
@@ -92,9 +100,15 @@
       "background": "bluedarkborderbox"
     },
     "labelBlueSkyRoundedBox": {
-      "font": "position-font",
-      "fontColor": "grayFont",
+      "font": "label-small-font",
+      "fontColor": "white",
       "background": "blueskyroundedbox"
+
+    },
+    "labelBlackBox": {
+      "font": "label-small-font",
+      "fontColor": "white",
+      "background": "table_row_up_black"
 
     },
     "labelButtonGameScreen": {
@@ -108,6 +122,14 @@
     "labelGreenGameScreen": {
       "font": "label-medium-font",
       "fontColor": "green"
+    },
+    "labelBlueGameScreen": {
+      "font": "label-medium-font",
+      "fontColor": "blue"
+    },
+    "labelWhiteGameScreen": {
+      "font": "label-medium-font",
+      "fontColor": "white"
     },
     "labelTitleGraySimulation": {
       "font": "label-small-font",

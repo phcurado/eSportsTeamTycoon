@@ -1,12 +1,14 @@
 {
   "ui": [
     {
-      "uniqueName": "ResultMatchBox",
+      "uniqueName": "genericWindow",
       "type": "window",
+      "title": "Tip",
+      "id": "title",
       "background": "window",
       "size": {
         "x": 600,
-        "y": 400
+        "y": 600
       },
       "position": {
         "x": 0,
@@ -18,37 +20,36 @@
     },
     {
       "type": "label",
-      "text": "Result",
+      "text": "Match",
       "id": "title",
       "size": {
         "x": 0,
         "y": 0
-
       },
       "position": {
         "x": 0,
         "y": 200
       },
-      "centerX": "ResultMatchBox",
-      "inside_Top": "ResultMatchBox",
+      "centerX": "genericWindow",
+      "inside_Top": "genericWindow",
       "marginTop": 10,
       "orientation": "none"
     },
     {
-      "uniqueName": "OkButton",
+      "uniqueName": "BattleButton",
       "type": "textbutton",
-      "text": "Ok",
+      "text": "Start_Match",
       "id": "default",
       "size": {
-        "x": 180,
+        "x": 250,
         "y": 65
       },
       "position": {
         "x": 0,
         "y": 0
       },
-      "inside_Bottom": "ResultMatchBox",
-      "centerX": "ResultMatchBox",
+      "inside_Bottom": "genericWindow",
+      "centerX": "genericWindow",
       "marginBottom": 30,
       "orientation": "none"
     }
