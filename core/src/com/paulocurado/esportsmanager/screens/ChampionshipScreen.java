@@ -59,14 +59,30 @@ public class ChampionshipScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         stage.clear();
 
-        Image background = new Image(mainApp.assets.get("img/images.atlas", TextureAtlas.class).findRegion("inGameFloor") );
-        background.setSize(gamePort.getWorldWidth(), gamePort.getWorldHeight());
+        Image background = new Image(skin, "window_square");
+
+        background.setSize(stage.getWidth(), stage.getHeight());
 
         stage.addActor(background);
+
+        Label label = new Label(mainApp.bundle.format("Tier_Championship", mainApp.championship.getTierPlaying()),
+                skin, "default");
+        label.setPosition(stage.getWidth() / 2 - label.getWidth() / 2, stage.getHeight() - label.getHeight());
+        stage.addActor(label);
 
         setBackButton();
 
         Table table = new Table();
+
+        Label victories = new Label("V", skin, "default");
+        victories.setAlignment(Align.center);
+        Label loses = new Label("L", skin, "default");
+        loses.setAlignment(Align.center);
+
+        table.add(new Label("Teams", skin, "default")).fillX();
+        table.add(victories).fillX();
+        table.add(loses).fillX().row();
+
 
         for(int i = 0; i < mainApp.championship.getTeamsInOrderOfVictory().size(); i++) {
             if(!(2*i >= mainApp.championship.getTeamsInOrderOfVictory().size())) {
@@ -75,10 +91,14 @@ public class ChampionshipScreen implements Screen {
 
                 Label scoreLabel_Light = new Label(Integer.toString(mainApp.championship.getTeamsInOrderOfVictory().get(2 * i).getVictoriesChampionship()),
                         skin, "Label_Gray_Light");
-                scoreLabel_Light.setAlignment(Align.center);
 
-                table.add(teamName_Light).padBottom(2).fillX();
-                table.add(scoreLabel_Light).padLeft(2).padBottom(2).fillX();
+                Label losesLabel_Light = new Label(Integer.toString(mainApp.championship.getTeamsInOrderOfVictory().get(2 * i).getLosesChampionship()),
+                        skin, "Label_Gray_Light");
+                losesLabel_Light.setAlignment(Align.center);
+
+                table.add(teamName_Light).padBottom(3).fillX();
+                table.add(scoreLabel_Light).padLeft(3).padBottom(3).fillX();
+                table.add(losesLabel_Light).padLeft(3).padBottom(3).fillX();
                 table.row();
             }
             if(!(2*i + 1 >= mainApp.championship.getTeamsInOrderOfVictory().size())) {
@@ -89,8 +109,14 @@ public class ChampionshipScreen implements Screen {
                         skin, "Label_Gray_Dark");
                 scoreLabel_Dark.setAlignment(Align.center);
 
-                table.add(teamName_Dark).padBottom(2).fillX();
-                table.add(scoreLabel_Dark).padLeft(2).padBottom(2).fillX();
+                Label losesLabel_Dark = new Label(Integer.toString(mainApp.championship.getTeamsInOrderOfVictory().get(2 * i + 1).getLosesChampionship()),
+                        skin, "Label_Gray_Dark");
+                losesLabel_Dark.setAlignment(Align.center);
+
+                table.add(teamName_Dark).padBottom(3).fillX();
+                table.add(scoreLabel_Dark).padLeft(3).padBottom(3).fillX();
+                table.add(losesLabel_Dark).padLeft(3).padBottom(3).fillX();
+
                 table.row();
             }
 
@@ -99,25 +125,39 @@ public class ChampionshipScreen implements Screen {
 
 
         if (mainApp.championship.isOrganizeTeamsFinal()) {
-            Table finalTable = new Table();
-            Label teamRadiantLabel = new Label(mainApp.championship.getFinalBattle().getRadiantTeam().getName(), skin, "Label_Gray_Light");
-            Label scoreRadiantLabel = new Label(Integer.toString(mainApp.championship.getFinalBattle().getRadiantVictories()), skin, "Label_Gray_Light");
+            Label finalLabel = new Label(mainApp.bundle.get("Final_Game"), skin, "default");
 
-            Label teamDireLabel = new Label(mainApp.championship.getFinalBattle().getDireTeam().getName(), skin, "Label_Gray_Light");
-            Label scoreDireLabel = new Label(Integer.toString(mainApp.championship.getFinalBattle().getDireVictories()), skin, "Label_Gray_Light");
+            Label radiantTeamLabel = new Label(mainApp.championship.getFinalBattle().getRadiantTeam().getName(), skin, "labelDarkGraySimulation");
+            Label radiantScoreLabel = new Label(Integer.toString(mainApp.championship.getFinalBattle().getRadiantVictories()), skin, "labelDarkGraySimulation");
+            Label direTeamLabel = new Label(mainApp.championship.getFinalBattle().getDireTeam().getName(), skin, "labelDarkGraySimulation");
+            Label direScoreLabel = new Label(Integer.toString(mainApp.championship.getFinalBattle().getDireVictories()), skin, "labelDarkGraySimulation");
+            Label versusLabel = new Label("-", skin, "labelDarkGraySimulation");
 
-            Label versus = new Label(mainApp.bundle.get("VS"), skin, "default");
-            finalTable.add(teamRadiantLabel).fillX();
-            finalTable.add(scoreRadiantLabel).padLeft(2).fillX();
-            finalTable.add(versus).padLeft(2).fillX();
-            finalTable.add(scoreDireLabel).padLeft(2).fillX();
-            finalTable.add(teamDireLabel).padLeft(2).fillX();
+            finalLabel.setPosition(stage.getWidth() / 2 - finalLabel.getWidth() / 2,
+                    stage.getHeight() - 100);
+            versusLabel.setPosition(stage.getWidth() / 2 - versusLabel.getWidth() / 2,
+                    stage.getHeight() - 160);
 
-            finalTable.setPosition(mainApp.V_WIDTH / 2 - finalTable.getWidth() / 2, 900);
-            stage.addActor(finalTable);
+            radiantScoreLabel.setPosition(versusLabel.getX() - radiantScoreLabel.getWidth(), versusLabel.getY());
+
+            radiantTeamLabel.setWidth(radiantScoreLabel.getX() - 23);
+            radiantTeamLabel.setPosition(20, versusLabel.getY());
+            radiantTeamLabel.setAlignment(Align.right);
+
+            direScoreLabel.setPosition(versusLabel.getRight(), versusLabel.getY());
+            direTeamLabel.setWidth(stage.getWidth() - direScoreLabel.getRight() - 23);
+            direTeamLabel.setPosition(direScoreLabel.getRight() + 3, versusLabel.getY());
+
+            stage.addActor(finalLabel);
+            stage.addActor(radiantTeamLabel);
+            stage.addActor(radiantScoreLabel);
+            stage.addActor(versusLabel);
+            stage.addActor(direTeamLabel);
+            stage.addActor(direScoreLabel);
+
         }
 
-        table.setPosition(150,500);
+        table.setSize(stage.getWidth(), stage.getHeight());
 
 
 
@@ -172,6 +212,7 @@ public class ChampionshipScreen implements Screen {
 
     public void setBackButton() {
         backButton = new TextButton(mainApp.bundle.get("Back"), skin, "default");
+        backButton.setWidth(stage.getWidth());
 
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {

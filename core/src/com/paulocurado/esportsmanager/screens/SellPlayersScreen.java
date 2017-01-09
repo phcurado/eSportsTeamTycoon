@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -18,6 +19,7 @@ import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.model.Player;
 import com.paulocurado.esportsmanager.model.Position;
 import com.paulocurado.esportsmanager.model.UsefulFunctions;
+import com.paulocurado.esportsmanager.uielements.GameScreenBox;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
 
 /**
@@ -37,7 +39,9 @@ public class SellPlayersScreen implements Screen {
 
     private int playerSelected = 0;
 
+    GameScreenBox yesNoDialog;
 
+    private TextButton backButton;
     public SellPlayersScreen(final EsportsManager mainApp, final Screen parent) {
         this.mainApp = mainApp;
         this.parent = parent;
@@ -64,13 +68,19 @@ public class SellPlayersScreen implements Screen {
         stage.clear();
 
         sellPlayersScreenLayout = new ReaderElements(mainApp, stage, skin, "ui/SellPlayersScreen.json");
+        yesNoDialog = new GameScreenBox(mainApp, skin, "ui/YesNoBox.json", this);
 
         setUpPlayerInformation(mainApp.user.getTeam().getPlayers().get(0));
         createSelectedButtons();
+        playerSelected = 0;
+
+        backButton = new TextButton(mainApp.bundle.get("Back"), skin, "default");
+        backButton.setWidth(stage.getWidth());
 
 
         backButtonClick();
         dismissButtonClick(this);
+        stage.addActor(backButton);
 
     }
 
@@ -86,11 +96,14 @@ public class SellPlayersScreen implements Screen {
 
 
         stage.draw();
+        yesNoDialog.draw();
     }
     private void createSelectedButtons() {
+        ButtonGroup buttonGroup = new ButtonGroup();
+
         for(int i = 0; i < mainApp.user.getTeam().getPlayers().size(); i++) {
             final int j = i;
-            TextButton playerButton = new TextButton(mainApp.user.getTeam().getPlayers().get(i).getNickName(), skin, "default");
+            TextButton playerButton = new TextButton(mainApp.user.getTeam().getPlayers().get(i).getNickName(), skin, "toggle");
             playerButton.setSize(190, 80);
             playerButton.setPosition(0, 650 - 80*i);
 
@@ -100,6 +113,11 @@ public class SellPlayersScreen implements Screen {
                     playerSelected = j;
                 }
             });
+            if (i == 0) {
+                playerButton.setChecked(true);
+            }
+
+            buttonGroup.add(playerButton);
             stage.addActor(playerButton);
 
         }
@@ -108,7 +126,7 @@ public class SellPlayersScreen implements Screen {
     private void setUpPlayerInformation(Player player) {
         ((Label) stage.getRoot().findActor("NickNameLabel")).setWrap(false);
         ((Label) stage.getRoot().findActor("NickNameLabel")).setText(player.getNickName());
-        ((Image) stage.getRoot().findActor("faceImage")).setDrawable(player.createPlayerFace(((GameScreen)((LineupScreen)parent).getParent()).facesOptions, gamePort).getDrawable() );
+        ((Image) stage.getRoot().findActor("faceImage")).setDrawable(player.createPlayerFace(mainApp.facesOptions, gamePort).getDrawable() );
 
 
         ((Label) stage.getRoot().findActor("FarmNumberLabel")).setText(Integer.toString(player.getFarm() ));
@@ -156,29 +174,58 @@ public class SellPlayersScreen implements Screen {
     public void dispose() {
         stage.dispose();
         skin.dispose();
+        yesNoDialog.dispose();
 
     }
 
     private void dismissButtonClick(final Screen sellPlayersScreen) {
         stage.getRoot().findActor("DismissButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                mainApp.user.getTeam().getPlayers().get(playerSelected).setTeamId("TEAM_0000");
-                UsefulFunctions usefulFunctions = new UsefulFunctions(mainApp);
-                usefulFunctions.removePlayerContract(mainApp.user.getTeam(), mainApp.user.getTeam().getPlayers().get(playerSelected));
-                mainApp.user.getTeam().getPlayers().remove(playerSelected);
-                mainApp.user.getTeam().organizeIdPlayers();
 
-                if(mainApp.user.getTeam().getPlayers().size() != 0) {
-                    mainApp.setScreen(sellPlayersScreen);
-                }
-                else {
-                    mainApp.setScreen(parent);
-                }
+                ((Label)yesNoDialog.getActor("informationLabel")).setText(mainApp.bundle.format("Confirmation_Dismiss",
+                        mainApp.user.getTeam().getPlayers().get(playerSelected).getNickName()));
+                yesNoDialog.getActor("YesButton").addListener(new ClickListener() {
+                    public void clicked(InputEvent e, float x, float y) {
+                        mainApp.user.getTeam().getPlayers().get(playerSelected).setTeamId("TEAM_0000");
+                        UsefulFunctions usefulFunctions = new UsefulFunctions(mainApp);
+                        usefulFunctions.removePlayerContract(mainApp.user.getTeam(), mainApp.user.getTeam().getPlayers().get(playerSelected));
+                        mainApp.user.getTeam().getPlayers().remove(playerSelected);
+                        mainApp.user.getTeam().organizeIdPlayers();
+
+                        if(mainApp.user.getTeam().getPlayers().size() != 0) {
+                            mainApp.setScreen(sellPlayersScreen);
+                        }
+                        else {
+                            mainApp.setScreen(parent);
+                        }
+
+                        yesNoDialog.getActor("NoButton").getListeners().removeIndex(yesNoDialog.getActor("NoButton").getListeners().size - 1);
+                        yesNoDialog.getActor("YesButton").getListeners().removeIndex(yesNoDialog.getActor("YesButton").getListeners().size - 1);
+
+                    }
+
+
+                });
+
+                yesNoDialog.getActor("NoButton").addListener(new ClickListener() {
+                    public void clicked(InputEvent e, float x, float y) {
+                        yesNoDialog.setVisibility(false);
+                        Gdx.input.setInputProcessor(stage);
+
+                        yesNoDialog.getActor("NoButton").getListeners().removeIndex(yesNoDialog.getActor("NoButton").getListeners().size - 1);
+                        yesNoDialog.getActor("YesButton").getListeners().removeIndex(yesNoDialog.getActor("YesButton").getListeners().size - 1);
+
+                    }
+                });
+
+                yesNoDialog.setVisibility(true);
+
+
             }
         });
     }
     private void backButtonClick() {
-        stage.getRoot().findActor("BackButton").addListener(new ClickListener() {
+        backButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 mainApp.setScreen(parent);
             }

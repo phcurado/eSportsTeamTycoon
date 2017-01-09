@@ -5,14 +5,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -20,20 +15,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.paulocurado.esportsmanager.model.Player;
-import com.paulocurado.esportsmanager.uielements.ButtonPlayer;
-import com.paulocurado.esportsmanager.uielements.ReaderElements;
-import com.paulocurado.esportsmanager.uielements.TipsDialog;
-
-import java.util.ArrayList;
-
 
 /**
- * Created by phcur on 29/12/2016.
+ * Created by phcur on 06/01/2017.
  */
 
-public class LineupScreen implements Screen {
+public class ScoutScreen implements Screen {
     private final EsportsManager mainApp;
     private final Screen parent;
 
@@ -43,19 +30,11 @@ public class LineupScreen implements Screen {
     private Skin skin;
 
     private Image background;
-    private TextButton positionsButton;
-    private TextButton sellPlayersButton;
+    private TextButton scoutReportButton;
+    private TextButton buyScoutButton;
     private TextButton backButton;
 
-    private ReaderElements lineupScreenLayout;
-
-    private TipsDialog tipsDialog;
-
-    public Screen getParent() {
-        return parent;
-    }
-
-    public LineupScreen(final EsportsManager mainApp, final Screen parent) {
+    public ScoutScreen(final EsportsManager mainApp, final Screen parent) {
         this.mainApp = mainApp;
         this.parent = parent;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT, mainApp.camera);
@@ -76,7 +55,7 @@ public class LineupScreen implements Screen {
 
     @Override
     public void show() {
-        System.out.println("Lineup Screen");
+        System.out.println("Scout Screen");
         Gdx.input.setInputProcessor(stage);
         stage.clear();
 
@@ -84,31 +63,25 @@ public class LineupScreen implements Screen {
                 mainApp.assets.get("img/images.atlas", TextureAtlas.class).findRegion("defaultbackground"))) );
         background.setFillParent(true);
 
-        positionsButton = new TextButton(mainApp.bundle.get("Squad"), skin, "default");
-        sellPlayersButton = new TextButton(mainApp.bundle.get("SellPlayers"), skin, "default");
+        scoutReportButton = new TextButton(mainApp.bundle.get("Scout_Report"), skin, "default");
+        buyScoutButton = new TextButton(mainApp.bundle.get("Buy_Scout"), skin, "default");
         backButton = new TextButton(mainApp.bundle.get("Back"), skin, "default");
 
+        scoutReportButtonClick(this);
+        buyScoutButtonClick(this);
+        backButtonClick();
 
         Table interfaceTable = new Table();
         interfaceTable.center();
         interfaceTable.setFillParent(true);
-        interfaceTable.add(positionsButton).expandX().fillX().padBottom(20).row();
-        interfaceTable.add(sellPlayersButton).expandX().fillX().padBottom(20).row();
+        interfaceTable.add(scoutReportButton).expandX().fillX().padBottom(20).row();
+        interfaceTable.add(buyScoutButton).expandX().fillX().padBottom(20).row();
         interfaceTable.add(backButton).expandX().fillX();
-
-        tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
-
-        positionsButtonClick(this);
-        sellPlayersButtonClick(this);
-        backButtonClick();
-        tipsDialog.defaultButtonClick(stage);
 
 
         stage.addActor(background);
         stage.addActor(interfaceTable);
     }
-
-
 
     @Override
     public void render(float delta) {
@@ -119,8 +92,10 @@ public class LineupScreen implements Screen {
         stage.getCamera().update();
         stage.getViewport().apply();
 
+
+
         stage.draw();
-        tipsDialog.draw();
+
     }
 
     @Override
@@ -146,34 +121,21 @@ public class LineupScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        tipsDialog.dispose();
         skin.dispose();
     }
 
-    private void positionsButtonClick(final Screen lineupParent) {
-        positionsButton.addListener(new ClickListener() {
+    private void scoutReportButtonClick(final Screen scoutScreen) {
+        scoutReportButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                if(mainApp.user.getTeam().getPlayers().size() >= 5) {
-                    mainApp.setScreen(new PositionsScreen(mainApp, lineupParent));
-                }
-                else {
-                    tipsDialog.setTip(mainApp.bundle.get("Tip_Minimum_5_Players"));
-                    tipsDialog.setVisibility(true);
-                }
+                mainApp.setScreen(new ScoutReportScreen(mainApp, scoutScreen, 1));
             }
         });
     }
 
-    private void sellPlayersButtonClick(final Screen lineupParent) {
-        sellPlayersButton.addListener(new ClickListener() {
+    private void buyScoutButtonClick(final Screen scoutScreen) {
+        buyScoutButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                if(mainApp.user.getTeam().getPlayers().size() != 0) {
-                    mainApp.setScreen(new SellPlayersScreen(mainApp, lineupParent));
-                }
-                else {
-                    tipsDialog.setTip(mainApp.bundle.get("Tip_No_Players"));
-                    tipsDialog.setVisibility(true);
-                }
+                mainApp.setScreen(new BuyScoutScreen(mainApp, scoutScreen));
             }
         });
     }
@@ -186,4 +148,7 @@ public class LineupScreen implements Screen {
         });
     }
 
+    public Screen getParent() {
+        return parent;
+    }
 }

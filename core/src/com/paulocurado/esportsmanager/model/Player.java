@@ -113,7 +113,7 @@ public class Player {
         float distance = (float)Math.sqrt(Math.pow(end.x - start.x,2)+Math.pow(end.y - start.y,2));
         float directionX = (end.x - start.x) / distance;
         float directionY = (end.y - start.y) / distance;
-        if (moving == true) {
+        if (moving) {
             position.x += directionX * speed * Gdx.graphics.getDeltaTime();
             position.y += directionY * speed * Gdx.graphics.getDeltaTime();
             if(Math.sqrt(Math.pow(position.x - start.x, 2)+Math.pow(position.y - start.y, 2)) >= distance) {
@@ -563,13 +563,13 @@ public class Player {
             positionHability = 0.25 * farm + 0.05 * independency + 0 * support + 0.05 * rotation + 0.65 * fighting;
         }
         else if(role == 3) {
-            positionHability = 0.15 * farm + 0.65 * independency + 0 * support + 0.05 * rotation + 0.15 * fighting;
+            positionHability = 0.15 * farm + 0.7 * independency + 0 * support + 0 * rotation + 0.15 * fighting;
         }
         else if(role == 4) {
             positionHability = 0 * farm + 0.05 * independency + 0.4 * support + 0.50 * rotation + 0.05 * fighting;
         }
         else {
-            positionHability = 0 * farm + 0.05 * independency + 0.75 * support + 0.1 * rotation + 0.10 * fighting;
+            positionHability = 0 * farm + 0 * independency + 0.80 * support + 0.15 * rotation + 0.05 * fighting;
         }
 
         return (int)positionHability;
@@ -611,7 +611,7 @@ public class Player {
 
         }
 
-        return (int) (Math.pow(Math.pow(1.09, positions[4]) + Math.pow(1.075, popularity), 1.22)*3/(Math.pow(1.035,200-1.1*positions[4]-0.9*popularity)) );
+        return (int) (Math.pow(Math.pow(1.09, positions[4]) + Math.pow(1.075, popularity), 1.22)*3.3/(Math.pow(1.035,200-1.1*positions[4]-0.9*popularity)) );
     }
 
     public int getRecomendedSalary(){
@@ -627,7 +627,7 @@ public class Player {
             }
 
         }
-        return (int) (Math.pow(Math.pow(1.09, positions[4]) + Math.pow(1.075, popularity), 1.22)*3/(Math.pow(1.035,200-1.1*positions[4]-0.9*popularity)) );
+        return (int) (Math.pow(Math.pow(1.08, positions[4])*2.7 + Math.pow(1.075, popularity), 1.22));
 
     }
 
@@ -655,7 +655,7 @@ public class Player {
             }
 
         }
-        return (int) (Math.pow(Math.pow(1.12, positions[4]) + Math.pow(1.09, popularity), 1.25)*14/(Math.pow(1.035,200-positions[4]-popularity)) );
+        return (int) (Math.pow(Math.pow(1.11, positions[4]) + Math.pow(1.09, popularity), 1.25)*14/(Math.pow(1.035,200-positions[4]-popularity)) );
     }
 
     public String bestPosition() {

@@ -8,6 +8,7 @@ public class User {
     private String userName;
     private Team team;
     private int fansNumber = 0;
+    private Scout scout;
 
     private boolean hireScreenFirstTime = true;
 
@@ -16,6 +17,7 @@ public class User {
         team = new Team();
         team.setName(teamName);
         team.setAbbreviatedName(shortTeamName);
+        scout = new Scout(1);
     }
 
     public Team getTeam() {
@@ -50,5 +52,13 @@ public class User {
 
     public void setFansNumber(int fansNumber) {
         this.fansNumber = fansNumber;
+    }
+
+    public Scout getScout() {
+        return scout;
+    }
+
+    public void setScout(Scout scout) {
+        this.scout = scout;
     }
 }

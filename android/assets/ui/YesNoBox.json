@@ -8,7 +8,7 @@
       "background": "window",
       "size": {
         "x": 550,
-        "y": 450
+        "y": 300
       },
       "position": {
         "x": 0,
@@ -36,32 +36,16 @@
       "marginTop": 10,
       "orientation": "none"
     },
-    {
-      "uniqueName": "panel",
-      "type": "panel",
-      "background": "panel",
-      "id": "default",
-      "size": {
-        "x": 500,
-        "y": 250
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "centerX": "YesNoBox",
-      "inside_Top": "YesNoBox",
-      "marginTop": 70,
-      "orientation": "none"
-    },
+
     {
       "uniqueName": "informationLabel",
       "type": "label",
       "text": "Error",
-      "id": "small",
+      "id": "default",
       "size": {
         "x": 470,
-        "y": 250
+        "y": 0,
+        "orientation": "center"
       },
       "position": {
         "x": 0,

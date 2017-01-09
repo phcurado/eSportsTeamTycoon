@@ -102,14 +102,6 @@ public class HireScreen implements Screen{
 
 
 
-      //  tableTitle.row().fillX();
-   //     tableTitle.add(new Label(mainApp.bundle.get("Nickname"), skin, "tableLabel_Title") ).width(178);
-      //  tableTitle.add(new Label(mainApp.bundle.get("Team"), skin, "tableLabel_Title") ).width(247);
-      //  tableTitle.add(new Label(mainApp.bundle.get("Position"), skin, "tableLabel_Title") );
-      //  tableTitle.add(new Label(mainApp.bundle.get("Rank"), skin, "tableLabel_Title") );
-
-
-
         for(int i = 0; i < mainApp.playerList.size(); i ++) {
 
             final Label playerNickName_Light = new Label(playerOrganizeByRank.get(i).getNickName(), skin, "tableLabel_Light");
@@ -184,6 +176,7 @@ public class HireScreen implements Screen{
             });
 
         }
+
 
 
 

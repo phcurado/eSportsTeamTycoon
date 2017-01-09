@@ -72,6 +72,7 @@ public class ReaderElements {
                         jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("id").getAsString());
             }
 
+
         }
         else if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("textbutton")) {
             actor = new TextButton(mainApp.bundle.get(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("text").getAsString()),
@@ -92,8 +93,9 @@ public class ReaderElements {
                 }
             }
 
-            else
-                ((TextButton)actor).getLabel().setAlignment(Align.center);
+            else {
+                ((TextButton) actor).getLabel().setAlignment(Align.center);
+            }
 
 
 

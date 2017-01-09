@@ -9,7 +9,7 @@ public class TowerInBattle {
     private int life;
 
     //basic variables
-    private static int TOWER_LIFE = 400;
+    private static int TOWER_LIFE = 600;
 
     public TowerInBattle() {
         life = TOWER_LIFE;

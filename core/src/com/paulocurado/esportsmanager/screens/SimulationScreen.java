@@ -129,15 +129,15 @@ public class SimulationScreen implements Screen {
         teamTable.add(new Label(mainApp.bundle.get("Deaths"), skin, "labelTitleGraySimulation") ).padLeft(3).expandX();
 
         for (int i = 0; i < simulationBattle.getRadiantPlayersInBattle().size(); i++ ) {
-            Label radiantPlayerNameLabel = new Label(simulationBattle.getRadiantPlayersInBattle().get(i).getNickName(), skin, "labelBlackBox");
+            Label radiantPlayerNameLabel = new Label(simulationBattle.getRadiantPlayersInBattle().get(i).getNickName(), skin, "Label_Gray_small");
 
-            Label radiantPlayerLastHitLabel = new Label(Integer.toString((int)simulationBattle.getRadiantPlayersInBattle().get(i).getLastHit()), skin, "labelBlackBox");
+            Label radiantPlayerLastHitLabel = new Label(Integer.toString((int)simulationBattle.getRadiantPlayersInBattle().get(i).getLastHit()), skin, "Label_Gray_small");
             radiantPlayerLastHitLabel.setName("radiantPlayerLastHitLabel_" + i);
 
-            Label radiantPlayerKillsLabel = new Label(Integer.toString(simulationBattle.getRadiantPlayersInBattle().get(i).getKills()), skin, "labelBlackBox");
+            Label radiantPlayerKillsLabel = new Label(Integer.toString(simulationBattle.getRadiantPlayersInBattle().get(i).getKills()), skin, "Label_Gray_small");
             radiantPlayerKillsLabel.setName("radiantPlayerKillsLabel_" + i);
 
-            Label radiantPlayerDeathsLabel = new Label(Integer.toString(simulationBattle.getRadiantPlayersInBattle().get(i).getDeaths()), skin, "labelBlackBox");
+            Label radiantPlayerDeathsLabel = new Label(Integer.toString(simulationBattle.getRadiantPlayersInBattle().get(i).getDeaths()), skin, "Label_Gray_small");
             radiantPlayerDeathsLabel.setName("radiantPlayerDeathsLabel_" + i);
 
             teamTable.row().fillX();
@@ -161,15 +161,15 @@ public class SimulationScreen implements Screen {
         teamTable.add(new Label(mainApp.bundle.get("Deaths"), skin, "labelTitleGraySimulation") ).padLeft(3).expandX();
 
         for (int i = 0; i < simulationBattle.getDirePlayersInBattle().size(); i++ ) {
-            Label direPlayerNameLabel = new Label(simulationBattle.getDirePlayersInBattle().get(i).getNickName(), skin, "labelBlackBox");
+            Label direPlayerNameLabel = new Label(simulationBattle.getDirePlayersInBattle().get(i).getNickName(), skin, "Label_Gray_small");
 
-            Label direPlayerLastHitLabel = new Label(Integer.toString((int)simulationBattle.getDirePlayersInBattle().get(i).getLastHit()), skin, "labelBlackBox");
+            Label direPlayerLastHitLabel = new Label(Integer.toString((int)simulationBattle.getDirePlayersInBattle().get(i).getLastHit()), skin, "Label_Gray_small");
             direPlayerLastHitLabel.setName("direPlayerLastHitLabel_" + i);
 
-            Label direPlayerKillsLabel = new Label(Integer.toString(simulationBattle.getDirePlayersInBattle().get(i).getKills()), skin, "labelBlackBox");
+            Label direPlayerKillsLabel = new Label(Integer.toString(simulationBattle.getDirePlayersInBattle().get(i).getKills()), skin, "Label_Gray_small");
             direPlayerKillsLabel.setName("direPlayerKillsLabel_" + i);
 
-            Label direPlayerDeathsLabel = new Label(Integer.toString(simulationBattle.getDirePlayersInBattle().get(i).getDeaths()), skin, "labelBlackBox");
+            Label direPlayerDeathsLabel = new Label(Integer.toString(simulationBattle.getDirePlayersInBattle().get(i).getDeaths()), skin, "Label_Gray_small");
             direPlayerDeathsLabel.setName("direPlayerDeathsLabel_" + i);
 
             teamTable.row().fillX();
@@ -215,20 +215,26 @@ public class SimulationScreen implements Screen {
                 isBattleOver = false;
 
             }
-            else if (isBattleOver == false) {
+            else if (!isBattleOver) {
                 for(int i = 0; i < mainApp.championship.getBattles().size(); i++) {
                     if(mainApp.championship.getBattles().get(i).equals(battleSimulation)) {
+                        mainApp.championship.getBattles().get(i).getRadiantTeam().setVictoriesChampionship(
+                                mainApp.championship.getBattles().get(i).getRadiantTeam().getVictoriesChampionship() +
+                                        mainApp.championship.getBattles().get(i).getRadiantVictories()
+                        );
+                        mainApp.championship.getBattles().get(i).getRadiantTeam().setLosesChampionship(
+                                mainApp.championship.getBattles().get(i).getRadiantTeam().getLosesChampionship() +
+                                        mainApp.championship.getBattles().get(i).getDireVictories()
+                        );
 
-                        if(battleSimulation.winner().equals(mainApp.championship.getBattles().get(i).getRadiantTeam())) {
-                            mainApp.championship.getBattles().get(i).getRadiantTeam().setVictoriesChampionship(
-                                    mainApp.championship.getBattles().get(i).getRadiantTeam().getVictoriesChampionship() + 1
-                            );
-                        }
-                        else if (battleSimulation.winner().equals(mainApp.championship.getBattles().get(i).getDireTeam())) {
-                            mainApp.championship.getBattles().get(i).getDireTeam().setVictoriesChampionship(
-                                    mainApp.championship.getBattles().get(i).getDireTeam().getVictoriesChampionship() + 1
-                            );
-                        }
+                        mainApp.championship.getBattles().get(i).getDireTeam().setVictoriesChampionship(
+                                mainApp.championship.getBattles().get(i).getDireTeam().getVictoriesChampionship() +
+                                        mainApp.championship.getBattles().get(i).getDireVictories()
+                        );
+                        mainApp.championship.getBattles().get(i).getDireTeam().setLosesChampionship(
+                                mainApp.championship.getBattles().get(i).getDireTeam().getLosesChampionship() +
+                                        mainApp.championship.getBattles().get(i).getRadiantVictories()
+                        );
 
                     }
                 }

@@ -7,7 +7,8 @@
     "blue": { "r": 0, "g": 0, "b": 1, "a": 1 },
     "green": { "r": 0, "g": 1, "b": 0, "a": 1 },
     "buttonUP": {"hex": "525d65"},
-    "grayFont": {"hex": "bfccd9"}
+    "grayFont": {"hex": "bfccd9"},
+    "greenDarker": {"hex": "009933"}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
@@ -21,7 +22,11 @@
     },
     "default_PlayerName": {
       "font": "playerName-font",
-      "fontColor": "grayFont"
+      "fontColor": "black"
+    },
+    "default_White_PlayerName": {
+      "font": "playerName-font",
+      "fontColor": "white"
     },
     "title": {
       "font": "button-font",
@@ -37,12 +42,12 @@
       "background": "table_row_title"
     },
     "tableLabel_Light": {
-      "font": "label-small-font",
+      "font": "playerName-font",
       "fontColor": "black",
       "background": "table_row_up"
     },
     "tableLabel_Dark": {
-      "font": "label-small-font",
+      "font": "playerName-font",
       "fontColor": "black",
       "background": "table_row_down"
     },
@@ -60,6 +65,11 @@
       "font": "label-clean-font",
       "fontColor": "black",
       "background": "table_row_down_gray"
+    },
+    "Label_Gray_small": {
+      "font": "playerName-font",
+      "fontColor": "black",
+      "background": "table_row_up_gray"
     },
     "labelBlueBoxSmallText": {
       "font": "position-font",
@@ -166,12 +176,23 @@
     "toggle": {
       "down": "button_down_menu",
       "up": "button_up_menu",
-      "font": "button-font",
-      "fontColor": "white"
+      "checked": "button_down_menu",
+      "over": "button_down_menu",
+      "font": "label-small-font",
+      "fontColor": "white",
+      "downFontColor": "grayFont"
     },
     "blackStyle": {
       "down": "button_down_menu",
       "up": "button_up_menu",
+      "font": "label-medium-font",
+      "fontColor": "white",
+      "downFontColor": "grayFont"
+    },
+    "sectionBlack": {
+      "down": "table_row_down_gray",
+      "up": "table_row_up_gray",
+      "checked": "table_row_title",
       "font": "label-medium-font",
       "fontColor": "white",
       "downFontColor": "grayFont"
@@ -214,6 +235,7 @@
       "titleFontColor": "black"
     }
   }
+
 
 }
 

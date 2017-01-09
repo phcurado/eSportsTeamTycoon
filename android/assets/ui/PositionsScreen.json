@@ -1,21 +1,6 @@
 {
   "ui": [
     {
-      "uniqueName": "PositionsScreenBackground",
-      "type": "image",
-      "path": "img/images.atlas",
-      "image": "startmenubackground",
-      "size": {
-        "x": 0,
-        "y": 0
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "orientation": "none"
-    },
-    {
       "uniqueName": "PlayerBox_1",
       "type": "window",
       "background": "window",
@@ -180,24 +165,7 @@
       "centerX": "PlayerBox_5",
       "marginTop": 15,
       "orientation": "none"
-    },
-    {
-      "uniqueName": "BackButton",
-      "type": "textbutton",
-      "text": "Back",
-      "id": "default",
-      "size": {
-        "x": 600,
-        "y": 75
-
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "centerX": "Screen",
-      "inside_Bottom": "Screen",
-      "orientation": "none"
     }
+
   ]
 }

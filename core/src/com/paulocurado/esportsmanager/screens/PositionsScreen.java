@@ -4,25 +4,37 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.model.Player;
+import com.paulocurado.esportsmanager.model.Position;
 import com.paulocurado.esportsmanager.uielements.ButtonPlayer;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
+
 
 import java.util.ArrayList;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.forever;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.scaleBy;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.scaleTo;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sizeBy;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sizeTo;
 
 /**
  * Created by phcur on 30/12/2016.
@@ -38,6 +50,10 @@ public class PositionsScreen implements Screen {
     private Skin skin;
 
     private ReaderElements positionsScreenLayout;
+    private ReaderElements playersScreenLayout;
+
+    private TextButton backButton;
+
 
 
     public PositionsScreen(final EsportsManager mainApp, final Screen parent) {
@@ -65,12 +81,19 @@ public class PositionsScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         stage.clear();
 
+        playersScreenLayout = new ReaderElements(mainApp, stage, skin, "ui/positionPlayerInformationBox.json");
         positionsScreenLayout = new ReaderElements(mainApp, stage, skin, "ui/PositionsScreen.json");
 
+        backButton = new TextButton(mainApp.bundle.get("Back"), skin, "default");
+        backButton.setWidth(stage.getWidth());
+
+        setUpPlayerInformation(mainApp.user.getTeam().getPlayers().get(0));
 
         backButtonClick();
 
         organizePlayersPositions();
+
+        stage.addActor(backButton);
 
     }
 
@@ -80,7 +103,6 @@ public class PositionsScreen implements Screen {
         buttonGroup.setMaxCheckCount(2);
         buttonGroup.setMinCheckCount(0);
 
-        final Actions actions = new Actions();
 
         for (int i = 0; i < mainApp.user.getTeam().getPlayers().size(); i++) {
             final ButtonPlayer playerFaceButton = new ButtonPlayer(mainApp.user.getTeam().getPlayers().get(i).
@@ -89,18 +111,21 @@ public class PositionsScreen implements Screen {
             playerFaceButton.setSize(100, 100);
             playerFaceButton.setPosition(rolesPositions(i + 1).x, rolesPositions(i + 1).y);
             playerFaceButton.setOrigin(playerFaceButton.getWidth() / 2,
-                    playerFaceButton.getY());
+                    playerFaceButton.getHeight() / 2);
             buttonGroup.add(playerFaceButton);
 
-            final Label playerNameLabel = new Label(mainApp.user.getTeam().getPlayers().get(i).getNickName(), skin, "labelVerySmallText");
+            final Label playerNameLabel = new Label(mainApp.user.getTeam().getPlayers().get(i).getNickName(), skin, "default_PlayerName");
             playerNameLabel.setPosition(playerFaceButton.getX() + playerFaceButton.getWidth() / 2 - playerNameLabel.getWidth() / 2,
                     playerFaceButton.getTop());
             labelGroup.add(playerNameLabel);
-
+            //final int j = i;
             playerFaceButton.addListener(new ClickListener() {
                 public void clicked(InputEvent e, float x, float y) {
 
+                    setUpPlayerInformation(mainApp.user.getTeam().getPlayers().get(playerFaceButton.getRolePosition() - 1));
+
                     if(buttonGroup.getAllChecked().size > 1) {
+
                         for(ButtonPlayer buttonPlayer : buttonGroup.getButtons()) {
                             buttonPlayer.clearActions();
                             buttonPlayer.setSize(100, 100);
@@ -111,6 +136,7 @@ public class PositionsScreen implements Screen {
                                 mainApp.user.getTeam().getPlayers().get(buttonGroup.getChecked().getRolePosition() - 1));
                         mainApp.user.getTeam().getPlayers().set(buttonGroup.getChecked().getRolePosition() - 1, player);
                         mainApp.user.getTeam().organizeIdPlayers();
+
 
                         int positionFaceButton  = playerFaceButton.getRolePosition();
 
@@ -124,20 +150,19 @@ public class PositionsScreen implements Screen {
                                 rolesPositions(buttonGroup.getChecked().getRolePosition()).y + buttonGroup.getChecked().getHeight());
 
 
-                        Label dummyLabel = playerNameLabel;
                         labelGroup.set(positionFaceButton - 1, labelGroup.get(buttonGroup.getChecked().getRolePosition() - 1));
-                        labelGroup.set(buttonGroup.getChecked().getRolePosition() - 1, dummyLabel);
+                        labelGroup.set(buttonGroup.getChecked().getRolePosition() - 1, playerNameLabel);
 
-                        buttonGroup.getChecked().addAction(actions.moveTo(rolesPositions(positionFaceButton).x,
+                        buttonGroup.getChecked().addAction(moveTo(rolesPositions(positionFaceButton).x,
                                 rolesPositions(positionFaceButton).y, 0.25f));
-                        playerFaceButton.addAction(actions.moveTo(rolesPositions(buttonGroup.getChecked().getRolePosition()).x,
+                        playerFaceButton.addAction(moveTo(rolesPositions(buttonGroup.getChecked().getRolePosition()).x,
                                 rolesPositions(buttonGroup.getChecked().getRolePosition()).y, 0.25f ));
 
 
-                        ButtonPlayer buttonPlayer = playerFaceButton;
+                        //ButtonPlayer buttonPlayer = playerFaceButton;
                         buttonGroup.getButtons().set(playerFaceButton.getRolePosition() - 1,
                                 buttonGroup.getChecked());
-                        buttonGroup.getButtons().set(buttonGroup.getChecked().getRolePosition() - 1, buttonPlayer);
+                        buttonGroup.getButtons().set(buttonGroup.getChecked().getRolePosition() - 1, playerFaceButton);
 
                         for(int i = 0; i < buttonGroup.getButtons().size; i++) {
                             buttonGroup.getButtons().get(i).setRolePosition(i + 1);
@@ -148,16 +173,19 @@ public class PositionsScreen implements Screen {
                         buttonGroup.getChecked().setChecked(false);
                     }
                     else if(buttonGroup.getAllChecked().size == 1) {
-                        playerFaceButton.addAction(actions.forever(actions.sequence(
-                                actions.sizeBy(10, 10, 0.4f), actions.sizeBy(-10,-10, 0.4f))) );
+                        playerFaceButton.setTransform(true);
+                        playerFaceButton.addAction(forever(sequence(sizeBy(10f, 10f, 0.4f), sizeBy(-10f, -10f, 0.4f)) ));
+
                     }
                     else {
                         for(ButtonPlayer buttonPlayer : buttonGroup.getButtons()) {
+                            //playerFaceButton.setTransform(false);
                             buttonPlayer.clearActions();
                             buttonPlayer.setSize(100, 100);
                             buttonPlayer.setOrigin(buttonPlayer.getWidth() / 2, buttonPlayer.getHeight() / 2);
                         }
                     }
+
                 }
             });
 
@@ -222,9 +250,35 @@ public class PositionsScreen implements Screen {
         stage.dispose();
         skin.dispose();
     }
+    private void setUpPlayerInformation(Player player) {
+        ((Label) stage.getRoot().findActor("NickNameLabel")).setWrap(false);
+        ((Label) stage.getRoot().findActor("NickNameLabel")).setText(player.getNickName());
+        ((Image) stage.getRoot().findActor("faceImage")).setDrawable(player.createPlayerFace(((GameScreen)((LineupScreen)parent).getParent()).facesOptions, gamePort).getDrawable() );
+
+
+        ((Label) stage.getRoot().findActor("FarmNumberLabel")).setText(Integer.toString(player.getFarm() ));
+        ((Label) stage.getRoot().findActor("FightNumberLabel")).setText(Integer.toString(player.getFighting() ));
+        ((Label) stage.getRoot().findActor("IndependenceNumberLabel")).setText(Integer.toString(player.getIndependency() ));
+        ((Label) stage.getRoot().findActor("RotationNumberLabel")).setText(Integer.toString(player.getRotation() ));
+        ((Label) stage.getRoot().findActor("SupportNumberLabel")).setText(Integer.toString(player.getSupport() ));
+
+
+        ((Label) stage.getRoot().findActor("CarryAbilityLabel")).setText(player.hability(Position.CARRY) );
+        ((Label) stage.getRoot().findActor("MidAbilityLabel")).setText(player.hability(Position.MID) );
+        ((Label) stage.getRoot().findActor("OfflaneAbilityLabel")).setText(player.hability(Position.OFFLANE) );
+        ((Label) stage.getRoot().findActor("Supp4AbilityLabel")).setText(player.hability(Position.SUPP4) );
+        ((Label) stage.getRoot().findActor("Supp5AbilityLabel")).setText(player.hability(Position.SUPP5) );
+
+        ((Label) stage.getRoot().findActor("CostNumberLabel")).setText(Integer.toString(player.getCost(mainApp.contractList)) );
+        ((Label) stage.getRoot().findActor("SalaryNumberLabel")).setText(Integer.toString(player.getSalary(mainApp.contractList)) );
+
+
+        ((Label) stage.getRoot().findActor("CostNumberLabel")).setAlignment(Align.right);
+        ((Label) stage.getRoot().findActor("SalaryNumberLabel")).setAlignment(Align.right);
+    }
 
     private void backButtonClick() {
-        stage.getRoot().findActor("BackButton").addListener(new ClickListener() {
+        backButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 mainApp.setScreen(parent);
             }

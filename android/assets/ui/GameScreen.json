@@ -1,14 +1,14 @@
 {
   "ui": [
     {
-      "uniqueName": "ConfirmDataBox",
+      "uniqueName": "InformationBox",
       "type": "window",
       "title": "ConfirmData",
       "id": "title",
       "background": "window_square2",
       "size": {
         "x": 550,
-        "y": 0
+        "y": 425
       },
       "position": {
         "x": 0,
@@ -16,6 +16,7 @@
       },
       "sizeOf_X": "Screen",
       "inside_Top": "Screen",
+      "marginTop": 40,
       "orientation": "none"
     },
     {
@@ -30,8 +31,8 @@
         "x": 0,
         "y": 0
       },
-      "inside_Left": "Screen",
-      "inside_Top": "Screen",
+      "inside_Left": "InformationBox",
+      "inside_Top": "InformationBox",
       "orientation": "none"
     },
     {
@@ -46,8 +47,8 @@
         "x": 0,
         "y": 0
       },
-      "inside_Right": "Screen",
-      "inside_Top": "Screen",
+      "inside_Right": "InformationBox",
+      "inside_Top": "InformationBox",
       "orientation": "none"
     },
     {
@@ -62,7 +63,7 @@
         "x": 0,
         "y": 0
       },
-      "inside_Left": "Screen",
+      "inside_Left": "InformationBox",
       "below": "timeLabel",
       "marginTop": 30,
       "orientation": "none"
@@ -81,7 +82,7 @@
         "y": 0
       },
       "alignLeft": "FanLabel",
-      "inside_Right": "Screen",
+      "inside_Right": "InformationBox",
       "orientation": "none"
     },
     {
@@ -139,6 +140,26 @@
       "orientation": "none"
     },
     {
+      "uniqueName": "AdvanceButton",
+      "type": "textbutton",
+      "text": "Advance",
+      "id": "blackStyle",
+      "size": {
+        "x": 290,
+        "y": 70
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Left": "InformationBox",
+      "inside_Top": "InformationBox",
+      "marginTop": 130,
+      "marginLeft": 20,
+      "orientation": "none"
+    },
+    {
       "uniqueName": "ChampionshipButton",
       "type": "textbutton",
       "text": "Championship",
@@ -152,9 +173,7 @@
         "x": 0,
         "y": 0
       },
-      "inside_Left": "Screen",
-      "inside_Top": "Screen",
-      "marginTop": 130,
+      "alignLeft": "AdvanceButton",
       "marginLeft": 20,
       "orientation": "none"
     },
@@ -172,8 +191,8 @@
         "x": 0,
         "y": 0
       },
-      "alignLeft": "ChampionshipButton",
-      "marginLeft": 20,
+      "below": "AdvanceButton",
+      "marginTop": 20,
       "orientation": "none"
     },
     {
@@ -190,8 +209,44 @@
         "x": 0,
         "y": 0
       },
-      "below": "ChampionshipButton",
+      "alignLeft": "LeaderBoardsButton",
+      "marginLeft": 20,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "ScoutButton",
+      "type": "textbutton",
+      "text": "Scout",
+      "id": "blackStyle",
+      "size": {
+        "x": 290,
+        "y": 70
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "LeaderBoardsButton",
       "marginTop": 20,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "TrainButton",
+      "type": "textbutton",
+      "text": "Train",
+      "id": "blackStyle",
+      "size": {
+        "x": 290,
+        "y": 70
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "ScoutButton",
+      "marginLeft": 20,
       "orientation": "none"
     }
   ]

@@ -31,7 +31,7 @@ public class PlayerInBattle extends Player {
     private boolean isBuyingItems;
 
     //in game variables
-    private static int LASTHIT_GOLD = 45;
+    private static int LASTHIT_GOLD = 50;
     private static int DEATH_GOLD = 400;
     private static int TOWER_GOLD = 200;
     private static int KILL_GOLD = 500;

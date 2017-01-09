@@ -1,6 +1,8 @@
 package com.paulocurado.esportsmanager.model;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -163,8 +165,10 @@ public class HandleSaveGame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        mainApp.championship.setTeams(usefulFunctions.getTeamsByTier(mainApp.user.getTeam().getTier()) );
+        mainApp.championship.setTeams(usefulFunctions.getTeamsByTier(mainApp.championship.getTierPlaying()) );
         //TODO arrumar esse de pegar o time por tier, tem que pegar o ultimo campeonato rolando
         mainApp.championship.setBasicVariables(mainApp);
+
+        mainApp.facesOptions = TextureRegion.split(mainApp.assets.get("img/facetextures.png", Texture.class), 32, 32);
     }
 }

@@ -3,7 +3,9 @@ package com.paulocurado.esportsmanager.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -11,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
@@ -23,6 +26,8 @@ import com.paulocurado.esportsmanager.uielements.GameScreenBox;
 import com.paulocurado.esportsmanager.uielements.NewGameDialog;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
 import com.paulocurado.esportsmanager.uielements.TipsDialog;
+
+import java.util.Locale;
 
 /**
  * Created by Paulo on 09/11/2016.
@@ -62,6 +67,7 @@ public class MainMenuScreen implements Screen {
         this.skin.add("label-clean-font", mainApp.cleanFont);
         this.skin.add("playerName-font", mainApp.playerNameFont);
         this.skin.load(Gdx.files.internal("ui/ui.json"));
+
     }
 
 
@@ -70,7 +76,6 @@ public class MainMenuScreen implements Screen {
         System.out.println("Start Screen");
         Gdx.input.setInputProcessor(stage);
         stage.clear();
-
 
         mainMenuLayout = new ReaderElements(mainApp, stage, skin, "ui/MainMenuScreen.json");
         newGameDialog = new NewGameDialog(mainApp, skin, "ui/NewGameBox.json", this);
@@ -242,12 +247,41 @@ public class MainMenuScreen implements Screen {
                 //informações básicas preenchidas para dar newGame
                 UsefulFunctions usefulFunctions = new UsefulFunctions(mainApp);
                 mainApp.user.getTeam().setId("TEAM_USER");
-                mainApp.user.getTeam().setBudget(250000);
+                mainApp.user.getTeam().setBudget(70000);
                 mainApp.user.getTeam().setTier(4);
                 mainApp.teamList.add(mainApp.user.getTeam());
                 mainApp.schedule = new GameSchedule();
                 mainApp.championship = new Championship(usefulFunctions.getTeamsByTier(mainApp.user.getTeam().getTier()),
                         mainApp);
+                mainApp.facesOptions = TextureRegion.split(mainApp.assets.get("img/facetextures.png", Texture.class), 32, 32);
+
+                mainApp.user.getTeam().getPlayers().add(usefulFunctions.findPlayerbyNickName("XBOCT"));
+                usefulFunctions.createNewContract(mainApp.user.getTeam(), mainApp.user.getTeam().getPlayers().get(0),
+                        mainApp.user.getTeam().getPlayers().get(0).getRecomendedCost(), mainApp.user.getTeam().getPlayers().get(0).getRecomendedSalary());
+                mainApp.user.getTeam().getPlayers().get(0).setTeamId(mainApp.user.getTeam().getId());
+
+                mainApp.user.getTeam().getPlayers().add(usefulFunctions.findPlayerbyNickName("SingSing"));
+                usefulFunctions.createNewContract(mainApp.user.getTeam(), mainApp.user.getTeam().getPlayers().get(1),
+                        mainApp.user.getTeam().getPlayers().get(1).getRecomendedCost(), mainApp.user.getTeam().getPlayers().get(1).getRecomendedSalary());
+                mainApp.user.getTeam().getPlayers().get(1).setTeamId(mainApp.user.getTeam().getId());
+
+                mainApp.user.getTeam().getPlayers().add(usefulFunctions.findPlayerbyNickName("Bulldog"));
+                usefulFunctions.createNewContract(mainApp.user.getTeam(), mainApp.user.getTeam().getPlayers().get(2),
+                        mainApp.user.getTeam().getPlayers().get(2).getRecomendedCost(), mainApp.user.getTeam().getPlayers().get(2).getRecomendedSalary());
+                mainApp.user.getTeam().getPlayers().get(2).setTeamId(mainApp.user.getTeam().getId());
+
+                mainApp.user.getTeam().getPlayers().add(usefulFunctions.findPlayerbyNickName("Fear"));
+                usefulFunctions.createNewContract(mainApp.user.getTeam(), mainApp.user.getTeam().getPlayers().get(3),
+                        mainApp.user.getTeam().getPlayers().get(3).getRecomendedCost(), mainApp.user.getTeam().getPlayers().get(3).getRecomendedSalary());
+                mainApp.user.getTeam().getPlayers().get(3).setTeamId(mainApp.user.getTeam().getId());
+
+                mainApp.user.getTeam().getPlayers().add(usefulFunctions.findPlayerbyNickName("ArtStyle"));
+                usefulFunctions.createNewContract(mainApp.user.getTeam(), mainApp.user.getTeam().getPlayers().get(4),
+                        mainApp.user.getTeam().getPlayers().get(4).getRecomendedCost(), mainApp.user.getTeam().getPlayers().get(4).getRecomendedSalary());
+                mainApp.user.getTeam().getPlayers().get(4).setTeamId(mainApp.user.getTeam().getId());
+
+                mainApp.user.getTeam().organizeIdPlayers();
+
 
                 mainApp.setScreen(new GameScreen(mainApp));
             }

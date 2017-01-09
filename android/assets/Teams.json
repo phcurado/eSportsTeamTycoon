@@ -12,7 +12,8 @@
       "PLAYER_000005"
     ],
     "tier": 1,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0002",
@@ -26,8 +27,9 @@
       "PLAYER_000011",
       "PLAYER_000010"
     ],
-    "tier": 2,
-    "victoriesChampionship": 0
+    "tier": 3,
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0003",
@@ -42,7 +44,8 @@
       "PLAYER_000016"
     ],
     "tier": 1,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0004",
@@ -57,7 +60,8 @@
       "PLAYER_000021"
     ],
     "tier": 1,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0005",
@@ -72,7 +76,8 @@
       "PLAYER_000026"
     ],
     "tier": 1,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0006",
@@ -87,7 +92,8 @@
       "PLAYER_000035"
     ],
     "tier": 3,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0007",
@@ -102,7 +108,8 @@
       "PLAYER_000040"
     ],
     "tier": 3,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0008",
@@ -117,7 +124,8 @@
       "PLAYER_000044"
     ],
     "tier": 4,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 0,
+    "losesChampionship": 2
   },
   {
     "id": "TEAM_0009",
@@ -132,7 +140,8 @@
       "PLAYER_000046"
     ],
     "tier": 3,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0010",
@@ -147,7 +156,8 @@
       "PLAYER_000055"
     ],
     "tier": 1,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0011",
@@ -162,7 +172,8 @@
       "PLAYER_000060"
     ],
     "tier": 2,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0012",
@@ -177,7 +188,8 @@
       "PLAYER_000065"
     ],
     "tier": 2,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0013",
@@ -192,7 +204,8 @@
       "PLAYER_000070"
     ],
     "tier": 2,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0014",
@@ -206,8 +219,9 @@
       "PLAYER_000074",
       "PLAYER_000075"
     ],
-    "tier": 3,
-    "victoriesChampionship": 0
+    "tier": 2,
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0015",
@@ -222,7 +236,8 @@
       "PLAYER_000080"
     ],
     "tier": 3,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0016",
@@ -237,7 +252,8 @@
       "PLAYER_000085"
     ],
     "tier": 4,
-    "victoriesChampionship": 1
+    "victoriesChampionship": 2,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0017",
@@ -252,7 +268,8 @@
       "PLAYER_000023"
     ],
     "tier": 4,
-    "victoriesChampionship": 2
+    "victoriesChampionship": 2,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_0018",
@@ -267,21 +284,23 @@
       "PLAYER_000094"
     ],
     "tier": 2,
-    "victoriesChampionship": 0
+    "victoriesChampionship": 0,
+    "losesChampionship": 0
   },
   {
     "id": "TEAM_USER",
-    "name": "aa",
+    "name": "a",
     "abbreviatedName": "a",
-    "budget": 198838,
+    "budget": 12145,
     "playersId": [
-      "PLAYER_000103",
-      "PLAYER_000025",
+      "PLAYER_000097",
+      "PLAYER_000098",
       "PLAYER_000099",
       "PLAYER_000006",
-      "PLAYER_000096"
+      "PLAYER_000105"
     ],
     "tier": 4,
-    "victoriesChampionship": 3
+    "victoriesChampionship": 0,
+    "losesChampionship": 2
   }
 ]

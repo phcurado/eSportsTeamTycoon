@@ -1,20 +1,24 @@
 {
-  "userName": "aa",
+  "userName": "a",
   "team": {
     "id": "TEAM_USER",
-    "name": "aa",
+    "name": "a",
     "abbreviatedName": "a",
-    "budget": 198838,
+    "budget": 12145,
     "playersId": [
-      "PLAYER_000103",
-      "PLAYER_000025",
+      "PLAYER_000097",
+      "PLAYER_000098",
       "PLAYER_000099",
       "PLAYER_000006",
-      "PLAYER_000096"
+      "PLAYER_000105"
     ],
     "tier": 4,
-    "victoriesChampionship": 3
+    "victoriesChampionship": 0,
+    "losesChampionship": 2
   },
   "fansNumber": 0,
-  "hireScreenFirstTime": false
+  "scout": {
+    "level": 5
+  },
+  "hireScreenFirstTime": true
 }

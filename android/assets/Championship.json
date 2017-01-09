@@ -16,35 +16,29 @@
     {
       "radiantTeamId": "TEAM_0017",
       "direTeamId": "TEAM_USER",
-      "radiantVictories": 0,
-      "direVictories": 2
+      "radiantVictories": 2,
+      "direVictories": 0
     },
     {
       "radiantTeamId": "TEAM_0017",
       "direTeamId": "TEAM_0008",
-      "radiantVictories": 2,
+      "radiantVictories": 0,
       "direVictories": 0
     },
     {
       "radiantTeamId": "TEAM_USER",
       "direTeamId": "TEAM_0016",
-      "radiantVictories": 2,
+      "radiantVictories": 0,
       "direVictories": 0
     },
     {
       "radiantTeamId": "TEAM_USER",
       "direTeamId": "TEAM_0008",
-      "radiantVictories": 2,
+      "radiantVictories": 0,
       "direVictories": 0
     },
     {
       "radiantTeamId": "TEAM_0016",
-      "direTeamId": "TEAM_0017",
-      "radiantVictories": 1,
-      "direVictories": 2
-    },
-    {
-      "radiantTeamId": "TEAM_USER",
       "direTeamId": "TEAM_0017",
       "radiantVictories": 0,
       "direVictories": 0
@@ -52,8 +46,8 @@
   ],
   "championshipSchedule": {
     "day": 1,
-    "week": 1,
-    "month": 4,
+    "week": 3,
+    "month": 6,
     "year": 2015,
     "realTime": 0.0,
     "dayPassing": false,
@@ -62,12 +56,13 @@
   },
   "matchReady": false,
   "week": 2,
-  "gamesPlayed": 6,
-  "roundsPlayed": 3,
+  "gamesPlayed": 2,
+  "roundsPlayed": 1,
+  "tierPlaying": 4,
   "organizeTeams": true,
-  "finalsUp": true,
-  "groupStage": false,
-  "organizeTeamsFinal": true,
+  "finalsUp": false,
+  "groupStage": true,
+  "organizeTeamsFinal": false,
   "championshipEnded": false,
   "isUserMatchShowed": false,
   "isDuelShowed": false,

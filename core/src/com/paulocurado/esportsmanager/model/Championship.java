@@ -29,6 +29,7 @@ public class Championship {
     private int week = STARTING_WEEK;
     private int gamesPlayed = 0;
     private int roundsPlayed = 0;
+    private int tierPlaying;
     private boolean organizeTeams = false;
     private boolean finalsUp = false;
     private boolean groupStage = false;
@@ -49,6 +50,7 @@ public class Championship {
         for(int j = 0; j < teams.size(); j++) {
             teamsId.add(teams.get(j).getId());
         }
+        tierPlaying = mainApp.user.getTeam().getTier();
 
 
     }
@@ -69,6 +71,7 @@ public class Championship {
                 teams = usefulFunctions.getTeamsByTier(mainApp.user.getTeam().getTier());
                 championshipIsUp = true;
                 groupStage = true;
+                tierPlaying = mainApp.user.getTeam().getTier();
                 championshipSchedule.setDay(schedule.getDay());
                 championshipSchedule.setWeek(schedule.getWeek() + 1);
                 championshipSchedule.setMonth(schedule.getMonth());
@@ -76,6 +79,7 @@ public class Championship {
                 battles.clear();
                 for (int j = 0; j < teams.size(); j++) {
                     teams.get(j).setVictoriesChampionship(0);
+                    teams.get(j).setLosesChampionship(0);
                 }
                 organizeTeamsFinal = false;
                 championshipEnded = false;
@@ -117,7 +121,25 @@ public class Championship {
                 if(battles.get(gamesPlayed).getRadiantTeam() != (mainApp.user.getTeam()) &&
                         battles.get(gamesPlayed).getDireTeam() != (mainApp.user.getTeam())) {
                     battles.get(gamesPlayed).bestofBattle(3);
-                    battles.get(gamesPlayed).winner().setVictoriesChampionship(battles.get(gamesPlayed).winner().getVictoriesChampionship() + 1);
+
+                    battles.get(gamesPlayed).getRadiantTeam().setVictoriesChampionship(
+                            battles.get(gamesPlayed).getRadiantTeam().getVictoriesChampionship() +
+                                    battles.get(gamesPlayed).getRadiantVictories()
+                    );
+                    battles.get(gamesPlayed).getRadiantTeam().setLosesChampionship(
+                            battles.get(gamesPlayed).getRadiantTeam().getLosesChampionship() +
+                                    battles.get(gamesPlayed).getDireVictories()
+                    );
+
+                    battles.get(gamesPlayed).getDireTeam().setVictoriesChampionship(
+                            battles.get(gamesPlayed).getDireTeam().getVictoriesChampionship() +
+                                    battles.get(gamesPlayed).getDireVictories()
+                    );
+                    battles.get(gamesPlayed).getDireTeam().setLosesChampionship(
+                            battles.get(gamesPlayed).getDireTeam().getLosesChampionship() +
+                                    battles.get(gamesPlayed).getRadiantVictories()
+                    );
+                    //battles.get(gamesPlayed).winner().setVictoriesChampionship(battles.get(gamesPlayed).winner().getVictoriesChampionship() + 1);
 
                 }
                  gamesPlayed++;
@@ -209,29 +231,39 @@ public class Championship {
     }
 
     public double payPrizeToUser() {
-        double prize = 4000000 / mainApp.user.getTeam().getTier();
+        double prize = 5000000 / mainApp.user.getTeam().getTier();
         for(int i = 0; i < getFinalChampionshipPositions().size(); i++) {
             if(mainApp.user.getTeam().equals(getFinalChampionshipPositions().get(i))) {
 
                 if(getWinnerOfChampionship().equals(mainApp.user.getTeam())) {
-                    prize = 0.4 * prize;
+                    prize = 0.44 * prize;
                     mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
                     System.out.println("Ficou em primeiro " + prize);
                 }
-                else if (i == 2) {
-                    prize = 0.2 * prize;
+                else if (i == 1) {
+                    prize = 0.16 * prize;
                     mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
                     System.out.println("Ficou em segundo " + prize);
                 }
-                else if (i == 3) {
+                else if (i == 2) {
                     prize = 0.1 * prize;
                     mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
                     System.out.println("Ficou em terceiro " + prize);
                 }
-                else {
-                    prize = 0.05 * prize;
+                else if (i == 3){
+                    prize = 0.07 * prize;
                     mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
                     System.out.println("Ficou em quarto " + prize);
+                }
+                else if (i == 4){
+                    prize = 0.045 * prize;
+                    mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
+                    System.out.println("Ficou em quinto " + prize);
+                }
+                else {
+                    prize = 0.025 * prize;
+                    mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
+                    System.out.println("Ficou depois do quinto " + prize);
                 }
             }
         }
@@ -365,5 +397,13 @@ public class Championship {
 
     public void setPlayerAcceptedChampionship(boolean playerAcceptedChampionship) {
         this.playerAcceptedChampionship = playerAcceptedChampionship;
+    }
+
+    public int getTierPlaying() {
+        return tierPlaying;
+    }
+
+    public void setTierPlaying(int tierPlaying) {
+        this.tierPlaying = tierPlaying;
     }
 }

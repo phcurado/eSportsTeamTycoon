@@ -11,30 +11,30 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
-import com.paulocurado.esportsmanager.model.BattleSimulation;
-import com.paulocurado.esportsmanager.model.Championship;
 import com.paulocurado.esportsmanager.model.HandleSaveGame;
-import com.paulocurado.esportsmanager.model.UsefulFunctions;
 import com.paulocurado.esportsmanager.uielements.DuelDialog;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
 import com.paulocurado.esportsmanager.uielements.ResultMatchDialog;
 import com.paulocurado.esportsmanager.uielements.SimulateMatchDialog;
 import com.paulocurado.esportsmanager.uielements.TipsDialog;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
-import java.util.ArrayList;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.alpha;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.forever;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.scaleTo;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sizeTo;
 
 /**
  * Created by Paulo on 03/12/2016.
@@ -49,20 +49,20 @@ public class GameScreen implements Screen {
     private Skin skin;
 
     private ReaderElements gameMenuLayout;
-
     private TipsDialog tipsDialog;
     private ResultMatchDialog resultMatchDialog;
     private SimulateMatchDialog simulateMatchDialog;
     private GameScreenBox confirmationDialog;
+    private GameScreenBox yesNoDialog;
     private DuelDialog duelDialog;
+    private TextureRegion floorBackground;
+    private Label debitsLabel;
 
-
+    public boolean advanceTime = false;
 
     public TextureRegion[][] facesOptions;
 
-    TextureRegion floorBackground;
 
-    Label debitsLabel;
 
     public GameScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
@@ -86,7 +86,6 @@ public class GameScreen implements Screen {
 
         floorBackground = mainApp.assets.get("img/images.atlas", TextureAtlas.class).findRegion("floorBackground");
 
-
     }
 
     @Override
@@ -94,26 +93,27 @@ public class GameScreen implements Screen {
         System.out.println("Game Screen");
         Gdx.input.setInputProcessor(stage);
         stage.clear();
-
-
-
+//        mainApp.adHandler.showAds(true);
         gameMenuLayout = new ReaderElements(mainApp, stage, skin, "ui/GameScreen.json");
         tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
         resultMatchDialog = new ResultMatchDialog(mainApp, skin, "ui/ResultMatch.json", this);
         simulateMatchDialog = new SimulateMatchDialog(mainApp, skin, "ui/SimulateMatch.json", this);
         confirmationDialog = new GameScreenBox(mainApp, skin, "ui/YesNoBox.json", this);
         duelDialog = new DuelDialog(mainApp, skin, "ui/genericBox.json", this);
+        yesNoDialog = new GameScreenBox(mainApp, skin, "ui/YesNoBox.json", this);
 
         tipsLogic(this);
 
+        advanceTime = false; //define se avança ou não o tempo
 
         //buttons in screen logic
         saveButtonLogic();
         exitButtonLogic();
+        advanceButtonLogic();
         championshipButtonLogic(this);
         leaderBoardsButtonLogic(this);
         lineupButtonLogic(this);
-
+        scoutButtonLogic(this);
 
         for (int i = 0; i < mainApp.user.getTeam().getPlayers().size(); i ++) {
             Image playerImage = new Image(mainApp.user.getTeam().getPlayers().get(i).createPlayerFace(facesOptions, gamePort).getDrawable());
@@ -128,16 +128,12 @@ public class GameScreen implements Screen {
             stage.addActor(playerImage);
         }
 
-
-
-        continueTime();
-
         ((Label) stage.getRoot().findActor("timeLabel")).setText(Integer.toString(mainApp.schedule.getDay()) + "D" + " " +
                 Integer.toString(mainApp.schedule.getWeek()) + "W" + " " +
                 Integer.toString(mainApp.schedule.getMonth()) + "M" + " " +
                 Integer.toString(mainApp.schedule.getYear()) + "Y");
 
-        ((Label) stage.getRoot().findActor("budgetLabel")).setText("$ " + Long.toString(mainApp.user.getTeam().getBudget()));
+        ((Label) stage.getRoot().findActor("budgetLabel")).setText("$ " + String.format("%,d", mainApp.user.getTeam().getBudget()));
 
         ((Label) stage.getRoot().findActor("FanLabel")).setText(mainApp.bundle.get("Fans") + ": " +
                 Integer.toString(mainApp.user.getFansNumber()));
@@ -149,6 +145,9 @@ public class GameScreen implements Screen {
         debitsLabel.setPosition(stage.getRoot().findActor("budgetLabel").getX(), stage.getRoot().findActor("budgetLabel").getY() -
                 stage.getRoot().findActor("budgetLabel").getHeight());
         stage.addActor(debitsLabel);
+
+
+
     }
 
     @Override
@@ -168,6 +167,7 @@ public class GameScreen implements Screen {
         confirmationDialog.draw();
         simulateMatchDialog.draw();
         duelDialog.draw();
+        yesNoDialog.draw();
 
 
         setChampionship();
@@ -187,13 +187,14 @@ public class GameScreen implements Screen {
 
     private void passTime() {
         mainApp.schedule.passTime();
+        continueTime();
         if (mainApp.schedule.dayPassed()) {
             ((Label) stage.getRoot().findActor("timeLabel")).setText(Integer.toString(mainApp.schedule.getDay()) + "D" + " " +
                     Integer.toString(mainApp.schedule.getWeek()) + "W" + " " +
                     Integer.toString(mainApp.schedule.getMonth()) + "M" + " " +
                     Integer.toString(mainApp.schedule.getYear()) + "Y");
 
-            ((Label) stage.getRoot().findActor("budgetLabel")).setText("$ " + Long.toString(mainApp.user.getTeam().getBudget()));
+            ((Label) stage.getRoot().findActor("budgetLabel")).setText("$ " + String.format("%,d", mainApp.user.getTeam().getBudget()));
 
             ((Label) stage.getRoot().findActor("FanLabel")).setText(mainApp.bundle.get("Fans") + ": " +
                     Integer.toString(mainApp.user.getFansNumber()));
@@ -208,7 +209,7 @@ public class GameScreen implements Screen {
             }
             debitsLabel.setStyle(new Label.LabelStyle(skin.getFont("label-medium-font"), skin.getColor("red")));
             mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() - debits);
-            debitsLabel.setText("$ -" + Integer.toString(debits));
+            debitsLabel.setText("$ -" + String.format("%,d", debits));
             debitsLabel.addAction(sequence(alpha(0f), fadeIn(0.8f), delay(1f), fadeOut(1f)));
         }
     }
@@ -225,7 +226,7 @@ public class GameScreen implements Screen {
             } else if (mainApp.championship.isGroupStage()) {
 
                 if (mainApp.championship.isMatchReady() && !mainApp.championship.isFinalsUp()) {
-                    pauseTime();
+                    advanceTime = false;
 
                     if (!mainApp.championship.isUserMatchShowed()) {
                         if (!duelDialog.isLoadInformation() && !mainApp.championship.isDuelShowed()) {
@@ -239,16 +240,12 @@ public class GameScreen implements Screen {
                         else if (duelDialog.isLoadInformation() && mainApp.championship.isDuelShowed()) {
                             duelDialog.setLoadInformation(false);
                             mainApp.championship.setDuelShowed(false);
+                            //mainApp.adHandler.showAds(false);
                             mainApp.setScreen(new SimulationScreen(mainApp, this, mainApp.championship.findBattleByTeam(mainApp.user.getTeam(),
                                     mainApp.championship.getRoundsPlayed()), 3));
                         }
                     }
                     if (mainApp.championship.isUserMatchShowed()) {
-                        //simulateMatchDialog.setUpDialog(mainApp.championship.findBattleByTeam(mainApp.user.getTeam(),
-                        //        mainApp.championship.getRoundsPlayed()));
-
-
-                        //simulateMatchDialog.setVisibility(true);
                         resultMatchDialog.showRoundMatches(mainApp.championship.getMatchesPerRound(mainApp.championship.getRoundsPlayed()));
                         resultMatchDialog.setVisibility(true);
                         mainApp.championship.setMatchReady(false);
@@ -265,21 +262,38 @@ public class GameScreen implements Screen {
                     mainApp.championship.setOrganizeTeamsFinal(true);
                 }
                 if (mainApp.championship.isMatchReady() && mainApp.championship.isOrganizeTeamsFinal()) {
-                    pauseTime();
+                    advanceTime = false;
                     //ver e a partida foi mostrada e verificar se user ta na final
                     if(mainApp.championship.getBattles().get(
                             mainApp.championship.getBattles().size() - 1).getRadiantTeam().equals(mainApp.user.getTeam()) ||
                             (mainApp.championship.getBattles().get(
                                     mainApp.championship.getBattles().size() - 1).getDireTeam().equals(mainApp.user.getTeam()))) {
+
                         if (!mainApp.championship.isUserMatchShowed()) {
-                            mainApp.setScreen(new SimulationScreen(mainApp, this, mainApp.championship.getBattles().get(
-                                    mainApp.championship.getBattles().size() - 1), 5));
+                            if (!duelDialog.isLoadInformation() && !mainApp.championship.isDuelShowed()) {
+                                duelDialog.setUpPlayers(mainApp.championship.getBattles().get(
+                                        mainApp.championship.getBattles().size() - 1) );
+                                duelDialog.setVisibility(true);
+                                duelDialog.buttonClick();
+                                mainApp.championship.setDuelShowed(true);
+                            }
+                            else if (duelDialog.isLoadInformation() && mainApp.championship.isDuelShowed()) {
+                                duelDialog.setLoadInformation(false);
+                                mainApp.championship.setDuelShowed(false);
+                                //mainApp.adHandler.showAds(false);
+                                mainApp.setScreen(new SimulationScreen(mainApp, this, mainApp.championship.getBattles().get(
+                                        mainApp.championship.getBattles().size() - 1), 5));
+                            }
                         }
                         else {
                             mainApp.championship.setUserMatchShowed(false);
-                         //   simulateMatchDialog.setUpDialog(mainApp.championship.getFinalBattle());
-                           // simulateMatchDialog.setVisibility(true);
+                            mainApp.championship.finalMatch();
+                            simulateMatchDialog.setUpDialog(mainApp.championship.getFinalBattle());
+                            simulateMatchDialog.setVisibility(true);
                             mainApp.championship.finishChampionship();
+                            debitsLabel.setStyle(new Label.LabelStyle(skin.getFont("label-medium-font"), skin.getColor("green")));
+                            debitsLabel.setText("$ +" + Integer.toString((int)mainApp.championship.payPrizeToUser()));
+                            debitsLabel.addAction(sequence(alpha(0f), fadeIn(0.8f), delay(1f), fadeOut(1f)));
                         }
                     }
                     else {
@@ -288,12 +302,12 @@ public class GameScreen implements Screen {
                         simulateMatchDialog.setUpDialog(mainApp.championship.getFinalBattle());
                         simulateMatchDialog.setVisibility(true);
                         mainApp.championship.finishChampionship();
+                        debitsLabel.setStyle(new Label.LabelStyle(skin.getFont("label-medium-font"), skin.getColor("green")));
+                        debitsLabel.setText("$ +" + Integer.toString((int)mainApp.championship.payPrizeToUser()));
+                        debitsLabel.addAction(sequence(alpha(0f), fadeIn(0.8f), delay(1f), fadeOut(1f)));
                     }
-
                 }
                 if(mainApp.championship.getWinnerOfChampionship() != null) {
-
-
                     if(mainApp.championship.getWinnerOfChampionship().equals(mainApp.user.getTeam())) {
                         if(mainApp.user.getTeam().getTier() != 1) {
 
@@ -304,31 +318,20 @@ public class GameScreen implements Screen {
                                     mainApp.user.getTeam().setTier(mainApp.user.getTeam().getTier() - 1);
                                     confirmationDialog.setVisibility(false);
                                     Gdx.input.setInputProcessor(stage);
-                                    continueTime();
-                                    debitsLabel.setStyle(new Label.LabelStyle(skin.getFont("label-medium-font"), skin.getColor("green")));
-                                    debitsLabel.setText("$ +" + Integer.toString((int)mainApp.championship.payPrizeToUser()
-                                    ));
-                                    debitsLabel.addAction(sequence(alpha(0f), fadeIn(0.8f), delay(1f), fadeOut(1f)));
                                 }
                             });
                             confirmationDialog.getActor("NoButton").addListener(new ClickListener() {
                                 public void clicked(InputEvent e, float x, float y) {
                                     confirmationDialog.setVisibility(false);
                                     Gdx.input.setInputProcessor(stage);
-                                    continueTime();
-                                    debitsLabel.setStyle(new Label.LabelStyle(skin.getFont("label-medium-font"), skin.getColor("green")));
-                                    debitsLabel.setText("$ +" + Integer.toString((int)mainApp.championship.payPrizeToUser()
-                                    ));
-                                    debitsLabel.addAction(sequence(alpha(0f), fadeIn(0.8f), delay(1f), fadeOut(1f)));
                                 }
                             });
-
 
                             simulateMatchDialog.setUpDialog(mainApp.championship.getFinalBattle());
                             simulateMatchDialog.setVisibility(true);
 
                         }
-                    }
+                    }//TODO perguntar se o usuario quer voltar pro tier dele caso fique entre os ultimos
 
                 }
             }
@@ -336,7 +339,19 @@ public class GameScreen implements Screen {
     }
 
     public void continueTime() {
-        mainApp.schedule.setTimePass(true);
+        if(advanceTime) {
+            if (!((TextButton)stage.getRoot().findActor("AdvanceButton")).getText().equals(mainApp.bundle.get("Stop"))) {
+                ((TextButton) stage.getRoot().findActor("AdvanceButton")).setText(mainApp.bundle.get("Stop"));
+            }
+            mainApp.schedule.setTimePass(true);
+        }
+        else {
+            if (!((TextButton)stage.getRoot().findActor("AdvanceButton")).getText().equals(mainApp.bundle.get("Advance"))) {
+                ((TextButton) stage.getRoot().findActor("AdvanceButton")).setText(mainApp.bundle.get("Advance"));
+
+            }
+            mainApp.schedule.setTimePass(false);
+        }
     }
 
     public void pauseTime() {
@@ -376,21 +391,22 @@ public class GameScreen implements Screen {
         simulateMatchDialog.dispose();
         confirmationDialog.dispose();
         duelDialog.dispose();
+        yesNoDialog.dispose();
         floorBackground.getTexture().dispose();
     }
 
     private void tipsLogic(final Screen parent) {
         if(!tipsDialog.isTeamPlayerRequirement()) {
-            pauseTime();
+            advanceTime = false;
             if(!tipsDialog.isVisible()) {
                 tipsDialog.setVisibility(true);
                 Gdx.input.setInputProcessor(tipsDialog.getStage());
 
                 tipsDialog.getActor("OkButton").addListener(new ClickListener() {
                     public void clicked(InputEvent e, float x, float y) {
-                        mainApp.setScreen(new HireScreen(mainApp, parent));
+                        //mainApp.adHandler.showAds(false);
+                        mainApp.setScreen(new ScoutReportScreen(mainApp, parent, 1));
                         tipsDialog.setVisibility(false);
-                        continueTime();
                     }
                 });
             }
@@ -401,7 +417,7 @@ public class GameScreen implements Screen {
     private void saveButtonLogic() {
         stage.getRoot().findActor("SaveButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                pauseTime();
+                advanceTime = false;
                 HandleSaveGame handler = new HandleSaveGame();
                 handler.saveGame(mainApp);
                 tipsDialog.setTip(mainApp.bundle.get("Game_Saved"));
@@ -412,7 +428,6 @@ public class GameScreen implements Screen {
                     public void clicked(InputEvent e, float x, float y) {
                         tipsDialog.setVisibility(false);
                         Gdx.input.setInputProcessor(stage);
-                        continueTime();
                     }
                 });
             }
@@ -421,16 +436,45 @@ public class GameScreen implements Screen {
     private void exitButtonLogic() {
         stage.getRoot().findActor("ExitButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                Gdx.app.exit();
+                advanceTime = false;
+                System.out.println(advanceTime);
+                ((Label)yesNoDialog.getActor("informationLabel")).setText(mainApp.bundle.get("Exit_Confirmation"));
+                yesNoDialog.setVisibility(true);
+                yesNoDialog.getActor("YesButton").addListener(new ClickListener() {
+                    public void clicked(InputEvent e, float x, float y) {
+                        Gdx.app.exit();
+                    }
+                });
+                yesNoDialog.getActor("NoButton").addListener(new ClickListener() {
+                    public void clicked(InputEvent e, float x, float y) {
+                        yesNoDialog.setVisibility(false);
+                        Gdx.input.setInputProcessor(stage);
+                    }
+                });
             }
         });
 
+    }
+    private void advanceButtonLogic() {
+        stage.getRoot().findActor("AdvanceButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                advanceTime = !advanceTime;
+                if (advanceTime) {
+                    ((TextButton)stage.getRoot().findActor("AdvanceButton")).setText(mainApp.bundle.get("Stop"));
+                }
+                else {
+                    ((TextButton)stage.getRoot().findActor("AdvanceButton")).setText(mainApp.bundle.get("Advance"));
+                }
+
+            }
+        });
     }
 
     private void championshipButtonLogic(final Screen parent) {
         stage.getRoot().findActor("ChampionshipButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                pauseTime();
+                advanceTime = false;
+                //mainApp.adHandler.showAds(false);
                 mainApp.setScreen(new ChampionshipScreen(mainApp, parent));
 
             }
@@ -440,7 +484,8 @@ public class GameScreen implements Screen {
     private void leaderBoardsButtonLogic(final Screen parent) {
         stage.getRoot().findActor("LeaderBoardsButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                pauseTime();
+                advanceTime = false;
+                //mainApp.adHandler.showAds(false);
                 mainApp.setScreen(new HireScreen(mainApp, parent));
             }
         });
@@ -449,13 +494,21 @@ public class GameScreen implements Screen {
     private void lineupButtonLogic(final Screen parent) {
         stage.getRoot().findActor("LineupButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                pauseTime();
+                advanceTime = false;
+                //mainApp.adHandler.showAds(false);
                 mainApp.setScreen(new LineupScreen(mainApp, parent));
             }
         });
-
     }
-
+    private void scoutButtonLogic(final Screen parent) {
+        stage.getRoot().findActor("ScoutButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                advanceTime = false;
+                //mainApp.adHandler.showAds(false);
+                mainApp.setScreen(new ScoutScreen(mainApp, parent));
+            }
+        });
+    }
 
     public EsportsManager getMainApp() {
         return mainApp;

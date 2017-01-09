@@ -1,97 +1,55 @@
 {
   "ui": [
     {
-      "uniqueName": "HirePlayerBox",
+      "uniqueName": "PositionsScreenBackground",
+      "type": "image",
+      "path": "img/images.atlas",
+      "image": "defaultbackground",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "SellPlayerBox",
       "type": "window",
       "background": "window",
       "size": {
-        "x": 600,
-        "y": 0
+        "x": 450,
+        "y": 500
       },
       "position": {
         "x": 0,
         "y": 0
       },
-      "orientation": "center"
-    },
-    {
-      "type": "label",
-      "text": "HirePlayer",
-      "id": "title",
-      "size": {
-        "x": 0,
-        "y": 0
-
-      },
-      "position": {
-        "x": 0,
-        "y": 200
-      },
-      "centerX": "HirePlayerBox",
-      "inside_Top": "HirePlayerBox",
-      "marginTop": 10,
-      "orientation": "none"
-    },
-    {
-      "uniqueName": "faceBackgroundPanel",
-      "type": "panel",
-      "background": "backgroundblue",
-      "id": "default",
-      "size": {
-        "x": 170,
-        "y": 260
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "inside_Top": "HirePlayerBox",
-      "inside_Left": "HirePlayerBox",
-      "marginTop": 70,
-      "marginLeft": 20,
-
-
-
-      "orientation": "none"
-    },
-    {
-      "uniqueName": "attributesPanel",
-      "type": "panel",
-      "background": "backgroundblue",
-      "id": "default",
-      "size": {
-        "x": 380,
-        "y": 260
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "alignLeft": "faceBackgroundPanel",
-      "marginLeft": 10,
-
-
-
+      "inside_Bottom": "Screen",
+      "centerX": "Screen",
+      "marginBottom": 150,
       "orientation": "none"
     },
     {
       "uniqueName": "NickNameLabel",
       "type": "label",
-      "text": "Label",
-      "id": "labelBlueBox",
+      "text": "Error",
+      "id": "title",
       "size": {
-        "x": 160,
-        "y": 0
+        "x": 450,
+        "y": 0,
+        "orientation": "center"
 
       },
       "position": {
-        "x": 90,
-        "y": 580
+        "x": 0,
+        "y": 0
       },
-      "centerX": "faceBackgroundPanel",
-      "inside_Top": "faceBackgroundPanel",
-      "marginTop": 5,
-
+      "centerX": "SellPlayerBox",
+      "inside_Top": "SellPlayerBox",
+      "marginTop": 10,
       "orientation": "none"
     },
     {
@@ -103,16 +61,15 @@
         "x": 70,
         "y": 0,
         "orientation": "center"
-
       },
       "position": {
         "x": 0,
         "y": 0
       },
-      "inside_Left": "attributesPanel",
-      "inside_Top": "attributesPanel",
-      "marginLeft": 8,
-      "marginTop": 3,
+      "inside_Left": "SellPlayerBox",
+      "inside_Top": "SellPlayerBox",
+      "marginLeft": 46,
+      "marginTop": 130,
 
       "orientation": "none"
     },
@@ -525,54 +482,16 @@
       "uniqueName": "faceImage",
       "type": "imageBlank",
       "size": {
-        "x": 128,
-        "y": 128
+        "x": 80,
+        "y": 80
       },
       "position": {
         "x": 0,
         "y": 0
       },
-      "centerY": "faceBackgroundPanel",
-      "centerX": "faceBackgroundPanel",
-      "orientation": "none"
-    },
-    {
-      "uniqueName": "HireButton",
-      "type": "textbutton",
-      "text": "Hire",
-      "id": "default",
-      "size": {
-        "x": 180,
-        "y": 65
-
-      },
-      "position": {
-        "x": 80,
-        "y": 290
-      },
-      "inside_Left": "HirePlayerBox",
-      "inside_Bottom": "HirePlayerBox",
-      "marginLeft": 30,
-      "marginBottom": 30,
-      "orientation": "none"
-    },
-    {
-      "uniqueName": "backButton",
-      "type": "textbutton",
-      "text": "Back",
-      "id": "default",
-      "size": {
-        "x": 180,
-        "y": 65
-
-      },
-      "position": {
-        "x": 380,
-        "y": 290
-      },
-      "alignY": "HireButton",
-      "inside_Right": "HirePlayerBox",
-      "marginRight": 30,
+      "centerX": "SellPlayerBox",
+      "inside_Top": "SellPlayerBox",
+      "marginTop": 40,
       "orientation": "none"
     }
   ]

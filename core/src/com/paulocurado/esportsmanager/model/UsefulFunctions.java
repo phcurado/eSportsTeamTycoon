@@ -85,4 +85,13 @@ public class UsefulFunctions {
         }
         return team;
     }
+
+    public Player findPlayerbyNickName(String NickName) {
+
+        for(int i = 0; i < mainApp.playerList.size(); i++) {
+            if(NickName.equals(mainApp.playerList.get(i).getNickName()))
+                return mainApp.playerList.get(i);
+        }
+        return null;
+    }
 }

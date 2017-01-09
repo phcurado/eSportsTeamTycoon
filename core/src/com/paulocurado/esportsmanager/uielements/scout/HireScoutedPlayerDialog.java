@@ -1,4 +1,4 @@
-package com.paulocurado.esportsmanager.uielements;
+package com.paulocurado.esportsmanager.uielements.scout;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -12,24 +12,21 @@ import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.model.Player;
 import com.paulocurado.esportsmanager.model.Position;
 import com.paulocurado.esportsmanager.screens.GameScreen;
-import com.paulocurado.esportsmanager.screens.HireScreen;
 import com.paulocurado.esportsmanager.screens.ScoutReportScreen;
+import com.paulocurado.esportsmanager.screens.ScoutScreen;
+import com.paulocurado.esportsmanager.screens.SellPlayersScreen;
+import com.paulocurado.esportsmanager.uielements.GameScreenBox;
 
 /**
- * Created by Paulo on 05/12/2016.
+ * Created by phcur on 07/01/2017.
  */
 
-public class PlayerHireDialog extends  GameScreenBox {
+public class HireScoutedPlayerDialog extends GameScreenBox {
     protected Player player;
 
-    public PlayerHireDialog(EsportsManager mainApp, Skin skin, String path, Screen root) {
+    public HireScoutedPlayerDialog(EsportsManager mainApp, Skin skin, String path, Screen root) {
         super(mainApp, skin, path, root);
-
-        this.getActor("HireButton").setVisible(false);
-        this.getActor("backButton").setX(getActor("HirePlayerBox").getX() + getActor("HirePlayerBox").getWidth() / 2 -
-                getActor("backButton").getWidth() / 2);
         buttonsClick();
-
     }
 
     public void setUpDialog(Player player) {
@@ -37,8 +34,9 @@ public class PlayerHireDialog extends  GameScreenBox {
 
         ((Label) getActor("NickNameLabel")).setWrap(false);
         ((Label) getActor("NickNameLabel")).setText(player.getNickName());
-        ((Image) getActor("faceImage")).setDrawable(player.createPlayerFace(((GameScreen)((HireScreen)mainApp.getScreen()).getParent()).facesOptions,
-                ((GameScreen)((HireScreen)mainApp.getScreen()).getParent()).gamePort).getDrawable());
+        ((Image) getActor("faceImage")).setDrawable(player.createPlayerFace(
+                mainApp.facesOptions,
+                ((ScoutReportScreen)root).getStage().getViewport()).getDrawable());
 
 
         ((Label) getActor("FarmNumberLabel")).setText(Integer.toString(player.getFarm() ));
@@ -64,11 +62,36 @@ public class PlayerHireDialog extends  GameScreenBox {
     }
 
     private void buttonsClick() {
+        this.getActor("HireButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+
+                if(!((ScoutReportScreen) root).getErrorScoutDialog().getError().equals("")) {
+                    ((ScoutReportScreen) root).getErrorScoutDialog().setVisibility(true);
+                }
+                else if (mainApp.user.getTeam().getPlayers().size() >= 5) {
+
+                    ((ScoutReportScreen) root).getTipsDialog().setVisibility(true);
+                    ((ScoutReportScreen) root).getTipsDialog().setTip(mainApp.bundle.get("Transfer_Sell_Players"));
+                    ((ScoutReportScreen) root).getTipsDialog().getActor("OkButton").clearListeners();
+                    ((ScoutReportScreen) root).getTipsDialog().getActor("OkButton").addListener((new ClickListener() {
+                        public void clicked(InputEvent e, float x, float y) {
+                            ((ScoutReportScreen) root).getTipsDialog().setVisibility(false);
+                            mainApp.setScreen(new SellPlayersScreen(mainApp, root));
+                        }
+                    }));
+
+                }
+
+                else {
+                    ((ScoutReportScreen) root).getConfirmContractScoutDialog().setVisibility(true);
+                }
+            }
+        });
 
         this.getActor("backButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 setVisibility(false);
-                Gdx.input.setInputProcessor(((HireScreen)root).getStage());
+                Gdx.input.setInputProcessor(((ScoutReportScreen)root).getStage());
             }
         });
     }

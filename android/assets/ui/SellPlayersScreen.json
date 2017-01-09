@@ -4,7 +4,7 @@
       "uniqueName": "PositionsScreenBackground",
       "type": "image",
       "path": "img/images.atlas",
-      "image": "startmenubackground",
+      "image": "defaultbackground",
       "size": {
         "x": 0,
         "y": 0
@@ -447,7 +447,7 @@
       "uniqueName": "CostNumberLabel",
       "type": "label",
       "text": "0000000",
-      "id": "labelVerySmallText",
+      "id": "default_White_PlayerName",
       "size": {
         "x": 0,
         "y": 0
@@ -464,7 +464,7 @@
       "uniqueName": "SalaryNumberLabel",
       "type": "label",
       "text": "0000000",
-      "id": "labelVerySmallText",
+      "id": "default_White_PlayerName",
       "size": {
         "x": 0,
         "y": 0
@@ -494,26 +494,6 @@
       "orientation": "none"
     },
     {
-      "uniqueName": "SellButton",
-      "type": "textbutton",
-      "text": "Sell",
-      "id": "default",
-      "size": {
-        "x": 180,
-        "y": 65
-
-      },
-      "position": {
-        "x": 80,
-        "y": 290
-      },
-      "inside_Left": "SellPlayerBox",
-      "inside_Bottom": "SellPlayerBox",
-      "marginLeft": 30,
-      "marginBottom": 30,
-      "orientation": "none"
-    },
-    {
       "uniqueName": "DismissButton",
       "type": "textbutton",
       "text": "Dismiss",
@@ -527,27 +507,9 @@
         "x": 380,
         "y": 290
       },
-      "alignY": "SellButton",
-      "inside_Right": "SellPlayerBox",
-      "marginRight": 30,
-      "orientation": "none"
-    },
-    {
-      "uniqueName": "BackButton",
-      "type": "textbutton",
-      "text": "Back",
-      "id": "default",
-      "size": {
-        "x": 600,
-        "y": 75
-
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "centerX": "Screen",
-      "inside_Bottom": "Screen",
+      "centerX": "SellPlayerBox",
+      "inside_Bottom": "SellPlayerBox",
+      "marginBottom": 30,
       "orientation": "none"
     }
   ]

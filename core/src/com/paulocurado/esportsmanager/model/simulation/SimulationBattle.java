@@ -82,6 +82,7 @@ public class SimulationBattle {
         for (PlayerInBattle playerInBattle : direPlayersInBattle) {
             playerInBattle.setFarming(true);
         }
+        System.out.println(ambientInBattle.getMinute());
 
         safeOffBattle();
         midBattle();
@@ -122,22 +123,23 @@ public class SimulationBattle {
     }
     private void radiantAttackTowers() {
         Random random = new Random();
-        int newRadiantCarryAbility = radiantPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(10)-10;
-        int newRadiantMidAbility = radiantPlayersInBattle.get(1).abilityInteger(Position.MID) + random.nextInt(10)-10;
-        int newRadiantOfflaneAbility = radiantPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(10)-10;
-        int newRadiantRoamerAbility = radiantPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(10)-10;
-        int newRadiantSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(10)-10;
+        int newRadiantCarryAbility = radiantPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(15)-15;
+        int newRadiantMidAbility = radiantPlayersInBattle.get(1).abilityInteger(Position.MID) + random.nextInt(15)-15;
+        int newRadiantOfflaneAbility = radiantPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(15)-15;
+        int newRadiantRoamerAbility = radiantPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(15)-15;
+        int newRadiantSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(15)-15;
 
-        int newDireCarryAbility = direPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(10)-10;
-        int newDireMidAbility = direPlayersInBattle.get(1).abilityInteger(Position.MID) + random.nextInt(10)-10;
-        int newDireOfflaneAbility = direPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(10)-10;
-        int newDireRoamerAbility = direPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(10)-10;
-        int newDireSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(10)-10;
+        int newDireCarryAbility = direPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(15)-15;
+        int newDireMidAbility = direPlayersInBattle.get(1).abilityInteger(Position.MID) + random.nextInt(15)-15;
+        int newDireOfflaneAbility = direPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(15)-15;
+        int newDireRoamerAbility = direPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(15)-15;
+        int newDireSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(15)-15;
 
         if (ambientInBattle.getRadiantTowersInBattle().size() != 0 && ambientInBattle.getDireTowersInBattle().size() != 0) {
 
 
             radiantPlayersInBattle.get(0).addLastHit(radiantPlayersInBattle.get(0).getFarm() / FARM_MULTIPLIER);
+            radiantPlayersInBattle.get(1).addLastHit(radiantPlayersInBattle.get(1).getFarm() / FARM_MULTIPLIER);
             radiantPlayersInBattle.get(0).hitTower(ambientInBattle.getDireTowersInBattle().get(0));
             radiantPlayersInBattle.get(1).hitTower(ambientInBattle.getDireTowersInBattle().get(0));
             radiantPlayersInBattle.get(2).hitTower(ambientInBattle.getDireTowersInBattle().get(0));
@@ -242,21 +244,22 @@ public class SimulationBattle {
     }
     private void direAttackTowers() {
         Random random = new Random();
-        int newRadiantCarryAbility = radiantPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(10)-10;
-        int newRadiantMidAbility = radiantPlayersInBattle.get(1).abilityInteger(Position.MID) + random.nextInt(10)-10;
-        int newRadiantOfflaneAbility = radiantPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(10)-10;
-        int newRadiantRoamerAbility = radiantPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(10)-10;
-        int newRadiantSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(10)-10;
+        int newRadiantCarryAbility = radiantPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(15)-15;
+        int newRadiantMidAbility = radiantPlayersInBattle.get(1).abilityInteger(Position.MID) + random.nextInt(15)-15;
+        int newRadiantOfflaneAbility = radiantPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(15)-15;
+        int newRadiantRoamerAbility = radiantPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(15)-15;
+        int newRadiantSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(15)-15;
 
-        int newDireCarryAbility = direPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(10)-10;
-        int newDireMidAbility = direPlayersInBattle.get(1).abilityInteger(Position.MID) + random.nextInt(10)-10;
-        int newDireOfflaneAbility = direPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(10)-10;
-        int newDireRoamerAbility = direPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(10)-10;
-        int newDireSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(10)-10;
+        int newDireCarryAbility = direPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(15)-15;
+        int newDireMidAbility = direPlayersInBattle.get(1).abilityInteger(Position.MID) + random.nextInt(15)-15;
+        int newDireOfflaneAbility = direPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(15)-15;
+        int newDireRoamerAbility = direPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(15)-15;
+        int newDireSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(15)-15;
 
         if (ambientInBattle.getRadiantTowersInBattle().size() != 0 && ambientInBattle.getDireTowersInBattle().size() != 0) {
 
             direPlayersInBattle.get(0).addLastHit(direPlayersInBattle.get(0).getFarm() / FARM_MULTIPLIER);
+            direPlayersInBattle.get(1).addLastHit(direPlayersInBattle.get(1).getFarm() / FARM_MULTIPLIER);
             direPlayersInBattle.get(0).hitTower(ambientInBattle.getRadiantTowersInBattle().get(0));
             direPlayersInBattle.get(1).hitTower(ambientInBattle.getRadiantTowersInBattle().get(0));
             direPlayersInBattle.get(2).hitTower(ambientInBattle.getRadiantTowersInBattle().get(0));
@@ -364,23 +367,23 @@ public class SimulationBattle {
 
 
     private void defineTimePhases() {
-        if (ambientInBattle.getMinute() <= 10) {
+        if (ambientInBattle.getMinute() <= 9) {
             isLanePhaseTime = true;
             isBattlePhaseTime = false;
         }
-        else if (ambientInBattle.getMinute() > 10 && ambientInBattle.getMinute() <= 15) {
+        else if (ambientInBattle.getMinute() > 9 && ambientInBattle.getMinute() <= 14) {
             isLanePhaseTime = false;
             isBattlePhaseTime = true;
         }
-        else if (ambientInBattle.getMinute() > 15 && ambientInBattle.getMinute() <= 20) {
+        else if (ambientInBattle.getMinute() > 14 && ambientInBattle.getMinute() <= 19) {
             isLanePhaseTime = true;
             isBattlePhaseTime = false;
         }
-        else if (ambientInBattle.getMinute() > 20 && ambientInBattle.getMinute() <= 25) {
+        else if (ambientInBattle.getMinute() > 19 && ambientInBattle.getMinute() <= 23) {
             isLanePhaseTime = false;
             isBattlePhaseTime = true;
         }
-        else if (ambientInBattle.getMinute() > 25 && ambientInBattle.getMinute() <= 40) {
+        else if (ambientInBattle.getMinute() > 23 && ambientInBattle.getMinute() <= 26) {
             isLanePhaseTime = true;
             isBattlePhaseTime = false;
         }
@@ -395,15 +398,15 @@ public class SimulationBattle {
 
     private void safeOffBattle() {
         Random random = new Random();
-        int newRadiantCarryAbility = radiantPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(10)-10;
-        int newRadiantOfflaneAbility = radiantPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(10)-10;
-        int newRadiantRoamerAbility = radiantPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(10)-10;
-        int newRadiantSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(10)-10;
+        int newRadiantCarryAbility = radiantPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(15)-15;
+        int newRadiantOfflaneAbility = radiantPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(15)-15;
+        int newRadiantRoamerAbility = radiantPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(15)-15;
+        int newRadiantSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(15)-15;
 
-        int newDireCarryAbility = direPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(10)-10;
-        int newDireOfflaneAbility = direPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(10)-10;
-        int newDireRoamerAbility = direPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(10)-10;
-        int newDireSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(10)-10;
+        int newDireCarryAbility = direPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(15)-15;
+        int newDireOfflaneAbility = direPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(15)-15;
+        int newDireRoamerAbility = direPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(15)-15;
+        int newDireSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(15)-15;
 
 
         if (newRadiantCarryAbility >= newDireOfflaneAbility) {

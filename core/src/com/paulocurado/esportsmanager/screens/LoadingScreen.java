@@ -22,6 +22,7 @@ import com.paulocurado.esportsmanager.model.Team;
 
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by Paulo on 03/11/2016.
@@ -51,6 +52,7 @@ public class LoadingScreen implements Screen {
         progress = MathUtils.lerp(progress, mainApp.assets.getProgress(), .1f);
         if(mainApp.assets.update() && progress >= mainApp.assets.getProgress() - .1f) {
             mainApp.bundle =  mainApp.assets.get("languages/languages", I18NBundle.class);
+
             mainApp.setScreen(new MainMenuScreen(mainApp));
         }
     }

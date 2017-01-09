@@ -16,6 +16,7 @@ public class Team {
     private String[] playersId;
     private int tier;
     private int victoriesChampionship;
+    private int losesChampionship;
 
     public Team() {
 
@@ -165,5 +166,13 @@ public class Team {
 
     public void setVictoriesChampionship(int victoriesChampionship) {
         this.victoriesChampionship = victoriesChampionship;
+    }
+
+    public int getLosesChampionship() {
+        return losesChampionship;
+    }
+
+    public void setLosesChampionship(int losesChampionship) {
+        this.losesChampionship = losesChampionship;
     }
 }
