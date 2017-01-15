@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -71,13 +72,19 @@ public class ReaderElements {
                 actor = new Label("", skin,
                         jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("id").getAsString());
             }
-
+        actor.debug();
 
         }
+
         else if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("textbutton")) {
             actor = new TextButton(mainApp.bundle.get(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("text").getAsString()),
                     skin, jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("id").getAsString());
         }
+
+        else if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("button")) {
+            actor = new Button(skin, jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("id").getAsString());
+        }
+
         else if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("type").getAsString().equals("imagetextbutton")) {
             actor = new TextButton(mainApp.bundle.get(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("text").getAsString()),
                     skin, jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("id").getAsString());
@@ -144,6 +151,11 @@ public class ReaderElements {
                         ((Label) actor).setAlignment(Align.center);
                         actor.setSize(actorSize.x, ((Label) actor).getHeight());
                     }
+                    else if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().getAsJsonObject("size").get("orientation").getAsString().equals("right")) {
+                        ((Label) actor).setWrap(true);
+                        ((Label) actor).setAlignment(Align.right);
+                        actor.setSize(actorSize.x, ((Label) actor).getHeight());
+                    }
                     else {
                         ((Label) actor).setWrap(true);
                         ((Label) actor).setAlignment(Align.topLeft);
@@ -168,6 +180,11 @@ public class ReaderElements {
                         ((Label) actor).setWrap(true);
                         ((Label) actor).setAlignment(Align.center);
                         actor.setSize(actorSize.x, actorSize.y);
+                    }
+                    if(jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().getAsJsonObject("size").get("orientation").getAsString().equals("right")) {
+                        ((Label) actor).setWrap(true);
+                        ((Label) actor).setAlignment(Align.right);
+                        actor.setSize(actorSize.x, ((Label) actor).getHeight());
                     }
                     else {
                         ((Label) actor).setWrap(true);
