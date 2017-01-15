@@ -33,7 +33,6 @@ import java.util.ArrayList;
 
 public class ScoutReportScreen implements Screen {
     private final EsportsManager mainApp;
-    private final Screen parent;
 
     private Viewport gamePort;
 
@@ -53,15 +52,23 @@ public class ScoutReportScreen implements Screen {
     private ConfirmContractScoutDialog confirmContractScoutDialog;
     private TipsDialog tipsDialog;
 
-    int position;
+    int position = 1;
 
 
     private Image background;
-    public ScoutReportScreen(final EsportsManager mainApp, final Screen parent, int position) {
+    public ScoutReportScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
-        this.parent = parent;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT, mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
+
+
+    }
+
+    @Override
+    public void show() {
+        System.out.println("Scout Report Screen");
+        Gdx.input.setInputProcessor(stage);
+        stage.clear();
 
         this.skin = new Skin();
         this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
@@ -74,14 +81,6 @@ public class ScoutReportScreen implements Screen {
         this.skin.add("label-clean-font", mainApp.cleanFont);
         this.skin.add("playerName-font", mainApp.playerNameFont);
         this.skin.load(Gdx.files.internal("ui/ui.json"));
-        this.position = position;
-    }
-
-    @Override
-    public void show() {
-        System.out.println("Scout Report Screen");
-        Gdx.input.setInputProcessor(stage);
-        stage.clear();
 
 
 
@@ -96,6 +95,7 @@ public class ScoutReportScreen implements Screen {
         offlaneButton = new TextButton(mainApp.bundle.get("Offlane"), skin, "toggle");
         roamerButton = new TextButton(mainApp.bundle.get("Supp4"), skin, "toggle");
         supportButton = new TextButton(mainApp.bundle.get("Supp5"), skin, "toggle");
+
 
         ButtonGroup buttonGroup = new ButtonGroup(carryButton, midButton, offlaneButton, roamerButton, supportButton);
 
@@ -148,10 +148,15 @@ public class ScoutReportScreen implements Screen {
         //stage.addActor(setUpScouts(1));
         stage.addActor(container);
 
+
+
         hireDialog = new HireScoutedPlayerDialog(mainApp, skin, "ui/HirePlayerBox.json", this);
         errorScoutDialog = new ErrorScoutDialog(mainApp, skin, "ui/ErrorBox.json", this);
         confirmContractScoutDialog = new ConfirmContractScoutDialog(mainApp, skin, "ui/ConfirmationBox.json", this);
         tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
+
+        screenFirstTime();
+
 
         errorDialogButtonsClick();
 
@@ -291,47 +296,43 @@ public class ScoutReportScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        skin.dispose();
-        hireDialog.dispose();
-        confirmContractScoutDialog.dispose();
-        errorScoutDialog.dispose();
-        tipsDialog.dispose();
     }
 
     private void positionsButtonClick() {
         carryButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if(position != 1) {
-                    mainApp.setScreen(new ScoutReportScreen(mainApp, parent, 1));
+                    position = 1;
+                    mainApp.setScreen(mainApp.scoutReportScreen);
                 }
             }
         });
         midButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if(position != 2) {
-                    mainApp.setScreen(new ScoutReportScreen(mainApp, parent, 2));
-                }
+                    position = 2;
+                    mainApp.setScreen(mainApp.scoutReportScreen);                }
             }
         });
         offlaneButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if(position != 3) {
-                    mainApp.setScreen(new ScoutReportScreen(mainApp, parent, 3));
-                }
+                    position = 3;
+                    mainApp.setScreen(mainApp.scoutReportScreen);                }
             }
         });
         roamerButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if(position != 4) {
-                    mainApp.setScreen(new ScoutReportScreen(mainApp, parent, 4));
-                }
+                    position = 4;
+                    mainApp.setScreen(mainApp.scoutReportScreen);                }
             }
         });
         supportButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if(position != 5) {
-                    mainApp.setScreen(new ScoutReportScreen(mainApp, parent, 5));
-                }
+                    position = 5;
+                    mainApp.setScreen(mainApp.scoutReportScreen);                }
             }
         });
 
@@ -339,7 +340,7 @@ public class ScoutReportScreen implements Screen {
     private void backButtonClick() {
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                mainApp.setScreen(parent);
+                mainApp.setScreen(mainApp.scoutScreen);
             }
         });
     }
@@ -348,9 +349,6 @@ public class ScoutReportScreen implements Screen {
         return stage;
     }
 
-    public Screen getParent() {
-        return parent;
-    }
 
     public HireScoutedPlayerDialog getHireDialog() {
         return hireDialog;
@@ -377,5 +375,15 @@ public class ScoutReportScreen implements Screen {
 
     public TipsDialog getTipsDialog() {
         return tipsDialog;
+    }
+
+
+    private void screenFirstTime() {
+        if (mainApp.user.scoutReportScreenFirstTime == true) {
+            tipsDialog.setTip(mainApp.bundle.get("ScoutReportScreen_FirstTime"));
+            tipsDialog.setVisibility(true);
+            tipsDialog.defaultButtonClick(stage);
+            mainApp.user.scoutReportScreenFirstTime = false;
+        }
     }
 }

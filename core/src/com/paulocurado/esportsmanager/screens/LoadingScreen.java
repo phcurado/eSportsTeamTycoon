@@ -2,6 +2,7 @@ package com.paulocurado.esportsmanager.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,6 +21,7 @@ import com.paulocurado.esportsmanager.model.Contract;
 import com.paulocurado.esportsmanager.model.Player;
 import com.paulocurado.esportsmanager.model.Team;
 
+import java.io.File;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -34,9 +36,22 @@ public class LoadingScreen implements Screen {
     private ShapeRenderer shapeRenderer;
     private float progress;
 
+    private String language;
+
     public LoadingScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
         this.shapeRenderer = new ShapeRenderer();
+
+        JsonParser jsonParser = new JsonParser();
+        JsonObject config = (JsonObject)jsonParser.parse(Gdx.files.internal("database/Configuration.json").reader());
+
+        language = config.get("language").getAsString();
+
+        if (Gdx.files.local("Configuration.json").exists()) {
+            config = (JsonObject) jsonParser.parse(Gdx.files.local("Configuration.json").reader());
+        }
+        language = config.get("language").getAsString();
+
 
     }
 
@@ -51,9 +66,10 @@ public class LoadingScreen implements Screen {
     private void update(float delta) {
         progress = MathUtils.lerp(progress, mainApp.assets.getProgress(), .1f);
         if(mainApp.assets.update() && progress >= mainApp.assets.getProgress() - .1f) {
-            mainApp.bundle =  mainApp.assets.get("languages/languages", I18NBundle.class);
 
-            mainApp.setScreen(new MainMenuScreen(mainApp));
+            mainApp.bundle =  mainApp.assets.get("languages/languages" + language, I18NBundle.class);
+
+            mainApp.setScreen(mainApp.initScreen);
         }
     }
 
@@ -134,8 +150,8 @@ public class LoadingScreen implements Screen {
 
         mainApp.assets.load("img/simulationMap.png", Texture.class);
         mainApp.assets.load("img/facetextures.png", Texture.class);
-        mainApp.assets.load("languages/languages", I18NBundle.class);
         mainApp.assets.load("ui/ui.atlas", TextureAtlas.class);
         mainApp.assets.load("img/images.atlas", TextureAtlas.class);
+        mainApp.assets.load("languages/languages" + language, I18NBundle.class);
     }
 }

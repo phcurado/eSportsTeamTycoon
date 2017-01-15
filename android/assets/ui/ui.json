@@ -28,6 +28,10 @@
       "font": "playerName-font",
       "fontColor": "white"
     },
+    "labelText_Green": {
+      "font": "position-font",
+      "fontColor": "green"
+    },
     "title": {
       "font": "button-font",
       "fontColor": "white"
@@ -161,6 +165,12 @@
     "toggle": {
       "down": "button_down_menu",
       "up": "button_up_menu"
+    },
+    "buttonLeft" : {
+      "up": "buttonLeft_up"
+    },
+    "buttonRight" : {
+      "up": "buttonRight_up"
     }
   },
 

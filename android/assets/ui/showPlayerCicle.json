@@ -27,9 +27,44 @@
         "x": 0,
         "y": 0
       },
-      "inside_Bottom": "Screen",
+      "centerY": "Screen",
       "centerX": "Screen",
-      "marginBottom": 150,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "LeftButton",
+      "type": "button",
+      "id": "buttonLeft",
+      "size": {
+        "x": 50,
+        "y": 50
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Left": "Screen",
+      "centerY": "SellPlayerBox",
+      "marginLeft": 20,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "RightButton",
+      "type": "button",
+      "id": "buttonRight",
+      "size": {
+        "x": 50,
+        "y": 50
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "inside_Right": "Screen",
+      "centerY": "SellPlayerBox",
+      "marginRight": 20,
       "orientation": "none"
     },
     {
@@ -416,9 +451,9 @@
       "orientation": "none"
     },
     {
-      "uniqueName": "CostLabel",
+      "uniqueName": "OverallLabel",
       "type": "label",
-      "text": "Cost",
+      "text": "Ability_whit_point",
       "id": "labelBlueBoxSmallText",
       "size": {
         "x": 180,
@@ -433,9 +468,9 @@
       "orientation": "none"
     },
     {
-      "uniqueName": "SalaryLabel",
+      "uniqueName": "PotentialLabel",
       "type": "label",
-      "text": "Salary",
+      "text": "Potential_whit_point",
       "id": "labelBlueBoxSmallText",
       "size": {
         "x": 180,
@@ -446,11 +481,11 @@
         "y": 0
       },
       "inside_Right": "SupportLabel",
-      "alignY": "CostLabel",
+      "alignY": "OverallLabel",
       "orientation": "none"
     },
     {
-      "uniqueName": "CostNumberLabel",
+      "uniqueName": "OverallNumberLabel",
       "type": "label",
       "text": "0000000",
       "id": "default_White_PlayerName",
@@ -462,12 +497,12 @@
         "x": 0,
         "y": 0
       },
-      "inside_Right": "CostLabel",
-      "centerY": "CostLabel",
+      "inside_Right": "OverallLabel",
+      "centerY": "OverallLabel",
       "orientation": "none"
     },
     {
-      "uniqueName": "SalaryNumberLabel",
+      "uniqueName": "PotentialNumberLabel",
       "type": "label",
       "text": "0000000",
       "id": "default_White_PlayerName",
@@ -479,8 +514,8 @@
         "x": 0,
         "y": 0
       },
-      "inside_Right": "SalaryLabel",
-      "centerY": "SalaryLabel",
+      "inside_Right": "PotentialLabel",
+      "centerY": "PotentialLabel",
       "orientation": "none"
     },
     {
@@ -497,6 +532,105 @@
       "centerX": "SellPlayerBox",
       "inside_Top": "SellPlayerBox",
       "marginTop": 50,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "TrainButton",
+      "type": "textbutton",
+      "text": "Train",
+      "id": "default",
+      "size": {
+        "x": 180,
+        "y": 65
+
+      },
+      "position": {
+        "x": 380,
+        "y": 290
+      },
+      "centerX": "SellPlayerBox",
+      "inside_Bottom": "SellPlayerBox",
+      "marginBottom": 30,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PlusFarmNumberLabel",
+      "type": "label",
+      "text": "00",
+      "id": "labelText_Green",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "FarmNumberLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PlusFightNumberLabel",
+      "type": "label",
+      "text": "00",
+      "id": "labelText_Green",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "FightNumberLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PlusIndependenceNumberLabel",
+      "type": "label",
+      "text": "00",
+      "id": "labelText_Green",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "IndependenceNumberLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PlusRotationNumberLabel",
+      "type": "label",
+      "text": "00",
+      "id": "labelText_Green",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "RotationNumberLabel",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PlusSupportNumberLabel",
+      "type": "label",
+      "text": "00",
+      "id": "labelText_Green",
+      "size": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "alignLeft": "SupportNumberLabel",
       "orientation": "none"
     }
   ]

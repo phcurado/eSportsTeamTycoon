@@ -24,7 +24,7 @@ public class InitScreen implements Screen {
     private Image logoCompany;
     private Stage stage;
 
-    private static float LOGO_SIZE = 150f;
+    private static float LOGO_SIZE = 250f;
 
     public InitScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
@@ -38,7 +38,7 @@ public class InitScreen implements Screen {
         Runnable transitionRunnable = new Runnable() {
             @Override
             public void run() {
-                mainApp.setScreen(new MainMenuScreen(mainApp));
+                mainApp.setScreen(mainApp.mainMenuScreen);
             }
         };
 

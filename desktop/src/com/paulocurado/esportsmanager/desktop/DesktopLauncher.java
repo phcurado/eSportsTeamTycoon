@@ -2,6 +2,7 @@ package com.paulocurado.esportsmanager.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.paulocurado.esportsmanager.AdHandler;
 import com.paulocurado.esportsmanager.EsportsManager;
 
 public class DesktopLauncher {
@@ -10,6 +11,11 @@ public class DesktopLauncher {
 		config.title = EsportsManager.TITLE + " v" + EsportsManager.VERSION;
 		config.width = EsportsManager.V_WIDTH;
 		config.height = EsportsManager.V_HEIGHT;
-		new LwjglApplication(new EsportsManager(), config);
+		new LwjglApplication(new EsportsManager(new AdHandler() {
+			@Override
+			public void showAds(boolean show) {
+
+			}
+		}), config);
 	}
 }

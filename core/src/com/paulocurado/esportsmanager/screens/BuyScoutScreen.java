@@ -27,7 +27,6 @@ import com.paulocurado.esportsmanager.uielements.TipsDialog;
 
 public class BuyScoutScreen implements Screen {
     private final EsportsManager mainApp;
-    private final Screen parent;
 
     private Viewport gamePort;
 
@@ -42,11 +41,18 @@ public class BuyScoutScreen implements Screen {
     private GameScreenBox yesNoDialog;
     TipsDialog tipsDialog;
 
-    public BuyScoutScreen(final EsportsManager mainApp, final Screen parent) {
+    public BuyScoutScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
-        this.parent = parent;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT, mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
+
+    }
+
+    @Override
+    public void show() {
+        System.out.println("Buy Scout Screen");
+        Gdx.input.setInputProcessor(stage);
+        stage.clear();
 
         this.skin = new Skin();
         this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
@@ -59,13 +65,6 @@ public class BuyScoutScreen implements Screen {
         this.skin.add("label-clean-font", mainApp.cleanFont);
         this.skin.add("playerName-font", mainApp.playerNameFont);
         this.skin.load(Gdx.files.internal("ui/ui.json"));
-    }
-
-    @Override
-    public void show() {
-        System.out.println("Buy Scout Screen");
-        Gdx.input.setInputProcessor(stage);
-        stage.clear();
 
         background = new Image(new TextureRegion(new TextureRegion(
                 mainApp.assets.get("img/images.atlas", TextureAtlas.class).findRegion("defaultbackground"))) );
@@ -76,7 +75,7 @@ public class BuyScoutScreen implements Screen {
         tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
         yesNoDialog = new TipsDialog(mainApp, skin, "ui/YesNoBox.json", this);
 
-
+        screenFirstTime();
 
 
 
@@ -92,11 +91,10 @@ public class BuyScoutScreen implements Screen {
 
         for(int i = 0; i < mainApp.user.getScout().MAX_LEVEL; i++) {
             final TextButton scoutLevelButton = new TextButton(mainApp.bundle.format("Scout_Level", i + 1) +
-                    "       $ " + String.format("%,d", i * mainApp.user.getScout().BASE_PRICE), skin, "sectionBlack");
+                    "       $ " + String.format("%,d", (int)(1.5 * i * mainApp.user.getScout().BASE_PRICE)), skin, "sectionBlack");
             scoutLevelButton.getLabel().setAlignment(Align.left);
             buttonGroup.add(scoutLevelButton);
 
-           // scoutLevelButton.setChecked(false);
             if (i + 1 == mainApp.user.getScout().getLevel()) {
                 scoutLevelButton.setChecked(true);
             }
@@ -106,14 +104,25 @@ public class BuyScoutScreen implements Screen {
             final int interation = i;
             scoutLevelButton.addListener(new ClickListener() {
                 public void clicked(InputEvent e, float x, float y) {
-                    if (interation + 1 != mainApp.user.getScout().getLevel()) {
-                        if (mainApp.user.getTeam().getBudget() <= interation * mainApp.user.getScout().BASE_PRICE) {
+                    if (interation + 1 < mainApp.user.getScout().getLevel()) {
+                        tipsDialog.setTip(mainApp.bundle.get("Scout_Exist"));
+
+                        tipsDialog.getActor("OkButton").addListener(new ClickListener() {
+                            public void clicked(InputEvent e, float x, float y) {
+                                mainApp.setScreen(mainApp.buyScoutScreen);
+
+                            }
+                        });
+                        tipsDialog.setVisibility(true);
+                    }
+                    else if (interation + 1 != mainApp.user.getScout().getLevel()) {
+                        if (mainApp.user.getTeam().getBudget() <= 1.5 * interation * mainApp.user.getScout().BASE_PRICE) {
                             tipsDialog.setTip(mainApp.bundle.format("No_Money_Scout", String.format("%,d",
                                     mainApp.user.getTeam().getBudget())));
 
                             tipsDialog.getActor("OkButton").addListener(new ClickListener() {
                                 public void clicked(InputEvent e, float x, float y) {
-                                    mainApp.setScreen(new BuyScoutScreen(mainApp, parent));
+                                    mainApp.setScreen(mainApp.buyScoutScreen);
 
                                 }
                             });
@@ -121,21 +130,23 @@ public class BuyScoutScreen implements Screen {
                         } else {
                             ((Label)yesNoDialog.getActor("informationLabel")).setText(
                                     mainApp.bundle.format("Confirmation_Scout",
-                                            String.format("%,d", interation * mainApp.user.getScout().BASE_PRICE),
-                                            String.format("%,d", mainApp.user.getTeam().getBudget() - interation * mainApp.user.getScout().BASE_PRICE))
+                                            String.format("%,d", (int)(1.5 * interation * mainApp.user.getScout().BASE_PRICE)),
+                                            String.format("%,d", mainApp.user.getTeam().getBudget() - (int)(1.5 * interation * mainApp.user.getScout().BASE_PRICE)))
                             );
-                            ((TextButton)yesNoDialog.getActor("NoButton")).setText(mainApp.bundle.get("Confirm"));
+                            ((TextButton)yesNoDialog.getActor("YesButton")).setText(mainApp.bundle.get("Confirm"));
+                            ((TextButton)yesNoDialog.getActor("NoButton")).setText(mainApp.bundle.get("Cancel"));
+
                             yesNoDialog.getActor("YesButton").addListener(new ClickListener() {
                                 public void clicked(InputEvent e, float x, float y) {
-                                    mainApp.user.getScout().setLevel(interation);
-                                    mainApp.setScreen(new BuyScoutScreen(mainApp, parent));
+                                    mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() - (long)(1.5*interation * mainApp.user.getScout().BASE_PRICE));
+                                    mainApp.user.getScout().setLevel(interation + 1);
+                                    mainApp.setScreen(mainApp.buyScoutScreen);
                                 }
                             });
-                            ((TextButton)yesNoDialog.getActor("YesButton")).setText(mainApp.bundle.get("Cancel"));
                             yesNoDialog.getActor("NoButton").addListener(new ClickListener() {
                                 public void clicked(InputEvent e, float x, float y) {
-                                    yesNoDialog.setVisibility(false);
-                                    Gdx.input.setInputProcessor(stage);
+                                    mainApp.setScreen(mainApp.buyScoutScreen);
+
                                 }
                             });
                             yesNoDialog.setVisibility(true);
@@ -149,7 +160,6 @@ public class BuyScoutScreen implements Screen {
         interfaceTable.add(backButton).bottom().expandX().fillX();
 
 
-        //upgradeScoutButtonClick();
         backButtonClick();
 
 
@@ -194,18 +204,22 @@ public class BuyScoutScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        tipsDialog.dispose();
-        yesNoDialog.dispose();
-        skin.dispose();
     }
-    private void yesNoDialogButtonClick() {
 
-    }
     private void backButtonClick() {
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                mainApp.setScreen(parent);
+                mainApp.setScreen(mainApp.scoutScreen);
             }
         });
+    }
+
+    private void screenFirstTime() {
+        if (mainApp.user.buyScoutScreenFirstTime == true) {
+            tipsDialog.setTip(mainApp.bundle.get("BuyScoutScreen_FirstTime"));
+            tipsDialog.setVisibility(true);
+            tipsDialog.defaultButtonClick(stage);
+            mainApp.user.buyScoutScreenFirstTime = false;
+        }
     }
 }

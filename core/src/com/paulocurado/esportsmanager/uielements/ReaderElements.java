@@ -72,7 +72,6 @@ public class ReaderElements {
                 actor = new Label("", skin,
                         jsonObject.get("ui").getAsJsonArray().get(position).getAsJsonObject().get("id").getAsString());
             }
-        actor.debug();
 
         }
 

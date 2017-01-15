@@ -16,7 +16,7 @@
     },
     {
       "type": "label",
-      "text": "HirePlayer",
+      "text": "Player",
       "id": "title",
       "size": {
         "x": 0,
@@ -374,8 +374,9 @@
       "text": "00",
       "id": "labelText",
       "size": {
-        "x": 0,
-        "y": 0
+        "x": 100,
+        "y": 0,
+        "orientation": "right"
       },
       "position": {
         "x": 0,
@@ -391,8 +392,9 @@
       "text": "00",
       "id": "labelText",
       "size": {
-        "x": 0,
-        "y": 0
+        "x": 100,
+        "y": 0,
+        "orientation": "right"
       },
       "position": {
         "x": 0,
@@ -408,8 +410,9 @@
       "text": "00",
       "id": "labelText",
       "size": {
-        "x": 0,
-        "y": 0
+        "x": 100,
+        "y": 0,
+        "orientation": "right"
       },
       "position": {
         "x": 0,
@@ -425,8 +428,9 @@
       "text": "00",
       "id": "labelText",
       "size": {
-        "x": 0,
-        "y": 0
+        "x": 100,
+        "y": 0,
+        "orientation": "right"
       },
       "position": {
         "x": 0,
@@ -442,8 +446,9 @@
       "text": "00",
       "id": "labelText",
       "size": {
-        "x": 0,
-        "y": 0
+        "x": 100,
+        "y": 0,
+        "orientation": "right"
       },
       "position": {
         "x": 0,

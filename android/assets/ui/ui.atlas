@@ -5,7 +5,7 @@ filter: Nearest,Nearest
 repeat: none
 window
   rotate: false
-  xy: 1, 456
+  xy: 1, 572
   size: 360, 292
   split: 41, 41, 74, 74
   orig: 360, 292
@@ -13,7 +13,7 @@ window
   index: -1
 panel
   rotate: false
-  xy: 1, 170
+  xy: 1, 286
   size: 352, 284
   split: 6, 6, 6, 6
   orig: 352, 284
@@ -21,7 +21,7 @@ panel
   index: -1
 window_square
   rotate: false
-  xy: 363, 465
+  xy: 363, 581
   size: 353, 283
   split: 25, 25, 68, 25
   orig: 353, 283
@@ -29,15 +29,23 @@ window_square
   index: -1
 window_square2
   rotate: false
-  xy: 363, 180
+  xy: 1, 1
   size: 353, 283
   split: 18, 18, 94, 7
   orig: 353, 283
   offset: 0, 0
   index: -1
+window_square3
+  rotate: false
+  xy: 363, 296
+  size: 353, 283
+  split: 13, 13, 101, 12
+  orig: 353, 283
+  offset: 0, 0
+  index: -1
 button_down_blue
   rotate: false
-  xy: 1, 74
+  xy: 718, 770
   size: 255, 94
   split: 16, 16, 14, 14
   orig: 255, 94
@@ -45,7 +53,7 @@ button_down_blue
   index: -1
 button_down_menu
   rotate: false
-  xy: 718, 654
+  xy: 718, 674
   size: 255, 94
   split: 19, 19, 18, 18
   orig: 255, 94
@@ -53,7 +61,7 @@ button_down_menu
   index: -1
 button_up_blue
   rotate: false
-  xy: 718, 558
+  xy: 718, 578
   size: 255, 94
   split: 16, 16, 14, 14
   orig: 255, 94
@@ -61,7 +69,7 @@ button_up_blue
   index: -1
 button_up_menu
   rotate: false
-  xy: 718, 462
+  xy: 718, 482
   size: 255, 94
   split: 19, 19, 18, 18
   orig: 255, 94
@@ -69,7 +77,7 @@ button_up_menu
   index: -1
 table_row_down
   rotate: false
-  xy: 718, 374
+  xy: 718, 394
   size: 247, 86
   split: 12, 12, 12, 12
   orig: 247, 86
@@ -77,7 +85,7 @@ table_row_down
   index: -1
 table_row_down_gray
   rotate: false
-  xy: 718, 286
+  xy: 718, 306
   size: 247, 86
   split: 12, 12, 12, 12
   orig: 247, 86
@@ -85,7 +93,7 @@ table_row_down_gray
   index: -1
 table_row_title
   rotate: false
-  xy: 718, 198
+  xy: 356, 208
   size: 247, 86
   split: 12, 12, 12, 12
   orig: 247, 86
@@ -93,7 +101,7 @@ table_row_title
   index: -1
 table_row_title_gray
   rotate: false
-  xy: 718, 110
+  xy: 356, 120
   size: 247, 86
   split: 12, 12, 12, 12
   orig: 247, 86
@@ -101,7 +109,7 @@ table_row_title_gray
   index: -1
 table_row_up
   rotate: false
-  xy: 355, 92
+  xy: 356, 32
   size: 247, 86
   split: 12, 12, 12, 12
   orig: 247, 86
@@ -109,7 +117,7 @@ table_row_up
   index: -1
 table_row_up_gray
   rotate: false
-  xy: 258, 4
+  xy: 718, 218
   size: 247, 86
   split: 12, 12, 12, 12
   orig: 247, 86
@@ -117,7 +125,7 @@ table_row_up_gray
   index: -1
 table_row_up_black
   rotate: false
-  xy: 507, 1
+  xy: 605, 127
   size: 228, 89
   split: 13, 13, 13, 13
   orig: 228, 89
@@ -125,7 +133,7 @@ table_row_up_black
   index: -1
 button_down_gamescreen
   rotate: false
-  xy: 1, 28
+  xy: 605, 250
   size: 111, 44
   split: 6, 6, 6, 6
   orig: 111, 44
@@ -133,7 +141,7 @@ button_down_gamescreen
   index: -1
 button_up_gamescreen
   rotate: false
-  xy: 604, 134
+  xy: 605, 81
   size: 111, 44
   split: 6, 6, 6, 6
   orig: 111, 44
@@ -141,7 +149,7 @@ button_up_gamescreen
   index: -1
 backgroundblue
   rotate: false
-  xy: 258, 103
+  xy: 835, 151
   size: 75, 65
   split: 12, 12, 12, 12
   orig: 75, 65
@@ -149,28 +157,42 @@ backgroundblue
   index: -1
 cursor
   rotate: false
-  xy: 975, 687
+  xy: 975, 803
   size: 1, 61
   orig: 1, 61
   offset: 0, 0
   index: -1
 selection
   rotate: false
-  xy: 975, 624
+  xy: 975, 740
   size: 1, 61
   orig: 1, 61
   offset: 0, 0
   index: -1
+buttonLeft_up
+  rotate: false
+  xy: 912, 150
+  size: 58, 66
+  orig: 58, 66
+  offset: 0, 0
+  index: -1
+buttonRight_up
+  rotate: false
+  xy: 605, 13
+  size: 58, 66
+  orig: 58, 66
+  offset: 0, 0
+  index: -1
 selection2
   rotate: false
-  xy: 1, 25
+  xy: 605, 247
   size: 61, 1
   orig: 61, 1
   offset: 0, 0
   index: -1
 text_field
   rotate: false
-  xy: 114, 41
+  xy: 718, 94
   size: 30, 31
   split: 3, 3, 3, 3
   orig: 30, 31
@@ -178,7 +200,15 @@ text_field
   index: -1
 bluedarkborderbox
   rotate: false
-  xy: 604, 112
+  xy: 835, 129
+  size: 39, 20
+  split: 1, 1, 1, 1
+  orig: 39, 20
+  offset: 0, 0
+  index: -1
+graylightborderbox
+  rotate: false
+  xy: 356, 10
   size: 39, 20
   split: 1, 1, 1, 1
   orig: 39, 20
@@ -186,30 +216,22 @@ bluedarkborderbox
   index: -1
 blueskyroundedbox
   rotate: false
-  xy: 604, 92
+  xy: 665, 61
   size: 39, 18
   split: 4, 4, 4, 4
   orig: 39, 18
   offset: 0, 0
   index: -1
-graylightborderbox
-  rotate: false
-  xy: 1, 3
-  size: 39, 20
-  split: 1, 1, 1, 1
-  orig: 39, 20
-  offset: 0, 0
-  index: -1
 hire_button_image
   rotate: false
-  xy: 146, 47
+  xy: 605, 220
   size: 22, 25
   orig: 22, 25
   offset: 0, 0
   index: -1
 bluebox
   rotate: false
-  xy: 645, 114
+  xy: 750, 107
   size: 25, 18
   split: 4, 4, 4, 4
   orig: 25, 18
@@ -217,7 +239,7 @@ bluebox
   index: -1
 redbox
   rotate: false
-  xy: 170, 54
+  xy: 876, 131
   size: 25, 18
   split: 1, 1, 1, 1
   orig: 25, 18

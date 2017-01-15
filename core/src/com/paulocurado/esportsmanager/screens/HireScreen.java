@@ -34,7 +34,6 @@ import java.util.Comparator;
 public class HireScreen implements Screen{
 
     private final EsportsManager mainApp;
-    private final Screen parent;
 
     private Viewport gamePort;
 
@@ -49,11 +48,18 @@ public class HireScreen implements Screen{
     private ErrorDialog errorDialog;
     private ConfirmContractDialog confirmContractDialog;
 
-    public HireScreen(final EsportsManager mainApp, final Screen parent) {
+    public HireScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
-        this.parent = parent;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT, mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
+
+    }
+
+    @Override
+    public void show() {
+        System.out.println("Hire Screen");
+        Gdx.input.setInputProcessor(stage);
+        stage.clear();
 
         this.skin = new Skin();
         this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
@@ -66,14 +72,6 @@ public class HireScreen implements Screen{
         this.skin.add("label-clean-font", mainApp.cleanFont);
         this.skin.add("playerName-font", mainApp.playerNameFont);
         this.skin.load(Gdx.files.internal("ui/ui.json"));
-
-    }
-
-    @Override
-    public void show() {
-        System.out.println("Hire Screen");
-        Gdx.input.setInputProcessor(stage);
-        stage.clear();
 
 
         hireDialog = new PlayerHireDialog(mainApp, skin, "ui/HirePlayerBox.json", this);
@@ -247,11 +245,6 @@ public class HireScreen implements Screen{
     @Override
     public void dispose() {
         stage.dispose();
-        tipsDialog.dispose();
-        hireDialog.dispose();
-        errorDialog.dispose();
-        confirmContractDialog.dispose();
-
     }
 
     public void setBackButton() {
@@ -259,7 +252,7 @@ public class HireScreen implements Screen{
 
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                mainApp.setScreen(parent);
+                mainApp.setScreen(mainApp.gameScreen);
             }
         });
 
@@ -292,11 +285,6 @@ public class HireScreen implements Screen{
     }
 
     public Stage getStage() { return stage; }
-
-
-    public Screen getParent() {
-        return parent;
-    }
 
     public ErrorDialog getErrorDialog() {
         return errorDialog;

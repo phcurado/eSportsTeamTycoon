@@ -22,7 +22,6 @@ import com.paulocurado.esportsmanager.EsportsManager;
 
 public class ScoutScreen implements Screen {
     private final EsportsManager mainApp;
-    private final Screen parent;
 
     private Viewport gamePort;
 
@@ -34,11 +33,19 @@ public class ScoutScreen implements Screen {
     private TextButton buyScoutButton;
     private TextButton backButton;
 
-    public ScoutScreen(final EsportsManager mainApp, final Screen parent) {
+    public ScoutScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
-        this.parent = parent;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT, mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
+
+
+    }
+
+    @Override
+    public void show() {
+        System.out.println("Scout Screen");
+        Gdx.input.setInputProcessor(stage);
+        stage.clear();
 
         this.skin = new Skin();
         this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
@@ -51,13 +58,6 @@ public class ScoutScreen implements Screen {
         this.skin.add("label-clean-font", mainApp.cleanFont);
         this.skin.add("playerName-font", mainApp.playerNameFont);
         this.skin.load(Gdx.files.internal("ui/ui.json"));
-    }
-
-    @Override
-    public void show() {
-        System.out.println("Scout Screen");
-        Gdx.input.setInputProcessor(stage);
-        stage.clear();
 
         background = new Image(new TextureRegion(new TextureRegion(
                 mainApp.assets.get("img/images.atlas", TextureAtlas.class).findRegion("defaultbackground"))) );
@@ -67,8 +67,8 @@ public class ScoutScreen implements Screen {
         buyScoutButton = new TextButton(mainApp.bundle.get("Buy_Scout"), skin, "default");
         backButton = new TextButton(mainApp.bundle.get("Back"), skin, "default");
 
-        scoutReportButtonClick(this);
-        buyScoutButtonClick(this);
+        scoutReportButtonClick();
+        buyScoutButtonClick();
         backButtonClick();
 
         Table interfaceTable = new Table();
@@ -121,21 +121,20 @@ public class ScoutScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        skin.dispose();
     }
 
-    private void scoutReportButtonClick(final Screen scoutScreen) {
+    private void scoutReportButtonClick() {
         scoutReportButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                mainApp.setScreen(new ScoutReportScreen(mainApp, scoutScreen, 1));
+                mainApp.setScreen(mainApp.scoutReportScreen);
             }
         });
     }
 
-    private void buyScoutButtonClick(final Screen scoutScreen) {
+    private void buyScoutButtonClick() {
         buyScoutButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                mainApp.setScreen(new BuyScoutScreen(mainApp, scoutScreen));
+                mainApp.setScreen(mainApp.buyScoutScreen);
             }
         });
     }
@@ -143,12 +142,9 @@ public class ScoutScreen implements Screen {
     private void backButtonClick() {
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                mainApp.setScreen(parent);
+                mainApp.setScreen(mainApp.gameScreen);
             }
         });
     }
 
-    public Screen getParent() {
-        return parent;
-    }
 }

@@ -24,6 +24,7 @@ import com.paulocurado.esportsmanager.model.Player;
 import com.paulocurado.esportsmanager.model.Team;
 import com.paulocurado.esportsmanager.model.simulation.PlayerInBattle;
 import com.paulocurado.esportsmanager.model.simulation.SimulationBattle;
+import com.paulocurado.esportsmanager.uielements.TipsDialog;
 
 
 /**
@@ -49,23 +50,16 @@ public class SimulationScreen implements Screen {
     private boolean isBattleOver;
     private boolean isMatchReady;
 
+    private TipsDialog tipsDialog;
+
+
     public SimulationScreen(final EsportsManager mainApp, final Screen parent, BattleSimulation battleSimulation, int matchesToPlay) {
         this.mainApp = mainApp;
         this.parent = parent;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT, mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
 
-        this.skin = new Skin();
-        this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
-        this.skin.add("button-font", mainApp.buttonFont);
-        this.skin.add("label-font", mainApp.labelFont);
-        this.skin.add("label-small-font", mainApp.labelFontSmall);
-        this.skin.add("position-font", mainApp.positionFont);
-        this.skin.add("position-small-font", mainApp.positionSmallFont);
-        this.skin.add("label-medium-font", mainApp.labelFontMedium);
-        this.skin.add("label-clean-font", mainApp.cleanFont);
-        this.skin.add("playerName-font", mainApp.playerNameFont);
-        this.skin.load(Gdx.files.internal("ui/ui.json"));
+
 
         this.battleSimulation = battleSimulation;
 
@@ -78,6 +72,18 @@ public class SimulationScreen implements Screen {
         System.out.println("Simulation Screen");
         Gdx.input.setInputProcessor(stage);
         stage.clear();
+
+        this.skin = new Skin();
+        this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
+        this.skin.add("button-font", mainApp.buttonFont);
+        this.skin.add("label-font", mainApp.labelFont);
+        this.skin.add("label-small-font", mainApp.labelFontSmall);
+        this.skin.add("position-font", mainApp.positionFont);
+        this.skin.add("position-small-font", mainApp.positionSmallFont);
+        this.skin.add("label-medium-font", mainApp.labelFontMedium);
+        this.skin.add("label-clean-font", mainApp.cleanFont);
+        this.skin.add("playerName-font", mainApp.playerNameFont);
+        this.skin.load(Gdx.files.internal("ui/ui.json"));
 
       //  Image background = new Image(new TextureRegion(new TextureRegion(mainApp.assets.get(
    //             "img/images.atlas", TextureAtlas.class)
@@ -189,6 +195,10 @@ public class SimulationScreen implements Screen {
         container.add(battleButton).expandX();
 
         stage.addActor(container);
+
+        tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
+
+        screenFirstTime();
 
     }
 
@@ -306,6 +316,7 @@ public class SimulationScreen implements Screen {
 
         }
         stage.draw();
+        tipsDialog.draw();
     }
 
     @Override
@@ -343,11 +354,28 @@ public class SimulationScreen implements Screen {
                     battleButton.setText(mainApp.bundle.get("Playing") + "...");
                 }
                 else if (isBattleOver) {
-                    mainApp.setScreen(parent);
+                    mainApp.setScreen(mainApp.gameScreen);
                     mainApp.championship.setUserMatchShowed(true);
                 }
 
             }
         });
+    }
+
+    private void screenFirstTime() {
+        if (mainApp.user.simulationScreenFirstTime == true) {
+            tipsDialog.setTip(mainApp.bundle.get("SimulationScreen_FirstTime"));
+            tipsDialog.getActor("tipWindow").setHeight(tipsDialog.getActor("tipWindow").getHeight() + 50);
+            tipsDialog.getActor("panel").setHeight(tipsDialog.getActor("panel").getHeight() + 50);
+            tipsDialog.getActor("tipLabel").setHeight(tipsDialog.getActor("tipLabel").getHeight() + 50);
+
+            tipsDialog.getActor("TitleLabel").setY(tipsDialog.getActor("tipWindow").getTop() -
+                    tipsDialog.getActor("TitleLabel").getHeight() - 10);
+
+
+            tipsDialog.setVisibility(true);
+            tipsDialog.defaultButtonClick(stage);
+            mainApp.user.simulationScreenFirstTime = false;
+        }
     }
 }

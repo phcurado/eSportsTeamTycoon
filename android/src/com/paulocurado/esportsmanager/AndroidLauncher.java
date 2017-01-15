@@ -47,7 +47,7 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler {
 		RelativeLayout layout = new RelativeLayout(this);
 
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		View gameView = initializeForView(new EsportsManager(), config);
+		View gameView = initializeForView(new EsportsManager(this), config);
 		layout.addView(gameView);
 
 		adView = new AdView(this);

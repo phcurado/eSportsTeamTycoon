@@ -124,10 +124,22 @@ public class SimulateMatchDialog extends GameScreenBox {
 
                 }
                 else if(mainApp.championship.getWinnerOfChampionship().equals(mainApp.user.getTeam())) {
-                    ((GameScreen) root).getConfirmationDialog().setVisibility(true);
+                    if(mainApp.user.getTeam().getTier() != 1) {
+                        ((GameScreen) root).getConfirmationDialog().setVisibility(true);
+                    }
+                }
+                else if (mainApp.championship.getFinalChampionshipPositions().get(
+                        mainApp.championship.getFinalChampionshipPositions().size() - 1).equals(mainApp.user.getTeam())) {
+                    if(mainApp.user.getTeam().getTier() != 4) {
+                        ((GameScreen) root).getConfirmationDialog().setVisibility(true);
+                    }
+                    else {
+                        mainApp.setScreen(mainApp.championshipScreen);
+                    }
                 }
                 else {
-                    ((GameScreen)root).continueTime();
+                    mainApp.setScreen(mainApp.championshipScreen);
+                    //((GameScreen)root).continueTime();
                 }
             }
         });

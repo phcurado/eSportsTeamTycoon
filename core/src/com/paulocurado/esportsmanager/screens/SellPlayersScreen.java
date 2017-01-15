@@ -21,6 +21,7 @@ import com.paulocurado.esportsmanager.model.Position;
 import com.paulocurado.esportsmanager.model.UsefulFunctions;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
+import com.paulocurado.esportsmanager.uielements.TipsDialog;
 
 /**
  * Created by phcur on 31/12/2016.
@@ -28,7 +29,6 @@ import com.paulocurado.esportsmanager.uielements.ReaderElements;
 
 public class SellPlayersScreen implements Screen {
     private final EsportsManager mainApp;
-    private final Screen parent;
 
     private Viewport gamePort;
 
@@ -36,17 +36,26 @@ public class SellPlayersScreen implements Screen {
     private Skin skin;
 
     private ReaderElements sellPlayersScreenLayout;
+    private TipsDialog tipsDialog;
 
     private int playerSelected = 0;
 
     GameScreenBox yesNoDialog;
 
     private TextButton backButton;
-    public SellPlayersScreen(final EsportsManager mainApp, final Screen parent) {
+    public SellPlayersScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
-        this.parent = parent;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT, mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
+
+
+    }
+
+    @Override
+    public void show() {
+        System.out.println("Positions Screen");
+        Gdx.input.setInputProcessor(stage);
+        stage.clear();
 
         this.skin = new Skin();
         this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
@@ -59,16 +68,12 @@ public class SellPlayersScreen implements Screen {
         this.skin.add("label-clean-font", mainApp.cleanFont);
         this.skin.add("playerName-font", mainApp.playerNameFont);
         this.skin.load(Gdx.files.internal("ui/ui.json"));
-    }
-
-    @Override
-    public void show() {
-        System.out.println("Positions Screen");
-        Gdx.input.setInputProcessor(stage);
-        stage.clear();
 
         sellPlayersScreenLayout = new ReaderElements(mainApp, stage, skin, "ui/SellPlayersScreen.json");
         yesNoDialog = new GameScreenBox(mainApp, skin, "ui/YesNoBox.json", this);
+        tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
+
+        screenFirstTime();
 
         setUpPlayerInformation(mainApp.user.getTeam().getPlayers().get(0));
         createSelectedButtons();
@@ -79,7 +84,7 @@ public class SellPlayersScreen implements Screen {
 
 
         backButtonClick();
-        dismissButtonClick(this);
+        dismissButtonClick();
         stage.addActor(backButton);
 
     }
@@ -97,6 +102,7 @@ public class SellPlayersScreen implements Screen {
 
         stage.draw();
         yesNoDialog.draw();
+        tipsDialog.draw();
     }
     private void createSelectedButtons() {
         ButtonGroup buttonGroup = new ButtonGroup();
@@ -173,62 +179,82 @@ public class SellPlayersScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        skin.dispose();
-        yesNoDialog.dispose();
-
     }
 
-    private void dismissButtonClick(final Screen sellPlayersScreen) {
+    private void dismissButtonClick() {
         stage.getRoot().findActor("DismissButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
+                if (mainApp.user.getTeam().getBudget() > mainApp.user.getTeam().getPlayers().get(playerSelected).getRecomendedSalary()) {
 
-                ((Label)yesNoDialog.getActor("informationLabel")).setText(mainApp.bundle.format("Confirmation_Dismiss",
-                        mainApp.user.getTeam().getPlayers().get(playerSelected).getNickName()));
-                yesNoDialog.getActor("YesButton").addListener(new ClickListener() {
-                    public void clicked(InputEvent e, float x, float y) {
-                        mainApp.user.getTeam().getPlayers().get(playerSelected).setTeamId("TEAM_0000");
-                        UsefulFunctions usefulFunctions = new UsefulFunctions(mainApp);
-                        usefulFunctions.removePlayerContract(mainApp.user.getTeam(), mainApp.user.getTeam().getPlayers().get(playerSelected));
-                        mainApp.user.getTeam().getPlayers().remove(playerSelected);
-                        mainApp.user.getTeam().organizeIdPlayers();
 
-                        if(mainApp.user.getTeam().getPlayers().size() != 0) {
-                            mainApp.setScreen(sellPlayersScreen);
+                    ((Label) yesNoDialog.getActor("informationLabel")).setText(mainApp.bundle.format("Confirmation_Dismiss",
+                            mainApp.user.getTeam().getPlayers().get(playerSelected).getNickName(),
+                            String.format("%,d",mainApp.user.getTeam().getPlayers().get(playerSelected).getRecomendedSalary())));
+
+                    yesNoDialog.getActor("YesButton").addListener(new ClickListener() {
+                        public void clicked(InputEvent e, float x, float y) {
+                            mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() - mainApp.user.getTeam().getPlayers().get(playerSelected).getRecomendedSalary());
+                            mainApp.user.getTeam().getPlayers().get(playerSelected).setTeamId("TEAM_0000");
+                            UsefulFunctions usefulFunctions = new UsefulFunctions(mainApp);
+                            usefulFunctions.removePlayerContract(mainApp.user.getTeam(), mainApp.user.getTeam().getPlayers().get(playerSelected));
+                            mainApp.user.getTeam().getPlayers().remove(playerSelected);
+                            mainApp.user.getTeam().organizeIdPlayers();
+
+                            if (mainApp.user.getTeam().getPlayers().size() != 0) {
+                                mainApp.setScreen(mainApp.sellPlayersScreen);
+                            } else {
+                                mainApp.setScreen(mainApp.scoutReportScreen);
+                            }
+
+                            yesNoDialog.getActor("NoButton").getListeners().removeIndex(yesNoDialog.getActor("NoButton").getListeners().size - 1);
+                            yesNoDialog.getActor("YesButton").getListeners().removeIndex(yesNoDialog.getActor("YesButton").getListeners().size - 1);
+
                         }
-                        else {
-                            mainApp.setScreen(parent);
+
+
+                    });
+
+                    yesNoDialog.getActor("NoButton").addListener(new ClickListener() {
+                        public void clicked(InputEvent e, float x, float y) {
+                            yesNoDialog.setVisibility(false);
+                            Gdx.input.setInputProcessor(stage);
+
+                            yesNoDialog.getActor("NoButton").getListeners().removeIndex(yesNoDialog.getActor("NoButton").getListeners().size - 1);
+                            yesNoDialog.getActor("YesButton").getListeners().removeIndex(yesNoDialog.getActor("YesButton").getListeners().size - 1);
+
                         }
+                    });
 
-                        yesNoDialog.getActor("NoButton").getListeners().removeIndex(yesNoDialog.getActor("NoButton").getListeners().size - 1);
-                        yesNoDialog.getActor("YesButton").getListeners().removeIndex(yesNoDialog.getActor("YesButton").getListeners().size - 1);
+                    yesNoDialog.setVisibility(true);
+                }
+                else {
+                    tipsDialog.setTip(mainApp.bundle.format("Tip_No_Money_Dismiss", String.format("%,d",mainApp.user.getTeam().getPlayers().get(playerSelected).getRecomendedSalary())));
+                    tipsDialog.setVisibility(true);
+                    tipsDialog.defaultButtonClick(stage);
 
-                    }
-
-
-                });
-
-                yesNoDialog.getActor("NoButton").addListener(new ClickListener() {
-                    public void clicked(InputEvent e, float x, float y) {
-                        yesNoDialog.setVisibility(false);
-                        Gdx.input.setInputProcessor(stage);
-
-                        yesNoDialog.getActor("NoButton").getListeners().removeIndex(yesNoDialog.getActor("NoButton").getListeners().size - 1);
-                        yesNoDialog.getActor("YesButton").getListeners().removeIndex(yesNoDialog.getActor("YesButton").getListeners().size - 1);
-
-                    }
-                });
-
-                yesNoDialog.setVisibility(true);
-
-
+                }
             }
         });
     }
     private void backButtonClick() {
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                mainApp.setScreen(parent);
+                if (mainApp.user.getTeam().getPlayers().size() < 5) {
+                    mainApp.setScreen(mainApp.scoutReportScreen);
+                }
+                else {
+                    mainApp.setScreen(mainApp.lineupScreen);
+                }
             }
         });
+    }
+
+    private void screenFirstTime() {
+        if (mainApp.user.sellPlayersScreenFirstTime == true) {
+            tipsDialog.setTip(mainApp.bundle.get("SellPlayersScreen_FirstTime"));
+            tipsDialog.setVisibility(true);
+            tipsDialog.defaultButtonClick(stage);
+            mainApp.user.sellPlayersScreenFirstTime = false;
+        }
     }
 }

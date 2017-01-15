@@ -14,7 +14,7 @@ public class GameSchedule {
     public static int MIN_DAY = 7;
     public static int MIN_WEEK = 4;
     public static int MIN_MONTH = 12;
-    public static float TIME_PASSING_SECONDS = 0.01f;
+    public static float TIME_PASSING_SECONDS = 0.2f;
     private float realTime = 0;
     private boolean dayPassing = false;
     private boolean monthPassing = false;

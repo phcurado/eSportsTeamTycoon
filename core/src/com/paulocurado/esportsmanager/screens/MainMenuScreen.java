@@ -16,6 +16,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.model.Championship;
 import com.paulocurado.esportsmanager.model.GameSchedule;
@@ -27,6 +30,8 @@ import com.paulocurado.esportsmanager.uielements.NewGameDialog;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
 import com.paulocurado.esportsmanager.uielements.TipsDialog;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Locale;
 
 /**
@@ -45,6 +50,7 @@ public class MainMenuScreen implements Screen {
     private GameScreenBox errorDialog;
     private GameScreenBox confirmDataDialog;
     private GameScreenBox aboutDialog;
+    private GameScreenBox languageDialog;
     private TipsDialog tipsDialog;
 
     ReaderElements mainMenuLayout;
@@ -55,6 +61,17 @@ public class MainMenuScreen implements Screen {
         this.mainApp = mainApp;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT , mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
+
+
+
+    }
+
+
+    @Override
+    public void show() {
+        System.out.println("Start Screen");
+        Gdx.input.setInputProcessor(stage);
+        stage.clear();
 
         this.skin = new Skin();
         this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
@@ -68,21 +85,13 @@ public class MainMenuScreen implements Screen {
         this.skin.add("playerName-font", mainApp.playerNameFont);
         this.skin.load(Gdx.files.internal("ui/ui.json"));
 
-    }
-
-
-    @Override
-    public void show() {
-        System.out.println("Start Screen");
-        Gdx.input.setInputProcessor(stage);
-        stage.clear();
-
         mainMenuLayout = new ReaderElements(mainApp, stage, skin, "ui/MainMenuScreen.json");
         newGameDialog = new NewGameDialog(mainApp, skin, "ui/NewGameBox.json", this);
         errorDialog = new GameScreenBox(mainApp, skin, "ui/ErrorBox.json", this);
         confirmDataDialog = new GameScreenBox(mainApp, skin, "ui/ConfirmData.json", this);
         aboutDialog = new GameScreenBox(mainApp, skin, "ui/HirePlayerBox.json", this);
         tipsDialog =  new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
+        languageDialog = new GameScreenBox(mainApp, skin, "ui/LanguageBox.json", this);
 
 
 
@@ -90,13 +99,17 @@ public class MainMenuScreen implements Screen {
         newGameDialogButtonsClick();
         errorDialogButtonsClick();
         confirmDataDialogButtonsClick();
+        languageButtonClick();
         tipsDialog.defaultButtonClick(stage);
+
+        languageDialogLogic();
 
 
         Actions actions = new Actions();
 
-        stage.getRoot().findActor("cloud1").addAction(actions.forever(actions.sequence(actions.moveBy(30, 0, 10f), actions.moveBy(-30, 0, 10f))) );
-        stage.getRoot().findActor("cloud2").addAction(actions.forever(actions.sequence(actions.moveBy(40, 0, 13f), actions.moveBy(-40, 0, 13f))) );
+        stage.getRoot().findActor("logo").addAction(actions.forever(actions.sequence(actions.moveBy(0, 10, 2f), actions.moveBy(0, -10, 2f))) );
+        stage.getRoot().findActor("cloud1").addAction(actions.forever(actions.sequence(actions.moveBy(30, 0, 7f), actions.moveBy(-30, 0, 7f))) );
+        stage.getRoot().findActor("cloud2").addAction(actions.forever(actions.sequence(actions.moveBy(40, 0, 10f), actions.moveBy(-40, 0, 10f))) );
     }
 
     @Override
@@ -116,6 +129,7 @@ public class MainMenuScreen implements Screen {
         confirmDataDialog.draw();
         aboutDialog.draw();
         tipsDialog.draw();
+        languageDialog.draw();
 
     }
 
@@ -146,12 +160,6 @@ public class MainMenuScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        skin.dispose();
-        newGameDialog.dispose();
-        errorDialog.dispose();
-        confirmDataDialog.dispose();
-        aboutDialog.dispose();
-        tipsDialog.dispose();
     }
 
 
@@ -170,7 +178,7 @@ public class MainMenuScreen implements Screen {
                         Gdx.files.local("Schedule.json").exists() && Gdx.files.local("Championship.json").exists()) {
                     HandleSaveGame handler = new HandleSaveGame();
                     handler.loadGame(mainApp);
-                    mainApp.setScreen(new GameScreen(mainApp));
+                    mainApp.setScreen(mainApp.gameScreen);
                 }
                 else {
                     tipsDialog.setTip(mainApp.bundle.get("Error_Load_Game"));
@@ -283,7 +291,7 @@ public class MainMenuScreen implements Screen {
                 mainApp.user.getTeam().organizeIdPlayers();
 
 
-                mainApp.setScreen(new GameScreen(mainApp));
+                mainApp.setScreen(mainApp.gameScreen);
             }
         });
 
@@ -294,6 +302,67 @@ public class MainMenuScreen implements Screen {
                 newGameDialog.setVisibility(true);
             }
         });
+    }
+
+    private void languageButtonClick() {
+        stage.getRoot().findActor("LanguageButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+            languageDialog.setVisibility(true);
+            }
+        });
+    }
+
+    private void languageDialogLogic() {
+        languageDialog.getActor("EnglishButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+
+                JsonParser jsonParser = new JsonParser();
+                JsonObject config = (JsonObject)jsonParser.parse(Gdx.files.internal("database/Configuration.json").reader());
+                Writer writerConfig = Gdx.files.local("Configuration.json").writer(false);
+                config.addProperty("language", "");
+
+                try {
+                    writerConfig.write(config.toString());
+                    writerConfig.close();
+                } catch (IOException f) {
+                    f.printStackTrace();
+                }
+                languageDialog.setVisibility(false);
+                tipsDialog.setVisibility(true);
+                tipsDialog.setTip(mainApp.bundle.get("Restart_App"));
+                tipsDialog.defaultButtonClick(stage);
+            }
+        });
+
+        languageDialog.getActor("PortugueseButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+
+                JsonParser jsonParser = new JsonParser();
+                JsonObject config = (JsonObject)jsonParser.parse(Gdx.files.internal("database/Configuration.json").reader());
+                Writer writerConfig = Gdx.files.local("Configuration.json").writer(false);
+                config.addProperty("language", "_pt_br");
+                try {
+                    writerConfig.write(config.toString());
+                    writerConfig.close();
+                } catch (IOException f) {
+                    f.printStackTrace();
+                }
+
+                languageDialog.setVisibility(false);
+                tipsDialog.setVisibility(true);
+                tipsDialog.setTip(mainApp.bundle.get("Restart_App"));
+                tipsDialog.defaultButtonClick(stage);
+            }
+        });
+
+        languageDialog.getActor("BackButton").addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                languageDialog.setVisibility(false);
+                Gdx.input.setInputProcessor(stage);
+            }
+        });
+
+
     }
 
 

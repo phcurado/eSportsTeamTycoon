@@ -26,6 +26,7 @@ public class ResultMatchDialog extends GameScreenBox {
     }
 
     public void showRoundMatches(ArrayList<BattleSimulation> battles) {
+
         for (int i = 0; i < battles.size(); i++) {
             Label radiantTeamLabel = new Label(battles.get(i).getRadiantTeam().getName(), skin, "labelDarkGraySimulation");
             Label radiantScoreLabel = new Label(Integer.toString(battles.get(i).getRadiantVictories()), skin, "labelDarkGraySimulation");

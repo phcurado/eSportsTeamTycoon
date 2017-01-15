@@ -39,6 +39,7 @@ public class Championship {
     private boolean isUserMatchShowed = false;
     private boolean isDuelShowed = false;
     private boolean playerAcceptedChampionship = false;
+    public boolean isChampionshipIsCloseStart = false;
 
     public Championship(ArrayList<Team> teams, EsportsManager mainApp) {
         this.mainApp = mainApp;
@@ -64,23 +65,44 @@ public class Championship {
         }
     }
 
-    public void startChampionship() {
+    public void closeChampionship() {
         for (int i = 1; i <= schedule.MIN_MONTH / DATE_OCCURRENCES; i++) {
-            if (schedule.getDay() == 1 && schedule.getWeek() == 1 && schedule.getMonth() == i * DATE_OCCURRENCES) {
+            if (schedule.getDay() == 1 && schedule.getWeek() == 1 && schedule.getMonth() == i * DATE_OCCURRENCES - 1) {
                 UsefulFunctions usefulFunctions = new UsefulFunctions(mainApp);
                 teams = usefulFunctions.getTeamsByTier(mainApp.user.getTeam().getTier());
-                championshipIsUp = true;
-                groupStage = true;
+                //groupStage = true;
                 tierPlaying = mainApp.user.getTeam().getTier();
                 championshipSchedule.setDay(schedule.getDay());
-                championshipSchedule.setWeek(schedule.getWeek() + 1);
-                championshipSchedule.setMonth(schedule.getMonth());
+                championshipSchedule.setWeek(schedule.getWeek());
+                championshipSchedule.setMonth(schedule.getMonth() + 1);
                 championshipSchedule.setYear(schedule.getYear());
-                battles.clear();
                 for (int j = 0; j < teams.size(); j++) {
                     teams.get(j).setVictoriesChampionship(0);
                     teams.get(j).setLosesChampionship(0);
                 }
+                isChampionshipIsCloseStart = true;
+                organizeTeamsFinal = false;
+            }
+        }
+    }
+    public void startChampionship() {
+        for (int i = 1; i <= schedule.MIN_MONTH / DATE_OCCURRENCES; i++) {
+            if (schedule.getDay() == 1 && schedule.getWeek() == 1 && schedule.getMonth() == i * DATE_OCCURRENCES) {
+                finishChampionship(); // testes
+                  UsefulFunctions usefulFunctions = new UsefulFunctions(mainApp);
+                 teams = usefulFunctions.getTeamsByTier(mainApp.user.getTeam().getTier());
+                championshipIsUp = true;
+                   groupStage = true;
+                tierPlaying = mainApp.user.getTeam().getTier();
+               // championshipSchedule.setDay(schedule.getDay());
+               // championshipSchedule.setWeek(schedule.getWeek() + 1);
+               // championshipSchedule.setMonth(schedule.getMonth());
+               // championshipSchedule.setYear(schedule.getYear());
+                  battles.clear();
+                 for (int j = 0; j < teams.size(); j++) {
+                       teams.get(j).setVictoriesChampionship(0);
+                       teams.get(j).setLosesChampionship(0);
+                   }
                 organizeTeamsFinal = false;
                 championshipEnded = false;
 
@@ -191,6 +213,8 @@ public class Championship {
         isUserMatchShowed = false;
         isDuelShowed = false;
         playerAcceptedChampionship = false;
+        isChampionshipIsCloseStart = false;
+
     }
     public Team getWinnerOfChampionship() {
         if(championshipEnded) {
@@ -231,37 +255,51 @@ public class Championship {
     }
 
     public double payPrizeToUser() {
-        double prize = 5000000 / mainApp.user.getTeam().getTier();
+        double prize;
+
+        if (mainApp.user.getTeam().getTier() == 1) {
+            prize =  3000000;
+        }
+        else if (mainApp.user.getTeam().getTier() == 2) {
+            prize =  2000000;
+        }
+        else if (mainApp.user.getTeam().getTier() == 3) {
+            prize =  1500000;
+        }
+        else {
+            prize =  900000;
+        }
+
         for(int i = 0; i < getFinalChampionshipPositions().size(); i++) {
             if(mainApp.user.getTeam().equals(getFinalChampionshipPositions().get(i))) {
 
                 if(getWinnerOfChampionship().equals(mainApp.user.getTeam())) {
-                    prize = 0.44 * prize;
+                    prize = 0.30 * prize;
                     mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
                     System.out.println("Ficou em primeiro " + prize);
                 }
                 else if (i == 1) {
-                    prize = 0.16 * prize;
+                    prize = 0.23 * prize;
                     mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
                     System.out.println("Ficou em segundo " + prize);
                 }
                 else if (i == 2) {
-                    prize = 0.1 * prize;
+                    prize = 0.17 * prize;
                     mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
                     System.out.println("Ficou em terceiro " + prize);
                 }
                 else if (i == 3){
-                    prize = 0.07 * prize;
+                    prize = 0.13 * prize;
                     mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
                     System.out.println("Ficou em quarto " + prize);
                 }
                 else if (i == 4){
-                    prize = 0.045 * prize;
+                    prize = 0.10 * prize;
                     mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
                     System.out.println("Ficou em quinto " + prize);
                 }
                 else {
-                    prize = 0.025 * prize;
+                    prize = 0.07 * prize;
                     mainApp.user.getTeam().setBudget(mainApp.user.getTeam().getBudget() + (long)prize);
                     System.out.println("Ficou depois do quinto " + prize);
                 }
@@ -269,6 +307,23 @@ public class Championship {
         }
 
         return prize;
+    }
+
+    public double payPrizePerMatchToUser() {
+
+        if (mainApp.user.getTeam().getTier() == 1) {
+            return 18000;
+        }
+        if (mainApp.user.getTeam().getTier() == 2) {
+            return 12000;
+        }
+        if (mainApp.user.getTeam().getTier() == 3) {
+            return 8000;
+        }
+        else {
+            return 5000;
+        }
+
     }
 
 

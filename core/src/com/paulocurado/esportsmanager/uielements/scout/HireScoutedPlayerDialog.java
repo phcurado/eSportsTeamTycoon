@@ -76,7 +76,7 @@ public class HireScoutedPlayerDialog extends GameScreenBox {
                     ((ScoutReportScreen) root).getTipsDialog().getActor("OkButton").addListener((new ClickListener() {
                         public void clicked(InputEvent e, float x, float y) {
                             ((ScoutReportScreen) root).getTipsDialog().setVisibility(false);
-                            mainApp.setScreen(new SellPlayersScreen(mainApp, root));
+                            mainApp.setScreen(mainApp.sellPlayersScreen);
                         }
                     }));
 

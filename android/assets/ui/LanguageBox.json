@@ -1,14 +1,12 @@
 {
   "ui": [
     {
-      "uniqueName": "tipWindow",
+      "uniqueName": "LanguageBox",
       "type": "window",
-      "title": "Tip",
-      "id": "title",
       "background": "window",
       "size": {
         "x": 550,
-        "y": 0
+        "y": 300
       },
       "position": {
         "x": 0,
@@ -17,69 +15,74 @@
       "orientation": "center"
     },
     {
-      "uniqueName": "TitleLabel",
       "type": "label",
-      "text": "Tip",
+      "text": "Language",
       "id": "title",
       "size": {
         "x": 0,
         "y": 0
+
       },
       "position": {
         "x": 0,
         "y": 200
       },
-      "centerX": "tipWindow",
-      "inside_Top": "tipWindow",
+      "centerX": "LanguageBox",
+      "inside_Top": "LanguageBox",
       "marginTop": 10,
       "orientation": "none"
     },
     {
-      "uniqueName": "panel",
-      "type": "panel",
-      "background": "panel",
-      "id": "default",
-      "size": {
-        "x": 500,
-        "y": 260
-      },
-      "position": {
-        "x": 0,
-        "y": 20
-      },
-      "orientation": "center"
-    },
-    {
-      "uniqueName": "tipLabel",
-      "type": "label",
-      "text": "Tip",
-      "id": "small",
-      "size": {
-        "x": 480,
-        "y": 250
-      },
-      "position": {
-        "x": 0,
-        "y": 15
-      },
-      "orientation": "center"
-    },
-    {
-      "uniqueName": "OkButton",
+      "uniqueName": "EnglishButton",
       "type": "textbutton",
-      "text": "Ok",
+      "text": "English",
       "id": "default",
       "size": {
-        "x": 180,
+        "x": 280,
         "y": 65
+
       },
       "position": {
         "x": 0,
-        "y": -160
+        "y": 0
       },
-      "inside_Bottom": "tipWindow",
-      "centerX": "tipWindow",
+      "centerX": "LanguageBox",
+      "centerY": "LanguageBox",
       "marginBottom": 30,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "PortugueseButton",
+      "type": "textbutton",
+      "text": "Portuguese",
+      "id": "default",
+      "size": {
+        "x": 280,
+        "y": 65
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "EnglishButton",
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "BackButton",
+      "type": "textbutton",
+      "text": "Back",
+      "id": "default",
+      "size": {
+        "x": 280,
+        "y": 65
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "PortugueseButton",
       "orientation": "none"
     }
   ]

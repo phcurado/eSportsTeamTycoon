@@ -33,10 +33,10 @@ public class ErrorScoutDialog extends GameScreenBox {
                 error += mainApp.bundle.get("Error_User_Team_No_Cost_Money") + "\n";
             }
 
-            if (mainApp.user.getTeam().getBudget() < MINUMUM_MONTHS * mainApp.findPlayerbyId(((ScoutReportScreen) root).getHireDialog().player.getId()).getSalary(mainApp.contractList)) {
+          //  if (mainApp.user.getTeam().getBudget() < MINUMUM_MONTHS * mainApp.findPlayerbyId(((ScoutReportScreen) root).getHireDialog().player.getId()).getSalary(mainApp.contractList)) {
 
-                error += mainApp.bundle.get("Error_User_Team_No_Salary_Money") + "\n";
-            }
+           //     error += mainApp.bundle.get("Error_User_Team_No_Salary_Money") + "\n";
+           // }
         }
 
         ((Label) getActor("errorLabel")).setText(error);

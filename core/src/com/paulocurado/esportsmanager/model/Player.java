@@ -5,9 +5,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FloatFrameBuffer;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -65,6 +67,7 @@ public class Player {
     private transient float speed = 20f;
     private transient boolean moving = true;
 
+    //public transient FrameBuffer faceDraw;
 
 
     public Player() {
@@ -73,7 +76,6 @@ public class Player {
         this.nickName = "";
         this.birthDay = Calendar.getInstance();
         position = new Vector2(0, 0);
-
     }
     public Player(Player player) {
         id = player.getId();
@@ -177,11 +179,14 @@ public class Player {
         }
 
 
-
     }
 
+    private transient  boolean m_fboEnabled = true;
+    private transient FrameBuffer m_fbo = null;
+    private transient TextureRegion m_fboRegion = null;
     public Image createPlayerFace(TextureRegion[][] texture, Viewport viewport) {
 
+/*
         Batch batch = new SpriteBatch();
 
         FrameBuffer faceDraw = new FrameBuffer(Pixmap.Format.RGBA8888, (int)viewport.getWorldWidth(), (int)viewport.getWorldHeight(), false);
@@ -198,6 +203,8 @@ public class Player {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 
         switch (faceColor) {
             case 0:
@@ -252,15 +259,111 @@ public class Player {
         batch.end();
         faceDraw.end();
 
-        viewport.apply();
+        //viewport.apply();
 
 
         TextureRegion combinedTexture = new TextureRegion(faceDraw.getColorBufferTexture());
+
         combinedTexture.flip(false, true);
+
 
         Image playerFace = new Image(combinedTexture);
         playerFace.setSize(128, 128);
+        faceDraw.dispose();
+*/        Batch batch = new SpriteBatch();
 
+        int width = Gdx.graphics.getWidth();
+        int height = Gdx.graphics.getHeight();
+        Matrix4 m = new Matrix4();
+        m.setToOrtho2D(0, 0, 32, 32);
+        batch.setProjectionMatrix(m);
+
+
+        if(m_fboEnabled)      // enable or disable the supersampling
+        {
+            if(m_fbo == null)
+            {
+                // m_fboScaler increase or decrease the antialiasing quality
+
+                m_fbo = new FrameBuffer(Pixmap.Format.RGBA8888, (int)viewport.getWorldWidth(), (int)viewport.getWorldHeight(), false);
+                m_fboRegion = new TextureRegion(m_fbo.getColorBufferTexture());
+                m_fboRegion.flip(false, true);
+            }
+
+            m_fbo.begin();
+        }
+
+        batch.enableBlending();
+        Gdx.gl.glBlendFuncSeparate(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.begin();
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
+        switch (faceColor) {
+            case 0:
+                batch.setColor(232f/255, 193f/255, 158f/255, 1);
+                break;
+            case 1:
+                batch.setColor(196f/255, 146f/255, 112f/255, 1);
+                break;
+            case 2:
+                batch.setColor(223f/255, 190f/255, 143f/255, 1);
+                break;
+            case 3:
+                batch.setColor(141f/255, 105f/255, 177f/255, 1);
+                break;
+        }
+        batch.draw(texture[1][faceType], position.x, position.y);
+        batch.setColor(Color.WHITE);
+        switch (hairColor) {
+            case 0:
+                batch.setColor(255f/255, 24f/255, 225f/255, 1);
+                break;
+            case 1:
+                batch.setColor(83f/255, 61f/255, 53f/255, 1);
+                break;
+            case 2:
+                batch.setColor(9f/255, 8f/255, 6f/255, 1);
+                break;
+            case 3:
+                batch.setColor(207f/255, 204f/255, 112f/255, 1);
+                break;
+            case 4:
+                batch.setColor(137f/255, 56f/255, 66f/255, 1);
+                break;
+            case 5:
+                batch.setColor(95f/255, 159f/255, 100f/255, 1);
+                break;
+        }
+        if(hairType != 0)
+            batch.draw(texture[0][hairType], position.x, position.y);
+        batch.setColor(Color.WHITE);
+        batch.draw(texture[1][expressionType+4], position.x, position.y);
+        switch (accessory) {
+            case 1:
+                batch.draw(texture[1][accessory+9], position.x, position.y);
+                break;
+            case 2:
+                batch.draw(texture[1][accessory+9], position.x, position.y);
+                break;
+        }
+
+
+        batch.end();
+
+        // this is the main render function
+
+        if(m_fbo != null)
+        {
+            m_fbo.end();
+
+
+        }
+
+        Image playerFace = new Image(m_fboRegion);
         return playerFace;
     }
 
@@ -510,19 +613,19 @@ public class Player {
         double positionAbility;
 
         if(role == 1) {
-            positionAbility = 0.65 * farm + 0.05 * independency + 0 * support + 0.05 * rotation + 0.25 * fighting;
+            positionAbility = 0.85 * farm + 0 * independency + 0 * support + 0 * rotation + 0.15 * fighting;
         }
         else if(role == 2) {
-            positionAbility = 0.15 * farm + 0.10 * independency + 0 * support + 0.10 * rotation + 0.65 * fighting;
+            positionAbility = 0.20 * farm + 0 * independency + 0 * support + 0 * rotation + 0.80 * fighting;
         }
         else if(role == 3) {
-            positionAbility = 0.1 * farm + 0.60 * independency + 0 * support + 0.15 * rotation + 0.15 * fighting;
+            positionAbility = 0.15 * farm + 0.70 * independency + 0 * support + 0 * rotation + 0.15 * fighting;
         }
         else if(role == 4) {
-            positionAbility = 0 * farm + 0.05 * independency + 0.4 * support + 0.50 * rotation + 0.05 * fighting;
+            positionAbility = 0 * farm + 0 * independency + 0.4 * support + 0.60 * rotation + 0 * fighting;
         }
        else {
-            positionAbility = 0 * farm + 0.05 * independency + 0.75 * support + 0.1 * rotation + 0.10 * fighting;
+            positionAbility = 0 * farm + 0 * independency + 0.85 * support + 0.15 * rotation + 0 * fighting;
         }
 
         return abilityResult((int)positionAbility);
@@ -532,7 +635,7 @@ public class Player {
     protected String abilityResult(int positionAbility) {
         String ability = "G";
         int range = 5;
-        int maxAbility = 91;
+        int maxAbility = 90;
 
         if(positionAbility >= maxAbility)
             ability = "S";
@@ -560,16 +663,16 @@ public class Player {
             positionHability = 0.85 * farm + 0 * independency + 0 * support + 0 * rotation + 0.15 * fighting;
         }
         else if(role == 2) {
-            positionHability = 0.25 * farm + 0.05 * independency + 0 * support + 0.05 * rotation + 0.65 * fighting;
+            positionHability = 0.20 * farm + 0 * independency + 0 * support + 0 * rotation + 0.80 * fighting;
         }
         else if(role == 3) {
             positionHability = 0.15 * farm + 0.7 * independency + 0 * support + 0 * rotation + 0.15 * fighting;
         }
         else if(role == 4) {
-            positionHability = 0 * farm + 0.05 * independency + 0.4 * support + 0.50 * rotation + 0.05 * fighting;
+            positionHability = 0 * farm + 0 * independency + 0.4 * support + 0.6 * rotation + 0 * fighting;
         }
         else {
-            positionHability = 0 * farm + 0 * independency + 0.80 * support + 0.15 * rotation + 0.05 * fighting;
+            positionHability = 0 * farm + 0 * independency + 0.85 * support + 0.15 * rotation + 0 * fighting;
         }
 
         return (int)positionHability;

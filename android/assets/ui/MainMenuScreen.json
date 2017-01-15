@@ -57,7 +57,10 @@
         "x": 0,
         "y": 300
       },
-      "orientation": "center"
+      "centerX": "Screen",
+      "inside_Top": "Screen",
+      "marginTop": 40,
+      "orientation": "none"
     },
     {
       "uniqueName": "startButton",
@@ -71,9 +74,12 @@
       },
       "position": {
         "x": 0,
-        "y": -50
+        "y": 0
       },
-      "orientation": "center"
+      "centerX": "Screen",
+      "inside_Bottom": "logo",
+      "marginTop": 140,
+      "orientation": "none"
     },
     {
       "uniqueName": "loadButton",
@@ -87,9 +93,29 @@
       },
       "position": {
         "x": 0,
-        "y": -150
+        "y": 0
       },
-      "orientation": "center"
+      "below": "startButton",
+      "marginTop": 20,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "LanguageButton",
+      "type": "textbutton",
+      "text": "Language",
+      "id": "default",
+      "size": {
+        "x": 220,
+        "y": 75
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "below": "loadButton",
+      "marginTop": 20,
+      "orientation": "none"
     },
     {
       "uniqueName": "exitButton",
@@ -103,9 +129,11 @@
       },
       "position": {
         "x": 0,
-        "y": -250
+        "y": 0
       },
-      "orientation": "center"
+      "below": "LanguageButton",
+      "marginTop": 20,
+      "orientation": "none"
     }
   ]
 }

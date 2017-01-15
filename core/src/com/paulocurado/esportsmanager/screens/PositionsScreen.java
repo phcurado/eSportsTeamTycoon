@@ -24,6 +24,7 @@ import com.paulocurado.esportsmanager.model.Position;
 import com.paulocurado.esportsmanager.uielements.ButtonPlayer;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
+import com.paulocurado.esportsmanager.uielements.TipsDialog;
 
 
 import java.util.ArrayList;
@@ -42,7 +43,6 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sizeTo;
 
 public class PositionsScreen implements Screen {
     private final EsportsManager mainApp;
-    private final Screen parent;
 
     private Viewport gamePort;
 
@@ -54,13 +54,22 @@ public class PositionsScreen implements Screen {
 
     private TextButton backButton;
 
+    private TipsDialog tipsDialog;
 
 
-    public PositionsScreen(final EsportsManager mainApp, final Screen parent) {
+    public PositionsScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
-        this.parent = parent;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT, mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
+
+
+    }
+
+    @Override
+    public void show() {
+        System.out.println("Positions Screen");
+        Gdx.input.setInputProcessor(stage);
+        stage.clear();
 
         this.skin = new Skin();
         this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
@@ -73,19 +82,16 @@ public class PositionsScreen implements Screen {
         this.skin.add("label-clean-font", mainApp.cleanFont);
         this.skin.add("playerName-font", mainApp.playerNameFont);
         this.skin.load(Gdx.files.internal("ui/ui.json"));
-    }
-
-    @Override
-    public void show() {
-        System.out.println("Positions Screen");
-        Gdx.input.setInputProcessor(stage);
-        stage.clear();
 
         playersScreenLayout = new ReaderElements(mainApp, stage, skin, "ui/positionPlayerInformationBox.json");
         positionsScreenLayout = new ReaderElements(mainApp, stage, skin, "ui/PositionsScreen.json");
 
         backButton = new TextButton(mainApp.bundle.get("Back"), skin, "default");
         backButton.setWidth(stage.getWidth());
+
+        tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
+
+        screenFirstTime();
 
         setUpPlayerInformation(mainApp.user.getTeam().getPlayers().get(0));
 
@@ -106,7 +112,7 @@ public class PositionsScreen implements Screen {
 
         for (int i = 0; i < mainApp.user.getTeam().getPlayers().size(); i++) {
             final ButtonPlayer playerFaceButton = new ButtonPlayer(mainApp.user.getTeam().getPlayers().get(i).
-                    createPlayerFace(((GameScreen)((LineupScreen)parent).getParent()).facesOptions, gamePort).getDrawable() );
+                    createPlayerFace(mainApp.facesOptions, gamePort).getDrawable() );
             playerFaceButton.setRolePosition(i + 1);
             playerFaceButton.setSize(100, 100);
             playerFaceButton.setPosition(rolesPositions(i + 1).x, rolesPositions(i + 1).y);
@@ -223,6 +229,8 @@ public class PositionsScreen implements Screen {
 
 
         stage.draw();
+        tipsDialog.draw();
+
     }
 
     @Override
@@ -248,12 +256,11 @@ public class PositionsScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        skin.dispose();
     }
     private void setUpPlayerInformation(Player player) {
         ((Label) stage.getRoot().findActor("NickNameLabel")).setWrap(false);
         ((Label) stage.getRoot().findActor("NickNameLabel")).setText(player.getNickName());
-        ((Image) stage.getRoot().findActor("faceImage")).setDrawable(player.createPlayerFace(((GameScreen)((LineupScreen)parent).getParent()).facesOptions, gamePort).getDrawable() );
+        ((Image) stage.getRoot().findActor("faceImage")).setDrawable(player.createPlayerFace(mainApp.facesOptions, gamePort).getDrawable() );
 
 
         ((Label) stage.getRoot().findActor("FarmNumberLabel")).setText(Integer.toString(player.getFarm() ));
@@ -280,9 +287,18 @@ public class PositionsScreen implements Screen {
     private void backButtonClick() {
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                mainApp.setScreen(parent);
+                mainApp.setScreen(mainApp.lineupScreen);
             }
         });
+    }
+
+    private void screenFirstTime() {
+        if (mainApp.user.positionScreenFirstTime == true) {
+            tipsDialog.setTip(mainApp.bundle.get("PositionsScreen_FirstTime"));
+            tipsDialog.setVisibility(true);
+            tipsDialog.defaultButtonClick(stage);
+            mainApp.user.positionScreenFirstTime = false;
+        }
     }
 
 }

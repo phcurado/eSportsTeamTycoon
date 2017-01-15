@@ -1,22 +1,18 @@
 {
   "ui": [
     {
-      "uniqueName": "YesNoBox",
+      "uniqueName": "ConfirmationBox",
       "type": "window",
-      "title": "ConfirmData",
-      "id": "title",
       "background": "window",
       "size": {
         "x": 550,
-        "y": 300
+        "y": 0
       },
       "position": {
         "x": 0,
         "y": 0
       },
-      "centerX": "Screen",
-      "centerY": "Screen",
-      "orientation": "none"
+      "orientation": "center"
     },
     {
       "type": "label",
@@ -29,33 +25,51 @@
       },
       "position": {
         "x": 0,
-        "y": 0
+        "y": 200
       },
-      "centerX": "YesNoBox",
-      "inside_Top": "YesNoBox",
+      "centerX": "ConfirmationBox",
+      "inside_Top": "ConfirmationBox",
       "marginTop": 10,
       "orientation": "none"
     },
-
+    {
+      "uniqueName": "panel",
+      "type": "panel",
+      "background": "panel",
+      "id": "default",
+      "size": {
+        "x": 500,
+        "y": 260
+      },
+      "position": {
+        "x": 0,
+        "y": 20
+      },
+      "centerX": "ConfirmationBox",
+      "centerY": "ConfirmationBox",
+      "marginBottom": 10,
+      "orientation": "none"
+    },
     {
       "uniqueName": "informationLabel",
       "type": "label",
-      "text": "Error",
-      "id": "default",
+      "text": "Tip",
+      "id": "small",
       "size": {
         "x": 470,
-        "y": 0,
-        "orientation": "center"
+        "y": 250
       },
       "position": {
         "x": 0,
         "y": 10
       },
-      "centerX": "YesNoBox",
-      "inside_Top": "YesNoBox",
-      "marginTop": 100,
+      "inside_Left": "ConfirmationBox",
+      "inside_Top": "ConfirmationBox",
+      "marginTop": 90,
+      "marginLeft": 30,
       "orientation": "none"
     },
+
     {
       "uniqueName": "YesButton",
       "type": "textbutton",
@@ -70,8 +84,8 @@
         "x": 80,
         "y": 290
       },
-      "inside_Left": "YesNoBox",
-      "inside_Bottom": "YesNoBox",
+      "inside_Left": "ConfirmationBox",
+      "inside_Bottom": "ConfirmationBox",
       "marginLeft": 30,
       "marginBottom": 30,
       "orientation": "none"
@@ -91,7 +105,7 @@
         "y": 290
       },
       "alignY": "YesButton",
-      "inside_Right": "YesNoBox",
+      "inside_Right": "ConfirmationBox",
       "marginRight": 30,
       "orientation": "none"
     }

@@ -37,8 +37,8 @@ public class PlayerHireDialog extends  GameScreenBox {
 
         ((Label) getActor("NickNameLabel")).setWrap(false);
         ((Label) getActor("NickNameLabel")).setText(player.getNickName());
-        ((Image) getActor("faceImage")).setDrawable(player.createPlayerFace(((GameScreen)((HireScreen)mainApp.getScreen()).getParent()).facesOptions,
-                ((GameScreen)((HireScreen)mainApp.getScreen()).getParent()).gamePort).getDrawable());
+        ((Image) getActor("faceImage")).setDrawable(player.createPlayerFace(mainApp.facesOptions,
+                mainApp.gameScreen.gamePort).getDrawable());
 
 
         ((Label) getActor("FarmNumberLabel")).setText(Integer.toString(player.getFarm() ));

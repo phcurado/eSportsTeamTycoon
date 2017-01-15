@@ -35,7 +35,6 @@ import java.util.ArrayList;
 
 public class LineupScreen implements Screen {
     private final EsportsManager mainApp;
-    private final Screen parent;
 
     private Viewport gamePort;
 
@@ -51,15 +50,20 @@ public class LineupScreen implements Screen {
 
     private TipsDialog tipsDialog;
 
-    public Screen getParent() {
-        return parent;
-    }
 
-    public LineupScreen(final EsportsManager mainApp, final Screen parent) {
+    public LineupScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
-        this.parent = parent;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT, mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
+
+
+    }
+
+    @Override
+    public void show() {
+        System.out.println("Lineup Screen");
+        Gdx.input.setInputProcessor(stage);
+        stage.clear();
 
         this.skin = new Skin();
         this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
@@ -72,13 +76,6 @@ public class LineupScreen implements Screen {
         this.skin.add("label-clean-font", mainApp.cleanFont);
         this.skin.add("playerName-font", mainApp.playerNameFont);
         this.skin.load(Gdx.files.internal("ui/ui.json"));
-    }
-
-    @Override
-    public void show() {
-        System.out.println("Lineup Screen");
-        Gdx.input.setInputProcessor(stage);
-        stage.clear();
 
         background = new Image(new TextureRegion(new TextureRegion(
                 mainApp.assets.get("img/images.atlas", TextureAtlas.class).findRegion("defaultbackground"))) );
@@ -98,8 +95,8 @@ public class LineupScreen implements Screen {
 
         tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
 
-        positionsButtonClick(this);
-        sellPlayersButtonClick(this);
+        positionsButtonClick();
+        sellPlayersButtonClick();
         backButtonClick();
         tipsDialog.defaultButtonClick(stage);
 
@@ -146,15 +143,14 @@ public class LineupScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        tipsDialog.dispose();
-        skin.dispose();
+;
     }
 
-    private void positionsButtonClick(final Screen lineupParent) {
+    private void positionsButtonClick() {
         positionsButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if(mainApp.user.getTeam().getPlayers().size() >= 5) {
-                    mainApp.setScreen(new PositionsScreen(mainApp, lineupParent));
+                    mainApp.setScreen(mainApp.positionsScreen);
                 }
                 else {
                     tipsDialog.setTip(mainApp.bundle.get("Tip_Minimum_5_Players"));
@@ -164,11 +160,11 @@ public class LineupScreen implements Screen {
         });
     }
 
-    private void sellPlayersButtonClick(final Screen lineupParent) {
+    private void sellPlayersButtonClick() {
         sellPlayersButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if(mainApp.user.getTeam().getPlayers().size() != 0) {
-                    mainApp.setScreen(new SellPlayersScreen(mainApp, lineupParent));
+                    mainApp.setScreen(mainApp.sellPlayersScreen);
                 }
                 else {
                     tipsDialog.setTip(mainApp.bundle.get("Tip_No_Players"));
@@ -181,7 +177,7 @@ public class LineupScreen implements Screen {
     private void backButtonClick() {
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                mainApp.setScreen(parent);
+                mainApp.setScreen(mainApp.gameScreen);
             }
         });
     }

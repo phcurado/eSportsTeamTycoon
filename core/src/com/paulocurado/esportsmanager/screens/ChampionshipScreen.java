@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
+import com.paulocurado.esportsmanager.uielements.TipsDialog;
 
 /**
  * Created by phcur on 26/12/2016.
@@ -23,7 +24,6 @@ import com.paulocurado.esportsmanager.EsportsManager;
 
 public class ChampionshipScreen implements Screen {
     private final EsportsManager mainApp;
-    private final Screen parent;
 
     private Viewport gamePort;
 
@@ -31,13 +31,23 @@ public class ChampionshipScreen implements Screen {
     private Skin skin;
 
     private TextButton backButton;
+    private TipsDialog tipsDialog;
 
 
-    public ChampionshipScreen(final EsportsManager mainApp, final Screen parent) {
+
+    public ChampionshipScreen(final EsportsManager mainApp) {
         this.mainApp = mainApp;
-        this.parent = parent;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT, mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
+
+
+    }
+
+    @Override
+    public void show() {
+        System.out.println("Championship Screen");
+        Gdx.input.setInputProcessor(stage);
+        stage.clear();
 
         this.skin = new Skin();
         this.skin.addRegions(mainApp.assets.get("ui/ui.atlas", TextureAtlas.class));
@@ -49,21 +59,19 @@ public class ChampionshipScreen implements Screen {
         this.skin.add("label-medium-font", mainApp.labelFontMedium);
         this.skin.add("label-clean-font", mainApp.cleanFont);
         this.skin.add("playerName-font", mainApp.playerNameFont);
-
         this.skin.load(Gdx.files.internal("ui/ui.json"));
-    }
-
-    @Override
-    public void show() {
-        System.out.println("Championship Screen");
-        Gdx.input.setInputProcessor(stage);
-        stage.clear();
 
         Image background = new Image(skin, "window_square");
 
         background.setSize(stage.getWidth(), stage.getHeight());
 
         stage.addActor(background);
+
+
+        tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
+
+        screenFirstTime();
+
 
         Label label = new Label(mainApp.bundle.format("Tier_Championship", mainApp.championship.getTierPlaying()),
                 skin, "default");
@@ -74,12 +82,12 @@ public class ChampionshipScreen implements Screen {
 
         Table table = new Table();
 
-        Label victories = new Label("V", skin, "default");
+        Label victories = new Label(mainApp.bundle.get("V_Victory"), skin, "default");
         victories.setAlignment(Align.center);
-        Label loses = new Label("L", skin, "default");
+        Label loses = new Label(mainApp.bundle.get("L_Lose"), skin, "default");
         loses.setAlignment(Align.center);
 
-        table.add(new Label("Teams", skin, "default")).fillX();
+        table.add(new Label(mainApp.bundle.get("Teams"), skin, "default")).fillX();
         table.add(victories).fillX();
         table.add(loses).fillX().row();
 
@@ -91,6 +99,7 @@ public class ChampionshipScreen implements Screen {
 
                 Label scoreLabel_Light = new Label(Integer.toString(mainApp.championship.getTeamsInOrderOfVictory().get(2 * i).getVictoriesChampionship()),
                         skin, "Label_Gray_Light");
+                scoreLabel_Light.setAlignment(Align.center);
 
                 Label losesLabel_Light = new Label(Integer.toString(mainApp.championship.getTeamsInOrderOfVictory().get(2 * i).getLosesChampionship()),
                         skin, "Label_Gray_Light");
@@ -165,8 +174,6 @@ public class ChampionshipScreen implements Screen {
 
         stage.addActor(backButton);
 
-
-
     }
 
     @Override
@@ -180,6 +187,7 @@ public class ChampionshipScreen implements Screen {
 
 
         stage.draw();
+        tipsDialog.draw();
 
     }
 
@@ -206,8 +214,6 @@ public class ChampionshipScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        skin.dispose();
-
     }
 
     public void setBackButton() {
@@ -216,9 +222,18 @@ public class ChampionshipScreen implements Screen {
 
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                mainApp.setScreen(parent); //TODO analisar se é melhor dar new Screen msm ou pegar o parent screen
+                mainApp.setScreen(mainApp.gameScreen);
             }
         });
 
+    }
+
+    private void screenFirstTime() {
+        if (mainApp.user.championshipScreenFirstTime == true) {
+            tipsDialog.setTip(mainApp.bundle.get("ChampionshipScreen_FirstTime"));
+            tipsDialog.setVisibility(true);
+            tipsDialog.defaultButtonClick(stage);
+            mainApp.user.championshipScreenFirstTime = false;
+        }
     }
 }

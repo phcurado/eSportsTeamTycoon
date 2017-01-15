@@ -23,7 +23,13 @@ public class Scout {
         playersScouts = new ArrayList<Player>();
 
         for (Player player : playersToScout) {
-            if (player.getOverall() >= MIN_ABILITY  && player.getOverall() <= MIN_ABILITY + RANGE_INCREASE + (level - 1) * RANGE_INCREASE ) {
+            if (level != MAX_LEVEL) {
+                if (player.getOverall() >= MIN_ABILITY && player.getOverall() <= MIN_ABILITY + RANGE_INCREASE + (level - 1) * RANGE_INCREASE) {
+                    playersScouts.add(player);
+
+                }
+            }
+            else {
                 playersScouts.add(player);
             }
         }

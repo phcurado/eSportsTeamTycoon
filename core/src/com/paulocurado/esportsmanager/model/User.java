@@ -10,8 +10,15 @@ public class User {
     private int fansNumber = 0;
     private Scout scout;
 
-    private boolean hireScreenFirstTime = true;
-
+    public boolean hireScreenFirstTime = true;
+    public boolean sellPlayersScreenFirstTime = true;
+    public boolean gameScreenFristTime = true;
+    public boolean buyScoutScreenFirstTime = true;
+    public boolean championshipScreenFirstTime = true;
+    public boolean positionScreenFirstTime = true;
+    public boolean scoutReportScreenFirstTime = true;
+    public boolean simulationScreenFirstTime = true;
+    public boolean trainScreenFirstTime = true;
     public User(String userName, String teamName, String shortTeamName) {
         this.userName = userName;
         team = new Team();

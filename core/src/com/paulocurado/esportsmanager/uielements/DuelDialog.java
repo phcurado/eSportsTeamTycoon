@@ -2,6 +2,8 @@ package com.paulocurado.esportsmanager.uielements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -21,15 +23,17 @@ public class DuelDialog extends GameScreenBox {
     private boolean isLoadInformation = false;
     public DuelDialog(EsportsManager mainApp, Skin skin, String path, Screen root) {
         super(mainApp, skin, path, root);
+
     }
 
     public void setUpPlayers(BattleSimulation battleSimulation) {
+
+
         if (!isLoadInformation()) {
 ;
-
             for (int i = 0; i < battleSimulation.getRadiantTeam().getPlayers().size(); i++) {
-                Image playerImage = new Image(battleSimulation.getRadiantTeam().getPlayers().get(i).createPlayerFace(
-                        ((GameScreen)root).facesOptions, stage.getViewport()).getDrawable() );
+                Image playerImage = battleSimulation.getRadiantTeam().getPlayers().get(i).createPlayerFace(
+                        mainApp.facesOptions, stage.getViewport());
                 playerImage.setSize(100, 100);
                 playerImage.setPosition(getActor("genericWindow").getX() + getActor("genericWindow").getWidth() / 2
                         - 105 * battleSimulation.getRadiantTeam().getPlayers().size() / 2 + 105 * i,
@@ -62,8 +66,8 @@ public class DuelDialog extends GameScreenBox {
 
 
             for (int i = 0; i < battleSimulation.getDireTeam().getPlayers().size(); i++) {
-                Image playerImage = new Image(battleSimulation.getDireTeam().getPlayers().get(i).createPlayerFace(
-                        ((GameScreen)root).facesOptions, stage.getViewport()).getDrawable() );
+                Image playerImage = battleSimulation.getDireTeam().getPlayers().get(i).createPlayerFace(
+                        mainApp.facesOptions, stage.getViewport());
                 playerImage.setSize(100, 100);
                 playerImage.setPosition(getActor("genericWindow").getX() + getActor("genericWindow").getWidth() / 2
                                 - 105 * battleSimulation.getDireTeam().getPlayers().size() / 2 + 105 * i,
@@ -79,6 +83,17 @@ public class DuelDialog extends GameScreenBox {
             }
         }
 
+
+    }
+
+    private void setUpDialog() {
+        for (int i = 0; i < 5; i++) {
+            Image playerRadiantImage = new Image();
+            playerRadiantImage.setSize(100, 100);
+            playerRadiantImage.setPosition(getActor("genericWindow").getX() + getActor("genericWindow").getWidth() / 2
+                            - 105 * 5 / 2 + 105 * i,
+                    getActor("genericWindow").getTop() - 180);
+        }
     }
 
     public void buttonClick() {

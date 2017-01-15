@@ -3,72 +3,72 @@ images.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-logoCompany
-  rotate: false
-  xy: 1, 1
-  size: 1110, 705
-  orig: 1110, 705
-  offset: 0, 0
-  index: -1
 blackbackground
   rotate: false
-  xy: 1113, 194
+  xy: 1, 1
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 defaultbackground
   rotate: false
-  xy: 1627, 194
+  xy: 515, 1
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 startmenubackground
   rotate: false
-  xy: 2141, 194
+  xy: 1029, 1
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
+logoCompany
+  rotate: false
+  xy: 1543, 166
+  size: 543, 347
+  orig: 543, 347
+  offset: 0, 0
+  index: -1
 inGameComputers
   rotate: false
-  xy: 1113, 125
-  size: 344, 67
-  orig: 344, 67
+  xy: 1543, 86
+  size: 344, 78
+  orig: 344, 78
   offset: 0, 0
   index: -1
 logo
   rotate: false
-  xy: 1459, 48
+  xy: 1889, 20
   size: 263, 144
   orig: 263, 144
   offset: 0, 0
   index: -1
 cloud1
   rotate: false
-  xy: 1113, 68
+  xy: 1543, 29
   size: 159, 55
   orig: 159, 55
   offset: 0, 0
   index: -1
 cloud2
   rotate: false
-  xy: 1724, 148
+  xy: 1704, 40
   size: 162, 44
   orig: 162, 44
   offset: 0, 0
   index: -1
 inGameFloor
   rotate: false
-  xy: 1724, 66
+  xy: 2088, 433
   size: 80, 80
   orig: 80, 80
   offset: 0, 0
   index: -1
 floorBackground
   rotate: false
-  xy: 1113, 18
+  xy: 2088, 383
   size: 48, 48
   orig: 48, 48
   offset: 0, 0

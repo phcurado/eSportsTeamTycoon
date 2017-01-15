@@ -17,7 +17,20 @@ import com.paulocurado.esportsmanager.model.GameSchedule;
 import com.paulocurado.esportsmanager.model.Player;
 import com.paulocurado.esportsmanager.model.Team;
 import com.paulocurado.esportsmanager.model.User;
+import com.paulocurado.esportsmanager.screens.BuyScoutScreen;
+import com.paulocurado.esportsmanager.screens.ChampionshipScreen;
+import com.paulocurado.esportsmanager.screens.GameScreen;
+import com.paulocurado.esportsmanager.screens.HireScreen;
+import com.paulocurado.esportsmanager.screens.InitScreen;
+import com.paulocurado.esportsmanager.screens.LineupScreen;
 import com.paulocurado.esportsmanager.screens.LoadingScreen;
+import com.paulocurado.esportsmanager.screens.MainMenuScreen;
+import com.paulocurado.esportsmanager.screens.PositionsScreen;
+import com.paulocurado.esportsmanager.screens.ScoutReportScreen;
+import com.paulocurado.esportsmanager.screens.ScoutScreen;
+import com.paulocurado.esportsmanager.screens.SellPlayersScreen;
+import com.paulocurado.esportsmanager.screens.SimulationScreen;
+import com.paulocurado.esportsmanager.screens.TrainScreen;
 
 
 import java.util.ArrayList;
@@ -56,25 +69,55 @@ public class EsportsManager extends Game {
 
     public AdHandler adHandler;
 
-    public EsportsManager() {
-       // this.adHandler = adHandler;
-      //  adHandler.showAds(true);
+    public BuyScoutScreen buyScoutScreen;
+    public ChampionshipScreen championshipScreen;
+    public GameScreen gameScreen;
+    public HireScreen hireScreen;
+    public InitScreen initScreen;
+    public LineupScreen lineupScreen;
+    public LoadingScreen loadingScreen;
+    public MainMenuScreen mainMenuScreen;
+    public PositionsScreen positionsScreen;
+    public ScoutReportScreen scoutReportScreen;
+    public ScoutScreen scoutScreen;
+    public SellPlayersScreen sellPlayersScreen;
+    public SimulationScreen simulationScreen;
+    public TrainScreen trainScreen;
+
+    public EsportsManager(AdHandler adHandler) {
+        this.adHandler = adHandler;
+        adHandler.showAds(false);
     }
 
 
     @Override
     public void create() {
         assets = new AssetManager();
-
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, V_WIDTH, V_HEIGHT);
+        batch = new SpriteBatch();
         initFonts();
         playerList = new ArrayList<Player>();
         teamList = new ArrayList<Team>();
         contractList = new ArrayList<Contract>();
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, V_WIDTH, V_HEIGHT);
-        batch = new SpriteBatch();
-        this.setScreen(new LoadingScreen(this));
+        buyScoutScreen = new BuyScoutScreen(this);
+        championshipScreen = new ChampionshipScreen(this);
+        gameScreen = new GameScreen(this);
+        hireScreen = new HireScreen(this);
+        initScreen = new InitScreen(this);
+        lineupScreen = new LineupScreen(this);
+        loadingScreen = new LoadingScreen(this);
+        mainMenuScreen = new MainMenuScreen(this);
+        positionsScreen = new PositionsScreen(this);
+        scoutReportScreen = new ScoutReportScreen(this);
+        scoutScreen = new ScoutScreen(this);
+        sellPlayersScreen = new SellPlayersScreen(this);
+        //simulationScreen;
+        trainScreen = new TrainScreen(this);
+
+
+        this.setScreen(loadingScreen);
 
     }
 
@@ -87,7 +130,19 @@ public class EsportsManager extends Game {
     public void dispose() {
         batch.dispose();
         assets.dispose();
-        this.getScreen().dispose();
+        buyScoutScreen.dispose();
+        championshipScreen.dispose();
+        gameScreen.dispose();
+        hireScreen.dispose();
+        initScreen.dispose();
+        lineupScreen.dispose();
+        loadingScreen.dispose();
+        mainMenuScreen.dispose();
+        positionsScreen.dispose();
+        scoutReportScreen.dispose();
+        scoutScreen.dispose();
+        sellPlayersScreen.dispose();
+        trainScreen.dispose();
     }
 
     private void initFonts() {
@@ -104,7 +159,6 @@ public class EsportsManager extends Game {
         parameter.color = Color.WHITE;
         labelFont = generatorLabel.generateFont(parameter);
 
-        FreeTypeFontGenerator generatorLabelMedium = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Neuton-Extrabold.ttf"));
         parameter.size = 25;
         parameter.borderWidth = 2;
         parameter.color = Color.WHITE;
@@ -141,6 +195,14 @@ public class EsportsManager extends Game {
         parameter.borderWidth = 0;
         parameter.color = Color.WHITE;
         playerNameFont = generatorPlayerName.generateFont(parameter);
+
+        generator.dispose();
+        generatorCleanFont.dispose();
+        generatorLabel.dispose();
+        generatorLabelSmall.dispose();
+        generatorPlayerName.dispose();
+        generatorPosition.dispose();
+        generatorSmallPosition.dispose();
 
     }
 
