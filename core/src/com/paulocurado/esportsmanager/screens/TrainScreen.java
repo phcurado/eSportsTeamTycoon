@@ -19,8 +19,6 @@ import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.model.Player;
 import com.paulocurado.esportsmanager.model.Position;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
-import com.paulocurado.esportsmanager.uielements.ReaderElements;
-import com.paulocurado.esportsmanager.uielements.TipsDialog;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
@@ -38,11 +36,11 @@ public class TrainScreen implements Screen {
     private Skin skin;
 
     private Image background;
-    private ReaderElements playersScreenLayout;
+    private com.paulocurado.esportsmanager.uielements.ReaderElements playersScreenLayout;
 
     private TextButton backButton;
 
-    private TipsDialog tipsDialog;
+    private com.paulocurado.esportsmanager.uielements.TipsDialog tipsDialog;
     private GameScreenBox yesNoDialog;
 
     private static int MONEY_TRAIN = 40000;
@@ -77,13 +75,13 @@ public class TrainScreen implements Screen {
         background.setFillParent(true);
         stage.addActor(background);
 
-        playersScreenLayout = new ReaderElements(mainApp, stage, skin, "ui/showPlayerCicle.json");
+        playersScreenLayout = new com.paulocurado.esportsmanager.uielements.ReaderElements(mainApp, stage, skin, "ui/showPlayerCicle.json");
 
         backButton = new TextButton(mainApp.bundle.get("Back"), skin, "default");
         backButton.setWidth(stage.getWidth());
 
-        tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
-        yesNoDialog = new TipsDialog(mainApp, skin, "ui/YesNoBox.json", this);
+        tipsDialog = new com.paulocurado.esportsmanager.uielements.TipsDialog(mainApp, skin, "ui/informationBox.json", this);
+        yesNoDialog = new com.paulocurado.esportsmanager.uielements.TipsDialog(mainApp, skin, "ui/YesNoBox.json", this);
 
 
         screenFirstTime();

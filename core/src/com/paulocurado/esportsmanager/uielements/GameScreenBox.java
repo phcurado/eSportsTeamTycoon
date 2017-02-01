@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.paulocurado.esportsmanager.EsportsManager;
 
 /**
  * Created by Paulo on 29/11/2016.
@@ -25,11 +24,11 @@ public class GameScreenBox {
 
     String[] text = new String[2];
 
-    protected EsportsManager mainApp;
+    protected com.paulocurado.esportsmanager.EsportsManager mainApp;
     protected final Screen root;
 
 
-    public GameScreenBox(final EsportsManager mainApp, Skin skin, String path, final Screen root) {
+    public GameScreenBox(final com.paulocurado.esportsmanager.EsportsManager mainApp, Skin skin, String path, final Screen root) {
         this.mainApp = mainApp;
         this.root = root;
         gamePort = new FitViewport(mainApp.V_WIDTH, mainApp.V_HEIGHT , mainApp.camera);

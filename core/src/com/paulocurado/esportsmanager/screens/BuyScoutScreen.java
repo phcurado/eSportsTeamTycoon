@@ -17,16 +17,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
-import com.paulocurado.esportsmanager.uielements.TipsDialog;
 
 /**
  * Created by phcur on 08/01/2017.
  */
 
 public class BuyScoutScreen implements Screen {
-    private final EsportsManager mainApp;
+    private final com.paulocurado.esportsmanager.EsportsManager mainApp;
 
     private Viewport gamePort;
 
@@ -39,9 +37,9 @@ public class BuyScoutScreen implements Screen {
     private TextButton upgradeScoutButton;
     private TextButton backButton;
     private GameScreenBox yesNoDialog;
-    TipsDialog tipsDialog;
+    com.paulocurado.esportsmanager.uielements.TipsDialog tipsDialog;
 
-    public BuyScoutScreen(final EsportsManager mainApp) {
+    public BuyScoutScreen(final com.paulocurado.esportsmanager.EsportsManager mainApp) {
         this.mainApp = mainApp;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT, mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
@@ -72,8 +70,8 @@ public class BuyScoutScreen implements Screen {
 
         stage.addActor(background);
 
-        tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
-        yesNoDialog = new TipsDialog(mainApp, skin, "ui/YesNoBox.json", this);
+        tipsDialog = new com.paulocurado.esportsmanager.uielements.TipsDialog(mainApp, skin, "ui/informationBox.json", this);
+        yesNoDialog = new com.paulocurado.esportsmanager.uielements.TipsDialog(mainApp, skin, "ui/YesNoBox.json", this);
 
         screenFirstTime();
 

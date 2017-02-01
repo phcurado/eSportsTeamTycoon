@@ -4,9 +4,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.paulocurado.esportsmanager.EsportsManager;
-import com.paulocurado.esportsmanager.screens.HireScreen;
 import com.paulocurado.esportsmanager.screens.ScoutReportScreen;
-import com.paulocurado.esportsmanager.screens.SellPlayersScreen;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
 
 /**

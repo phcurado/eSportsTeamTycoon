@@ -15,20 +15,19 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.model.Player;
-import com.paulocurado.esportsmanager.model.Position;
 import com.paulocurado.esportsmanager.model.UsefulFunctions;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
 import com.paulocurado.esportsmanager.uielements.TipsDialog;
+import com.paulocurado.esportsmanager.model.Position;
 
 /**
  * Created by phcur on 31/12/2016.
  */
 
 public class SellPlayersScreen implements Screen {
-    private final EsportsManager mainApp;
+    private final com.paulocurado.esportsmanager.EsportsManager mainApp;
 
     private Viewport gamePort;
 
@@ -43,7 +42,7 @@ public class SellPlayersScreen implements Screen {
     GameScreenBox yesNoDialog;
 
     private TextButton backButton;
-    public SellPlayersScreen(final EsportsManager mainApp) {
+    public SellPlayersScreen(final com.paulocurado.esportsmanager.EsportsManager mainApp) {
         this.mainApp = mainApp;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT, mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);

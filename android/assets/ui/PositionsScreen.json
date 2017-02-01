@@ -80,7 +80,7 @@
       "uniqueName": "PositionLabel_1",
       "type": "label",
       "text": "Carry",
-      "id": "small",
+      "id": "default_PlayerName",
       "size": {
         "x": 0,
         "y": 0
@@ -98,7 +98,7 @@
       "uniqueName": "PositionLabel_2",
       "type": "label",
       "text": "Mid",
-      "id": "small",
+      "id": "default_PlayerName",
       "size": {
         "x": 0,
         "y": 0
@@ -116,7 +116,7 @@
       "uniqueName": "PositionLabel_3",
       "type": "label",
       "text": "Offlane",
-      "id": "small",
+      "id": "default_PlayerName",
       "size": {
         "x": 0,
         "y": 0
@@ -134,7 +134,7 @@
       "uniqueName": "PositionLabel_4",
       "type": "label",
       "text": "Supp4",
-      "id": "small",
+      "id": "default_PlayerName",
       "size": {
         "x": 0,
         "y": 0
@@ -152,7 +152,7 @@
       "uniqueName": "PositionLabel_5",
       "type": "label",
       "text": "Supp5",
-      "id": "small",
+      "id": "default_PlayerName",
       "size": {
         "x": 0,
         "y": 0

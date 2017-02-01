@@ -18,12 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.paulocurado.esportsmanager.EsportsManager;
-import com.paulocurado.esportsmanager.model.Player;
-import com.paulocurado.esportsmanager.uielements.TipsDialog;
 import com.paulocurado.esportsmanager.uielements.scout.ConfirmContractScoutDialog;
+import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.uielements.scout.ErrorScoutDialog;
-import com.paulocurado.esportsmanager.uielements.scout.HireScoutedPlayerDialog;
 
 import java.util.ArrayList;
 
@@ -47,10 +44,10 @@ public class ScoutReportScreen implements Screen {
 
     private TextButton backButton;
 
-    private HireScoutedPlayerDialog hireDialog;
+    private com.paulocurado.esportsmanager.uielements.scout.HireScoutedPlayerDialog hireDialog;
     private ErrorScoutDialog errorScoutDialog;
     private ConfirmContractScoutDialog confirmContractScoutDialog;
-    private TipsDialog tipsDialog;
+    private com.paulocurado.esportsmanager.uielements.TipsDialog tipsDialog;
 
     int position = 1;
 
@@ -150,10 +147,10 @@ public class ScoutReportScreen implements Screen {
 
 
 
-        hireDialog = new HireScoutedPlayerDialog(mainApp, skin, "ui/HirePlayerBox.json", this);
+        hireDialog = new com.paulocurado.esportsmanager.uielements.scout.HireScoutedPlayerDialog(mainApp, skin, "ui/HirePlayerBox.json", this);
         errorScoutDialog = new ErrorScoutDialog(mainApp, skin, "ui/ErrorBox.json", this);
         confirmContractScoutDialog = new ConfirmContractScoutDialog(mainApp, skin, "ui/ConfirmationBox.json", this);
-        tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
+        tipsDialog = new com.paulocurado.esportsmanager.uielements.TipsDialog(mainApp, skin, "ui/informationBox.json", this);
 
         screenFirstTime();
 
@@ -165,7 +162,7 @@ public class ScoutReportScreen implements Screen {
     public Table setUpScouts(int position) {
         mainApp.user.getScout().scoutAllPlayers(mainApp.playerList);
 
-        ArrayList<Player> players = new ArrayList<Player>();
+        ArrayList<com.paulocurado.esportsmanager.model.Player> players = new ArrayList<com.paulocurado.esportsmanager.model.Player>();
 
 
         players.addAll(mainApp.user.getScout().getPlayersPerPosition(position));
@@ -237,7 +234,7 @@ public class ScoutReportScreen implements Screen {
             labelTable.add(abilityLabel).width(abilityTitleLabel.getWidth());
             labelTable.add(potentialLabel).width(potentialTitleLabel.getWidth());
 
-            final Player playerClicked = players.get(i);
+            final com.paulocurado.esportsmanager.model.Player playerClicked = players.get(i);
 
             nickNameLabel.addListener(new ClickListener() {
                 public void clicked(InputEvent e, float x, float y) {
@@ -350,7 +347,7 @@ public class ScoutReportScreen implements Screen {
     }
 
 
-    public HireScoutedPlayerDialog getHireDialog() {
+    public com.paulocurado.esportsmanager.uielements.scout.HireScoutedPlayerDialog getHireDialog() {
         return hireDialog;
     }
 
@@ -373,7 +370,7 @@ public class ScoutReportScreen implements Screen {
 
     }
 
-    public TipsDialog getTipsDialog() {
+    public com.paulocurado.esportsmanager.uielements.TipsDialog getTipsDialog() {
         return tipsDialog;
     }
 

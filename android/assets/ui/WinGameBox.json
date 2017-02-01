@@ -1,0 +1,79 @@
+{
+  "ui": [
+    {
+      "uniqueName": "YesNoBox",
+      "type": "window",
+      "title": "ConfirmData",
+      "id": "title",
+      "background": "window",
+      "size": {
+        "x": 550,
+        "y": 500
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "centerX": "Screen",
+      "centerY": "Screen",
+      "orientation": "none"
+    },
+    {
+      "type": "label",
+      "text": "Tip",
+      "id": "title",
+      "size": {
+        "x": 0,
+        "y": 0
+
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "centerX": "YesNoBox",
+      "inside_Top": "YesNoBox",
+      "marginTop": 10,
+      "orientation": "none"
+    },
+
+    {
+      "uniqueName": "TextLabel",
+      "type": "label",
+      "text": "Error",
+      "id": "default",
+      "size": {
+        "x": 470,
+        "y": 0,
+        "orientation": "center"
+      },
+      "position": {
+        "x": 0,
+        "y": 10
+      },
+      "centerX": "YesNoBox",
+      "inside_Top": "YesNoBox",
+      "marginTop": 200,
+      "orientation": "none"
+    },
+    {
+      "uniqueName": "OkButton",
+      "type": "textbutton",
+      "text": "Ok",
+      "id": "default",
+      "size": {
+        "x": 180,
+        "y": 65
+
+      },
+      "position": {
+        "x": 80,
+        "y": 290
+      },
+      "centerX": "YesNoBox",
+      "inside_Bottom": "YesNoBox",
+      "marginBottom": 30,
+      "orientation": "none"
+    }
+  ]
+}

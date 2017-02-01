@@ -13,7 +13,6 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.paulocurado.esportsmanager.EsportsManager;
 
 public class AndroidLauncher extends AndroidApplication implements AdHandler {
 	private static final String TAG = "AndroidLuncher";

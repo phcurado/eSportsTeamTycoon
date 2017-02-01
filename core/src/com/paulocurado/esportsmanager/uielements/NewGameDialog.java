@@ -3,13 +3,9 @@ package com.paulocurado.esportsmanager.uielements;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.paulocurado.esportsmanager.EsportsManager;
-import com.paulocurado.esportsmanager.screens.MainMenuScreen;
 
 /**
  * Created by Paulo on 12/11/2016.

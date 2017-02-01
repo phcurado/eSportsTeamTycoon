@@ -8,7 +8,7 @@ public class User {
     private String userName;
     private Team team;
     private int fansNumber = 0;
-    private Scout scout;
+    private com.paulocurado.esportsmanager.model.Scout scout;
 
     public boolean hireScreenFirstTime = true;
     public boolean sellPlayersScreenFirstTime = true;
@@ -24,7 +24,7 @@ public class User {
         team = new Team();
         team.setName(teamName);
         team.setAbbreviatedName(shortTeamName);
-        scout = new Scout(1);
+        scout = new com.paulocurado.esportsmanager.model.Scout(1);
     }
 
     public Team getTeam() {
@@ -61,11 +61,11 @@ public class User {
         this.fansNumber = fansNumber;
     }
 
-    public Scout getScout() {
+    public com.paulocurado.esportsmanager.model.Scout getScout() {
         return scout;
     }
 
-    public void setScout(Scout scout) {
+    public void setScout(com.paulocurado.esportsmanager.model.Scout scout) {
         this.scout = scout;
     }
 }

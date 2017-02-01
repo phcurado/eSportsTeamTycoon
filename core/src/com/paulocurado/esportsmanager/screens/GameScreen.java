@@ -16,13 +16,13 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
-import com.paulocurado.esportsmanager.model.HandleSaveGame;
 import com.paulocurado.esportsmanager.uielements.DuelDialog;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
+import com.paulocurado.esportsmanager.uielements.ReaderElements;
 import com.paulocurado.esportsmanager.uielements.ResultMatchDialog;
 import com.paulocurado.esportsmanager.uielements.SimulateMatchDialog;
 import com.paulocurado.esportsmanager.uielements.TipsDialog;
-import com.paulocurado.esportsmanager.uielements.ReaderElements;
+import com.paulocurado.esportsmanager.uielements.WinGameDialog;
 
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.alpha;
@@ -49,6 +49,7 @@ public class GameScreen implements Screen {
     private SimulateMatchDialog simulateMatchDialog;
     private GameScreenBox confirmationDialog;
     private GameScreenBox yesNoDialog;
+    private WinGameDialog winGameDialog;
     private DuelDialog duelDialog;
     private TextureRegion floorBackground;
     private Label debitsLabel;
@@ -90,6 +91,7 @@ public class GameScreen implements Screen {
         confirmationDialog = new GameScreenBox(mainApp, skin, "ui/ConfirmationTierBox.json", this);
         duelDialog = new DuelDialog(mainApp, skin, "ui/genericBox.json", this);
         yesNoDialog = new GameScreenBox(mainApp, skin, "ui/YesNoBox.json", this);
+        winGameDialog = new WinGameDialog(mainApp, skin, "ui/WinGameBox.json", this);
 
         screenFirstTime();
 
@@ -104,8 +106,6 @@ public class GameScreen implements Screen {
         lineupButtonLogic();
         scoutButtonLogic();
         trainButtonLogic();
-
-
 
 
         for (int i = 0; i < mainApp.user.getTeam().getPlayers().size(); i ++) {
@@ -161,6 +161,7 @@ public class GameScreen implements Screen {
         duelDialog.draw();
         yesNoDialog.draw();
         tipsDialog.draw();
+        winGameDialog.draw();
 
 
         setChampionship();
@@ -240,6 +241,9 @@ public class GameScreen implements Screen {
                             mainApp.championship.groupMatches();
                             duelDialog.setUpPlayers(mainApp.championship.findBattleByTeam(mainApp.user.getTeam(),
                                     mainApp.championship.getRoundsPlayed()) );
+
+                            System.out.println("o radiant team aqui: " + mainApp.championship.findBattleByTeam(mainApp.user.getTeam(),
+                                    mainApp.championship.getRoundsPlayed()).getRadiantTeam().getName());
                             duelDialog.setVisibility(true);
                             duelDialog.buttonClick();
                             mainApp.championship.setDuelShowed(true);
@@ -351,8 +355,16 @@ public class GameScreen implements Screen {
                             });
 
                         }
-                        simulateMatchDialog.setUpDialog(mainApp.championship.getFinalBattle());
-                        simulateMatchDialog.setVisibility(true);
+                        else {
+                            System.out.println("HI");
+                            winGameDialog.setText(mainApp.bundle.format("Win_Tier_1", mainApp.user.getTeam().getName()));
+                            winGameDialog.setVisibility(true);
+                            winGameDialog.defaultButtonClick(simulateMatchDialog.getStage());
+                        }
+                        if (!winGameDialog.isVisible()) {
+                            simulateMatchDialog.setUpDialog(mainApp.championship.getFinalBattle());
+                            simulateMatchDialog.setVisibility(true);
+                        }
                     }
                     if (mainApp.championship.getFinalChampionshipPositions().get(
                             mainApp.championship.getFinalChampionshipPositions().size() - 1).equals(mainApp.user.getTeam())) {
@@ -441,7 +453,7 @@ public class GameScreen implements Screen {
         stage.getRoot().findActor("SaveButton").addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 advanceTime = false;
-                HandleSaveGame handler = new HandleSaveGame();
+                com.paulocurado.esportsmanager.model.HandleSaveGame handler = new com.paulocurado.esportsmanager.model.HandleSaveGame();
                 handler.saveGame(mainApp);
                 tipsDialog.setTip(mainApp.bundle.get("Game_Saved"));
                 tipsDialog.setVisibility(true);

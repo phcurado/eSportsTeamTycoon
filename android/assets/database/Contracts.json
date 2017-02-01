@@ -38,15 +38,15 @@
     "id": "CONTRACT_000007",
     "playerId": "PLAYER_000007",
     "teamId": "TEAM_0002",
-    "transferFee": 230000,
+    "transferFee": 265000,
     "salary": 10000
   },
   {
     "id": "CONTRACT_000008",
     "playerId": "PLAYER_000008",
     "teamId": "TEAM_0002",
-    "transferFee": 340000,
-    "salary": 12000
+    "transferFee": 400000,
+    "salary": 13000
   },
   {
     "id": "CONTRACT_000010",
@@ -143,22 +143,22 @@
     "id": "CONTRACT_000022",
     "playerId": "PLAYER_000027",
     "teamId": "TEAM_0005",
-    "transferFee": 900000,
-    "salary": 20000
+    "transferFee": 1400000,
+    "salary": 26000
   },
   {
     "id": "CONTRACT_000023",
     "playerId": "PLAYER_000028",
     "teamId": "TEAM_0005",
-    "transferFee": 720000,
-    "salary": 18000
+    "transferFee": 600000,
+    "salary": 15000
   },
   {
     "id": "CONTRACT_000024",
     "playerId": "PLAYER_000029",
     "teamId": "TEAM_0005",
-    "transferFee": 300000,
-    "salary": 10000
+    "transferFee": 400000,
+    "salary": 12000
   },
   {
     "id": "CONTRACT_000025",
@@ -628,5 +628,75 @@
     "teamId": "TEAM_0019",
     "transferFee": 107300,
     "salary": 7637
+  },
+  {
+    "id": "CONTRACT_000091",
+    "playerId": "PLAYER_000111",
+    "teamId": "TEAM_0009",
+    "transferFee": 144000,
+    "salary": 7600
+  },
+  {
+    "id": "CONTRACT_000092",
+    "playerId": "PLAYER_000119",
+    "teamId": "TEAM_0009",
+    "transferFee": 140000,
+    "salary": 8100
+  },
+  {
+    "id": "CONTRACT_000093",
+    "playerId": "PLAYER_000120",
+    "teamId": "TEAM_0009",
+    "transferFee": 121000,
+    "salary": 7500
+  },
+  {
+    "id": "CONTRACT_000094",
+    "playerId": "PLAYER_000121",
+    "teamId": "TEAM_0009",
+    "transferFee": 155000,
+    "salary": 8700
+  },
+  {
+    "id": "CONTRACT_000095",
+    "playerId": "PLAYER_000122",
+    "teamId": "TEAM_0009",
+    "transferFee": 170000,
+    "salary": 8920
+  },
+  {
+    "id": "CONTRACT_000096",
+    "playerId": "PLAYER_000128",
+    "teamId": "TEAM_0020",
+    "transferFee": 115000,
+    "salary": 7400
+  },
+  {
+    "id": "CONTRACT_000097",
+    "playerId": "PLAYER_000047",
+    "teamId": "TEAM_0020",
+    "transferFee": 250000,
+    "salary": 9500
+  },
+  {
+    "id": "CONTRACT_000098",
+    "playerId": "PLAYER_000129",
+    "teamId": "TEAM_0020",
+    "transferFee": 53000,
+    "salary": 5000
+  },
+  {
+    "id": "CONTRACT_000099",
+    "playerId": "PLAYER_000130",
+    "teamId": "TEAM_0020",
+    "transferFee": 64000,
+    "salary": 5600
+  },
+  {
+    "id": "CONTRACT_000100",
+    "playerId": "PLAYER_000096",
+    "teamId": "TEAM_0020",
+    "transferFee": 150000,
+    "salary": 7800
   }
 ]

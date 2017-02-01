@@ -5,70 +5,70 @@ filter: Nearest,Nearest
 repeat: none
 blackbackground
   rotate: false
-  xy: 1, 1
+  xy: 1, 45
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 defaultbackground
   rotate: false
-  xy: 515, 1
+  xy: 515, 45
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 startmenubackground
   rotate: false
-  xy: 1029, 1
+  xy: 1029, 45
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 logoCompany
   rotate: false
-  xy: 1543, 166
+  xy: 1543, 210
   size: 543, 347
   orig: 543, 347
   offset: 0, 0
   index: -1
+logo
+  rotate: false
+  xy: 1543, 1
+  size: 584, 207
+  orig: 584, 207
+  offset: 0, 0
+  index: -1
 inGameComputers
   rotate: false
-  xy: 1543, 86
+  xy: 2088, 479
   size: 344, 78
   orig: 344, 78
   offset: 0, 0
   index: -1
-logo
-  rotate: false
-  xy: 1889, 20
-  size: 263, 144
-  orig: 263, 144
-  offset: 0, 0
-  index: -1
 cloud1
   rotate: false
-  xy: 1543, 29
+  xy: 2088, 422
   size: 159, 55
   orig: 159, 55
   offset: 0, 0
   index: -1
 cloud2
   rotate: false
-  xy: 1704, 40
+  xy: 2249, 433
   size: 162, 44
   orig: 162, 44
   offset: 0, 0
   index: -1
 inGameFloor
   rotate: false
-  xy: 2088, 433
+  xy: 2088, 340
   size: 80, 80
   orig: 80, 80
   offset: 0, 0
   index: -1
 floorBackground
   rotate: false
-  xy: 2088, 383
+  xy: 2088, 290
   size: 48, 48
   orig: 48, 48
   offset: 0, 0

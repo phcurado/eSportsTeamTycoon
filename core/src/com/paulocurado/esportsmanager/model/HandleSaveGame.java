@@ -146,7 +146,7 @@ public class HandleSaveGame {
         mainApp.user.setTeam(mainApp.teamList.get(mainApp.teamList.size() - 1) );
         try {
             Reader readerSchedule = Gdx.files.local("Schedule.json").reader();
-            mainApp.schedule = gson.fromJson(readerSchedule, GameSchedule.class);
+            mainApp.schedule = gson.fromJson(readerSchedule, com.paulocurado.esportsmanager.model.GameSchedule.class);
             readerSchedule.close();
         } catch (IOException e) {
             e.printStackTrace();

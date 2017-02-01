@@ -15,12 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.model.Player;
-import com.paulocurado.esportsmanager.uielements.ConfirmContractDialog;
-import com.paulocurado.esportsmanager.uielements.ErrorDialog;
-import com.paulocurado.esportsmanager.uielements.PlayerHireDialog;
-import com.paulocurado.esportsmanager.uielements.TipsDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +28,7 @@ import java.util.Comparator;
 
 public class HireScreen implements Screen{
 
-    private final EsportsManager mainApp;
+    private final com.paulocurado.esportsmanager.EsportsManager mainApp;
 
     private Viewport gamePort;
 
@@ -43,12 +38,12 @@ public class HireScreen implements Screen{
     private Table container;
     private TextButton backButton;
 
-    private PlayerHireDialog hireDialog;
-    private TipsDialog tipsDialog;
-    private ErrorDialog errorDialog;
-    private ConfirmContractDialog confirmContractDialog;
+    private com.paulocurado.esportsmanager.uielements.PlayerHireDialog hireDialog;
+    private com.paulocurado.esportsmanager.uielements.TipsDialog tipsDialog;
+    private com.paulocurado.esportsmanager.uielements.ErrorDialog errorDialog;
+    private com.paulocurado.esportsmanager.uielements.ConfirmContractDialog confirmContractDialog;
 
-    public HireScreen(final EsportsManager mainApp) {
+    public HireScreen(final com.paulocurado.esportsmanager.EsportsManager mainApp) {
         this.mainApp = mainApp;
         gamePort = new FitViewport(mainApp.V_WIDTH , mainApp.V_HEIGHT, mainApp.camera);
         stage = new Stage(gamePort, mainApp.batch);
@@ -74,10 +69,10 @@ public class HireScreen implements Screen{
         this.skin.load(Gdx.files.internal("ui/ui.json"));
 
 
-        hireDialog = new PlayerHireDialog(mainApp, skin, "ui/HirePlayerBox.json", this);
-        tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
-        errorDialog = new ErrorDialog(mainApp, skin, "ui/ErrorBox.json", this);
-        confirmContractDialog = new ConfirmContractDialog(mainApp, skin, "ui/ConfirmationBox.json", this);
+        hireDialog = new com.paulocurado.esportsmanager.uielements.PlayerHireDialog(mainApp, skin, "ui/HirePlayerBox.json", this);
+        tipsDialog = new com.paulocurado.esportsmanager.uielements.TipsDialog(mainApp, skin, "ui/informationBox.json", this);
+        errorDialog = new com.paulocurado.esportsmanager.uielements.ErrorDialog(mainApp, skin, "ui/ErrorBox.json", this);
+        confirmContractDialog = new com.paulocurado.esportsmanager.uielements.ConfirmContractDialog(mainApp, skin, "ui/ConfirmationBox.json", this);
 
 
         tipLogic();
@@ -286,15 +281,15 @@ public class HireScreen implements Screen{
 
     public Stage getStage() { return stage; }
 
-    public ErrorDialog getErrorDialog() {
+    public com.paulocurado.esportsmanager.uielements.ErrorDialog getErrorDialog() {
         return errorDialog;
     }
 
-    public PlayerHireDialog getHireDialog() {
+    public com.paulocurado.esportsmanager.uielements.PlayerHireDialog getHireDialog() {
         return hireDialog;
     }
 
-    public ConfirmContractDialog getConfirmContractDialog() {
+    public com.paulocurado.esportsmanager.uielements.ConfirmContractDialog getConfirmContractDialog() {
         return confirmContractDialog;
     }
 }

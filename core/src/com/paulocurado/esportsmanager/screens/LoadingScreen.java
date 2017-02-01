@@ -2,7 +2,6 @@ package com.paulocurado.esportsmanager.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,15 +15,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import com.paulocurado.esportsmanager.EsportsManager;
-import com.paulocurado.esportsmanager.model.Contract;
-import com.paulocurado.esportsmanager.model.Player;
 import com.paulocurado.esportsmanager.model.Team;
+import com.paulocurado.esportsmanager.EsportsManager;
 
-import java.io.File;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * Created by Paulo on 03/11/2016.
@@ -117,8 +112,8 @@ public class LoadingScreen implements Screen {
     private void queueAssets() {
         Reader reader = Gdx.files.internal("database/Players.json").reader();
         Gson gson = new GsonBuilder().create();
-        mainApp.playerList.addAll((ArrayList<Player>) gson.fromJson(reader,
-                new TypeToken<ArrayList<Player>>() {
+        mainApp.playerList.addAll((ArrayList<com.paulocurado.esportsmanager.model.Player>) gson.fromJson(reader,
+                new TypeToken<ArrayList<com.paulocurado.esportsmanager.model.Player>>() {
                 }.getType()));
 
         Reader readerTeam = Gdx.files.internal("database/Teams.json").reader();
@@ -127,8 +122,8 @@ public class LoadingScreen implements Screen {
                 }.getType()));
 
         Reader readerContract = Gdx.files.internal("database/Contracts.json").reader();
-        mainApp.contractList.addAll((ArrayList<Contract>) gson.fromJson(readerContract,
-                new TypeToken<ArrayList<Contract>>() {
+        mainApp.contractList.addAll((ArrayList<com.paulocurado.esportsmanager.model.Contract>) gson.fromJson(readerContract,
+                new TypeToken<ArrayList<com.paulocurado.esportsmanager.model.Contract>>() {
                 }.getType()));
 
 
@@ -153,5 +148,7 @@ public class LoadingScreen implements Screen {
         mainApp.assets.load("ui/ui.atlas", TextureAtlas.class);
         mainApp.assets.load("img/images.atlas", TextureAtlas.class);
         mainApp.assets.load("languages/languages" + language, I18NBundle.class);
+
+
     }
 }

@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -20,10 +19,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.model.Player;
-import com.paulocurado.esportsmanager.model.Position;
-import com.paulocurado.esportsmanager.uielements.ButtonPlayer;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 import com.paulocurado.esportsmanager.uielements.TipsDialog;
 
 
@@ -104,14 +100,14 @@ public class PositionsScreen implements Screen {
     }
 
     private void organizePlayersPositions() {
-        final ButtonGroup<ButtonPlayer> buttonGroup = new ButtonGroup<ButtonPlayer>();
+        final ButtonGroup<com.paulocurado.esportsmanager.uielements.ButtonPlayer> buttonGroup = new ButtonGroup<com.paulocurado.esportsmanager.uielements.ButtonPlayer>();
         final ArrayList<Label> labelGroup = new ArrayList<Label>();
         buttonGroup.setMaxCheckCount(2);
         buttonGroup.setMinCheckCount(0);
 
 
         for (int i = 0; i < mainApp.user.getTeam().getPlayers().size(); i++) {
-            final ButtonPlayer playerFaceButton = new ButtonPlayer(mainApp.user.getTeam().getPlayers().get(i).
+            final com.paulocurado.esportsmanager.uielements.ButtonPlayer playerFaceButton = new com.paulocurado.esportsmanager.uielements.ButtonPlayer(mainApp.user.getTeam().getPlayers().get(i).
                     createPlayerFace(mainApp.facesOptions, gamePort).getDrawable() );
             playerFaceButton.setRolePosition(i + 1);
             playerFaceButton.setSize(100, 100);
@@ -132,7 +128,7 @@ public class PositionsScreen implements Screen {
 
                     if(buttonGroup.getAllChecked().size > 1) {
 
-                        for(ButtonPlayer buttonPlayer : buttonGroup.getButtons()) {
+                        for(com.paulocurado.esportsmanager.uielements.ButtonPlayer buttonPlayer : buttonGroup.getButtons()) {
                             buttonPlayer.clearActions();
                             buttonPlayer.setSize(100, 100);
                             buttonPlayer.setOrigin(buttonPlayer.getWidth() / 2, buttonPlayer.getHeight() / 2);
@@ -184,7 +180,7 @@ public class PositionsScreen implements Screen {
 
                     }
                     else {
-                        for(ButtonPlayer buttonPlayer : buttonGroup.getButtons()) {
+                        for(com.paulocurado.esportsmanager.uielements.ButtonPlayer buttonPlayer : buttonGroup.getButtons()) {
                             //playerFaceButton.setTransform(false);
                             buttonPlayer.clearActions();
                             buttonPlayer.setSize(100, 100);
@@ -270,11 +266,11 @@ public class PositionsScreen implements Screen {
         ((Label) stage.getRoot().findActor("SupportNumberLabel")).setText(Integer.toString(player.getSupport() ));
 
 
-        ((Label) stage.getRoot().findActor("CarryAbilityLabel")).setText(player.hability(Position.CARRY) );
-        ((Label) stage.getRoot().findActor("MidAbilityLabel")).setText(player.hability(Position.MID) );
-        ((Label) stage.getRoot().findActor("OfflaneAbilityLabel")).setText(player.hability(Position.OFFLANE) );
-        ((Label) stage.getRoot().findActor("Supp4AbilityLabel")).setText(player.hability(Position.SUPP4) );
-        ((Label) stage.getRoot().findActor("Supp5AbilityLabel")).setText(player.hability(Position.SUPP5) );
+        ((Label) stage.getRoot().findActor("CarryAbilityLabel")).setText(player.hability(com.paulocurado.esportsmanager.model.Position.CARRY) );
+        ((Label) stage.getRoot().findActor("MidAbilityLabel")).setText(player.hability(com.paulocurado.esportsmanager.model.Position.MID) );
+        ((Label) stage.getRoot().findActor("OfflaneAbilityLabel")).setText(player.hability(com.paulocurado.esportsmanager.model.Position.OFFLANE) );
+        ((Label) stage.getRoot().findActor("Supp4AbilityLabel")).setText(player.hability(com.paulocurado.esportsmanager.model.Position.SUPP4) );
+        ((Label) stage.getRoot().findActor("Supp5AbilityLabel")).setText(player.hability(com.paulocurado.esportsmanager.model.Position.SUPP5) );
 
         ((Label) stage.getRoot().findActor("CostNumberLabel")).setText(Integer.toString(player.getCost(mainApp.contractList)) );
         ((Label) stage.getRoot().findActor("SalaryNumberLabel")).setText(Integer.toString(player.getSalary(mainApp.contractList)) );

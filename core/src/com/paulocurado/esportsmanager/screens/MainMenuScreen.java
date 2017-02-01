@@ -13,26 +13,22 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.model.Championship;
 import com.paulocurado.esportsmanager.model.GameSchedule;
-import com.paulocurado.esportsmanager.model.HandleSaveGame;
 import com.paulocurado.esportsmanager.model.UsefulFunctions;
 import com.paulocurado.esportsmanager.model.User;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
 import com.paulocurado.esportsmanager.uielements.NewGameDialog;
 import com.paulocurado.esportsmanager.uielements.ReaderElements;
-import com.paulocurado.esportsmanager.uielements.TipsDialog;
+import com.paulocurado.esportsmanager.EsportsManager;
+import com.paulocurado.esportsmanager.model.HandleSaveGame;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Locale;
 
 /**
  * Created by Paulo on 09/11/2016.
@@ -51,7 +47,7 @@ public class MainMenuScreen implements Screen {
     private GameScreenBox confirmDataDialog;
     private GameScreenBox aboutDialog;
     private GameScreenBox languageDialog;
-    private TipsDialog tipsDialog;
+    private com.paulocurado.esportsmanager.uielements.TipsDialog tipsDialog;
 
     ReaderElements mainMenuLayout;
 
@@ -90,7 +86,7 @@ public class MainMenuScreen implements Screen {
         errorDialog = new GameScreenBox(mainApp, skin, "ui/ErrorBox.json", this);
         confirmDataDialog = new GameScreenBox(mainApp, skin, "ui/ConfirmData.json", this);
         aboutDialog = new GameScreenBox(mainApp, skin, "ui/HirePlayerBox.json", this);
-        tipsDialog =  new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
+        tipsDialog =  new com.paulocurado.esportsmanager.uielements.TipsDialog(mainApp, skin, "ui/informationBox.json", this);
         languageDialog = new GameScreenBox(mainApp, skin, "ui/LanguageBox.json", this);
 
 
@@ -255,7 +251,7 @@ public class MainMenuScreen implements Screen {
                 //informações básicas preenchidas para dar newGame
                 UsefulFunctions usefulFunctions = new UsefulFunctions(mainApp);
                 mainApp.user.getTeam().setId("TEAM_USER");
-                mainApp.user.getTeam().setBudget(70000);
+                mainApp.user.getTeam().setBudget(150000);
                 mainApp.user.getTeam().setTier(4);
                 mainApp.teamList.add(mainApp.user.getTeam());
                 mainApp.schedule = new GameSchedule();
@@ -268,7 +264,7 @@ public class MainMenuScreen implements Screen {
                         mainApp.user.getTeam().getPlayers().get(0).getRecomendedCost(), mainApp.user.getTeam().getPlayers().get(0).getRecomendedSalary());
                 mainApp.user.getTeam().getPlayers().get(0).setTeamId(mainApp.user.getTeam().getId());
 
-                mainApp.user.getTeam().getPlayers().add(usefulFunctions.findPlayerbyNickName("SingSing"));
+                mainApp.user.getTeam().getPlayers().add(usefulFunctions.findPlayerbyNickName("Wagamama"));
                 usefulFunctions.createNewContract(mainApp.user.getTeam(), mainApp.user.getTeam().getPlayers().get(1),
                         mainApp.user.getTeam().getPlayers().get(1).getRecomendedCost(), mainApp.user.getTeam().getPlayers().get(1).getRecomendedSalary());
                 mainApp.user.getTeam().getPlayers().get(1).setTeamId(mainApp.user.getTeam().getId());

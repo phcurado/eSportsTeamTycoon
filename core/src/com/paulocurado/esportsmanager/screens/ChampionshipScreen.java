@@ -16,7 +16,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
-import com.paulocurado.esportsmanager.uielements.TipsDialog;
 
 /**
  * Created by phcur on 26/12/2016.
@@ -31,7 +30,7 @@ public class ChampionshipScreen implements Screen {
     private Skin skin;
 
     private TextButton backButton;
-    private TipsDialog tipsDialog;
+    private com.paulocurado.esportsmanager.uielements.TipsDialog tipsDialog;
 
 
 
@@ -68,7 +67,7 @@ public class ChampionshipScreen implements Screen {
         stage.addActor(background);
 
 
-        tipsDialog = new TipsDialog(mainApp, skin, "ui/informationBox.json", this);
+        tipsDialog = new com.paulocurado.esportsmanager.uielements.TipsDialog(mainApp, skin, "ui/informationBox.json", this);
 
         screenFirstTime();
 

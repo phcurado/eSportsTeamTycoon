@@ -10,12 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.model.Player;
-import com.paulocurado.esportsmanager.model.Position;
-import com.paulocurado.esportsmanager.screens.GameScreen;
 import com.paulocurado.esportsmanager.screens.ScoutReportScreen;
-import com.paulocurado.esportsmanager.screens.ScoutScreen;
-import com.paulocurado.esportsmanager.screens.SellPlayersScreen;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
+import com.paulocurado.esportsmanager.model.Position;
 
 /**
  * Created by phcur on 07/01/2017.

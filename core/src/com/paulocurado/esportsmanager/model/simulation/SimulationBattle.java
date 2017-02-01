@@ -1,9 +1,5 @@
 package com.paulocurado.esportsmanager.model.simulation;
 
-import com.paulocurado.esportsmanager.model.BattleSimulation;
-import com.paulocurado.esportsmanager.model.Player;
-import com.paulocurado.esportsmanager.model.Position;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -26,19 +22,30 @@ public class SimulationBattle {
 
     private static float FARM_MULTIPLIER = 13f;
 
+    public int radiantAdvantage = 0;
+    public int direAdvantage = 0;
 
-    public SimulationBattle(BattleSimulation battle) {
+
+    public SimulationBattle(com.paulocurado.esportsmanager.model.BattleSimulation battle) {
         ambientInBattle = new AmbientInBattle();
         radiantPlayersInBattle = new ArrayList<PlayerInBattle>();
         direPlayersInBattle = new ArrayList<PlayerInBattle>();
-        for (Player player : battle.getRadiantTeam().getPlayers()) {
+        for (com.paulocurado.esportsmanager.model.Player player : battle.getRadiantTeam().getPlayers()) {
             PlayerInBattle playerInBattle = new PlayerInBattle(player);
             radiantPlayersInBattle.add(playerInBattle);
         }
-        for (Player player : battle.getDireTeam().getPlayers()) {
+        for (com.paulocurado.esportsmanager.model.Player player : battle.getDireTeam().getPlayers()) {
             PlayerInBattle playerInBattle = new PlayerInBattle(player);
             direPlayersInBattle.add(playerInBattle);
         }
+        Random random = new Random();
+        radiantAdvantage = random.nextInt(3);
+        direAdvantage = random.nextInt(3);
+
+        System.out.println("A vantagem da radiant é : " + radiantAdvantage);
+        System.out.println("A vantagem do dire é : " + direAdvantage);
+
+
     }
 
 
@@ -60,7 +67,6 @@ public class SimulationBattle {
         else {
             ambientInBattle.setTimePass(false);
             isMatchUp = false;
-            System.out.println("hi");
         }
     }
 
@@ -82,7 +88,6 @@ public class SimulationBattle {
         for (PlayerInBattle playerInBattle : direPlayersInBattle) {
             playerInBattle.setFarming(true);
         }
-        System.out.println(ambientInBattle.getMinute());
 
         safeOffBattle();
         midBattle();
@@ -123,17 +128,17 @@ public class SimulationBattle {
     }
     private void radiantAttackTowers() {
         Random random = new Random();
-        int newRadiantCarryAbility = radiantPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(15)-15;
-        int newRadiantMidAbility = radiantPlayersInBattle.get(1).abilityInteger(Position.MID) + random.nextInt(15)-15;
-        int newRadiantOfflaneAbility = radiantPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(15)-15;
-        int newRadiantRoamerAbility = radiantPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(15)-15;
-        int newRadiantSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(15)-15;
+        int newRadiantCarryAbility = radiantPlayersInBattle.get(0).abilityInteger(com.paulocurado.esportsmanager.model.Position.CARRY) + random.nextInt(15)-15 + radiantAdvantage;
+        int newRadiantMidAbility = radiantPlayersInBattle.get(1).abilityInteger(com.paulocurado.esportsmanager.model.Position.MID) + random.nextInt(15)-15 + radiantAdvantage;
+        int newRadiantOfflaneAbility = radiantPlayersInBattle.get(2).abilityInteger(com.paulocurado.esportsmanager.model.Position.OFFLANE) + random.nextInt(15)-15 + radiantAdvantage;
+        int newRadiantRoamerAbility = radiantPlayersInBattle.get(3).abilityInteger(com.paulocurado.esportsmanager.model.Position.SUPP4) + random.nextInt(15)-15 + radiantAdvantage;
+        int newRadiantSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(com.paulocurado.esportsmanager.model.Position.SUPP5) + random.nextInt(15)-15 + radiantAdvantage;
 
-        int newDireCarryAbility = direPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(15)-15;
-        int newDireMidAbility = direPlayersInBattle.get(1).abilityInteger(Position.MID) + random.nextInt(15)-15;
-        int newDireOfflaneAbility = direPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(15)-15;
-        int newDireRoamerAbility = direPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(15)-15;
-        int newDireSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(15)-15;
+        int newDireCarryAbility = direPlayersInBattle.get(0).abilityInteger(com.paulocurado.esportsmanager.model.Position.CARRY) + random.nextInt(15)-15 + direAdvantage;
+        int newDireMidAbility = direPlayersInBattle.get(1).abilityInteger(com.paulocurado.esportsmanager.model.Position.MID) + random.nextInt(15)-15 + direAdvantage;
+        int newDireOfflaneAbility = direPlayersInBattle.get(2).abilityInteger(com.paulocurado.esportsmanager.model.Position.OFFLANE) + random.nextInt(15)-15 + direAdvantage;
+        int newDireRoamerAbility = direPlayersInBattle.get(3).abilityInteger(com.paulocurado.esportsmanager.model.Position.SUPP4) + random.nextInt(15)-15 + direAdvantage;
+        int newDireSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(com.paulocurado.esportsmanager.model.Position.SUPP5) + random.nextInt(15)-15 + direAdvantage;
 
         if (ambientInBattle.getRadiantTowersInBattle().size() != 0 && ambientInBattle.getDireTowersInBattle().size() != 0) {
 
@@ -244,17 +249,17 @@ public class SimulationBattle {
     }
     private void direAttackTowers() {
         Random random = new Random();
-        int newRadiantCarryAbility = radiantPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(15)-15;
-        int newRadiantMidAbility = radiantPlayersInBattle.get(1).abilityInteger(Position.MID) + random.nextInt(15)-15;
-        int newRadiantOfflaneAbility = radiantPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(15)-15;
-        int newRadiantRoamerAbility = radiantPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(15)-15;
-        int newRadiantSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(15)-15;
+        int newRadiantCarryAbility = radiantPlayersInBattle.get(0).abilityInteger(com.paulocurado.esportsmanager.model.Position.CARRY) + random.nextInt(15)-15 + radiantAdvantage;
+        int newRadiantMidAbility = radiantPlayersInBattle.get(1).abilityInteger(com.paulocurado.esportsmanager.model.Position.MID) + random.nextInt(15)-15 + radiantAdvantage;
+        int newRadiantOfflaneAbility = radiantPlayersInBattle.get(2).abilityInteger(com.paulocurado.esportsmanager.model.Position.OFFLANE) + random.nextInt(15)-15 + radiantAdvantage;
+        int newRadiantRoamerAbility = radiantPlayersInBattle.get(3).abilityInteger(com.paulocurado.esportsmanager.model.Position.SUPP4) + random.nextInt(15)-15 + radiantAdvantage;
+        int newRadiantSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(com.paulocurado.esportsmanager.model.Position.SUPP5) + random.nextInt(15)-15 + radiantAdvantage;
 
-        int newDireCarryAbility = direPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(15)-15;
-        int newDireMidAbility = direPlayersInBattle.get(1).abilityInteger(Position.MID) + random.nextInt(15)-15;
-        int newDireOfflaneAbility = direPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(15)-15;
-        int newDireRoamerAbility = direPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(15)-15;
-        int newDireSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(15)-15;
+        int newDireCarryAbility = direPlayersInBattle.get(0).abilityInteger(com.paulocurado.esportsmanager.model.Position.CARRY) + random.nextInt(15)-15 + direAdvantage;
+        int newDireMidAbility = direPlayersInBattle.get(1).abilityInteger(com.paulocurado.esportsmanager.model.Position.MID) + random.nextInt(15)-15 + direAdvantage;
+        int newDireOfflaneAbility = direPlayersInBattle.get(2).abilityInteger(com.paulocurado.esportsmanager.model.Position.OFFLANE) + random.nextInt(15)-15 + direAdvantage;
+        int newDireRoamerAbility = direPlayersInBattle.get(3).abilityInteger(com.paulocurado.esportsmanager.model.Position.SUPP4) + random.nextInt(15)-15 + direAdvantage;
+        int newDireSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(com.paulocurado.esportsmanager.model.Position.SUPP5) + random.nextInt(15)-15 + direAdvantage;
 
         if (ambientInBattle.getRadiantTowersInBattle().size() != 0 && ambientInBattle.getDireTowersInBattle().size() != 0) {
 
@@ -398,15 +403,15 @@ public class SimulationBattle {
 
     private void safeOffBattle() {
         Random random = new Random();
-        int newRadiantCarryAbility = radiantPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(15)-15;
-        int newRadiantOfflaneAbility = radiantPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(15)-15;
-        int newRadiantRoamerAbility = radiantPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(15)-15;
-        int newRadiantSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(15)-15;
+        int newRadiantCarryAbility = radiantPlayersInBattle.get(0).abilityInteger(com.paulocurado.esportsmanager.model.Position.CARRY) + random.nextInt(15)-15 + radiantAdvantage;
+        int newRadiantOfflaneAbility = radiantPlayersInBattle.get(2).abilityInteger(com.paulocurado.esportsmanager.model.Position.OFFLANE) + random.nextInt(15)-15 + radiantAdvantage;
+        int newRadiantRoamerAbility = radiantPlayersInBattle.get(3).abilityInteger(com.paulocurado.esportsmanager.model.Position.SUPP4) + random.nextInt(15)-15 + radiantAdvantage;
+        int newRadiantSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(com.paulocurado.esportsmanager.model.Position.SUPP5) + random.nextInt(15)-15 + radiantAdvantage;
 
-        int newDireCarryAbility = direPlayersInBattle.get(0).abilityInteger(Position.CARRY) + random.nextInt(15)-15;
-        int newDireOfflaneAbility = direPlayersInBattle.get(2).abilityInteger(Position.OFFLANE) + random.nextInt(15)-15;
-        int newDireRoamerAbility = direPlayersInBattle.get(3).abilityInteger(Position.SUPP4) + random.nextInt(15)-15;
-        int newDireSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(Position.SUPP5) + random.nextInt(15)-15;
+        int newDireCarryAbility = direPlayersInBattle.get(0).abilityInteger(com.paulocurado.esportsmanager.model.Position.CARRY) + random.nextInt(15)-15 + direAdvantage;
+        int newDireOfflaneAbility = direPlayersInBattle.get(2).abilityInteger(com.paulocurado.esportsmanager.model.Position.OFFLANE) + random.nextInt(15)-15 + direAdvantage;
+        int newDireRoamerAbility = direPlayersInBattle.get(3).abilityInteger(com.paulocurado.esportsmanager.model.Position.SUPP4) + random.nextInt(15)-15 + direAdvantage;
+        int newDireSuppAbility = radiantPlayersInBattle.get(4).abilityInteger(com.paulocurado.esportsmanager.model.Position.SUPP5) + random.nextInt(15)-15 + direAdvantage;
 
 
         if (newRadiantCarryAbility >= newDireOfflaneAbility) {
@@ -526,9 +531,8 @@ public class SimulationBattle {
 
     private void midBattle() {
         Random random = new Random();
-        int newRadiantMidHability = radiantPlayersInBattle.get(1).getFighting() + random.nextInt(40)-20;
-        System.out.println(newRadiantMidHability);
-        int newDireMidHability = direPlayersInBattle.get(1).getFighting() + random.nextInt(40)-20;
+        int newRadiantMidHability = radiantPlayersInBattle.get(1).getFighting() + random.nextInt(40)-20 + radiantAdvantage;
+        int newDireMidHability = direPlayersInBattle.get(1).getFighting() + random.nextInt(40)-20 + direAdvantage;
         if (newRadiantMidHability > newDireMidHability) {
             //calcula quanto cada um consegue de farm
             radiantPlayersInBattle.get(1).addLastHit(radiantPlayersInBattle.get(1).getFarm() / FARM_MULTIPLIER); //ganho a batalha, full farm
@@ -655,5 +659,18 @@ public class SimulationBattle {
         for(PlayerInBattle playerInBattle : direPlayersInBattle) {
             playerInBattle.reset();
         }
+        Random random = new Random();
+
+        if (random.nextInt(100) > 67) {
+            radiantAdvantage = random.nextInt(8) + 2;
+            direAdvantage = random.nextInt(8) + 2;
+        }
+        else {
+            radiantAdvantage = random.nextInt(3);
+            direAdvantage = random.nextInt(3);
+        }
+
+        System.out.println("A vantagem da radiant é : " + radiantAdvantage);
+        System.out.println("A vantagem do dire é : " + direAdvantage);
     }
 }

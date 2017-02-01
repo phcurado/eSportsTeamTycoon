@@ -15,7 +15,7 @@ public class AmbientInBattle {
 
     private int minute;
     private boolean timePass = false;
-    private static float TIME_PASSING_SECONDS = 0.01f;
+    private static float TIME_PASSING_SECONDS = 0.17f;
     private float realTime = 0;
     private boolean isMinutePassing = false;
 

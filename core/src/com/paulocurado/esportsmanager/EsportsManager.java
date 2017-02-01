@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.paulocurado.esportsmanager.model.Championship;
 import com.paulocurado.esportsmanager.model.Contract;
@@ -19,26 +18,25 @@ import com.paulocurado.esportsmanager.model.Team;
 import com.paulocurado.esportsmanager.model.User;
 import com.paulocurado.esportsmanager.screens.BuyScoutScreen;
 import com.paulocurado.esportsmanager.screens.ChampionshipScreen;
-import com.paulocurado.esportsmanager.screens.GameScreen;
 import com.paulocurado.esportsmanager.screens.HireScreen;
 import com.paulocurado.esportsmanager.screens.InitScreen;
-import com.paulocurado.esportsmanager.screens.LineupScreen;
 import com.paulocurado.esportsmanager.screens.LoadingScreen;
 import com.paulocurado.esportsmanager.screens.MainMenuScreen;
-import com.paulocurado.esportsmanager.screens.PositionsScreen;
 import com.paulocurado.esportsmanager.screens.ScoutReportScreen;
-import com.paulocurado.esportsmanager.screens.ScoutScreen;
 import com.paulocurado.esportsmanager.screens.SellPlayersScreen;
-import com.paulocurado.esportsmanager.screens.SimulationScreen;
 import com.paulocurado.esportsmanager.screens.TrainScreen;
+import com.paulocurado.esportsmanager.screens.GameScreen;
+import com.paulocurado.esportsmanager.screens.LineupScreen;
+import com.paulocurado.esportsmanager.screens.PositionsScreen;
+import com.paulocurado.esportsmanager.screens.ScoutScreen;
 
 
 import java.util.ArrayList;
 
 public class EsportsManager extends Game {
 
-    public static final String TITLE = "eSports Manager";
-    public static final float VERSION = 0.1f;
+    public static final String TITLE = "eSports Team Tycoon";
+    public static final float VERSION = 1.0f;
     public static final int V_WIDTH = 640;
     public static final int V_HEIGHT = 960;
 
@@ -81,7 +79,7 @@ public class EsportsManager extends Game {
     public ScoutReportScreen scoutReportScreen;
     public ScoutScreen scoutScreen;
     public SellPlayersScreen sellPlayersScreen;
-    public SimulationScreen simulationScreen;
+    public com.paulocurado.esportsmanager.screens.SimulationScreen simulationScreen;
     public TrainScreen trainScreen;
 
     public EsportsManager(AdHandler adHandler) {

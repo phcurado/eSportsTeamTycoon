@@ -17,7 +17,7 @@ public class Championship {
         this.teamsId = teamsId;
     }
 
-    private transient ArrayList<Team> teams;
+    private transient ArrayList<com.paulocurado.esportsmanager.model.Team> teams;
     private ArrayList<String> teamsId;
     private static int DATE_OCCURRENCES = 3;
     private boolean championshipIsUp = false;
@@ -41,7 +41,7 @@ public class Championship {
     private boolean playerAcceptedChampionship = false;
     public boolean isChampionshipIsCloseStart = false;
 
-    public Championship(ArrayList<Team> teams, EsportsManager mainApp) {
+    public Championship(ArrayList<com.paulocurado.esportsmanager.model.Team> teams, EsportsManager mainApp) {
         this.mainApp = mainApp;
         this.teams = teams;
         this.schedule = mainApp.schedule;
@@ -112,8 +112,8 @@ public class Championship {
     }
 
     public void updateTeamsMatches() {
-        Team teamDummy = teams.get(0);
-        ArrayList<Team> teamsDummy = new ArrayList<Team>();
+        com.paulocurado.esportsmanager.model.Team teamDummy = teams.get(0);
+        ArrayList<com.paulocurado.esportsmanager.model.Team> teamsDummy = new ArrayList<com.paulocurado.esportsmanager.model.Team>();
         teamsDummy.addAll(teams);
         int numDays = (teams.size() - 1);
         int halfSize = teams.size() / 2;
@@ -183,15 +183,15 @@ public class Championship {
 
     }
 
-    public ArrayList<Team> getTeamsInOrderOfVictory() {
-        ArrayList<Team> teamsBuffer = new ArrayList<Team>();
+    public ArrayList<com.paulocurado.esportsmanager.model.Team> getTeamsInOrderOfVictory() {
+        ArrayList<com.paulocurado.esportsmanager.model.Team> teamsBuffer = new ArrayList<com.paulocurado.esportsmanager.model.Team>();
         for (int i = 0; i < teams.size(); i++) {
             teamsBuffer.add(teams.get(i));
         }
         for (int i = 0; i < teamsBuffer.size(); i++) {
             for (int j = 0; j < teamsBuffer.size() - 1 - i; j++) {
                 if (teamsBuffer.get(i).getVictoriesChampionship() < teamsBuffer.get(i + j + 1).getVictoriesChampionship()) {
-                    Team teamBuff = teamsBuffer.get(i);
+                    com.paulocurado.esportsmanager.model.Team teamBuff = teamsBuffer.get(i);
                     teamsBuffer.set(i, teamsBuffer.get(i + j + 1));
                     teamsBuffer.set(i + j + 1, teamBuff);
 
@@ -216,7 +216,7 @@ public class Championship {
         isChampionshipIsCloseStart = false;
 
     }
-    public Team getWinnerOfChampionship() {
+    public com.paulocurado.esportsmanager.model.Team getWinnerOfChampionship() {
         if(championshipEnded) {
             return battles.get(battles.size() - 1).winner();
         }
@@ -231,7 +231,7 @@ public class Championship {
         return battleSimulations;
     }
 
-    public BattleSimulation findBattleByTeam(Team team, int round) {
+    public BattleSimulation findBattleByTeam(com.paulocurado.esportsmanager.model.Team team, int round) {
         for(int i = 0; i < teams.size() / 2; i++) {
             if(battles.get(i + (round - 1) * teams.size() / 2).getRadiantTeam().equals(team) ||
                     battles.get(i + (round - 1) * teams.size() / 2).getDireTeam().equals(team)) {
@@ -241,13 +241,13 @@ public class Championship {
         return null;
     }
 
-    public ArrayList<Team> getFinalChampionshipPositions() {
-        ArrayList<Team> teamsArrange = getTeamsInOrderOfVictory();
+    public ArrayList<com.paulocurado.esportsmanager.model.Team> getFinalChampionshipPositions() {
+        ArrayList<com.paulocurado.esportsmanager.model.Team> teamsArrange = getTeamsInOrderOfVictory();
         if(teamsArrange.get(0) == getWinnerOfChampionship()) {
             return teamsArrange;
         }
         else {
-            Team teamDummy = teamsArrange.get(0);
+            com.paulocurado.esportsmanager.model.Team teamDummy = teamsArrange.get(0);
             teamsArrange.set(0, teamsArrange.get(1));
             teamsArrange.set(1, teamDummy);
             return teamsArrange;
@@ -258,16 +258,16 @@ public class Championship {
         double prize;
 
         if (mainApp.user.getTeam().getTier() == 1) {
-            prize =  3000000;
+            prize =  5100000;
         }
         else if (mainApp.user.getTeam().getTier() == 2) {
-            prize =  2000000;
+            prize =  3100000;
         }
         else if (mainApp.user.getTeam().getTier() == 3) {
-            prize =  1500000;
+            prize =  1600000;
         }
         else {
-            prize =  900000;
+            prize =  1100000;
         }
 
         for(int i = 0; i < getFinalChampionshipPositions().size(); i++) {
@@ -315,19 +315,19 @@ public class Championship {
             return 18000;
         }
         if (mainApp.user.getTeam().getTier() == 2) {
-            return 12000;
+            return 14000;
         }
         if (mainApp.user.getTeam().getTier() == 3) {
-            return 8000;
+            return 10000;
         }
         else {
-            return 5000;
+            return 6500;
         }
 
     }
 
 
-    public ArrayList<Team> getTeams() {
+    public ArrayList<com.paulocurado.esportsmanager.model.Team> getTeams() {
         return teams;
     }
     public ArrayList<BattleSimulation> getBattles() {
@@ -418,7 +418,7 @@ public class Championship {
         this.schedule = schedule;
     }
 
-    public void setTeams(ArrayList<Team> teams) {
+    public void setTeams(ArrayList<com.paulocurado.esportsmanager.model.Team> teams) {
         this.teams = teams;
     }
 

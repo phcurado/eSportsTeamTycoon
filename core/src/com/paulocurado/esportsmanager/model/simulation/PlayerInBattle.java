@@ -1,15 +1,10 @@
 package com.paulocurado.esportsmanager.model.simulation;
 
-import com.badlogic.gdx.math.Vector2;
-import com.paulocurado.esportsmanager.model.Player;
-
-import java.util.Calendar;
-
 /**
  * Created by phcur on 02/01/2017.
  */
 
-public class PlayerInBattle extends Player {
+public class PlayerInBattle extends com.paulocurado.esportsmanager.model.Player {
     private double life = 400;
     private double actualLife = 400;
     private double damage = 60;
@@ -37,7 +32,7 @@ public class PlayerInBattle extends Player {
     private static int KILL_GOLD = 500;
     private static int RESPAWN_TIME = 1;
 
-    public PlayerInBattle(Player player) {
+    public PlayerInBattle(com.paulocurado.esportsmanager.model.Player player) {
         super(player);
     }
 
@@ -263,7 +258,7 @@ public class PlayerInBattle extends Player {
                 if (enemy.actualLife <= 0) {
                     enemy.actualLife = enemy.life;
                     killEnemy(enemy);
-                    System.out.println(getNickName() + " matou " + enemy.getNickName());
+                    //System.out.println(getNickName() + " matou " + enemy.getNickName());
                 }
             }
         }
@@ -273,7 +268,7 @@ public class PlayerInBattle extends Player {
         if (!isDeath) {
             towerInBattle.setLife(towerInBattle.getLife() - (int)damage);
             if (towerInBattle.getLife() <= 0) {
-                System.out.println(getNickName() + " destruiu a torre");
+               // System.out.println(getNickName() + " destruiu a torre");
             }
 
         }

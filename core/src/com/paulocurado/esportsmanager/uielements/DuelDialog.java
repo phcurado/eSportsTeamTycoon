@@ -2,17 +2,11 @@ package com.paulocurado.esportsmanager.uielements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.paulocurado.esportsmanager.EsportsManager;
-import com.paulocurado.esportsmanager.model.BattleSimulation;
-import com.paulocurado.esportsmanager.model.Team;
 import com.paulocurado.esportsmanager.screens.GameScreen;
 
 /**
@@ -21,16 +15,15 @@ import com.paulocurado.esportsmanager.screens.GameScreen;
 
 public class DuelDialog extends GameScreenBox {
     private boolean isLoadInformation = false;
-    public DuelDialog(EsportsManager mainApp, Skin skin, String path, Screen root) {
+    public DuelDialog(com.paulocurado.esportsmanager.EsportsManager mainApp, Skin skin, String path, Screen root) {
         super(mainApp, skin, path, root);
 
     }
 
-    public void setUpPlayers(BattleSimulation battleSimulation) {
-
+    public void setUpPlayers(com.paulocurado.esportsmanager.model.BattleSimulation battleSimulation) {
 
         if (!isLoadInformation()) {
-;
+
             for (int i = 0; i < battleSimulation.getRadiantTeam().getPlayers().size(); i++) {
                 Image playerImage = battleSimulation.getRadiantTeam().getPlayers().get(i).createPlayerFace(
                         mainApp.facesOptions, stage.getViewport());

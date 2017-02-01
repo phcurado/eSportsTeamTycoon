@@ -10,8 +10,8 @@ public class Scout {
     private int level;
     public static int MAX_LEVEL = 5;
     private transient ArrayList<Player> playersScouts;
-    private static int MIN_ABILITY = 70;
-    private static int RANGE_INCREASE = 5;
+    private static int MIN_ABILITY = 73;
+    private static int RANGE_INCREASE = 4;
     public static int BASE_PRICE = 100000;
 
 
@@ -24,7 +24,7 @@ public class Scout {
 
         for (Player player : playersToScout) {
             if (level != MAX_LEVEL) {
-                if (player.getOverall() >= MIN_ABILITY && player.getOverall() <= MIN_ABILITY + RANGE_INCREASE + (level - 1) * RANGE_INCREASE) {
+                if (player.getOverall() <= MIN_ABILITY + RANGE_INCREASE + (level - 1) * RANGE_INCREASE) {
                     playersScouts.add(player);
 
                 }

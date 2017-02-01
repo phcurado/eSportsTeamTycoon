@@ -2,12 +2,8 @@ package com.paulocurado.esportsmanager.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -20,11 +16,10 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.model.BattleSimulation;
-import com.paulocurado.esportsmanager.model.Player;
-import com.paulocurado.esportsmanager.model.Team;
-import com.paulocurado.esportsmanager.model.simulation.PlayerInBattle;
 import com.paulocurado.esportsmanager.model.simulation.SimulationBattle;
 import com.paulocurado.esportsmanager.uielements.TipsDialog;
+
+import java.util.Random;
 
 
 /**
@@ -147,7 +142,7 @@ public class SimulationScreen implements Screen {
             radiantPlayerDeathsLabel.setName("radiantPlayerDeathsLabel_" + i);
 
             teamTable.row().fillX();
-            teamTable.add(radiantPlayerNameLabel).width(300).padBottom(4).fillX().expandX();
+            teamTable.add(radiantPlayerNameLabel).padBottom(4).fillX().expandX();
             teamTable.add(radiantPlayerLastHitLabel).padLeft(3).padBottom(4).expandX();
             teamTable.add(radiantPlayerKillsLabel).padLeft(3).padBottom(4).expandX();
             teamTable.add(radiantPlayerDeathsLabel).padLeft(3).padBottom(4).expandX();
@@ -179,7 +174,7 @@ public class SimulationScreen implements Screen {
             direPlayerDeathsLabel.setName("direPlayerDeathsLabel_" + i);
 
             teamTable.row().fillX();
-            teamTable.add(direPlayerNameLabel).width(300).padBottom(4).fillX().expandX();
+            teamTable.add(direPlayerNameLabel).padBottom(4).fillX().expandX();
             teamTable.add(direPlayerLastHitLabel).padLeft(3).padBottom(4).expandX();
             teamTable.add(direPlayerKillsLabel).padLeft(3).padBottom(4).expandX();
             teamTable.add(direPlayerDeathsLabel).padLeft(3).padBottom(4).expandX();
@@ -223,6 +218,7 @@ public class SimulationScreen implements Screen {
             if (battleSimulation.getRadiantVictories() < matchesToPlay / 2 + 1 &&
                     battleSimulation.getDireVictories() < matchesToPlay / 2 + 1) {
                 isBattleOver = false;
+
 
             }
             else if (!isBattleOver) {

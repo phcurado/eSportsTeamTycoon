@@ -8,18 +8,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.paulocurado.esportsmanager.EsportsManager;
 import com.paulocurado.esportsmanager.model.Player;
-import com.paulocurado.esportsmanager.model.Position;
-import com.paulocurado.esportsmanager.screens.GameScreen;
 import com.paulocurado.esportsmanager.screens.HireScreen;
-import com.paulocurado.esportsmanager.screens.ScoutReportScreen;
+import com.paulocurado.esportsmanager.EsportsManager;
+import com.paulocurado.esportsmanager.model.Position;
 
 /**
  * Created by Paulo on 05/12/2016.
  */
 
-public class PlayerHireDialog extends  GameScreenBox {
+public class PlayerHireDialog extends GameScreenBox {
     protected Player player;
 
     public PlayerHireDialog(EsportsManager mainApp, Skin skin, String path, Screen root) {

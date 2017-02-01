@@ -1,13 +1,8 @@
 package com.paulocurado.esportsmanager.uielements;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.paulocurado.esportsmanager.EsportsManager;
-import com.paulocurado.esportsmanager.screens.GameScreen;
 import com.paulocurado.esportsmanager.screens.HireScreen;
 
 /**
@@ -19,7 +14,7 @@ public class ErrorDialog extends GameScreenBox {
     private String error;
     private static int MINUMUM_MONTHS = 4;
 
-    public ErrorDialog(EsportsManager mainApp, Skin skin, String path, Screen root) {
+    public ErrorDialog(com.paulocurado.esportsmanager.EsportsManager mainApp, Skin skin, String path, Screen root) {
         super(mainApp, skin, path, root);
     }
 

@@ -250,5 +250,33 @@
       "PLAYER_000118"
     ],
     "tier": 3
+  },
+  {
+    "id": "TEAM_0009",
+    "name": "Invictus",
+    "abbreviatedName": "IV",
+    "budget": 500000,
+    "playersId": [
+      "PLAYER_000111",
+      "PLAYER_000119",
+      "PLAYER_000120",
+      "PLAYER_000121",
+      "PLAYER_000122"
+    ],
+    "tier": 4
+  },
+  {
+    "id": "TEAM_0020",
+    "name": "Wanted",
+    "abbreviatedName": "Wanted",
+    "budget": 450000,
+    "playersId": [
+      "PLAYER_000128",
+      "PLAYER_000047",
+      "PLAYER_000129",
+      "PLAYER_000130",
+      "PLAYER_000096"
+    ],
+    "tier": 4
   }
 ]

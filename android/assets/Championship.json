@@ -3,32 +3,131 @@
     "TEAM_0008",
     "TEAM_0016",
     "TEAM_0017",
+    "TEAM_0009",
+    "TEAM_0020",
     "TEAM_USER"
   ],
   "championshipIsUp": false,
-  "battles": [],
+  "battles": [
+    {
+      "radiantTeamId": "TEAM_0012",
+      "direTeamId": "TEAM_0011",
+      "radiantVictories": 2,
+      "direVictories": 1
+    },
+    {
+      "radiantTeamId": "TEAM_0013",
+      "direTeamId": "TEAM_USER",
+      "radiantVictories": 0,
+      "direVictories": 2
+    },
+    {
+      "radiantTeamId": "TEAM_0014",
+      "direTeamId": "TEAM_0018",
+      "radiantVictories": 2,
+      "direVictories": 1
+    },
+    {
+      "radiantTeamId": "TEAM_0013",
+      "direTeamId": "TEAM_0011",
+      "radiantVictories": 0,
+      "direVictories": 2
+    },
+    {
+      "radiantTeamId": "TEAM_0014",
+      "direTeamId": "TEAM_0012",
+      "radiantVictories": 2,
+      "direVictories": 1
+    },
+    {
+      "radiantTeamId": "TEAM_0018",
+      "direTeamId": "TEAM_USER",
+      "radiantVictories": 0,
+      "direVictories": 2
+    },
+    {
+      "radiantTeamId": "TEAM_0014",
+      "direTeamId": "TEAM_0011",
+      "radiantVictories": 2,
+      "direVictories": 0
+    },
+    {
+      "radiantTeamId": "TEAM_0018",
+      "direTeamId": "TEAM_0013",
+      "radiantVictories": 2,
+      "direVictories": 0
+    },
+    {
+      "radiantTeamId": "TEAM_USER",
+      "direTeamId": "TEAM_0012",
+      "radiantVictories": 2,
+      "direVictories": 1
+    },
+    {
+      "radiantTeamId": "TEAM_0018",
+      "direTeamId": "TEAM_0011",
+      "radiantVictories": 2,
+      "direVictories": 0
+    },
+    {
+      "radiantTeamId": "TEAM_USER",
+      "direTeamId": "TEAM_0014",
+      "radiantVictories": 2,
+      "direVictories": 0
+    },
+    {
+      "radiantTeamId": "TEAM_0012",
+      "direTeamId": "TEAM_0013",
+      "radiantVictories": 2,
+      "direVictories": 1
+    },
+    {
+      "radiantTeamId": "TEAM_USER",
+      "direTeamId": "TEAM_0011",
+      "radiantVictories": 2,
+      "direVictories": 0
+    },
+    {
+      "radiantTeamId": "TEAM_0012",
+      "direTeamId": "TEAM_0018",
+      "radiantVictories": 1,
+      "direVictories": 2
+    },
+    {
+      "radiantTeamId": "TEAM_0013",
+      "direTeamId": "TEAM_0014",
+      "radiantVictories": 2,
+      "direVictories": 0
+    },
+    {
+      "radiantTeamId": "TEAM_USER",
+      "direTeamId": "TEAM_0018",
+      "radiantVictories": 3,
+      "direVictories": 1
+    }
+  ],
   "championshipSchedule": {
     "day": 1,
-    "week": 1,
-    "month": 3,
-    "year": 2015,
+    "week": 3,
+    "month": 10,
+    "year": 2022,
     "realTime": 0.0,
     "dayPassing": false,
-    "monthPassing": false,
+    "monthPassing": true,
     "timePass": false
   },
   "matchReady": false,
   "week": 2,
   "gamesPlayed": 0,
   "roundsPlayed": 0,
-  "tierPlaying": 4,
+  "tierPlaying": 2,
   "organizeTeams": false,
   "finalsUp": false,
   "groupStage": false,
-  "organizeTeamsFinal": false,
-  "championshipEnded": false,
+  "organizeTeamsFinal": true,
+  "championshipEnded": true,
   "isUserMatchShowed": false,
   "isDuelShowed": false,
   "playerAcceptedChampionship": false,
-  "isChampionshipIsCloseStart": true
+  "isChampionshipIsCloseStart": false
 }

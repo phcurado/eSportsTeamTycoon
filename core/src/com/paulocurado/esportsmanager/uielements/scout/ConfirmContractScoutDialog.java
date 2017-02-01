@@ -5,13 +5,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.paulocurado.esportsmanager.EsportsManager;
-import com.paulocurado.esportsmanager.model.Player;
 import com.paulocurado.esportsmanager.model.Team;
 import com.paulocurado.esportsmanager.model.UsefulFunctions;
-import com.paulocurado.esportsmanager.screens.HireScreen;
-import com.paulocurado.esportsmanager.screens.ScoutReportScreen;
 import com.paulocurado.esportsmanager.uielements.GameScreenBox;
+import com.paulocurado.esportsmanager.EsportsManager;
+import com.paulocurado.esportsmanager.model.Player;
+import com.paulocurado.esportsmanager.screens.ScoutReportScreen;
 
 /**
  * Created by Paulo on 07/12/2016.
